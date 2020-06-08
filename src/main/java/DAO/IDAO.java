@@ -1,0 +1,92 @@
+package DAO;
+
+import DTO.*;
+
+import java.util.List;
+
+public interface IDAO {
+    BrugerDTO getBruger(int oprId) throws DALException;
+
+    List<BrugerDTO> getBrugerList() throws DALException;
+
+    void createBruger(BrugerDTO opr) throws DALException;
+
+    void updateBruger(BrugerDTO opr) throws DALException;
+
+
+    public interface IRaavareDAO {
+        RaavareDTO getRaavare(int raavareId) throws DALException;
+
+        List<BrugerDTO> getRaavareList() throws DALException;
+
+        void createRaavare(RaavareDTO raavare) throws DALException;
+
+        void updateRaavare(RaavareDTO raavare) throws DALException;
+    }
+
+
+    public interface IReceptDAO {
+        ReceptDTO getRecept(int receptId) throws DALException;
+
+        List<ReceptDTO> getReceptList() throws DALException;
+
+        void createRecept(ReceptDTO recept) throws DALException;
+
+        void updateRecept(ReceptDTO recept) throws DALException;
+    }
+
+
+    public interface IReceptKompDAO {
+        ReceptKompDTO getReceptKomp(int receptId, int raavareId) throws DALException;
+
+        List<ReceptKompDTO> getReceptKompList(int receptId) throws DALException;
+
+        List<ReceptKompDTO> getReceptKompList() throws DALException;
+
+        void createReceptKomp(ReceptKompDTO receptkomponent) throws DALException;
+
+        void updateReceptKomp(ReceptKompDTO receptkomponent) throws DALException;
+    }
+
+
+    public interface IRaavareBatchDAO {
+        RaavareBatchDTO getRaavareBatch(int rbId) throws DALException;
+
+        List<RaavareBatchDTO> getRaavareBatchList() throws DALException;
+
+        List<RaavareBatchDTO> getRaavareBatchList(int raavareId) throws DALException;
+
+        void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException;
+
+        void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException;
+    }
+
+
+    public interface IProduktBatchDAO {
+        ProduktBatchDTO getProduktBatch(int pbId) throws DALException;
+
+        List<ProduktBatchDTO> getProduktBatchList() throws DALException;
+
+        void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException;
+
+        void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException;
+    }
+
+    public interface IProduktBatchKompDAO {
+        ProduktBatchKompDTO getProduktBatchKomp(int pbId, int rbId) throws DALException;
+
+        List<ProduktBatchKompDTO> getProduktBatchKompList(int pbId) throws DALException;
+
+        List<ProduktBatchKompDTO> getProduktBatchKompList() throws DALException;
+
+        void createProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException;
+
+        void updateProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException;
+    }
+
+    public class DALException extends Exception {
+        public DALException(String message) {
+            super(message);
+        }
+    }
+}
