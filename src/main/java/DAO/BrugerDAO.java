@@ -4,7 +4,7 @@ import DTO.BrugerDTO;
 
 import java.util.List;
 
-public class DAO implements IDAO {
+public class BrugerDAO implements IDAO {
     @Override
     public BrugerDTO getBruger(String oprId) throws DALException {
         return null;

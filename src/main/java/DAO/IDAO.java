@@ -83,10 +83,4 @@ public interface IDAO {
 
         void updateProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException;
     }
-
-    public class DALException extends Exception {
-        public DALException(String message) {
-            super(message);
-        }
-    }
 }
