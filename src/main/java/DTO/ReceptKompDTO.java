@@ -4,11 +4,11 @@ public class ReceptKompDTO {
     /**
      * recept id i området 1-99999999
      */
-    int receptId;
+    String receptID;
     /**
      * raavare id i området 1-99999999 vælges af brugerne
      */
-    int raavareId;
+    String raavareID;
     /**
      * nominel nettomængde i området 0,05 - 20,0 kg
      */

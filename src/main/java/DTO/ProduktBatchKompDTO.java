@@ -4,11 +4,11 @@ public class ProduktBatchKompDTO {
     /**
      * produkt batch id i området 1-99999999. Vælges af brugerne
      */
-    int pbId;
+    String pbId;
     /**
      * raavare batch id i området 1-99999999. Vælges af brugerne
      */
-    int rbId;
+    String rbId;
     /**
      * tara i kg
      */
@@ -20,6 +20,6 @@ public class ProduktBatchKompDTO {
     /**
      * Laborant-identifikationsnummer
      */
-    int oprId;
+    String labID;
 
 }

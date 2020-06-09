@@ -5,7 +5,7 @@ import DTO.*;
 import java.util.List;
 
 public interface IDAO {
-    BrugerDTO getBruger(int oprId) throws DALException;
+    BrugerDTO getBruger(String oprId) throws DALException;
 
     List<BrugerDTO> getBrugerList() throws DALException;
 

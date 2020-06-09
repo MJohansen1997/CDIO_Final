@@ -5,7 +5,7 @@ public class ProduktBatchDTO {
      * produkt batch id i området 1-99999999. Vælges af brugerne
      * PB00001
      */
-    int pbId;
+    String pbID;
     /**
      * status 0: ikke påbegyndt, 1: under produktion, 2: afsluttet
      */
@@ -13,5 +13,5 @@ public class ProduktBatchDTO {
     /**
      * recept id i området 1-99999999. Vælges af brugerne
      */
-    int receptId;
+    String receptID;
 }

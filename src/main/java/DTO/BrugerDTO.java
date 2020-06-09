@@ -7,11 +7,11 @@ public class BrugerDTO {
      * Bruger id i området 1-99999999. Vælges af brugerne
      *
      */
-    int oprId;
+    String brugerID;
     /**
      * Bruger navn (opr_navn) min. 2 max. 20 karakterer
      */
-    String oprNavn;
+    String brugerNavn;
     /**
      * Bruger initialer min. 2 max. 4 karakterer
      */

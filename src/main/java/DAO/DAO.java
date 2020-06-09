@@ -6,7 +6,7 @@ import java.util.List;
 
 public class DAO implements IDAO {
     @Override
-    public BrugerDTO getBruger(int oprId) throws DALException {
+    public BrugerDTO getBruger(String oprId) throws DALException {
         return null;
     }
 

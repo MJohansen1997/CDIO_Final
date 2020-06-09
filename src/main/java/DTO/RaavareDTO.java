@@ -4,7 +4,7 @@ public class RaavareDTO {
     /**
      * raavare id i området 1-99999999 vælges af brugerne
      */
-    int raavareId;
+    String raavareID;
     /**
      * min. 2 max. 20 karakterer
      */
