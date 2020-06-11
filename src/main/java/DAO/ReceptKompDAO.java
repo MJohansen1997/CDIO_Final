@@ -3,6 +3,7 @@ package DAO;
 import DTO.ReceptKompDTO;
 
 import java.util.List;
+/** @author Doe, John (john.doe@example.com)*/
 
 public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     @Override

@@ -4,7 +4,7 @@ import DTO.BrugerDTO;
 import DTO.RaavareDTO;
 
 import java.util.List;
-
+/** @author Kristensen, Nikolai (john.doe@example.com)*/
 public class RaavareDAO implements IDAO.IRaavareDAO {
     @Override
     public RaavareDTO getRaavare(int raavareId) throws DALException {

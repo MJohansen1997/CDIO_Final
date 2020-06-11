@@ -3,7 +3,7 @@ package DAO;
 import DTO.ProduktBatchDTO;
 
 import java.util.List;
-
+/** @author Hansen, Mads (john.doe@example.com)*/
 public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
     @Override
     public ProduktBatchDTO getProduktBatch(int pbId) throws DALException {

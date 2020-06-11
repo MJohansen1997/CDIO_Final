@@ -3,7 +3,7 @@ package DAO;
 import DTO.ReceptDTO;
 
 import java.util.List;
-
+/** @author Johansen, Mikkel (john.doe@example.com)*/
 public class ReceptDAO implements IDAO.IReceptDAO {
     @Override
     public ReceptDTO getRecept(int receptId) throws DALException {

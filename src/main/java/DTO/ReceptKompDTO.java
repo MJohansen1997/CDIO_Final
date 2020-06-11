@@ -1,5 +1,5 @@
 package DTO;
-
+/** @author Doe, John (john.doe@example.com)*/
 public class ReceptKompDTO {
     /**
      * recept id i området 1-99999999

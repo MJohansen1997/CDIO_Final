@@ -3,7 +3,7 @@ package DAO;
 import DTO.RaavareBatchDTO;
 
 import java.util.List;
-
+/** @author Luxhøj, Steffan (john.doe@example.com)*/
 public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     @Override
     public RaavareBatchDTO getRaavareBatch(int rbId) throws DALException {
