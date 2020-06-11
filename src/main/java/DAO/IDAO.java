@@ -2,10 +2,11 @@ package DAO;
 
 import DTO.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface IDAO {
-    BrugerDTO getBruger(String oprId) throws DALException;
+    BrugerDTO getBruger(String oprId) throws DALException, SQLException, ClassNotFoundException;
 
     List<BrugerDTO> getBrugerList() throws DALException;
 

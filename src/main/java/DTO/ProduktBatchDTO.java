@@ -1,5 +1,5 @@
 package DTO;
-/** @author Hansen, Mads (john.doe@example.com)*/
+
 public class ProduktBatchDTO {
     /** @author Hansen, Mads (john.doe@example.com)
      **/
