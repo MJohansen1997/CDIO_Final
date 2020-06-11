@@ -1,5 +1,5 @@
 package DTO;
-/** @author Hau, Shania (john.doe@example.com)*/
+
 public class ProduktBatchKompDTO {
     /**
      * produkt batch id i området 1-99999999. Vælges af brugerne

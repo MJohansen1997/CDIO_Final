@@ -1,5 +1,5 @@
 package DTO;
-/** @author Kristensen, Nikolai (john.doe@example.com)*/
+
 public class RaavareDTO {
     /**
      * raavare id i området 1-99999999 vælges af brugerne
