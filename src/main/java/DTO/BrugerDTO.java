@@ -1,7 +1,7 @@
 package DTO;
 
 import java.util.List;
-/** @author Christensen, Jacob (john.doe@example.com)*/
+
 public class BrugerDTO {
     /**
      * Bruger id i området 1-99999999. Vælges af brugerne
