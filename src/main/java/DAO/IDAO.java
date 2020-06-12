@@ -74,14 +74,14 @@ public interface IDAO {
     }
 
     public interface IProduktBatchKompDAO {
-        ProduktBatchKompDTO getProduktBatchKomp(int pbId, int rbId) throws DALException;
+        ProduktBatchKompDTO getProduktBatchKomp(int pbId, int rbId) throws DALException, SQLException, ClassNotFoundException;
 
         List<ProduktBatchKompDTO> getProduktBatchKompList(int pbId) throws DALException;
 
-        List<ProduktBatchKompDTO> getProduktBatchKompList() throws DALException;
+        List<ProduktBatchKompDTO> getProduktBatchKompList() throws DALException, SQLException, ClassNotFoundException;
 
-        void createProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException;
+        void createProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException;
 
-        void updateProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException;
+        void updateProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException;
     }
 }
