@@ -1,8 +1,6 @@
 package DAO;
 
-import DTO.BrugerDTO;
 import DTO.ReceptDTO;
-import DAO.MySQLCon;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,14 +72,13 @@ public class ReceptDAO implements IDAO.IReceptDAO {
         try {
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery("UPDATE Recepter Set " +
-                    "recNAVN" + recept.getReceptNavn() + ", " +
+                    "recNavn" + recept.getReceptNavn() + ", " +
                     "WHERE recID = " + recept.getReceptID()
             );
 
         } catch (SQLException e) {
             throw new DALException("Fejl søgning");
         }
-
     }
 
     private ReceptDTO udtagReceptFraResultat(ResultSet rs) throws SQLException {

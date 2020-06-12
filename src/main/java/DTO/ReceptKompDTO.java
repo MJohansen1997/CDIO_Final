@@ -1,6 +1,28 @@
 package DTO;
 
 public class ReceptKompDTO {
+    public String getReceptID() {
+        return receptID;
+    }
+
+    public String getRaavareID() {
+        return raavareID;
+    }
+
+    public double getNonNetto() {
+        return nonNetto;
+    }
+
+    public double getTolerance() {
+        return tolerance;
+    }
+
+    public ReceptKompDTO(String recID, String raavID, double netto, double tol){
+        receptID = recID;
+        raavareID = raavID;
+        nonNetto = netto;
+        tolerance = tol;
+    }
     /**
      * recept id i området 1-99999999
      */
@@ -12,7 +34,7 @@ public class ReceptKompDTO {
     /**
      * nominel nettomængde i området 0,05 - 20,0 kg
      */
-    double nomNetto;
+    double nonNetto;
     /**
      * tolerance i området 0,1 - 10,0 %
      */
