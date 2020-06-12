@@ -2,7 +2,6 @@ package DAO;
 
 import DTO.ProduktBatchDTO;
 
-import java.awt.event.TextEvent;
 import java.sql.*;
 
 import java.util.ArrayList;
@@ -43,27 +42,21 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
         try {
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            ArrayList
+            ArrayList<ProduktBatchDTO> list = new ArrayList<>();
 
             //Iterating through the query and getting the essentials from the database
             while (rs.next()) {
                 String pbID = rs.getString("pbId");
                 String receptID = rs.getString("recID");
                 int status = rs.getInt("status");
+                list.add();
 
             }
             stmt.close();
         } catch (Exception e){
             throw new DALException("Failed to get specified ProduktBatch" + e);
         }
-
-
-
-
-
-
-
-
+        
         return null;
     }
 
@@ -82,5 +75,13 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
     @Override
     public void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
 
+    }
+
+
+    private ProduktBatchDTO extractProduktBatchListFromResultSet(ResultSet rs) throws SQLException {
+        ProduktBatchDTO produktbatchList = new ProduktBatchDTO(rs.getString("pbID"), rs.getInt("status"), rs.getString("recID"));
+        ;
+        return produktbatchList;
+    }
     }
 }
