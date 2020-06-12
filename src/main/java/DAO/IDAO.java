@@ -16,9 +16,9 @@ public interface IDAO {
 
 
     public interface IRaavareDAO {
-        RaavareDTO getRaavare(int raavareId) throws DALException;
+        RaavareDTO getRaavare(String raavareId) throws DALException;
 
-        List<BrugerDTO> getRaavareList() throws DALException;
+        List<RaavareDTO> getRaavareList() throws DALException;
 
         void createRaavare(RaavareDTO raavare) throws DALException;
 
