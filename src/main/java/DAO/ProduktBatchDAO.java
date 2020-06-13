@@ -6,19 +6,7 @@ import java.sql.*;
 
 import java.util.ArrayList;
 import java.util.List;
-/** @author Hansen, Mads (john.doe@example.com)
- *
- * receptID
- * pbID
- * status
- *
- * (produkt bestilling tabellen)
- * DTO er et objekt som skal transportere data
- * Som forstås som en beholder.
- * N mængde
- * DTOEN BRUGES TIL AT STRUKTURERE DATAEN BEGGE VEJE (DATALAG, LOGIKLAG, PRÆSENTATIONLAG)
- * FÅ OG SENDE TIL DATABASEN. UDFYLD METODERNE
- * */
+/** @author Hansen, Mads Østerlund (s195456@student.dtu.dk) **/
 public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
     MySQLCon newCon = new MySQLCon();
 
@@ -26,7 +14,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
         try {
             newCon.setupCon();
         } catch (SQLException | ClassNotFoundException e) {
-            throw new DALException("Kan ikke oprette forbindelse til serveren");
+            throw new DALException("Cannot establish a connection to the server! " + e);
         }
     }
 
@@ -34,54 +22,95 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
 
     @Override
     public ProduktBatchDTO getProduktBatch(int pbId) throws DALException, SQLException, ClassNotFoundException {
-        //Query to get produktbatch
-        String query = "SELECT * FROM prodbestilling";
-
         /* Creating a try catch
          * Within creating a statement and then getting a returned resultset with the specifed query. */
         try {
+            /* SQL Query */
+            String query = "SELECT * FROM prodbestilling WHERE pbID = " + pbId;
+            /* Statement to SQL */
             Statement stmt = newCon.connection.createStatement();
+            /* Resultset from the query */
             ResultSet rs = stmt.executeQuery(query);
-            ArrayList<ProduktBatchDTO> list = new ArrayList<>();
 
-            //Iterating through the query and getting the essentials from the database
-            while (rs.next()) {
-                String pbID = rs.getString("pbId");
-                String receptID = rs.getString("recID");
-                int status = rs.getInt("status");
-                list.add();
-
+            //Using custom method to extract the information needed from the resultset.
+            if (rs.next()) {
+                return extractPBLFromResultSet(rs);
             }
-            stmt.close();
+            throw new DALException("No results");
+
+            /* Catching exception and throwing a new custom one */
         } catch (Exception e){
-            throw new DALException("Failed to get specified ProduktBatch" + e);
+            throw new DALException("Failed to get the ProduktBatch" + e);
         }
-        
-        return null;
     }
 
     @Override
     public List<ProduktBatchDTO> getProduktBatchList() throws DALException {
-        return null;
+        try {
+            /* SQL Query */
+            String query = "SELECT * FROM prodbestilling";
+            /* Statement to SQL */
+            Statement stmt = newCon.connection.createStatement();
+            /* Resultset from the query */
+            ResultSet rs = stmt.executeQuery(query);
+            /* Arraylist needed to extract a full list of produktbatches */
+            ArrayList<ProduktBatchDTO> pblist = new ArrayList<>();
+
+            //Using custom method to extract the information needed from the resultset.
+            if (rs.next()) {
+                pblist.add(extractPBLFromResultSet(rs));
+                return pblist;
+            }
+            throw new DALException("No results");
+            /* Catching exception and throwing a new custom one */
+        } catch (Exception e) {
+            throw new DALException("Failed to get a ProduktBatch list " + e);
+        }
     }
 
     @Override
     public void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
+        try {
 
+            /* Statement to SQL */
+            Statement stmt = newCon.connection.createStatement();
+            /* SQL Query to insert values */
+            String query = "INSERT INTO prodbestilling VALUES (" +
+                    "'" + produktbatch.getPbID() + "'" + ", " +
+                    "'" + produktbatch.getReceptID() + "'" + ", " +
+                    "'" + produktbatch.getStatus() + "'";
 
-        //Trigger til selv at sætte status op
+            /* Resultset from the query */
+            ResultSet rs = stmt.executeQuery(query);
+
+        } catch (SQLException e) {
+            throw new DALException("Error! Couldn't insert desired values");
+        }
     }
 
     @Override
     public void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
+        try {
 
+            /* SQL Statement & Query to update values */
+            PreparedStatement statusQuery = newCon.connection.prepareStatement
+                    ("UPDATE prodbestilling SET status = ? WHERE pbID = ?");
+
+            statusQuery.setInt(1, produktbatch.getStatus());
+            statusQuery.setString(2, produktbatch.getPbID());
+
+        } catch (SQLException e) {
+            throw new DALException("Error! Couldn't update desired values");
+        }
     }
 
 
-    private ProduktBatchDTO extractProduktBatchListFromResultSet(ResultSet rs) throws SQLException {
-        ProduktBatchDTO produktbatchList = new ProduktBatchDTO(rs.getString("pbID"), rs.getInt("status"), rs.getString("recID"));
-        ;
-        return produktbatchList;
-    }
+    private ProduktBatchDTO extractPBLFromResultSet(ResultSet rs) throws SQLException {
+        ProduktBatchDTO PBL = new ProduktBatchDTO(
+                rs.getString("pbID"),
+                rs.getInt("status"),
+                rs.getString("recID"));
+        return PBL;
     }
 }
+
