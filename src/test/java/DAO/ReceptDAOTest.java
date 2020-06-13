@@ -29,12 +29,18 @@ class ReceptDAOTest {
     }
 
     @Test
-    void getReceptList() {
+    void getReceptList() throws DALException {
+        ReceptDAO DAO = new ReceptDAO();
+        for (ReceptDTO dto : DAO.getReceptList()) {
+            System.out.println(dto.getReceptID());
+            System.out.println(dto.getReceptNavn());
+        }
+
 
     }
 
     @Test
-    void createRecept(ReceptDTO recept) throws DALException {
+    void createRecept() throws DALException {
         ReceptDAO DAO = new ReceptDAO();
         ReceptDTO recept3 = new ReceptDTO("rec003","receptNavn");
 

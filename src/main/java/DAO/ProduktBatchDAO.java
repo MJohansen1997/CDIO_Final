@@ -49,7 +49,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
                 String pbID = rs.getString("pbId");
                 String receptID = rs.getString("recID");
                 int status = rs.getInt("status");
-                list.add();
+                //list.add();
 
             }
             stmt.close();
@@ -83,5 +83,6 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
         ;
         return produktbatchList;
     }
-    }
 }
+
+
