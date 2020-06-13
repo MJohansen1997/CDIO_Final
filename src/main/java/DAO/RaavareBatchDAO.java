@@ -68,7 +68,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
 
     @Override
     public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws SQLException, ClassNotFoundException, DALException {
-        try {
+        /*try {
             PreparedStatement preparedStatement = newCon.connection.prepareStatement("INSERT INTO Raavarebatches (rbId, raavareID, maengde) VALUES (? ,? ,?)");
 
             ArrayList<String> ar1 = IDCreate.autoIncrementIDs("Raavarebatches" ,"rbId");
@@ -80,7 +80,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
 
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
-        }
+        }*/
     }
 
     @Override

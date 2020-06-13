@@ -31,6 +31,7 @@ public class ReceptDAO implements IDAO.IReceptDAO {
             throw new DALException("ingen resultater fundet");
 
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DALException("Fejl søgning");
         }
     }
@@ -57,11 +58,13 @@ public class ReceptDAO implements IDAO.IReceptDAO {
     public void createRecept(ReceptDTO recept) throws DALException {
         try {
             Statement stmt = newCon.connection.createStatement();
-            ResultSet rs = stmt.executeQuery("Insert Into Recepter Values (" +
-                    recept.getReceptID() + ", " +
-                    recept.getReceptNavn()
-                    );
+            ResultSet rs = stmt.executeQuery("insert into recepter values(\" "+
+                    recept.getReceptID() +
+                    "\", \"" + recept.getReceptNavn() +"\");"
+            );
+
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DALException("Fejl ved indsættelse af element");
         }
 
@@ -72,8 +75,8 @@ public class ReceptDAO implements IDAO.IReceptDAO {
         try {
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery("UPDATE Recepter Set " +
-                    "recNavn" + recept.getReceptNavn() + ", " +
-                    "WHERE recID = " + recept.getReceptID()
+                    "recNavn = \"" + recept.getReceptNavn() + "\", \"" +
+                    "WHERE recID = " + recept.getReceptID() + "\""
             );
 
         } catch (SQLException e) {
