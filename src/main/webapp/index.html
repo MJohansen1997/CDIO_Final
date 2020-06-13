@@ -6,17 +6,18 @@
 </head>
 <body>
 <h1> Login</h1>
-
-<form action="/action_page.php">
-
+<div class = "login">
     <form action="/action_page.php">
         <label for="bnavn">Brugernavn:</label>
         <input type="text" id="bnavn" name="bnavn"><br><br>
+
         <label for="password">Password:</label>
         <input type="text" id="password" name="password"><br><br>
-        <input type="submit" value="Submit">
-    </form>
 
-</form>
+        <button onclick="submit">Login</button>
+        <button type="button" onclick="document.getElementById('demo').innerHTML = Date()">Login</button>
+    </form>
+</div>
+
 </body>
 </html>
