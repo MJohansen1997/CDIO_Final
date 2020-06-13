@@ -49,7 +49,7 @@ public class BrugerDAO implements IDAO {
     }
 
     private BrugerDTO extractUserFromResultSet(ResultSet rs) throws SQLException {
-        BrugerDTO user = new BrugerDTO(rs.getString("brugerID"), rs.getString("brugerNavn"), rs.getString("ini"), rs.getString("cpr"));
+        BrugerDTO user = new BrugerDTO(rs.getString("brugerID"), rs.getString("brugerNavn"), rs.getString("ini"), rs.getString("cpr"),rs.getString("password"));
         return user;
     }
 }
