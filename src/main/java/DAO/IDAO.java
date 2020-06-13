@@ -27,7 +27,7 @@ public interface IDAO {
 
 
     public interface IReceptDAO {
-        ReceptDTO getRecept(int receptId) throws DALException;
+        ReceptDTO getRecept(String receptId) throws DALException;
 
         List<ReceptDTO> getReceptList() throws DALException;
 

@@ -21,7 +21,7 @@ public class ReceptDAO implements IDAO.IReceptDAO {
     }
 
     @Override
-    public ReceptDTO getRecept(int receptId) throws DALException {
+    public ReceptDTO getRecept(String receptId) throws DALException {
         try {
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Recepter WHERE recID = " + receptId);
