@@ -1,17 +1,13 @@
 package DTO;
-
 public class ProduktBatchDTO {
-    /**
-     * produkt batch id i området 1-99999999. Vælges af brugerne
-     * PB00001
-     */
+    //Produktbatch id
     String pbID;
-    /**
-     * status 0: ikke påbegyndt, 1: under produktion, 2: afsluttet
-     */
+    // Status 0: Ikke påbegyndt, 1: Under produktion, 2: Afsluttet
     int status;
-    /**
-     * recept id i området 1-99999999. Vælges af brugerne
-     */
+    // Recept id
     String receptID;
+
+    public ProduktBatchDTO(String pbID, int status, String receptID){
+
+    }
 }

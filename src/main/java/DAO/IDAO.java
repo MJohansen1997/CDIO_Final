@@ -51,20 +51,20 @@ public interface IDAO {
 
 
     public interface IRaavareBatchDAO {
-        RaavareBatchDTO getRaavareBatch(int rbId) throws DALException;
+        RaavareBatchDTO getRaavareBatch(int rbId) throws DALException, SQLException, ClassNotFoundException;
 
-        List<RaavareBatchDTO> getRaavareBatchList() throws DALException;
+        List<RaavareBatchDTO> getRaavareBatchList() throws DALException, SQLException, ClassNotFoundException;
 
-        List<RaavareBatchDTO> getRaavareBatchList(int raavareId) throws DALException;
+        List<RaavareBatchDTO> getRaavareBatchList(int raavareId) throws DALException, SQLException, ClassNotFoundException;
 
-        void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException;
+        void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException, SQLException, ClassNotFoundException;
 
         void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException;
     }
 
 
     public interface IProduktBatchDAO {
-        ProduktBatchDTO getProduktBatch(int pbId) throws DALException;
+        ProduktBatchDTO getProduktBatch(int pbId) throws DALException, SQLException, ClassNotFoundException;
 
         List<ProduktBatchDTO> getProduktBatchList() throws DALException;
 

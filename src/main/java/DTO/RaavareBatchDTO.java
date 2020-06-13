@@ -1,16 +1,46 @@
 package DTO;
 
+import DAO.RaavareDAO;
+
 public class RaavareBatchDTO {
-    /**
-     * raavare batch id i området 1-99999999. Vælges af brugerne
-     */
+     // Raavare batch id
     String rbID;
-    /**
-     * raavare id i området 1-99999999 vælges af brugerne
-     */
+     // Raavare id
     String raavareId;
-    /**
-     * mængde på lager
-     */
+     // Mængde på lager
     double maengde;
+
+    public RaavareBatchDTO(String rbID, String raavareId, double maengde) {
+        this.rbID = rbID;
+        this.raavareId = raavareId;
+        this.maengde = maengde;
+    }
+
+    public void setRbID(String rbID) {
+        this.rbID = rbID;
+    }
+
+    public void setRaavareId(String raavareId) {
+        this.raavareId = raavareId;
+    }
+
+    public void setMaengde(double maengde) {
+        this.maengde = maengde;
+    }
+
+    public String getRbID() {
+        return rbID;
+    }
+
+    public String getRaavareId() {
+        return raavareId;
+    }
+
+    public double getMaengde() {
+        return maengde;
+    }
+
+
+
+
 }
