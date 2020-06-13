@@ -12,8 +12,6 @@ class ProduktBatchKompDAOTest {
     void getProduktBatchKomp() {
         assertEquals("lab001",pbk.getLabID());
         assertNotEquals("lab01",pbk.getLabID());
-
-        assert
     }
 
     @org.junit.jupiter.api.Test
