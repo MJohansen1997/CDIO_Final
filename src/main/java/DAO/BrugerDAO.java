@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BrugerDAO implements IDAO {
     MySQLCon newCon = new MySQLCon();
-    IncrementID IDCreate = new IncrementID();
+    //IncrementID IDCreate = new IncrementID();
 
     public BrugerDAO() throws SQLException, ClassNotFoundException, DALException {
         try {
@@ -28,7 +28,7 @@ public class BrugerDAO implements IDAO {
     public BrugerDTO getBruger(String brugerID) throws DALException, SQLException, ClassNotFoundException {
         try {
             Statement stmt = newCon.connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM brugerer WHERE id=" + brugerID);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM brugerer WHERE brugerID = \'" + brugerID + "\'");
             if (rs.next()) {
                 return extractUserFromResultSet(rs);
             }
@@ -57,42 +57,48 @@ public class BrugerDAO implements IDAO {
     }
 
     @Override
-    public void createBruger(BrugerDTO opr) throws DALException, SQLException {
+    public void createBruger(BrugerDTO opr) throws DALException{
         try {
-            PreparedStatement preparedStatement = newCon.connection.prepareStatement("INSERT INTO brugerer (brugerID, brugerNavn, ini, cpr, rolle) VALUES (?, ?, ?, ?, ?);");
+            PreparedStatement preparedStatement = newCon.connection.prepareStatement("INSERT INTO brugerer " +
+                    "(brugerID, brugerNavn, ini, cpr, rolle, password) VALUES (?, ?, ?, ?, ?, ?);");
 
-            ArrayList<String> ArrayID = IDCreate.autoIncrementIDs("brugerer", "brugerID");
+           //ArrayList<String> ArrayID = IDCreate.autoIncrementIDs("brugerer", "brugerID");
 
 
-            preparedStatement.setString(1, IDCreate.returnID(ArrayID));
+            //preparedStatement.setString(1, IDCreate.returnID(ArrayID));
             preparedStatement.setString(2, opr.getBrugerNavn());
             preparedStatement.setString(3, opr.getIni());
             preparedStatement.setString(4, opr.getCpr());
             preparedStatement.setString(5, opr.getRolle());
+            preparedStatement.setString(6, opr.getPassword());
 
         } catch (SQLException e) {
-            throw new SQLException("Encountered an error when executing given sql statement.", e);
+            throw new DALException("Encountered an error when executing given sql statement. : " + e.getMessage());
         }
     }
 
     @Override
-    public void updateBruger(BrugerDTO opr) throws DALException, SQLException {
+    public void updateBruger(BrugerDTO opr) throws DALException {
 
         try {
-            PreparedStatement preparedStatement = newCon.connection.prepareStatement("UPDATE brugerer SET brugerID = ?, brugerNavn = ?, ini = ?, cpr = ?, rolle = ? WHERE userID = ?");
+            PreparedStatement preparedStatement = newCon.connection.prepareStatement("UPDATE brugerer SET " +
+                    "brugerID = ?, brugerNavn = ?, ini = ?, cpr = ?, rolle = ?, password = ? WHERE userID = ?");
             preparedStatement.setString(1, opr.getBrugerID());
             preparedStatement.setString(2, opr.getBrugerNavn());
             preparedStatement.setString(3, opr.getIni());
             preparedStatement.setString(4, opr.getCpr());
             preparedStatement.setString(5, opr.getRolle());
-            preparedStatement.setString(6, opr.getBrugerID());
+            preparedStatement.setString(6, opr.getPassword());
+            preparedStatement.setString(7, opr.getBrugerID());
         } catch (SQLException e) {
-            throw new SQLException("Encountered an error when executing given sql statement.", e);
+            throw new DALException("Encountered an error when executing given sql statement." + e.getMessage());
         }
     }
 
     private BrugerDTO extractUserFromResultSet(ResultSet rs) throws SQLException {
-        BrugerDTO user = new BrugerDTO(rs.getString("brugerID"), rs.getString("brugerNavn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("rolle"));
+        BrugerDTO user = new BrugerDTO(rs.getString("brugerID"), rs.getString("brugerNavn"),
+                rs.getString("ini"), rs.getString("cpr"), rs.getString("rolle"),
+                rs.getString("password"));
         return user;
     }
 }
