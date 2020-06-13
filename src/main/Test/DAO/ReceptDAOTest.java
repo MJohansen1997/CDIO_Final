@@ -34,7 +34,7 @@ class ReceptDAOTest {
     }
 
     @Test
-    void createRecept(ReceptDTO recept) throws DALException {
+    void createRecept() throws DALException {
         ReceptDAO DAO = new ReceptDAO();
         ReceptDTO recept3 = new ReceptDTO("rec003","receptNavn");
 
