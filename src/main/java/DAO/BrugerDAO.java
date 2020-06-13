@@ -7,23 +7,28 @@ import DTO.BrugerDTO;
 import java.sql.ResultSet;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+
 /** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
 
 
 public class BrugerDAO implements IDAO {
     MySQLCon newCon = new MySQLCon();
+    IncrementID IDCreate = new IncrementID();
 
-    public BrugerDAO() throws SQLException, ClassNotFoundException {
+    public BrugerDAO() throws SQLException, ClassNotFoundException, DALException {
+        try {
+            newCon.setupCon();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new DALException("Kan ikke oprette en connection til serveren");
+        }
     }
 
     @Override
     public BrugerDTO getBruger(String brugerID) throws DALException, SQLException, ClassNotFoundException {
-        newCon.setupCon();
         try {
             Statement stmt = newCon.connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM brugere WHERE id=" + brugerID);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM brugerer WHERE id=" + brugerID);
             if (rs.next()) {
                 return extractUserFromResultSet(rs);
             }
@@ -35,21 +40,59 @@ public class BrugerDAO implements IDAO {
 
     @Override
     public List<BrugerDTO> getBrugerList() throws DALException {
+        try {
+            Statement stmt = newCon.connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM brugerer");
+            ArrayList<BrugerDTO> users = new ArrayList<>();
+            while (rs.next()) {
+                    BrugerDTO user = extractUserFromResultSet(rs);
+                    users.add(user);
+            }
+            return users;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         return null;
     }
 
     @Override
-    public void createBruger(BrugerDTO opr) throws DALException {
+    public void createBruger(BrugerDTO opr) throws DALException, SQLException {
+        try {
+            PreparedStatement preparedStatement = newCon.connection.prepareStatement("INSERT INTO brugerer (brugerID, brugerNavn, ini, cpr, rolle) VALUES (?, ?, ?, ?, ?);");
 
+            ArrayList<String> ArrayID = IDCreate.autoIncrementIDs("brugerer", "brugerID");
+
+
+            preparedStatement.setString(1, IDCreate.returnID(ArrayID));
+            preparedStatement.setString(2, opr.getBrugerNavn());
+            preparedStatement.setString(3, opr.getIni());
+            preparedStatement.setString(4, opr.getCpr());
+            preparedStatement.setString(5, opr.getRolle());
+
+        } catch (SQLException e) {
+            throw new SQLException("Encountered an error when executing given sql statement.", e);
+        }
     }
 
     @Override
-    public void updateBruger(BrugerDTO opr) throws DALException {
+    public void updateBruger(BrugerDTO opr) throws DALException, SQLException {
 
+        try {
+            PreparedStatement preparedStatement = newCon.connection.prepareStatement("UPDATE brugerer SET brugerID = ?, brugerNavn = ?, ini = ?, cpr = ?, rolle = ? WHERE userID = ?");
+            preparedStatement.setString(1, opr.getBrugerID());
+            preparedStatement.setString(2, opr.getBrugerNavn());
+            preparedStatement.setString(3, opr.getIni());
+            preparedStatement.setString(4, opr.getCpr());
+            preparedStatement.setString(5, opr.getRolle());
+            preparedStatement.setString(6, opr.getBrugerID());
+        } catch (SQLException e) {
+            throw new SQLException("Encountered an error when executing given sql statement.", e);
+        }
     }
 
     private BrugerDTO extractUserFromResultSet(ResultSet rs) throws SQLException {
-        BrugerDTO user = new BrugerDTO(rs.getString("brugerID"), rs.getString("brugerNavn"), rs.getString("ini"), rs.getString("cpr"),rs.getString("password"));
+        BrugerDTO user = new BrugerDTO(rs.getString("brugerID"), rs.getString("brugerNavn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("rolle"));
         return user;
     }
 }

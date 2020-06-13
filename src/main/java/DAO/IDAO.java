@@ -10,9 +10,9 @@ public interface IDAO {
 
     List<BrugerDTO> getBrugerList() throws DALException;
 
-    void createBruger(BrugerDTO opr) throws DALException;
+    void createBruger(BrugerDTO opr) throws DALException, SQLException;
 
-    void updateBruger(BrugerDTO opr) throws DALException;
+    void updateBruger(BrugerDTO opr) throws DALException, SQLException;
 
 
     public interface IRaavareDAO {
