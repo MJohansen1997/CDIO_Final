@@ -1,6 +1,5 @@
 package DAO;
 
-import DTO.BrugerDTO;
 import DTO.ProduktBatchKompDTO;
 
 import java.sql.ResultSet;
@@ -14,6 +13,7 @@ import java.util.List;
  */
 public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     MySQLCon newCon = new MySQLCon();
+
 
     @Override
     public ProduktBatchKompDTO getProduktBatchKomp(int pbId, int rbId) throws DALException {
@@ -74,9 +74,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
                             + pbk.getTara() + ","
                             + pbk.getNetto() + ");");
 
-            if (rs.next()) {
-                extractcreateProduktBatchFromResultSet(rs);
-            }
+
         } catch (SQLException | ClassNotFoundException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
@@ -94,7 +92,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
                     ", laborant = " + pbk.getLabID() +
                     ", tara = " + pbk.getTara() +
                     ", netto = " + pbk.getNetto() +
-                    "where pbID =" + pbID);
+                    "where pbID =" + pbk.getPbId());
 
         } catch (SQLException | ClassNotFoundException ex) {
             throw new DALException("kunne ikke finde ønsket information");
