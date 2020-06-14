@@ -24,13 +24,13 @@ public class IncrementID {
 
     public static void main(String[] args) throws SQLException, DALException, ClassNotFoundException {
         IncrementID incre = new IncrementID();
-        incre.returnID("brugerer", "brugerID");
+        incre.returnID("Recepter", "recID");
     }
 
 
     public String returnID(String tableName, String columnIDName) throws DALException {
         ArrayList<String> IDS = autoIncrementIDs(tableName, columnIDName);
-        String[] IDNumbers = new String[IDS.size()];
+        String IDNumbers = null;
         String[] part = new String[0];
         String formatString = null;
         int ID;
@@ -39,10 +39,10 @@ public class IncrementID {
             part = IDS.get(i).split("(?<=\\D)(?=\\d)");
             ID = (Integer.parseInt(part[1]) + 1);
             String formattingString = String.format("%05d", ID);
-            IDNumbers[i] = part[0] + formattingString;
-            System.out.println(IDNumbers[i]);
+            IDNumbers = part[0] + formattingString;
+            System.out.println(IDNumbers);
         }
-        return part[0] + formatString;
+        return IDNumbers;
     }
 
 
@@ -50,7 +50,7 @@ public class IncrementID {
     public ArrayList<String> autoIncrementIDs(String tableName, String columnIDName) throws DALException {
         try {
             ResultSet rs;
-            PreparedStatement st = newCon.connection.prepareStatement("SELECT * FROM " + tableName + " ORDER BY " + columnIDName + " DESC LIMIT 2");
+            PreparedStatement st = newCon.connection.prepareStatement("SELECT * FROM " + tableName + " ORDER BY " + columnIDName + " DESC LIMIT 1");
             rs = st.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
             int columnsNumber = rsmd.getColumnCount();

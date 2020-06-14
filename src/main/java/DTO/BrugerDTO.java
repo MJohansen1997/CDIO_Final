@@ -21,7 +21,8 @@ public class BrugerDTO {
         this.password = password;
     }
 
-
+    public BrugerDTO(BrugerDTO brugerDTO) {
+    }
 
     public String getBrugerID() {return brugerID;}
 

@@ -45,8 +45,9 @@ public class BrugerDAO implements IDAO {
             ResultSet rs = stmt.executeQuery("SELECT * FROM brugerer");
             ArrayList<BrugerDTO> users = new ArrayList<>();
             while (rs.next()) {
-                    BrugerDTO user = extractUserFromResultSet(rs);
-                    users.add(user);
+                BrugerDTO user = new BrugerDTO(rs.getString("brugerID"), rs.getString("brugerNavn"),
+                        rs.getString("ini"), rs.getString("cpr"), rs.getString("rolle"), rs.getString("password"));
+                users.add(user);
             }
             return users;
 
@@ -57,16 +58,19 @@ public class BrugerDAO implements IDAO {
     }
 
     @Override
-    public void createBruger(BrugerDTO opr) throws DALException{
+    public void createBruger(BrugerDTO opr) throws DALException {
         try {
             PreparedStatement preparedStatement = newCon.connection.prepareStatement("INSERT INTO brugerer " +
-                    "(brugerID, brugerNavn, ini, cpr, rolle) VALUES (?, ?, ?, ?, ?);");
+                    "(brugerID, brugerNavn, ini, cpr, rolle, password) VALUES (?, ?, ?, ?, ?, ?);");
 
-            preparedStatement.setString(1, IDCreate.returnID("brugerer","brugerID"));
+            preparedStatement.setString(1,opr.getBrugerID());
             preparedStatement.setString(2, opr.getBrugerNavn());
             preparedStatement.setString(3, opr.getIni());
             preparedStatement.setString(4, opr.getCpr());
             preparedStatement.setString(5, opr.getRolle());
+            preparedStatement.setString(6, opr.getPassword());
+            preparedStatement.executeUpdate();
+
 
         } catch (SQLException e) {
             throw new DALException("Encountered an error when executing given sql statement. : " + e.getMessage());
@@ -78,13 +82,14 @@ public class BrugerDAO implements IDAO {
 
         try {
             PreparedStatement preparedStatement = newCon.connection.prepareStatement("UPDATE brugerer SET " +
-                    "brugerID = ?, brugerNavn = ?, ini = ?, cpr = ?, rolle = ? WHERE userID = ?");
+                    "brugerID = ?, brugerNavn = ?, ini = ?, cpr = ?, rolle = ?, password = ? WHERE brugerID = ?");
             preparedStatement.setString(1, opr.getBrugerID());
             preparedStatement.setString(2, opr.getBrugerNavn());
             preparedStatement.setString(3, opr.getIni());
             preparedStatement.setString(4, opr.getCpr());
             preparedStatement.setString(5, opr.getRolle());
-            preparedStatement.setString(6, opr.getBrugerID());
+            preparedStatement.setString(6, opr.getPassword());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DALException("Encountered an error when executing given sql statement." + e.getMessage());
         }
