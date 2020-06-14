@@ -26,17 +26,18 @@
     </script>
 </head>
 <body>
-<div>
+  <div class = "title">
     <h1>Rødovrevej Pharmaceutics</h1>
-</div>
-<div id="maincontainer">
-<p> Login</p>
+  </div>
+  <div id="maincontainer">
+<p> Login:</p>
 <form action="rest/login/verify" method="POST" id='loginform'>
-    <p>UserName : <input type="text" name="Username" /></p>
-    <p>Password : <input type="text" name="Password" /></p>
+    <p>Username : <input type="text" name="Username" required /></p>
+    <p>Password : <input type="text" name="Password" required /></p>
     <!-- <input type="submit" name="submit" value="Submit" id="submitButton" /> -->
 </form>
 <button>Send an HTTP POST request to a page and get the result back</button>
 </div>
+  <img src = "/main/resources/alberta-2297204_1280.jpg" alt = "Et billede af rødovrevej"/>
 </body>
 </html>
