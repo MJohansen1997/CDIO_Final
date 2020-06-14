@@ -1,0 +1,52 @@
+body {
+    font-family: Cambria, serif;
+}
+
+#login {
+    overflow: hidden;
+}
+
+#loginimg {
+    width: 900px;
+    height: 1000px;
+    border: 2px solid black;
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+}
+
+#maincontainer {
+    text-align: center;
+    position: relative;
+    float: left;
+    right: 6px;
+    padding: 5px;
+    border: 2px solid #343434;
+    background: #bce2ff;
+}
+.container {
+    margin-left: 5%;
+
+
+}
+.title {
+    width: 500px;
+    margin-top: 320px;
+    font-size: 20px;
+    margin-left: 40px;
+}
+
+.vl {
+    border-left: 3px solid black;
+    position: absolute;
+    opacity: 1;
+    height: 100%;
+    left: 640px;
+    top: 21px;
+}
+.text-input {
+    padding: 3px
+}
+.password-field {
+    padding-right: 2px;
+}
