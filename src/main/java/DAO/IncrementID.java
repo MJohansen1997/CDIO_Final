@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+/** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
+
 public class IncrementID {
     MySQLCon newCon = new MySQLCon();
 

@@ -19,7 +19,6 @@ public class BrugerDTO {
         this.cpr = cpr;
         this.rolle = rolle;
         this.password = password;
-
     }
 
 

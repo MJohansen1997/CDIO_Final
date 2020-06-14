@@ -5,6 +5,31 @@
     <title>Title</title>
 </head>
 <body>
+<table id ="userInfo-table" class="table">
+    <thead>
+        <tr>
+            <th>brugerID</th>
+            <th>Bruger Navn</th>
+            <th>Ini</th>
+            <th>Cpr</th>
+            <th>Rolle</th>
+            <th>Password</th>
+        </tr>
+    </thead>
+    <tbody id="brugerBody">
+    </tbody>
+</table>
+
+    <script type="text/javascript">
+        const rankingBody = document.querySelector("#rankings-table > tbody");
+
+
+        function loadData() {
+            const request = new XMLHttpRequest();
+
+            request.open("get", "")
+        }
+    </script>
 
 </body>
 </html>
