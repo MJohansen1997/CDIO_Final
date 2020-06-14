@@ -8,6 +8,8 @@ public class ProduktBatchDTO {
         this.receptID = receptID;
     }
 
+    public ProduktBatchDTO(){}
+
     public String getPbID() {
         return pbID;
     }

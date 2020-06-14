@@ -5,6 +5,8 @@ public class ReceptDTO {
         receptID = recID;
         receptNavn = recNavn;
     }
+
+    public ReceptDTO(){}
     /**
      * recept id i området 1-99999999
      */

@@ -1,7 +1,5 @@
 package DTO;
 
-import DAO.RaavareDAO;
-
 public class RaavareBatchDTO {
      // Raavare batch id
     String rbID;
@@ -15,6 +13,8 @@ public class RaavareBatchDTO {
         this.raavareId = raavareId;
         this.maengde = maengde;
     }
+
+    public RaavareBatchDTO(){}
 
     public void setRbID(String rbID) {
         this.rbID = rbID;

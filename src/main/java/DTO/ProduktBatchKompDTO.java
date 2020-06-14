@@ -10,6 +10,8 @@ public class ProduktBatchKompDTO {
         this.labID = labID;
     }
 
+    public ProduktBatchDTO(){}
+
     /**
      * produkt batch id i området 1-99999999. Vælges af brugerne
      */

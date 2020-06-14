@@ -3,8 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
+<header>
+    <h6 id="userinfo">Userinformation</h6>
+    //top
+    <nav>
+        <ul>
+            <li id="home">Hjem</li>
+            <li id="brugeradmin">Brugeradministration</li>
+            <li id="logud">Log ud</li>
+        </ul>
+    </nav>
+</header>
 <body>
+<h1>Velkommen tilbage "username"</h1>
+//left side
+<nav>
+    <ul>
+        <button id="myBtn">Opret</button>
+        <li id="slet">Slet</li>
+        <li id="rediger">Rediger</li>
+        <li id="find">Find</li>
+    </ul>
+</nav>
+
+<p>Opret bruger</p>
+
+<form action="rest/login/admin" method="POST" id='adminform'>
+    p>Vælg userid : <input type="text" id="userid" name="userid" required/></p>
+    <p>Vælg username : <input type="text" id="username" name="username" required/></p>
+    <p>Vælg userini : <input type="text" id="userini" name="userini" required/></p>
+    <p>Vælg usercpr : <input type="text" id="usercpr" name="usercpr" required/></p>
+    <p>Vælg password : <input type="text" id="userpword" name="userpword" required/></p>
+</form>
+<button>Gem</button>
+
+
+<script>
+
+    const user = {
+        userid :#userid,
+        username :#username,
+        userini:#userini,
+        usercpr :#usercpr,
+        userpword:#userpword
+    };
+
+    var bruger = JSON.stringify(user);
+
+
+    $(document).ready(function(){
+        $("button").click(function(){
+            $.ajax({
+                url : "rest/login/admin",
+                data : $('#loginform').serialize(),
+                contentType: "application/x-www-form-urlencoded",
+                method: 'POST',
+                success : function(data){
+                    alert(data);
+                    if(data=='true'){
+                        /*$('#maincontainer').load("HomePage.html");*/
+                        window.location.href = 'HomePage.html';
+                    }
+                }
+            });
+
+        });
+    });
+</script>
 
 </body>
-</html>

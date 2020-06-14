@@ -1,6 +1,5 @@
 package DTO;
 
-import java.util.List;
 /** @author Christensen, Jacob Kjærby (john.doe@example.com)*/
 
 public class BrugerDTO {
@@ -17,11 +16,9 @@ public class BrugerDTO {
         this.ini = ini;
         this.cpr = cpr;
         this.rolle = rolle;
-
-
     }
 
-
+    public BrugerDTO() {  }
 
     public String getBrugerID() {return brugerID;}
 
@@ -42,5 +39,7 @@ public class BrugerDTO {
     public String getRolle() {return rolle; }
 
     public void setRolle(String cpr) {this.rolle = rolle; }
+
+
 }
 
