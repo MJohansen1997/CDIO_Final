@@ -14,7 +14,14 @@ function loadBrugere() {
 
 
 function generateHTML(bruger){
-    return '<tr><td>' +
+    return '<tr><td>' + bruger.brugerID + '</td>' +
+        '<td>' + bruger.brugerNavn + '</td>' +
+        '<td>' + bruger.ini + '</td>' +
+        '<td>' + bruger.cpr + '</td>' +
+        '<td>' + bruger.rolle + '</td>' +
+        '<td>' + bruger.password + '</td</tr>>'
+
+    //@TODO Make a button which creates, updates and remove
 }
 
 
