@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BrugerDAO implements IDAO {
     MySQLCon newCon = new MySQLCon();
-    //IncrementID IDCreate = new IncrementID();
+    IncrementID IDCreate = new IncrementID();
 
     public BrugerDAO() throws SQLException, ClassNotFoundException, DALException {
         try {
@@ -62,10 +62,7 @@ public class BrugerDAO implements IDAO {
             PreparedStatement preparedStatement = newCon.connection.prepareStatement("INSERT INTO brugerer " +
                     "(brugerID, brugerNavn, ini, cpr, rolle) VALUES (?, ?, ?, ?, ?);");
 
-           //ArrayList<String> ArrayID = IDCreate.autoIncrementIDs("brugerer", "brugerID");
-
-
-            //preparedStatement.setString(1, IDCreate.returnID(ArrayID));
+            preparedStatement.setString(1, IDCreate.returnID("brugerer","brugerID"));
             preparedStatement.setString(2, opr.getBrugerNavn());
             preparedStatement.setString(3, opr.getIni());
             preparedStatement.setString(4, opr.getCpr());
@@ -110,7 +107,7 @@ public class BrugerDAO implements IDAO {
 
     private BrugerDTO extractUserFromResultSet(ResultSet rs) throws SQLException {
         BrugerDTO user = new BrugerDTO(rs.getString("brugerID"), rs.getString("brugerNavn"),
-                rs.getString("ini"), rs.getString("cpr"), rs.getString("rolle"));
+                rs.getString("ini"), rs.getString("cpr"), rs.getString("rolle"), rs.getString("password"));
         return user;
     }
 }

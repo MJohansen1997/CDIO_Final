@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel = "stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>Rødovrevejs Pharmaceutics</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -25,19 +26,27 @@
         });
     </script>
 </head>
-<body>
-  <div class = "title">
+<body id = "login">
+  <div class = "title container">
     <h1>Rødovrevej Pharmaceutics</h1>
   </div>
-  <div id="maincontainer">
-<p> Login:</p>
+  <div id="maincontainer" class = container>
+      <h3>Login</h3>
 <form action="rest/login/verify" method="POST" id='loginform'>
-    <p>Username : <input type="text" name="Username" required /></p>
-    <p>Password : <input type="text" name="Password" required /></p>
+    <div  class = "text-input username-field">
+        <label for="loginform">Username: </label>
+        <input type="text" name="Username" required />
+    </div>
+    <div  class = "text-input password-field" >
+        <label for="loginform">Password: </label>
+        <input type="password" name="Password" required />
     <!-- <input type="submit" name="submit" value="Submit" id="submitButton" /> -->
+    </div>
 </form>
-<button>Send an HTTP POST request to a page and get the result back</button>
+<button id = "submit">Log på</button>
 </div>
-  <img src = "/main/resources/alberta-2297204_1280.jpg" alt = "Et billede af rødovrevej"/>
+  <div  id = "loginimg">
+    <img src = "roedovrevej_011_171017_BP.jpg" alt = "Et billede af rødovrevej" id = "roedovrevej" />
+  </div>
 </body>
 </html>
