@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel = "stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>Rødovrevejs Pharmaceutics</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $("button").click(function(){
+        $(document).ready(function () {
+            $("button").click(function () {
                 $.ajax({
-                    url : "rest/login/verify",
-                    data : $('#loginform').serialize(),
+                    url: "rest/login/verify",
+                    data: $('#loginform').serialize(),
                     contentType: "application/x-www-form-urlencoded",
                     method: 'POST',
-                    success : function(data){
+                    success: function (data) {
                         alert(data);
-                        if(data=='true'){
+                        if (data == 'true') {
                             /*$('#maincontainer').load("HomePage.html");*/
                             window.location.href = 'HomePage.html';
                         }
@@ -26,27 +26,29 @@
         });
     </script>
 </head>
-<body id = "login">
-  <div class = "title container">
-    <h1>Rødovrevej Pharmaceutics</h1>
-  </div>
-  <div id="maincontainer" class = container>
-      <h3>Login</h3>
-<form action="rest/login/verify" method="POST" id='loginform'>
-    <div  class = "text-input username-field">
-        <label for="loginform">Username: </label>
-        <input type="text" name="Username" required />
+<body>
+<div id="whole-panel">
+    <div class="title">
+        <header class=header-panel>
+            <img src="pill-512.png" height="64" width="64" alt="Logo" id = "logo"/>
+            <h1 id = "title">Rødovrevej Pharmaceutics</h1>
+        </header>
     </div>
-    <div  class = "text-input password-field" >
-        <label for="loginform">Password: </label>
-        <input type="password" name="Password" required />
-    <!-- <input type="submit" name="submit" value="Submit" id="submitButton" /> -->
+    <div id="maincontainer" class=container>
+        <h4 id = "login-title">Login med dit brugernavn og kodeord</h4>
+        <form action="rest/login/verify" method="POST" id='loginform'>
+            <div class="text-input">
+                <input type="text" name="Username" class = "username-field" placeholder="Brugernavn" required/>
+                <br>
+                <input type="password" name="Password" class= "password-field" placeholder="Kodeord" required/>
+                <!-- <input type="submit" name="submit" value="Submit" id="submitButton" /> -->
+            </div>
+        </form>
+        <button id="loginbutton">Log på</button>
     </div>
-</form>
-<button id = "submit">Log på</button>
 </div>
-  <div  id = "loginimg">
-    <img src = "roedovrevej_011_171017_BP.jpg" alt = "Et billede af rødovrevej" id = "roedovrevej" />
-  </div>
+<div id="imgbox">
+    <img src="1644639.jpg" alt="Et billede af rødovrevej" id="bygning" height="1000"/>
+</div>
 </body>
 </html>
