@@ -22,11 +22,12 @@ public class AdminBrugerService {
                            @FormParam("Username") String username,
                            @FormParam("Userini") String ini,
                            @FormParam("Usercpr") String cpr,
+                           @FormParam("Userrolle") String rolle,
                            @FormParam("Userpword") String password)
             throws SQLException, ClassNotFoundException, DALException {
 
         BrugerDAO BDAO = new BrugerDAO();
-        BrugerDTO bruger = new BrugerDTO(id, username, ini, cpr, password);
+        BrugerDTO bruger = new BrugerDTO(id, username, ini, cpr, rolle, password);
 
 
         BDAO.createBruger(bruger);

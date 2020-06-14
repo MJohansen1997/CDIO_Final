@@ -8,7 +8,7 @@ public class RaavareDTO
         leverandoer = lev;
     }
 
-    public ReceptDTO(){}
+    public RaavareDTO(){}
 
     //raavare id i området 1-99999999 vælges af brugerne
     String raavareID;

@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>Rødovrevejs Pharmaceutics</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $("button").click(function(){
+        $(document).ready(function () {
+            $("button").click(function () {
                 $.ajax({
-                    url : "rest/login/verify",
-                    data : $('#loginform').serialize(),
+                    url: "rest/login/verify",
+                    data: $('#loginform').serialize(),
                     contentType: "application/x-www-form-urlencoded",
                     method: 'POST',
-                    success : function(data){
+                    success: function (data) {
                         alert(data);
-                        if(data=='true'){
+                        if (data == 'true') {
                             /*$('#maincontainer').load("HomePage.html");*/
                             window.location.href = 'HomePage.html';
                         }
@@ -26,18 +27,28 @@
     </script>
 </head>
 <body>
-  <div class = "title">
-    <h1>Rødovrevej Pharmaceutics</h1>
-  </div>
-  <div id="maincontainer">
-<p> Login:</p>
-<form action="rest/login/verify" method="POST" id='loginform'>
-    <p>Username : <input type="text" name="Username" required /></p>
-    <p>Password : <input type="text" name="Password" required /></p>
-    <!-- <input type="submit" name="submit" value="Submit" id="submitButton" /> -->
-</form>
-<button>Send an HTTP POST request to a page and get the result back</button>
+<div id="whole-panel">
+    <div class="title">
+        <header class=header-panel>
+            <img src="pill-512.png" height="64" width="64" alt="Logo" id = "logo"/>
+            <h1 id = "title">Rødovrevej Pharmaceutics</h1>
+        </header>
+    </div>
+    <div id="maincontainer" class=container>
+        <h4 id = "login-title">Login med dit brugernavn og kodeord</h4>
+        <form action="rest/login/verify" method="POST" id='loginform'>
+            <div class="text-input">
+                <input type="text" name="Username" class = "username-field" placeholder="Brugernavn" required/>
+                <br>
+                <input type="password" name="Password" class= "password-field" placeholder="Kodeord" required/>
+                <!-- <input type="submit" name="submit" value="Submit" id="submitButton" /> -->
+            </div>
+        </form>
+        <button id="loginbutton">Log på</button>
+    </div>
 </div>
-  <img src = "\main\resources\alberta-2297204_1280.jpg" alt = "Et billede af rødovrevej"/>
+<div id="imgbox">
+    <img src="1644639.jpg" alt="Et billede af rødovrevej" id="bygning" height="1000"/>
+</div>
 </body>
 </html>

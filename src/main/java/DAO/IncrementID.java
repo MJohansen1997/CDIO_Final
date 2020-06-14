@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+/** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
+
 public class IncrementID {
     MySQLCon newCon = new MySQLCon();
 
@@ -19,10 +21,15 @@ public class IncrementID {
         }
     }
 
-    ArrayList<String> IDS = autoIncrementIDs("brugerer", "brugerID");
-    String IDs = returnID(IDS);
 
-    public String returnID(ArrayList<String> IDS){
+    public static void main(String[] args) throws SQLException, DALException, ClassNotFoundException {
+        IncrementID incre = new IncrementID();
+        incre.returnID("brugerer", "brugerID");
+    }
+
+
+    public String returnID(String tableName, String columnIDName) throws DALException {
+        ArrayList<String> IDS = autoIncrementIDs(tableName, columnIDName);
         String[] IDNumbers = new String[IDS.size()];
         String[] part = new String[0];
         String formatString = null;
@@ -40,13 +47,10 @@ public class IncrementID {
 
 
 
-    public ArrayList<String> autoIncrementIDs(String tableName, String columnIDName){
+    public ArrayList<String> autoIncrementIDs(String tableName, String columnIDName) throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
             ResultSet rs;
-            PreparedStatement st = newCon.connection.prepareStatement("SELECT * FROM ? ORDER BY ? DESC LIMIT 1");
-            st.setString(1,tableName);
-            st.setString(2, columnIDName);
+            PreparedStatement st = newCon.connection.prepareStatement("SELECT * FROM " + tableName + " ORDER BY " + columnIDName + " DESC LIMIT 2");
             rs = st.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
             int columnsNumber = rsmd.getColumnCount();
@@ -59,13 +63,12 @@ public class IncrementID {
                         IDS.add(columnValue);
                     }
                 }
+
             }
             return IDS;
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+                throw new DALException("Du har indtastet forkert tableNavn eller kollonneID navn");
         }
-        return null;
     }
-
 }

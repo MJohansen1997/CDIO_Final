@@ -9,13 +9,15 @@ public class BrugerDTO {
     String ini;
     String cpr;
     String rolle;
+    String password;
 
-    public BrugerDTO(String brugerID, String brugerNavn, String ini, String cpr, String rolle) {
+    public BrugerDTO(String brugerID, String brugerNavn, String ini, String cpr, String rolle, String password) {
         this.brugerID = brugerID;
         this.brugerNavn = brugerNavn;
         this.ini = ini;
         this.cpr = cpr;
         this.rolle = rolle;
+        this.password = password;
     }
 
     public BrugerDTO() {  }
@@ -40,6 +42,8 @@ public class BrugerDTO {
 
     public void setRolle(String cpr) {this.rolle = rolle; }
 
+    public String getPassword() {return password; }
 
+    public void setPassword(String password) {this.password = password;}
 }
 
