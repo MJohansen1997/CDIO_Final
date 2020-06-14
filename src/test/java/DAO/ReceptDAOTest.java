@@ -52,7 +52,7 @@ class ReceptDAOTest {
         //DAO.getRecept("rec003");
         BrugerDAO DAO = new BrugerDAO();
         BrugerDTO user = new BrugerDTO("B00001", "Rødovrevej", "RØD",
-                "000000-0000", "Farmaceut", "stig");
+                "000000-0000", "Farmaceut");
         //DAO.createBruger(user);
         BrugerDTO ha = DAO.getBruger(user.getBrugerID());
         System.out.println(ha.getBrugerNavn());

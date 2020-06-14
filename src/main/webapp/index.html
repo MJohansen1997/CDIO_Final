@@ -2,15 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Rødovrevejs Pharmaceutics</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $.ajax({
+                    url : "rest/login/verify",
+                    data : $('#loginform').serialize(),
+                    contentType: "application/x-www-form-urlencoded",
+                    method: 'POST',
+                    success : function(data){
+                        alert(data);
+                        if(data=='true'){
+                            /*$('#maincontainer').load("HomePage.html");*/
+                            window.location.href = 'HomePage.html';
+                        }
+                    }
+                });
+
+            });
+        });
+    </script>
 </head>
 <body>
-<h1> Login</h1>
-<form action="rest/login/verify" method="post">
+<div>
+    <h1>Rødovrevej Pharmaceutics</h1>
+</div>
+<div id="maincontainer">
+<p> Login</p>
+<form action="rest/login/verify" method="POST" id='loginform'>
     <p>UserName : <input type="text" name="Username" /></p>
     <p>Password : <input type="text" name="Password" /></p>
-    <input type="submit" value="login" />
+    <!-- <input type="submit" name="submit" value="Submit" id="submitButton" /> -->
 </form>
-
+<button>Send an HTTP POST request to a page and get the result back</button>
+</div>
 </body>
 </html>
