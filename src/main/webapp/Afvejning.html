@@ -1,10 +1,32 @@
+<!-- @Author Mikkel Johansen -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $form = $("<form class=\"form\" action=\"rest/login/verify\" method=\"POST\">\n" +
+                "            <label>Username : <input type=\"text\" name=\"Username\" required /></label>\n" +
+                "            <label>Password : <input type=\"text\" name=\"Password\" required /></label>\n" +
+                "        </form>");
+            $("button").click(function () {
+                $("#maincontainer").append($form);
+            })
+
+        })
+    </script>
 </head>
 <body>
-
+<div class = "maincontainer" id="maincontainer">
+    <div class = "formdiv" id = "lab">
+        <form class="form" action="rest/login/verify" method="POST" id='loginform'>
+            <label>Username : <input type="text" name="Username" required /></label>
+            <label>Password : <input type="text" name="Password" required /></label>
+        </form>
+    </div>
+    <button>click me</button>
+</div>
 </body>
 </html>
