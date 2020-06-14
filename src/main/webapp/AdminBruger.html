@@ -19,6 +19,9 @@
             display: none;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.serializejson.js"></script>
+    <script src="AdminBrugerJS.js"></script>
 </head>
 
 <header>
@@ -250,6 +253,45 @@
 </script>
 
 <table id="userInfo-table" class="table">
+<div class="container">
+    <h1>Opret ny bruger</h1>
+    <form id="opretBrugerForm">
+        <div>
+            <label>Bruger navn:
+                <input type="text" name="brugerNavn">
+            </label>
+        </div>
+        <div>
+            <label for="rolle">Rolle:
+                <select name="rolle" id="rolle">
+                    <option value="Brugeradminstrator">Brugeradminstrator</option>
+                    <option value="Farmaceut">Farmaceut</option>
+                    <option value="Produktionsleder">Produktionsleder</option>
+                    <option value="Laborant">Laborant</option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <label>Password:
+                <input type="text" name="password">
+            </label>
+        </div>
+        <div>
+            <label>CPR:
+                <input type="text" name="cpr">
+            </label>
+        </div>
+        <div>
+            <label>Initials:
+                <input type="text" name="ini">
+            </label>
+        </div>
+        <button type="submit">Gem ændringerne</button>
+
+    </form>
+</div>
+
+<table id ="userInfo-table" class="table">
     <thead>
     <tr>
         <th>brugerID</th>
@@ -263,5 +305,5 @@
     <tbody id="brugerBody">
     </tbody>
 </table>
-
 </body>
+</html>
