@@ -2,10 +2,12 @@ body {font-family: Georgia, serif;}
 #login {overflow: hidden;}
 
 #imgbox, #bygning {
-    width: 1450px;
+    width: 88%;
+    right: 20%;
+    height: auto;
     position: absolute;
-    right: 16%;
-    bottom: 0px;
+    margin-bottom: 50%;
+    background: gold;
 }
 #whole-panel {
     float: right;
