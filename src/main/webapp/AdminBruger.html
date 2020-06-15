@@ -4,21 +4,11 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.serializejson.js"></script>
+    <script src="AdminBrugerStyle.css"></script>
     <script src="AdminBrugerJS.js"></script>
-    <style>
-        .modal1{
-            display: none;
-        }
-        .modal2{
-            display: none;
-        }
-        .modal3{
-            display: none;
-        }
-        .modal4{
-            display: none;
-        }
-    </style>
+
+
 </head>
 
 <header>
@@ -40,19 +30,22 @@
 
 <nav>
     <ul>
-        <button id="myopret">Opret</button>
-        <button id="myrediger">Rediger</button>
-        <button id="myslet">Slet</button>
-        <button id="myfind">Find</button>
+        <button type="myopret" class="formButton">Opret</button>
+        <button class="myrediger">Rediger</button>
+        <button class="myslet">Slet</button>
+        <button class="myfind">Find</button>
     </ul>
 </nav>
 <br>
 
-<div id="opret" class="modal1">
-    <div id="test">
 
-    </div>
-</div>
+<form class="formOpret">
+    <p>Vælg username : <input type="text" name="username" required/></p>
+    <p>Vælg userini : <input type="text" name="userini" required/></p>
+    <p>Vælg usercpr : <input type="text" name="usercpr" required/></p>
+    <p>Vælg password : <input type="text" name="userpword" required/></p>
+    <button type="button" id="submit">Gem ændringer</button>
+</form>
 
 <div id = "rediger" class="modal2">
 
@@ -65,26 +58,6 @@
 <div id = "slet" class="modal3">
 
 </div>
-
-
-
-
-<!--send data?-->
-<script>
-
-    const user = {
-        userid: #userid,
-        username: #username,
-        userini: #userini,
-        usercpr: #usercpr,
-        userpword: #userpword
-    };
-
-    var bruger = JSON.stringify(user);
-
-
-</script>
-
 
 
 
