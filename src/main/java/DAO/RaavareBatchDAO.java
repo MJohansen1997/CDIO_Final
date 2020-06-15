@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 /** @author Luxhøj, Stefan (s195467@student.dtu.dk)*/
 public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
-    MySQLCon newCon = new MySQLCon();
+    MySQLCon newCon;
 
     public RaavareBatchDAO() throws SQLException, ClassNotFoundException, DALException {
         try {
-            newCon.setupCon();
+            newCon = MySQLCon.getInstance();;
         }
         catch (SQLException | ClassNotFoundException ex) {
             throw new DALException("Kunne ikke oprette forbindelse");

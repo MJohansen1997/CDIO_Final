@@ -12,11 +12,11 @@ import java.util.List;
 
 public class ReceptKompDAO implements IDAO.IReceptKompDAO {
 
-    MySQLCon newCon = new MySQLCon();
+    MySQLCon newCon;
 
     public ReceptKompDAO() throws DALException {
         try {
-            newCon.setupCon();
+            newCon = MySQLCon.getInstance();
         }
         catch (SQLException | ClassNotFoundException e){
             throw new DALException("kunne ikke forbinde til databasen");
