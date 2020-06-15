@@ -38,9 +38,9 @@ public interface IDAO {
 
 
     public interface IReceptKompDAO {
-        ReceptKompDTO getReceptKomp(int receptId, int raavareId) throws DALException;
+        ReceptKompDTO getReceptKomp(String receptId, String raavareId) throws DALException;
 
-        List<ReceptKompDTO> getReceptKompList(int receptId) throws DALException;
+        List<ReceptKompDTO> getReceptKompList(String receptId) throws DALException;
 
         List<ReceptKompDTO> getReceptKompList() throws DALException;
 
@@ -51,11 +51,11 @@ public interface IDAO {
 
 
     public interface IRaavareBatchDAO {
-        RaavareBatchDTO getRaavareBatch(int rbId) throws DALException, SQLException, ClassNotFoundException;
+        RaavareBatchDTO getRaavareBatch(String rbId) throws DALException, SQLException, ClassNotFoundException;
 
         List<RaavareBatchDTO> getRaavareBatchList() throws DALException, SQLException, ClassNotFoundException;
 
-        List<RaavareBatchDTO> getRaavareBatchList(int raavareId) throws DALException, SQLException, ClassNotFoundException;
+        List<RaavareBatchDTO> getRaavareBatchList(String raavareId) throws DALException, SQLException, ClassNotFoundException;
 
         void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException, SQLException, ClassNotFoundException;
 
@@ -74,9 +74,9 @@ public interface IDAO {
     }
 
     public interface IProduktBatchKompDAO {
-        ProduktBatchKompDTO getProduktBatchKomp(int pbId, int rbId) throws DALException, SQLException, ClassNotFoundException;
+        ProduktBatchKompDTO getProduktBatchKomp(String pbId, String rbId) throws DALException, SQLException, ClassNotFoundException;
 
-        List<ProduktBatchKompDTO> getProduktBatchKompList(int pbId) throws DALException;
+        List<ProduktBatchKompDTO> getProduktBatchKompList(String pbId) throws DALException;
 
         List<ProduktBatchKompDTO> getProduktBatchKompList() throws DALException, SQLException, ClassNotFoundException;
 

@@ -24,7 +24,7 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     }
 
     @Override
-    public ReceptKompDTO getReceptKomp(int receptId, int raavareId) throws DALException {
+    public ReceptKompDTO getReceptKomp(String receptId, String raavareId) throws DALException {
         try{
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM reckomp WHERE recID = " + receptId
@@ -41,10 +41,10 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     }
 
     @Override
-    public List<ReceptKompDTO> getReceptKompList(int receptId) throws DALException {
+    public List<ReceptKompDTO> getReceptKompList(String receptId) throws DALException {
         try{
             Statement stmt = newCon.connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM reckomp WHERE recID = " + receptId);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM reckomp WHERE recID = '" + receptId+"'");
             List<ReceptKompDTO> liste = new ArrayList<>();
             while (rs.next()) {
                 liste.add(udtagReceptFraResultat(rs));

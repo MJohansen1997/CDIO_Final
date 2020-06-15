@@ -27,7 +27,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
             try
             {
                 Statement stmt = newCon.connection.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM raavarer WHERE id = '" + raavareId + "'");
+                ResultSet rs = stmt.executeQuery("SELECT * FROM raavarer WHERE raavID = '" + raavareId + "'");
 
                 if (rs.next())
                 {
