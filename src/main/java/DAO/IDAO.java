@@ -64,7 +64,7 @@ public interface IDAO {
 
 
     public interface IProduktBatchDAO {
-        ProduktBatchDTO getProduktBatch(int pbId) throws DALException, SQLException, ClassNotFoundException;
+        ProduktBatchDTO getProduktBatch(String pbId) throws DALException, SQLException, ClassNotFoundException;
 
         List<ProduktBatchDTO> getProduktBatchList() throws DALException;
 

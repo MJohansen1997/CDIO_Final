@@ -21,12 +21,12 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
 
 
     @Override
-    public ProduktBatchDTO getProduktBatch(int pbId) throws DALException, SQLException, ClassNotFoundException {
+    public ProduktBatchDTO getProduktBatch(String pbId) throws DALException, SQLException, ClassNotFoundException {
         /* Creating a try catch
          * Within creating a statement and then getting a returned resultset with the specifed query. */
         try {
             /* SQL Query */
-            String query = "SELECT * FROM prodbestilling WHERE pbID = " + pbId;
+            String query = "SELECT * FROM prodbestilling WHERE pbID = \'" + pbId + "\'";
             /* Statement to SQL */
             Statement stmt = newCon.connection.createStatement();
             /* Resultset from the query */
@@ -96,7 +96,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
             PreparedStatement statusQuery = newCon.connection.prepareStatement
                     ("UPDATE prodbestilling SET status = ? WHERE pbID = ?");
 
-            statusQuery.setInt(1, produktbatch.getStatus());
+            statusQuery.setString(1, produktbatch.getStatus());
             statusQuery.setString(2, produktbatch.getPbID());
 
         } catch (SQLException e) {
@@ -108,8 +108,9 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
     private ProduktBatchDTO extractPBLFromResultSet(ResultSet rs) throws SQLException {
         ProduktBatchDTO PBL = new ProduktBatchDTO(
                 rs.getString("pbID"),
-                rs.getInt("status"),
+                rs.getString("status"),
                 rs.getString("recID"));
+
         return PBL;
     }
 }

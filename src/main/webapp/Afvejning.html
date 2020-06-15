@@ -5,28 +5,18 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var $form = $("<form class=\"form\" action=\"rest/login/verify\" method=\"POST\">\n" +
-                "            <label>Username : <input type=\"text\" name=\"Username\" required /></label>\n" +
-                "            <label>Password : <input type=\"text\" name=\"Password\" required /></label>\n" +
-                "        </form>");
-            $("button").click(function () {
-                $("#maincontainer").append($form);
-            })
-
-        })
-    </script>
+    <script src="Afvejning.js"></script>
 </head>
 <body>
-<div class = "maincontainer" id="maincontainer">
-    <div class = "formdiv" id = "lab">
-        <form class="form" action="rest/login/verify" method="POST" id='loginform'>
-            <label>Username : <input type="text" name="Username" required /></label>
-            <label>Password : <input type="text" name="Password" required /></label>
+<div class = "container" id="container">
+    <div class = "lab" id = "lab">
+        <form class="form" action="rest/afvejning/verifylab" method="POST" id='labidform'>
+            <label> Laborant ID : <input type="text" name="userid" required /></label>
         </form>
+        <button id="labbut">Verificer ID</button>
+        <button id="subkomp">Tilføj Komponent</button>
+        <button id="subprod">Find Recept</button>
     </div>
-    <button>click me</button>
 </div>
 </body>
 </html>
