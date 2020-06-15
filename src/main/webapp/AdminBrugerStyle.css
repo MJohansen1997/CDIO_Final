@@ -1,14 +1,23 @@
-html {
-    font-family: Arial, sans-serif;
-    max-width: 500px;
-    margin: auto;
-    color: #666;
+form {
+    display: none;
 }
 
-.formButton {
+#buttonOpret {
     display: block;
 }
 
-.formOpret {
-    display: none;
+#buttonRediger {
+    display: block;
+}
+
+#buttonSlet {
+    display: block;
+}
+
+#buttonFind {
+    display: block;
+}
+
+#submit4 {
+    display: block;
 }
