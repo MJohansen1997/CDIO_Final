@@ -5,7 +5,7 @@
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="jquery.serializejson.js"></script>
-    <script src="AdminBrugerStyle.css"></script>
+    <link rel="stylesheet" href="AdminBrugerStyle.css"/>
     <script src="AdminBrugerJS.js"></script>
 
 
@@ -30,36 +30,71 @@
 
 <nav>
     <ul>
-        <button type="myopret" class="formButton">Opret</button>
-        <button class="myrediger">Rediger</button>
-        <button class="myslet">Slet</button>
-        <button class="myfind">Find</button>
+        <button type="button" id="buttonOpret">Opret</button>
+        <button type="button" id="buttonRediger">Rediger</button>
+        <button type="button" id="buttonSlet">Slet</button>
+        <button type="button" id="buttonFind">Find</button>
     </ul>
 </nav>
 <br>
 
 
-<form class="formOpret">
-    <p>Vælg username : <input type="text" name="username" required/></p>
-    <p>Vælg userini : <input type="text" name="userini" required/></p>
-    <p>Vælg usercpr : <input type="text" name="usercpr" required/></p>
-    <p>Vælg password : <input type="text" name="userpword" required/></p>
-    <button type="button" id="submit">Gem ændringer</button>
+<form id="opretForm">
+    <h1>Opret Bruger</h1>
+    <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>
+    <label for="rolle">Vælg Rolle:
+        <select name="rolle" id="rolle">
+            <option value="Brugeradminstrator">Brugeradminstrator</option>
+            <option value="Farmaceut">Farmaceut</option>
+            <option value="Produktionsleder">Produktionsleder</option>
+            <option value="Laborant">Laborant</option>
+        </select>
+    </label>
+    <p>Vælg Bruger initialer : <input type="text" name="ini" required/></p>
+    <p>Vælg Bruger CPR : <input type="text" name="cpr" required/></p>
+    <p>Vælg Password : <input type="text" name="password" required/></p>
+    <button type="submit">Gem ændringer</button>
 </form>
 
-<div id = "rediger" class="modal2">
 
-</div>
-
-<div id = "find" class="modal4">
-
-</div>
-
-<div id = "slet" class="modal3">
-
-</div>
+<form id="redigerForm">
+    <p>Vælg brugerID : <input type="text" name="brugerNavn" required/></p>
+    <button type="button" id="submit2">Gem ændringer</button>
+</form>
 
 
+<form id="sletForm">
+    <p>Vælg brugerID : <input type="text" name="username" required/></p>
+    <button type="button" id="submit3">Gem ændringer</button>
+</form>
+
+<form id="findForm">
+    <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
+    <button type="submit" id="submit4">Gem ændringer</button>
+
+    <table id="findForm-table" class="table">
+        <thead>
+        <tr>
+            <th>brugerID</th>
+            <th>Bruger Navn</th>
+            <th>Ini</th>
+            <th>Cpr</th>
+            <th>Rolle</th>
+            <th>Password</th>
+        </tr>
+        </thead>
+        <tbody id="findFormBody">
+        </tbody>
+    </table>
+</form>
+
+
+<form id="redigerInfoForm">
+    <p>Vælg Bruger navn : <input type="text" name="username" required/></p>
+    <p>Vælg Bruger initialer : <input type="text" name="userini" required/></p>
+    <p>Vælg Bruger CPR : <input type="text" name="usercpr" required/></p>
+    <p>Vælg Password : <input type="text" name="userpword" required/></p>
+</form>
 
 <table id="userInfo-table" class="table">
     <thead>

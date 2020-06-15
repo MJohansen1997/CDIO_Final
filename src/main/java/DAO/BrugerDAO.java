@@ -24,6 +24,13 @@ public class BrugerDAO implements IDAO {
         }
     }
 
+    public static void main(String[] args) throws SQLException, DALException, ClassNotFoundException {
+        BrugerDAO bruger = new BrugerDAO();
+
+        BrugerDTO User = bruger.getBruger("B00001");
+        System.out.println(User.getBrugerNavn() + User.getCpr());
+    }
+
     @Override
     public BrugerDTO getBruger(String brugerID) throws DALException, SQLException, ClassNotFoundException {
         try {

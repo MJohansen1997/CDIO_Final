@@ -13,10 +13,7 @@ import org.json.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Path("/brugere")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -40,9 +37,9 @@ public class BrugerHaandtering {
         IncrementID incre = new IncrementID();
         JSONObject json = new JSONObject(jsonBody);
 
-        try{
+        try {
             BrugerDTO user = new BrugerDTO(
-                    incre.returnID("brugerer","brugerID"),
+                    incre.returnID("brugerer", "brugerID"),
                     json.getString("brugerNavn"),
                     json.getString("ini"),
                     json.getString("cpr"),
@@ -55,7 +52,13 @@ public class BrugerHaandtering {
             e.printStackTrace();
         }
     }
-    }
 
+    @GET
+    @Path("{brugerID}")
+    public BrugerDTO getBruger(@PathParam("brugerID") String brugerID) throws ClassNotFoundException, DALException, SQLException {
+
+        return new BrugerDTO(dbAccess.getBruger(brugerID));
+    }
+}
 
 
