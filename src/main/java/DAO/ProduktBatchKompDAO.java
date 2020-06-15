@@ -12,16 +12,20 @@ import java.util.List;
  * @author Hau, Shania (john.doe@example.com)
  */
 public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
-    MySQLCon newCon = new MySQLCon();
 
+    MySQLCon newCon;
+    public ProduktBatchKompDAO(){
+        try{newCon = MySQLCon.getInstance();} catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public ProduktBatchKompDTO getProduktBatchKomp(int pbId, int rbId) throws DALException {
         try {
-            newCon.setupCon();
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE id = \'" + pbId + "\' AND \'" + rbId+"\'");
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
         return null;
@@ -31,12 +35,11 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     public List<ProduktBatchKompDTO> getProduktBatchKompList(int pbId) throws DALException {
 
         try {
-            newCon.setupCon();
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE id = \'" + pbId + "\'");
 
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
         return null;
@@ -45,7 +48,6 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     @Override
     public List<ProduktBatchKompDTO> getProduktBatchKompList() throws DALException {
         try {
-            newCon.setupCon();
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches");
 
@@ -55,7 +57,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
                 alleprodukter.add(extractProduktBatchKompListFromResultSet(rs));
             }
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
         return null;
@@ -64,7 +66,6 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     @Override
     public void createProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException {
         try {
-            newCon.setupCon();
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery
                     ("insert into produktbatches values ("
@@ -75,7 +76,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
                             + pbk.getNetto() + ");");
 
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
 
@@ -83,8 +84,6 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
 
     public void updateProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException {
         try {
-            newCon.setupCon();
-
             Statement stmt = newCon.connection.createStatement();
             stmt.executeQuery("update produktbatches set " +
                     "pbID = " + pbk.getPbId() +
@@ -94,7 +93,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
                     ", netto = " + pbk.getNetto() +
                     "where pbID =" + pbk.getPbId());
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
     }

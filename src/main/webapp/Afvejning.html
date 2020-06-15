@@ -1,10 +1,27 @@
+<!-- @Author Mikkel Johansen -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="Afvejning.js"></script>
 </head>
 <body>
-
+<div class = "container" id="container">
+    <div class = "lab" id = "lab">
+        <form class="form" action="rest/afvejning/verifylab" method="POST" id='labidform'>
+            <label class='inlab' id='lablab'> Laborarnt ID : <input class="input" type="text" name="userid" required /></label>
+            <label class='inlab' id='prodlab'> Produktions ID : <input type="text" name="produktionsid" required /></label>
+            <label class='inlab' name='reclab' id="recid"> Recept ID : <input type=\"text\" id="receptid"
+                                                                              name=\"receptid\" readonly /> </label>
+            <label class='inlab' name='reclab' id="recnavn"> Recept Navn : <input type=\"text\"
+                                                                                  id="receptnavn" readonly /></label>
+        </form>
+        <button id="labbut">Verificer ID</button>
+        <button id="subkomp">Tilføj Komponent</button>
+        <button id="subprod">Find Recept</button>
+    </div>
+</div>
 </body>
 </html>

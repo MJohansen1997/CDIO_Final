@@ -12,7 +12,7 @@ public class loginService{
 
     @POST
     @Path("/verify")
-    public boolean verification(@FormParam("Username") String name, @FormParam("Password") String password)
+        public boolean verification(@FormParam("Username") String name, @FormParam("Password") String password)
             throws SQLException, ClassNotFoundException, DALException {
         BrugerDAO BDAO = new BrugerDAO();
         //BrugerDTO user = new BrugerDTO("B0001", "mikkel","MJ" ,"000000-0000",

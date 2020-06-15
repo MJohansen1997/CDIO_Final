@@ -1,0 +1,14 @@
+html {
+    font-family: Arial, sans-serif;
+    max-width: 500px;
+    margin: auto;
+    color: #666;
+}
+
+.formButton {
+    display: block;
+}
+
+.formOpret {
+    display: none;
+}

@@ -2,7 +2,7 @@ package DTO;
 public class ProduktBatchDTO {
 
     /* Constructor */
-    public ProduktBatchDTO(String pbID, int status, String receptID) {
+    public ProduktBatchDTO(String pbID, String status, String receptID) {
         this.pbID = pbID;
         this.status = status;
         this.receptID = receptID;
@@ -14,7 +14,7 @@ public class ProduktBatchDTO {
         return pbID;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -25,7 +25,7 @@ public class ProduktBatchDTO {
     //Produktbatch id
     String pbID;
     // Status 0: Ikke påbegyndt, 1: Under produktion, 2: Afsluttet
-    int status;
+    String status;
     // Recept id
     String receptID;
 
