@@ -1,15 +1,23 @@
 body {font-family: Georgia, serif;}
 body.login-page {
+    height: 100%;
+    margin: 0;
     overflow: hidden;
 }
+#imgbox {
+    position: relative;
+    display: flex;
+    background: #425f9c;
+    width: 73%;
+    height: 50%;
+    left: 0;
+    top: 0;
+
+}
 #bygning {
-    float: left;
-    position: absolute;
-    right: 35%;
-    height: 100%;
-    bottom: 0.2%;
-
-
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
 }
 #whole-panel {
     float: right;
@@ -44,9 +52,8 @@ body.login-page {
 }
 #logo {
     float: right;
-    margin-right: 75px;
+    margin-right: 110px;
     margin-top: 15px;
-
 }
 
 .title {
