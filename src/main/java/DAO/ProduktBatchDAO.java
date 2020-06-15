@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 /** @author Hansen, Mads Østerlund (s195456@student.dtu.dk) **/
 public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
-    MySQLCon newCon = new MySQLCon();
+    MySQLCon newCon;
 
     public ProduktBatchDAO () throws DALException, SQLException, ClassNotFoundException {
-        try {
-            newCon.setupCon();
+        try {newCon = MySQLCon.getInstance();
         } catch (SQLException | ClassNotFoundException e) {
             throw new DALException("Cannot establish a connection to the server! " + e);
         }

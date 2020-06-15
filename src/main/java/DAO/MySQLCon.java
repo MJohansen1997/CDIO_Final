@@ -9,7 +9,7 @@ public class MySQLCon {
     private String database = "cdiofinaldb";
     private String user = "myadmin@universitydtudb";
     private String password = "2GpZ#P/h{&";
-    private Connection connection = null;
+    public Connection connection = null;
     private static MySQLCon instance;
 
     private MySQLCon() throws SQLException, ClassNotFoundException {
@@ -23,7 +23,7 @@ public class MySQLCon {
     }
 
     // check that the driver is installed
-    public void setupCon() throws SQLException, ClassNotFoundException {
+    private void setupCon() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             System.out.println("MariaDB driver detected");

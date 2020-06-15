@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 /** @author Johansen, Mikkel (john.doe@example.com)*/
 public class ReceptDAO implements IDAO.IReceptDAO {
-    MySQLCon newCon = new MySQLCon();
+    MySQLCon newCon;
 
     public ReceptDAO() throws DALException {
         try {
-            newCon.setupCon();
+            newCon = MySQLCon.getInstance();
         }
         catch (SQLException | ClassNotFoundException e){
             throw new DALException("kunne ikke forbinde til databasen");

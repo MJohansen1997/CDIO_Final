@@ -13,12 +13,12 @@ import java.util.List;
 
 
 public class BrugerDAO implements IDAO {
-    MySQLCon newCon = MySQLCon.getInstance();
+    MySQLCon newCon;
     IncrementID IDCreate = new IncrementID();
 
     public BrugerDAO() throws SQLException, ClassNotFoundException, DALException {
         try {
-            newCon.setupCon();
+            newCon = MySQLCon.getInstance();
         } catch (SQLException | ClassNotFoundException e) {
             throw new DALException("Kan ikke oprette en connection til serveren");
         }
