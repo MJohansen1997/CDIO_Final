@@ -1,16 +1,27 @@
 body {font-family: Georgia, serif;}
-#login {overflow: hidden;}
+body.login-page {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+#imgbox {
+    position: relative;
+    display: flex;
+    background: #425f9c;
+    width: 73%;
+    height: 50%;
+    left: 0;
+    top: 0;
 
-#imgbox, #bygning {
-    width: 88%;
-    right: 20%;
-    height: auto;
-    position: absolute;
-    margin-bottom: 50%;
-    background: gold;
+}
+#bygning {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
 }
 #whole-panel {
     float: right;
+    position: relative;
 }
 #maincontainer {
     text-align: left;
@@ -41,9 +52,8 @@ body {font-family: Georgia, serif;}
 }
 #logo {
     float: right;
-    margin-right: 75px;
+    margin-right: 110px;
     margin-top: 15px;
-
 }
 
 .title {
@@ -55,5 +65,36 @@ body {font-family: Georgia, serif;}
     padding: 7px;
     margin-bottom: 7px;
     border: 1px solid gray;
+}
+li {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li:hover {
+    background: #425f9c;
+}
+.navigation {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: cornflowerblue;
+}
+.home {
+    border: 2px solid black;
+    position: relative;
+}
+#paragraph {
+    border: 2px solid black;
+    width: 35%;
+}
+#drugimg{
+    position: absolute;
+    border: 2px solid black;
+    float: right;
 }
 
