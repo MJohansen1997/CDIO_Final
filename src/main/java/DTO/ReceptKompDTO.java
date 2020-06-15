@@ -23,6 +23,8 @@ public class ReceptKompDTO {
         nonNetto = netto;
         tolerance = tol;
     }
+
+    public ReceptKompDTO(){}
     /**
      * recept id i området 1-99999999
      */

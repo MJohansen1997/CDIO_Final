@@ -4,61 +4,103 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="jquery.serializejson.js"></script>
     <script src="AdminBrugerJS.js"></script>
+    <style>
+        .modal1{
+            display: none;
+        }
+        .modal2{
+            display: none;
+        }
+        .modal3{
+            display: none;
+        }
+        .modal4{
+            display: none;
+        }
+    </style>
 </head>
-<body>
-<div class="container">
-    <h1>Opret ny bruger</h1>
-    <form id="opretBrugerForm">
-        <div>
-            <label>Bruger navn:
-                <input type="text" name="brugerNavn">
-            </label>
-        </div>
-        <div>
-            <label for="rolle">Rolle:
-                <select name="rolle" id="rolle">
-                    <option value="Brugeradminstrator">Brugeradminstrator</option>
-                    <option value="Farmaceut">Farmaceut</option>
-                    <option value="Produktionsleder">Produktionsleder</option>
-                    <option value="Laborant">Laborant</option>
-                </select>
-            </label>
-        </div>
-        <div>
-            <label>Password:
-                <input type="text" name="password">
-            </label>
-        </div>
-        <div>
-            <label>CPR:
-                <input type="text" name="cpr">
-            </label>
-        </div>
-        <div>
-            <label>Initials:
-                <input type="text" name="ini">
-            </label>
-        </div>
-        <button type="submit">Gem ændringerne</button>
 
-    </form>
+<header>
+    <h6 id="userinfo">Userinformation</h6>
+    //top
+    <nav>
+        <ul>
+            <li id="home">Hjem</li>
+            <li id="brugeradmin">Brugeradministration</li>
+            <li id="logud">Log ud</li>
+        </ul>
+    </nav>
+</header>
+<body>
+
+<h1>Velkommen tilbage "username"</h1>
+<!--leftside-->
+
+
+<nav>
+    <ul>
+        <button id="myopret">Opret</button>
+        <button id="myrediger">Rediger</button>
+        <button id="myslet">Slet</button>
+        <button id="myfind">Find</button>
+    </ul>
+</nav>
+<br>
+
+<div id="opret" class="modal1">
+    <div id="test">
+
+    </div>
 </div>
 
-<table id ="userInfo-table" class="table">
+<div id = "rediger" class="modal2">
+
+</div>
+
+<div id = "find" class="modal4">
+
+</div>
+
+<div id = "slet" class="modal3">
+
+</div>
+
+
+
+
+<!--send data?-->
+<script>
+
+    const user = {
+        userid: #userid,
+        username: #username,
+        userini: #userini,
+        usercpr: #usercpr,
+        userpword: #userpword
+    };
+
+    var bruger = JSON.stringify(user);
+
+
+</script>
+
+
+
+
+<table id="userInfo-table" class="table">
     <thead>
-        <tr>
-            <th>brugerID</th>
-            <th>Bruger Navn</th>
-            <th>Ini</th>
-            <th>Cpr</th>
-            <th>Rolle</th>
-            <th>Password</th>
-        </tr>
+    <tr>
+        <th>brugerID</th>
+        <th>Bruger Navn</th>
+        <th>Ini</th>
+        <th>Cpr</th>
+        <th>Rolle</th>
+        <th>Password</th>
+    </tr>
     </thead>
     <tbody id="brugerBody">
     </tbody>
 </table>
+
 </body>
-</html>

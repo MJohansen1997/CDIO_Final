@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+        }
+    </style>
 </head>
-<body>
 
+<body>
+<h2>R&aring;vare liste</h2>
+<p>Indtast ny r&aring;varer</p>
+
+<form method = "POST" action = "rest/Raavare/form">
+    <label for="IDName">ID:</label>
+    <input type="text" id="IDName" name="IDName">
+
+    <label for="rName">R&aring;varer:</label>
+    <input type="text" id="rName" name="rName">
+
+    <label for="lName">Leverand&oslash;: </label>
+    <input type="text" id="lName" name="lName"><br><br>
+
+    <input type = "submit" value = "ADD Raavarer"><br><br>
+</form>
+
+
+<table style="width:100%">
+    <tr>
+        <th>ID</th>
+        <th>R&aring;varer</th>
+        <th>Levarand&oslash;r</th>
+    </tr>
+
+    
+</table>
 </body>
 </html>

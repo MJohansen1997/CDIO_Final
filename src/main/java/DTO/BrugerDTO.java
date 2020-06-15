@@ -1,6 +1,5 @@
 package DTO;
 
-import java.util.List;
 /** @author Christensen, Jacob Kjærby (john.doe@example.com)*/
 
 public class BrugerDTO {
