@@ -63,8 +63,8 @@ function generateHTML(bruger){
 
 
 $("#myopret").click(function(){
-    $("#opret").after($(#test).append("" +
-        "<span class=\"close\">&times;</span>\n" +
+    $("#opret").after(("" +
+        "<span class=\"close1\">&times;</span>\n" +
         "    <form action=\"rest/login/admin\" method=\"POST\" id='adminopret'>\n" +
         "        <p>Vælg userid : <input type=\"text\" id=\"userid\" name=\"userid\" required/></p>\n" +
         "        <p>Vælg username : <input type=\"text\" id=\"username\" name=\"username\" required/></p>\n" +
@@ -76,8 +76,8 @@ $("#myopret").click(function(){
 });
 
 $("#myrediger").click(function(){
-    $(".modal2").after(append("" +
-        "<span class=\"close\">&times;</span>\n" +
+    $(".modal2").append(("" +
+        "<span class=\"close2\">&times;</span>\n" +
         "    <form action=\"rest/login/admin\" method=\"PUT\" id='adminrediger'>\n" +
         "        <p>Vælg userid : <input type=\"text\" id=\"userid\" name=\"userid\" required/></p>\n" +
         "    </form>\n" +
@@ -86,7 +86,7 @@ $("#myrediger").click(function(){
 
 $("#myslet").click(function(){
     $("modal3").append("" +
-        "<span class=\"close\">&times;</span>\n" +
+        "<span class=\"close3\">&times;</span>\n" +
         "    <form action=\"rest/login/admin\" method=\"GET\" id='adminslet'>\n" +
         "        <p>Vælg userid : <input type=\"text\" id=\"userid\" name=\"userid\" required/></p>\n" +
         "    </form>\n" +
@@ -94,7 +94,7 @@ $("#myslet").click(function(){
 
 $("#myfind").click(function(){
     $("modal4").append("" +
-        "<span class=\"close\">&times;</span>\n" +
+        "<span class=\"close4\">&times;</span>\n" +
         "    <form action=\"rest/login/admin\" method=\"GET\" id='adminfind'>\n" +
         "        <p>Vælg userid : <input type=\"text\" id=\"userid\" name=\"userid\" required/></p>\n" +
         "    </form>\n" +
@@ -109,23 +109,24 @@ $("#myfind").click(function(){
 <!--pop up opret-->
 var modal1 = document.getElementById("#opret");
 var opret = document.getElementById("#myopret");
-var span = document.getElementsByClassName("close")[0];
+var span1 = document.getElementsByClassName("close1")[0];
 
 opret.onclick = function() {
     modal1.style.display = "block";
 };
-span.onclick = function() {
+span1.onclick = function() {
     modal1.style.display = "none";
 };
 
     <!--pop up rediger-->
 var modal2 = document.getElementById("rediger");
 var rediger = document.getElementById("myrediger");
+var span2 = document.getElementsByClassName("close2")[0];
 
 rediger.onclick = function() {
     modal2.style.display = "block";
 };
-span.onclick = function() {
+span2.onclick = function() {
     modal2.style.display = "none";
 };
 
@@ -133,11 +134,12 @@ span.onclick = function() {
     <!--pop up find-->
 var modal3 = document.getElementById("find");
 var find = document.getElementById("myfind");
+var span3 = document.getElementsByClassName("close3")[0];
 
 find.onclick = function() {
     modal3.style.display = "block";
 };
-span.onclick = function() {
+span3.onclick = function() {
     modal3.style.display = "none";
 };
 
@@ -145,11 +147,12 @@ span.onclick = function() {
     <!--pop up slet-->
 var modal4 = document.getElementById("slet");
 var slet = document.getElementById("myslet");
+var span4 = document.getElementsByClassName("close4")[0];
 
 slet.onclick = function() {
     modal4.style.display = "block";
 };
-span.onclick = function() {
+span4.onclick = function() {
     modal4.style.display = "none";
 };
 
