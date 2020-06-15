@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public class BrugerDAO implements IDAO {
-    MySQLCon newCon = new MySQLCon();
+    MySQLCon newCon = MySQLCon.getInstance();
     IncrementID IDCreate = new IncrementID();
 
     public BrugerDAO() throws SQLException, ClassNotFoundException, DALException {

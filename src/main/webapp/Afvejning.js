@@ -1,4 +1,6 @@
-$(document).ready(function () {
+    $(document).ready(function () {
+    $(".inlab").hide();
+    $("#lablab").show();
     $("button").hide();
     $("#labbut").show().click(function () {
         $.ajax({
@@ -10,7 +12,7 @@ $(document).ready(function () {
                 if (data == 'true') {
                     $("#labbut").remove();
                     $("#subprod").show();
-                    $("#labidform").append("<label> Produktions ID : <input type=\"text\" name=\"produktionsid\" required /></label>");
+                    $("#prodlab").show();
                 }
                 else return alert("ingen laborant fundet med dette ID");
             }
@@ -21,15 +23,16 @@ $(document).ready(function () {
             url: "rest/afvejning/verifyprod",
             data: $('#labidform').serialize(),
             contentType: "application/x-www-form-urlencoded",
-            dataType: "text",
+            dataType: "JSON",
             method: 'POST',
             success: function (data) {
-                if (data != '') {
+                if (data != null) {
                     $("#subprod").remove();
                     $("#subkomp").show();
-                    $("#labidform")
-                        .append("<label> Recept ID : <input type=\"text\" name=\"receptid\" readonly /> </label>")
-                        .append("<label> Recept Navn : <input type=\"text\" name=\"receptnavn\" readonly /></label>");
+                    $("[name='reclab']").show();
+                    $("#receptid").val(data.receptID);
+                    $("#receptnavn").val(data.receptNavn);
+
                 }
                 else return alert("ingen Produktion matcher dette id");
             }

@@ -5,11 +5,22 @@ import java.util.Properties;
 
 public class MySQLCon {
     // Initialize connection variables.
-    String host = "universitydtudb.mysql.database.azure.com";
-    String database = "cdiofinaldb";
-    String user = "myadmin@universitydtudb";
-    String password = "2GpZ#P/h{&";
-    Connection connection = null;
+    private String host = "universitydtudb.mysql.database.azure.com";
+    private String database = "cdiofinaldb";
+    private String user = "myadmin@universitydtudb";
+    private String password = "2GpZ#P/h{&";
+    private Connection connection = null;
+    private static MySQLCon instance;
+
+    private MySQLCon() throws SQLException, ClassNotFoundException {
+        setupCon();
+    }
+
+    public static MySQLCon getInstance() throws SQLException, ClassNotFoundException {
+        if (instance == null)
+            instance = new MySQLCon();
+        return instance;
+    }
 
     // check that the driver is installed
     public void setupCon() throws SQLException, ClassNotFoundException {

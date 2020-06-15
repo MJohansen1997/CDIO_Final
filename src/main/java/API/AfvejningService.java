@@ -2,6 +2,7 @@ package API;
 
 import DAO.DALException;
 import DAO.ProduktBatchDAO;
+import DAO.ReceptDAO;
 import DTO.ProduktBatchDTO;
 import DTO.ReceptDTO;
 
@@ -21,23 +22,16 @@ public class AfvejningService {
 
     @POST
     @Path("/verifyprod")
-    public String verifyProdID(@FormParam("produktionsid") String prodID){
-        ProduktBatchDTO PB = new ProduktBatchDTO();
+    @Produces(MediaType.APPLICATION_JSON)
+    public ReceptDTO verifyProdID(@FormParam("produktionsid") String prodID){
         try {
             ProduktBatchDAO PDAO = new ProduktBatchDAO();
-            PB = PDAO.getProduktBatch(prodID);
+            ProduktBatchDTO PB = PDAO.getProduktBatch(prodID);
+            ReceptDAO RDAO = new ReceptDAO();
+            return RDAO.getRecept(PB.getReceptID());
         }
         catch (ClassNotFoundException | DALException | SQLException e){
-            return "";
+            return null;
         }
-        return PB.getReceptID();
-    }
-
-    @Produces
-    @POST
-    @Path("/getrecept")
-    public ReceptDTO getRecept(@FormParam("receptid") String recid){
-
-        return null;
     }
 }

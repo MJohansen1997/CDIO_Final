@@ -24,7 +24,7 @@ public class ReceptDAO implements IDAO.IReceptDAO {
     public ReceptDTO getRecept(String receptId) throws DALException {
         try {
             Statement stmt = newCon.connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Recepter WHERE recID = " + receptId);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Recepter WHERE recID = '" + receptId + "'");
             if (rs.next()) {
                 return udtagReceptFraResultat(rs);
             }
