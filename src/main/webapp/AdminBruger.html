@@ -19,9 +19,6 @@
             display: none;
         }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="jquery.serializejson.js"></script>
-    <script src="AdminBrugerJS.js"></script>
 </head>
 
 <header>
@@ -52,56 +49,24 @@
 <br>
 
 <div id="opret" class="modal1">
-    <span class="close1">&times;</span>
-    <form action="rest/login/admin" method="POST" id='adminopret'>
-        <p>Vælg userid : <input type="text" id="userid" name="userid" required/></p>
-        <p>Vælg username : <input type="text" id="username" name="username" required/></p>
-        <p>Vælg userini : <input type="text" id="userini" name="userini" required/></p>
-        <p>Vælg usercpr : <input type="text" id="usercpr" name="usercpr" required/></p>
-        <p>Vælg userrolle : <input type="text" id="userrolle" name="userrolle" required/></p>
-        <p>Vælg password : <input type="text" id="userpword" name="userpword" required/></p>
-    </form>
-    <button>Gem</button>
+    <div id="test">
+
+    </div>
 </div>
 
 <div id = "rediger" class="modal2">
-    <span class="close2">&times;</span>
 
-    <form action="rest/login/admin" method="PUT" id='adminrediger'>
-        <p>Vælg useridxd : <input type="text" id="userid" name="userid" required/></p>
-        <p>Vælg username : <input type="text" id="username" name="username" required/></p>
-        <p>Vælg userini : <input type="text" id="userini" name="userini" required/></p>
-        <p>Vælg usercpr : <input type="text" id="usercpr" name="usercpr" required/></p>
-        <p>Vælg password : <input type="text" id="userpword" name="userpword" required/></p>
-    </form>
-    <button>Gem</button>
-</div>
-
-<div id = "slet" class="modal3">
-    <span class="close3">&times;</span>
-
-    <form action="rest/login/admin" method="delete" id='adminslet'>
-        <p>Vælg userid : <input type="text" id="userid" name="userid" required/></p>
-        <p>Vælg username : <input type="text" id="username" name="username" required/></p>
-        <p>Vælg userini : <input type="text" id="userini" name="userini" required/></p>
-        <p>Vælg usercpr : <input type="text" id="usercpr" name="usercpr" required/></p>
-        <p>Vælg password : <input type="text" id="userpword" name="userpword" required/></p>
-    </form>
-    <button>Gem</button>
 </div>
 
 <div id = "find" class="modal4">
-    <span class="close4">&times;</span>
 
-    <form action="rest/login/admin" method="GET" id='adminfind'>
-        <p>Vælg userid : <input type="text" id="userid" name="userid" required/></p>
-        <p>Vælg username : <input type="text" id="username" name="username" required/></p>
-        <p>Vælg userini : <input type="text" id="userini" name="userini" required/></p>
-        <p>Vælg usercpr : <input type="text" id="usercpr" name="usercpr" required/></p>
-        <p>Vælg password : <input type="text" id="userpword" name="userpword" required/></p>
-    </form>
-    <button>Gem</button>
 </div>
+
+<div id = "slet" class="modal3">
+
+</div>
+
+
 
 
 <!--send data?-->
@@ -112,186 +77,18 @@
         username: #username,
         userini: #userini,
         usercpr: #usercpr,
-        userrolle: #userrolle,
         userpword: #userpword
     };
 
     var bruger = JSON.stringify(user);
 
 
-    $(document).ready(function () {
-        $("button").click(function () {
-            $.ajax({
-                url: "rest/login/admin",
-                data: $('#loginform').serialize(),
-                contentType: "application/x-www-form-urlencoded",
-                method: 'POST',
-                success: function (data) {
-                    alert(data);
-                    if (data == 'true') {
-                        /*$('#maincontainer').load("HomePage.html");*/
-                        window.location.href = 'HomePage.html';
-                    }
-                }
-            });
-
-        });
-    });
 </script>
 
-<!--pop up opret-->
-<script>
-    // Get the modal
-    var modal = document.getElementById("opret");
 
-    // Get the button that opens the modal
-    var opret = document.getElementById("myopret");
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close1")[0];
-
-    // When the user clicks the button, open the modal
-    opret.onclick = function() {
-        modal.style.display = "block";
-    };
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-<!--pop up rediger-->
-<script>
-    // Get the modal
-    var modal = document.getElementById("rediger");
-
-    // Get the button that opens the modal
-    var rediger = document.getElementById("myrediger");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close2")[0];
-
-    // When the user clicks the button, open the modal
-    rediger.onclick = function() {
-        modal.style.display = "block";
-    };
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-<!--pop up slet-->
-<script>
-    // Get the modal
-    var modal = document.getElementById("slet");
-
-    // Get the button that opens the modal
-    var slet = document.getElementById("myslet");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close3")[0];
-
-    // When the user clicks the button, open the modal
-    slet.onclick = function() {
-        modal.style.display = "block";
-    };
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-<!--pop up find-->
-<script>
-    // Get the modal
-    var modal = document.getElementById("find");
-
-    // Get the button that opens the modal
-    var find = document.getElementById("myfind");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close4")[0];
-
-    // When the user clicks the button, open the modal
-    find.onclick = function() {
-        modal.style.display = "block";
-    };
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
 
 <table id="userInfo-table" class="table">
-<div class="container">
-    <h1>Opret ny bruger</h1>
-    <form id="opretBrugerForm">
-        <div>
-            <label>Bruger navn:
-                <input type="text" name="brugerNavn">
-            </label>
-        </div>
-        <div>
-            <label for="rolle">Rolle:
-                <select name="rolle" id="rolle">
-                    <option value="Brugeradminstrator">Brugeradminstrator</option>
-                    <option value="Farmaceut">Farmaceut</option>
-                    <option value="Produktionsleder">Produktionsleder</option>
-                    <option value="Laborant">Laborant</option>
-                </select>
-            </label>
-        </div>
-        <div>
-            <label>Password:
-                <input type="text" name="password">
-            </label>
-        </div>
-        <div>
-            <label>CPR:
-                <input type="text" name="cpr">
-            </label>
-        </div>
-        <div>
-            <label>Initials:
-                <input type="text" name="ini">
-            </label>
-        </div>
-        <button type="submit">Gem ændringerne</button>
-
-    </form>
-</div>
-
-<table id ="userInfo-table" class="table">
     <thead>
     <tr>
         <th>brugerID</th>
@@ -305,5 +102,5 @@
     <tbody id="brugerBody">
     </tbody>
 </table>
+
 </body>
-</html>
