@@ -9,18 +9,25 @@
 </head>
 <body>
 <div class = "container" id="container">
-    <div class = "lab" id = "lab">
+    <div id="lab">
         <form class="form" action="rest/afvejning/verifylab" method="POST" id='labidform'>
             <label class='inlab' id='lablab'> Laborarnt ID : <input class="input" type="text" name="userid" required /></label>
             <label class='inlab' id='prodlab'> Produktions ID : <input type="text" name="produktionsid" required /></label>
             <label class='inlab' name='reclab' id="recid"> Recept ID : <input type=\"text\" id="receptid"
                                                                               name=\"receptid\" readonly /> </label>
-            <label class='inlab' name='reclab' id="recnavn"> Recept Navn : <input type=\"text\"
-                                                                                  id="receptnavn" readonly /></label>
+            <label class='inlab' name='reclab' id="recnavn"> Recept Navn : <input type=\"text\" id="receptnavn" readonly /></label>
         </form>
-        <button id="labbut">Verificer ID</button>
-        <button id="subkomp">Tilføj Komponent</button>
-        <button id="subprod">Find Recept</button>
+            <button id="labbut">Verificer ID</button>
+            <button id="subkomp">Tilføj Komponent</button>
+            <button id="subprod">Find Recept</button>
+    </div>
+    <div id="mangler">
+        <h1>Mangler</h1>
+
+    </div>
+    <div id="færdig">
+        <h1>Færdig</h1>
+
     </div>
 </div>
 </body>

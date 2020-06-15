@@ -32,12 +32,21 @@
                     $("[name='reclab']").show();
                     $("#receptid").val(data.receptID);
                     $("#receptnavn").val(data.receptNavn);
-
                 }
                 else return alert("ingen Produktion matcher dette id");
             }
         });
     });
+    $("#subkomp").click(function () {
+        $("#subkomp").after(form);
+    })
 
-});
+    });
+var count = 0;
+function counter() {
+    return count + 1;
+}
+var form = "<form class=\"form\" action=\"rest/afvejning/verifylab\" method=\"POST\" id='labidform'>" +
+    "<label class='inlab' id=\"" + counter() +"\"> Laborarnt ID : <input class=\"input\" type=\"text\" name=\"userid\" required /></label>" +
+    "</form>";
 
