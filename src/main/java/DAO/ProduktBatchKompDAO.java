@@ -21,7 +21,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     }
 
     @Override
-    public ProduktBatchKompDTO getProduktBatchKomp(int pbId, int rbId) throws DALException {
+    public ProduktBatchKompDTO getProduktBatchKomp(String pbId, String rbId) throws DALException {
         try {
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE id = \'" + pbId + "\' AND \'" + rbId+"\'");
@@ -32,17 +32,23 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     }
 
     @Override
-    public List<ProduktBatchKompDTO> getProduktBatchKompList(int pbId) throws DALException {
+    public List<ProduktBatchKompDTO> getProduktBatchKompList(String pbId) throws DALException {
 
         try {
             Statement stmt = newCon.connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE id = \'" + pbId + "\'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE pbid = '" + pbId + "'");
 
+            List<ProduktBatchKompDTO> alleprodukter = new ArrayList<ProduktBatchKompDTO>();
+
+            while (rs.next()) {
+                alleprodukter.add(extractProduktBatchKompListFromResultSet(rs));
+            }
+            return alleprodukter;
 
         } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
-        return null;
+
     }
 
     @Override

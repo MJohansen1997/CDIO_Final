@@ -1,12 +1,7 @@
 package API;
 
-import DAO.DALException;
-import DAO.ProduktBatchDAO;
-import DAO.ReceptDAO;
-import DAO.ReceptKompDAO;
-import DTO.ProduktBatchDTO;
-import DTO.ReceptDTO;
-import DTO.ReceptKompDTO;
+import DAO.*;
+import DTO.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -39,7 +34,20 @@ public class AfvejningService {
     }
 
     @POST
-    @Path("/loadkomps")
+    @Path("/loadprodkomps")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ProduktBatchKompDTO> loadprodKomps(@FormParam("produktionsid") String prodid){
+        try {
+            ProduktBatchKompDAO dao = new ProduktBatchKompDAO();
+            return dao.getProduktBatchKompList(prodid);
+        } catch (DALException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @POST
+    @Path("/loadreckomps")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ReceptKompDTO> loadKomps(@FormParam("receptid") String recid){
         try {
@@ -48,6 +56,19 @@ public class AfvejningService {
         } catch (DALException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @GET
+    @Path("/getrnavn")
+    public String getRaaNavn(@QueryParam("raavid") String rid){
+        try{
+            RaavareBatchDAO rbdao = new RaavareBatchDAO();
+            RaavareDAO rdao = new RaavareDAO();
+            return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavareNavn();
+        } catch (DALException | SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return "????";
         }
     }
 }
