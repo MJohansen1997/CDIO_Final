@@ -10,7 +10,15 @@ import java.util.List;
 public class RaavareDAO implements IDAO.IRaavareDAO
 {
     //Forbinder til databasen
-    MySQLCon newCon = new  MySQLCon();
+    MySQLCon newCon;
+
+    public RaavareDAO(){
+        try{
+            newCon = MySQLCon.getInstance();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public RaavareDTO getRaavare(String raavareId) throws DALException
@@ -18,7 +26,6 @@ public class RaavareDAO implements IDAO.IRaavareDAO
             //Få daten fra databasen angåene råvarer
             try
             {
-                newCon.setupCon();
                 Statement stmt = newCon.connection.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM raavarer WHERE id = '" + raavareId + "'");
 
@@ -27,7 +34,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
                     return extractUserFromResultSet(rs);
                 }
             }
-            catch (SQLException | ClassNotFoundException ex)
+            catch (SQLException ex)
             {
                 throw new DALException("String message");
             }
@@ -39,7 +46,6 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     {
         try
         {
-            newCon.setupCon();
             Statement stmt = newCon.connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM userinformations");
             ArrayList<RaavareDTO> users = new ArrayList<>();
@@ -50,7 +56,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
             }
             return users;
         }
-        catch (SQLException | ClassNotFoundException ex)
+        catch (SQLException ex)
         {
             throw new DALException("String messsage");
         }
@@ -62,14 +68,13 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     {
         try
         {
-            newCon.setupCon();
             Statement stmt = newCon.connection.createStatement();
             stmt.executeQuery("INSERT INTO raavarer VALUES "
                     + raavare.getRaavareID()
                     + raavare.getRaavareNavn()
                     + raavare.getLeverandoer());
         }
-        catch (SQLException | ClassNotFoundException throwables)
+        catch (SQLException throwables)
         {
             throw new DALException("String messsage");
         }

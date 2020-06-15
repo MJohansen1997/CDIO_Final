@@ -10,12 +10,12 @@ import java.util.List;
 /** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
 
 public class IncrementID {
-    MySQLCon newCon = new MySQLCon();
+    MySQLCon newCon;
 
 
     public IncrementID() throws SQLException, ClassNotFoundException, DALException {
         try {
-            newCon.setupCon();
+            newCon = MySQLCon.getInstance();
         } catch (SQLException | ClassNotFoundException e) {
             throw new DALException("Kan ikke oprette en connection til serveren");
         }
