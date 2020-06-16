@@ -29,7 +29,7 @@ public class AfvejningService {
             ReceptDAO RDAO = new ReceptDAO();
             return RDAO.getRecept(PB.getReceptID());
         }
-        catch (ClassNotFoundException | DALException | SQLException e){
+        catch (DALException e){
             return null;
         }
     }

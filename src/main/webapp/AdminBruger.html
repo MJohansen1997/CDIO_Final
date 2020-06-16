@@ -27,7 +27,6 @@
 <h1>Velkommen tilbage "username"</h1>
 <!--leftside-->
 
-
 <nav>
     <ul>
         <button type="button" id="buttonOpret">Opret</button>
@@ -37,7 +36,6 @@
     </ul>
 </nav>
 <br>
-
 
 <form id="opretForm">
     <h1>Opret Bruger</h1>
@@ -59,21 +57,37 @@
 
 <form id="redigerForm">
     <h1>Rediger Bruger</h1>
-    <p>Vælg brugerID : <input type="text" name="brugerNavn" required/></p>
-    <button type="button" id="submit2">Gem ændringer</button>
+    <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
+    <button type="submit">Gem ændringer</button>
+</form>
+
+<form id="redigerInfoForm">
+    <h1>Rediger bruger</h1>
+    <input type="hidden" name="brugerID" />
+    <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>
+    <select name="rolle" id="RolleRed">
+        <option value="Brugeradminstrator">Brugeradminstrator</option>
+        <option value="Farmaceut">Farmaceut</option>
+        <option value="Produktionsleder">Produktionsleder</option>
+        <option value="Laborant">Laborant</option>
+    </select>
+    <p>Vælg Bruger initialer : <input type="text" name="ini" required/></p>
+    <p>Vælg Bruger CPR : <input type="text" name="cpr" required/></p>
+    <p>Vælg Password : <input type="text" name="password" required/></p>
+    <button type="submit">Gem ændringer</button>
 </form>
 
 
 <form id="sletForm">
     <h1>Slet Bruger</h1>
-    <p>Vælg brugerID : <input type="text" name="username" required/></p>
-    <button type="button" id="submit3">Gem ændringer</button>
+    <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
+    <button type="submit">Gem ændringer</button>
 </form>
 
 <form id="findForm">
     <h1>Find Bruger</h1>
     <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
-    <button type="submit" id="submit4">Gem ændringer</button>
+    <button type="submit">Find</button>
 
     <table id="findForm-table" class="table">
         <thead>
@@ -89,14 +103,6 @@
         <tbody id="findFormBody">
         </tbody>
     </table>
-</form>
-
-
-<form id="redigerInfoForm">
-    <p>Vælg Bruger navn : <input type="text" name="username" required/></p>
-    <p>Vælg Bruger initialer : <input type="text" name="userini" required/></p>
-    <p>Vælg Bruger CPR : <input type="text" name="usercpr" required/></p>
-    <p>Vælg Password : <input type="text" name="userpword" required/></p>
 </form>
 
 <table id="userInfo-table" class="table">

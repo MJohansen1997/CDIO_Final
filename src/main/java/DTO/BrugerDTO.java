@@ -20,9 +20,6 @@ public class BrugerDTO {
         this.password = password;
     }
 
-    public BrugerDTO(BrugerDTO brugerDTO) {
-    }
-
     public String getBrugerID() {return brugerID;}
 
     public void setBrugerID(String brugerID) {this.brugerID = brugerID;}

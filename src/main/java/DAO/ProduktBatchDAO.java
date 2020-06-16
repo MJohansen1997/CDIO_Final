@@ -10,7 +10,7 @@ import java.util.List;
 public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
     MySQLCon newCon;
 
-    public ProduktBatchDAO () throws DALException, SQLException, ClassNotFoundException {
+    public ProduktBatchDAO () throws DALException {
         try {newCon = MySQLCon.getInstance();
         } catch (SQLException | ClassNotFoundException e) {
             throw new DALException("Cannot establish a connection to the server! " + e);
@@ -20,7 +20,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
 
 
     @Override
-    public ProduktBatchDTO getProduktBatch(String pbId) throws DALException, SQLException, ClassNotFoundException {
+    public ProduktBatchDTO getProduktBatch(String pbId) throws DALException {
         /* Creating a try catch
          * Within creating a statement and then getting a returned resultset with the specifed query. */
         try {
