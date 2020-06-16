@@ -2,6 +2,7 @@ package API;
 
 import DAO.*;
 import DTO.*;
+import org.json.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -96,6 +97,22 @@ public class AfvejningService {
         } catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             return "????";
+        }
+    }
+
+    @POST
+    @Path("/createpbk")
+    public void createProdBatchKomp(String jsonBody){
+
+        try {
+            IncrementID incre = new IncrementID();
+            JSONObject json = new JSONObject(jsonBody);
+            ProduktBatchKompDAO pbdao = new ProduktBatchKompDAO();
+            //ProduktBatchKompDTO pb = new ProduktBatchKompDTO(json.getString("pbId"),json.getString("rbId"),);
+
+
+        } catch (DALException e) {
+            e.printStackTrace();
         }
     }
 }

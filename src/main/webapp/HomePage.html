@@ -4,12 +4,27 @@
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>Rødovre Pharmaceutics Hjem</title>
+    <script>
+        $(document).ready(function () {
+            $("#afvejning").click(function () {
+                $("#container").load("Afvejning.html #container");
+                $.getScript("Afvejning.js");
+            });
+            $("#admin").click(function () {
+                $("#container").load("AdminBruger.html #container");
+                $.getScript("AdminBrugerJS.js");
+                $.getScript("jquery.serializejson.js");
+            })
+        })
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <header id = homepage-header>
     <h6 id="userinfo">Userinformation</h6>
     <nav>
         <ul class="navigation">
             <li id="hjem">Hjem</li>
+            <li id="admin">Brugeradmin</li>
             <li id="afvejning">Afvejning</li>
             <li id="rvbatches">Råvarebatches</li>
             <li id="pdbatches">Produktionbatches</li>
@@ -20,6 +35,7 @@
     </nav>
 </header>
 <body id = homepage-body>
+<div id = container>
 <h1 id = "homepage-title">Velkommen tilbage til Rødovrevej Pharmaceutics</h1>
 <div class="home">
     <h2 class=section-title>Hvad står vi for?</h2>
@@ -39,6 +55,7 @@
             forksere og udviklere.
         </p>
         <img src="drug.jpg" alt="Stoffer brormand" id="drugimg" height="450">
+</div>
 </div>
 </body>
 <footer>
