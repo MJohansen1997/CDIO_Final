@@ -68,11 +68,11 @@ jQuery(document).ready(function() {
 });
 
 
-$("#myopret").click(function(){
+$("#buttonOpret").click(function(){
     $("#modal1").append(generateMyOpretHtml());
 });
 
-$("#myrediger").click(function(){
+$("#buttonRediger").click(function(){
     $(".modal2").append(("" +
         "<span class=\"close2\">&times;</span>\n" +
         "    <form action=\"rest/login/admin\" method=\"PUT\" id='adminrediger'>\n" +
@@ -81,7 +81,7 @@ $("#myrediger").click(function(){
         "    <button>Gem</button>"))});
 
 
-$("#myslet").click(function(){
+$("#buttonSlet").click(function(){
     $("modal3").append("" +
         "<span class=\"close\">&times;</span>\n" +
         "    <form action=\"rest/login/admin\" method=\"GET\" id='adminslet'>\n" +
@@ -89,7 +89,7 @@ $("#myslet").click(function(){
         "    </form>\n" +
         "    <button>Gem</button>")});
 
-$("#myfind").click(function(){
+$("#buttonFind").click(function(){
     $("modal4").append("" +
         "<span class=\"close\">&times;</span>\n" +
         "    <form action=\"rest/login/admin\" method=\"GET\" id='adminfind'>\n" +
@@ -104,8 +104,8 @@ $("#myfind").click(function(){
 
 
 <!--pop up opret-->
-var modal1 = document.getElementById("#opret");
-var opret = document.getElementById("#myopret");
+var modal1 = document.getElementById("#opretForm");
+var opret = document.getElementById("#buttonOpret");
 var span = document.getElementsByClassName("close")[0];
 
 jQuery(opret).click(function() {
@@ -117,7 +117,7 @@ jQuery(span).click(function() {
 
     <!--pop up rediger-->
 var modal2 = document.getElementById("rediger");
-var rediger = document.getElementById("myrediger");
+var rediger = document.getElementById("buttonRediger");
 
 jQuery(rediger).click(function() {
     modal2.style.display = "block";
@@ -130,7 +130,7 @@ jQuery(span).click(function() {
 
     <!--pop up find-->
 var modal3 = document.getElementById("find");
-var find = document.getElementById("myfind");
+var find = document.getElementById("buttonFind");
 
 find.onclick = function() {
     modal3.style.display = "block";
@@ -142,7 +142,7 @@ span.onclick = function() {
 
     <!--pop up slet-->
 var modal4 = document.getElementById("slet");
-var slet = document.getElementById("myslet");
+var slet = document.getElementById("buttonSlet");
 
 slet.onclick = function() {
     modal4.style.display = "block";
