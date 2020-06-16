@@ -1,4 +1,7 @@
+/* Alle body elementer*/
 body {font-family: Georgia, serif;}
+
+/* Login forsiden*/
 body.login-page {
     height: 100%;
     margin: 0;
@@ -55,7 +58,6 @@ body.login-page {
     margin-right: 110px;
     margin-top: 15px;
 }
-
 .title {
     width: 500px;
 
@@ -66,6 +68,8 @@ body.login-page {
     margin-bottom: 7px;
     border: 1px solid gray;
 }
+
+/* Homepage */
 li {
     float: left;
     display: block;
@@ -91,6 +95,9 @@ li:hover {
 #paragraph {
     border: 2px solid black;
     width: 35%;
+}
+#home-image-box {
+    
 }
 #drugimg{
     position: absolute;
