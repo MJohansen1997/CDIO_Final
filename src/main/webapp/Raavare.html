@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Råvarer liste</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+<h2>R&aring;vare liste</h2>
+<p>Indtast ny r&aring;varer</p>
+
+<form method = "POST" action = "">
+    <label for="IDName">ID:</label>
+    <input type="text" id="IDName" name="IDName">
+
+    <label for="rName">R&aring;varer:</label>
+    <input type="text" id="rName" name="rName">
+
+    <label for="lName">Leverand&oslash;r: </label>
+    <input type="text" id="lName" name="lName"><br><br>
+
+    <button  type = "button" id = "Add" class = "btn btn-success"> Tilf&oslash;j</button>
+    <button type = "button" id = "Opdatere" class = "btn btn-success">Opdater</button>
+
+        <br><br>
+</form>
+
+
+<table class = "table table-bordered table-hover" id = "raavarer" style="width:100%">
+    <tr>
+        <th>ID</th>
+        <th>R&aring;varer</th>
+        <th>Levarand&oslash;r</th>
+    </tr>
+
+    <script type = "text/javascript">
+        var db = window.openDatabase("cdiofinaldb", "1.0", "cdiofinaldb", 65535);
+        $(function () {
+
+        });
+
+        //Add
+        $("#Add").click(function ()
+        {
+            var raavID = $("#IDName").value();
+            var raavNavn = $("#rName").value();
+            var leverandor = $("#lName").value();
+            db.transaction(function (transaction)
+            {
+                var sql = "INSERT INTO raavarer(raavID, raavNavn, leverandør) VALUES(?,?,?)";
+                transaction.executeSql(sql, [raavID, raavNavn, leverandor],
+                    function ()
+                    {
+                        alert("Ny varer indsat uden fejl");
+                    },
+                    function (transaction, err)
+                    {
+                        alert(err.message);
+                    })
+            })
+        })
+
+        //Henter tabel
+        $("#Opdatere").click()(function ()
+        {
+            $("#raavarer").children().remove();
+            db.transaction(function (transaction)
+            {
+                var sql = "SELECT * FROM raavarer ORDER BY id DESC";
+                transaction.executeSql(sql,undefined,
+                function (transaction, result) {
+                if(result.rows.length)
+                {
+                    for(var i = 0; i < result.row.length; i++)
+                    {
+                        var row = result.rows.item(i);
+                        var item = row.IDName();
+                        var id = row.id;
+                        //var leverandor = row.leverandor;
+                        $("#raavarer").append('<tr><td>'
+                            + id
+                            + '</td><td>'
+                            + item
+                            + '</td><td>'
+                            +  /*leverandor*/ );
+                    }
+                }
+                else
+                {
+                    $("#raavarer").append('<tr><td colspan = "3" align = "center"> Ingen raavare fundet"</td></tr>');
+                }
+
+                }, function (transaction, err) {
+                        alert(err.message);
+                    })
+            })
+        })
+    </script>
+</table>
+</body>
+</html>
