@@ -101,8 +101,8 @@ public class AfvejningService {
     }
 
     @POST
-    @Path("/createUser")
-    public void createBruger(String jsonBody){
+    @Path("/createpbk")
+    public void createProdBatchKomp(String jsonBody){
 
         try {
             IncrementID incre = new IncrementID();

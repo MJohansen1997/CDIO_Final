@@ -18,8 +18,19 @@
             <li id="logud">Log ud</li>
         </ul>
     </nav>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#afvejning").click(function () {
+                $("#container").load("Afvejning.html #container")
+                $.getScript("Afvejning.js");
+            })
+        })
+
+    </script>
 </header>
 <body id = homepage-body>
+<div id = container>
 <h1 id = "homepage-title">Velkommen tilbage til Rødovrevej Pharmaceutics</h1>
 <div class="home">
     <h2 class=section-title>Hvad står vi for?</h2>
@@ -39,6 +50,7 @@
             forksere og udviklere.
         </p>
         <img src="drug.jpg" alt="Stoffer brormand" id="drugimg" height="450">
+</div>
 </div>
 </body>
 <footer>

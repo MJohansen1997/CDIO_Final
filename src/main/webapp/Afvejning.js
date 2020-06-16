@@ -1,47 +1,47 @@
-    $(document).ready(function () {
-        $(".inlab").hide();
-        $("#lablab").show();
-        $("button").hide();
-        $("#labbut").show().click(function () {
-            $.ajax({
-                url: "rest/afvejning/verifylab",
-                data: $('#labidform').serialize(),
-                contentType: "application/x-www-form-urlencoded",
-                method: 'POST',
-                success: function (data) {
-                    if (data == 'true') {
-                        $("#labbut").remove();
-                        $("#userid").prop("readonly", true);
-                        $("#subprod").show();
-                        $("#prodlab").show();
-                    } else return alert("ingen laborant fundet med dette ID");
-                }
-            });
+$(document).ready(function () {
+    $(".inlab").hide();
+    $("#lablab").show();
+    $("button").hide();
+});
+$(document).ready(function () {
+    $("#labbut").show().click(function () {
+        $.ajax({
+            url: "rest/afvejning/verifylab",
+            data: $('#labidform').serialize(),
+            contentType: "application/x-www-form-urlencoded",
+            method: 'POST',
+            success: function (data) {
+                if (data == 'true') {
+                    $("#labbut").remove();
+                    $("#userid").prop("readonly", true);
+                    $("#subprod").show();
+                    $("#prodlab").show();
+                } else return alert("ingen laborant fundet med dette ID");
+            }
         });
-        $("#subprod").click(function () {
-            $.ajax({
-                url: "rest/afvejning/verifyprod",
-                data: $('#labidform').serialize(),
-                contentType: "application/x-www-form-urlencoded",
-                dataType: "JSON",
-                method: 'POST',
-                success: function (data) {
-                    if (data != null) {
-                        $("#subprod").remove();
-                        $("#subkomp").show();
-                        $("#produktionsid").prop("readonly", true);
-                        $("[name='reclab']").show();
-                        $("#receptid").val(data.receptID);
-                        $("#receptnavn").val(data.receptNavn);
-                        findreckomps();
-                        findprodKomps();
-                    } else return alert("ingen Produktion matcher dette id");
-                }
-            });
-        });
-
-
     });
+    $("#subprod").click(function () {
+        $.ajax({
+            url: "rest/afvejning/verifyprod",
+            data: $('#labidform').serialize(),
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "JSON",
+            method: 'POST',
+            success: function (data) {
+                if (data != null) {
+                    $("#subprod").remove();
+                    $("#subkomp").show();
+                    $("#produktionsid").prop("readonly", true);
+                    $("[name='reclab']").show();
+                    $("#receptid").val(data.receptID);
+                    $("#receptnavn").val(data.receptNavn);
+                    findreckomps();
+                    findprodKomps();
+                } else return alert("ingen Produktion matcher dette id");
+            }
+        });
+    });
+});
 var rec;
 function saver(o) {
     rec = o;
