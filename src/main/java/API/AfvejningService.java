@@ -59,13 +59,40 @@ public class AfvejningService {
         }
     }
 
-    @GET
+    @POST
+    @Path("/IdBatch")
+    public String verifyIdBatch(@QueryParam("rid") String rid, @QueryParam("rbid") String rbid){
+        try {
+            RaavareBatchDAO rbdao = new RaavareBatchDAO();
+            RaavareDAO rdao = new RaavareDAO();
+            if(!rid.equals(rbdao.getRaavareBatch(rbid).getRaavareId()))
+                return rdao.getRaavare(rid).getRaavareNavn();
+            else return "";
+        }catch (DALException | SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    @POST
     @Path("/getrnavn")
-    public String getRaaNavn(@QueryParam("raavid") String rid){
+    public String getRaaNavn(String rid){
         try{
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
             RaavareDAO rdao = new RaavareDAO();
             return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavareNavn();
+        } catch (DALException | SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return "????";
+        }
+    }
+    @POST
+    @Path("/getrid")
+    public String getRaaID(String rid){
+        try{
+            RaavareBatchDAO rbdao = new RaavareBatchDAO();
+            RaavareDAO rdao = new RaavareDAO();
+            return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavareID();
         } catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             return "????";
