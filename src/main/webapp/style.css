@@ -72,6 +72,7 @@ body.login-page {
 /* Homepage */
 #homepage-title {
     margin-left: 45px;
+    font-weight: lighter;
 }
 #homepage-body { background: #f7f7f7
 }
@@ -88,6 +89,8 @@ li:hover {
     color: #f7f7f7;
 }
 .navigation {
+    font-family: Verdana;
+
     padding-left: 10px;
     list-style-type: none;
     margin: 0;
@@ -105,6 +108,7 @@ li:hover {
 .section-title {
     margin: 25px 0 0 20px;
     width: fit-content;
+    font-weight: lighter;
 
 }
 .paragraph {
