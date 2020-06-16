@@ -60,6 +60,21 @@ public class AfvejningService {
     }
 
     @POST
+    @Path("/IdBatch")
+    public String verifyIdBatch(@QueryParam("rid") String rid, @QueryParam("rbid") String rbid){
+        try {
+            RaavareBatchDAO rbdao = new RaavareBatchDAO();
+            RaavareDAO rdao = new RaavareDAO();
+            if(!rid.equals(rbdao.getRaavareBatch(rbid).getRaavareId()))
+                return rdao.getRaavare(rid).getRaavareNavn();
+            else return "";
+        }catch (DALException | SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    @POST
     @Path("/getrnavn")
     public String getRaaNavn(String rid){
         try{

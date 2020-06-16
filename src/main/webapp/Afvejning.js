@@ -57,9 +57,7 @@ function saver3(o) {
     holder = o;
 }
 
-var count = 0;
 function formfilled(temp, prodid, rbid, tara, vaegt, lab) {
-    count = count + 1;
     var form =
         "<form class='form' action='rest/afvejning/verifylab' method='POST' id='labidform'>" +
         "<h3>" +temp+ "</h3>"+
@@ -71,9 +69,22 @@ function formfilled(temp, prodid, rbid, tara, vaegt, lab) {
         "</form>";
     return form;
 }
+function formunfilled(raavnavn) {
+    var form =
+        "<form class='form' method='POST' id='" +raavnavn+ "form'>" +
+        "<h3>" +raavnavn+ "</h3>"+
+        "<label class='batch'> Råvare Batch : <input class='input' type='text' readonly /></label>" +
+        "<label class='batch'> Tara Vægt : <input class='input' type='text' readonly /></label>" +
+        "<label class='batch'> Tolerance : <input class='input' type='text' readonly /></label>" +
+        "<label class='batch'> Råvare Mængde : <input class='input' type='text' readonly /></label>" +
+        "<label class='batch'> Laborant : <input class='input' type='text' readonly /></label>" +
+        "<input class='input' type='hidden' id='prodid' readonly/>" +
+        "</form>" +
+        "<button id='but" + raavnavn + "'> Click me</button>";
+    return form;
+}
 
 function findreckomps() {
-    alert("recstarted");
     $.ajax({
         url: "rest/afvejning/loadreckomps",
         data: $('#labidform').serialize(),
@@ -82,7 +93,6 @@ function findreckomps() {
         method: 'POST',
         success: function (data) {
             if (data != null) {
-                /*saver(JSON.stringify(data));*/
                 saver(data);
             }
             else alert("recfailed")
@@ -90,7 +100,6 @@ function findreckomps() {
     });
 }
 function findprodKomps() {
-    alert("prodstarted");
     $.ajax({
         url: "rest/afvejning/loadprodkomps",
         data: $('#labidform').serialize(),
@@ -100,7 +109,6 @@ function findprodKomps() {
         success: function (data) {
             if (data != null) {
                 saver2(data);
-            /*x½saver2(JSON.stringify(data));*/
                 insertKomps();
             }
             else alert("prodfailed")
@@ -110,42 +118,60 @@ function findprodKomps() {
     /*[{"pbId":"PB00001","rbId":"RB00001","tara":12.0,"netto":1000.0,"labID":"B00001"}]*/
     /*[{"receptID":"REC00001","raavareID":"R00001","nonNetto":1000.0,"tolerance":3.0},{"receptID":"REC00001","raavareID":"R00002","nonNetto":1000.0,"tolerance":3.0}]*/
 function insertKomps() {
-    alert("insertstarted");
-    /*var jsonrec = JSON.parse(rec);*/
-    alert(rec[0].receptID + " : " + prod[0].rbId);
+    insertprodkomps(insertForm);
+}
+function getraavID(ravid) {
+    $.ajax({
+        url: "rest/afvejning/getrid",
+        data: ravid,
+        dataType : "text",
+        method: 'POST',
+        success: function (data) {
+            alert(data);
+            saver3(data);
+        }
+    });
+}
+
+function insertForm() {
     for (i = 0; i < Object.keys(rec).length; i++) {
         for (j = 0; j < Object.keys(prod).length; j++) {
-            getraavID(prod[j].rbId);
-            alert(rec[i].raavareID + " : " + holder);
-            if (rec[i].raavareID == holder)
-                $("#faerdig").append(formfilled(getraavnavn(prod[j].rbId), prod.pbId, prod.rbId, prod.tara, prod.netto, prod.labID));
+            $.ajax({
+                url: "rest/afvejning/IdBatch?rid=" + rec[i].raavareID + "&rbid=" + prod[j].rbId,
+                method: 'POST',
+                success: function (data) {
+                    console.log(data);
+                    if(data != ""){
+                        $("#mangler").append(formunfilled(data));
+                        $(document).find("#but" + data + "").on("click",function () {
+                            console.log("lol")
+                        });
+                    }
+
+
+                    /*$("#mangler").append(formfilled(data, prod[0].pbId, prod[0].rbId, prod[0].tara, prod[0].netto, prod[0].labID))*/
+
+                }
+            });
         }
     }
 }
-    function getraavID(ravid) {
-        $.ajax({
-            url: "rest/afvejning/getrid",
-            data: ravid,
-            dataType : "text",
-            method: 'POST',
-            success: function (data) {
-                alert(data);
-                saver3(data);
-            }
-        });
-    }
 
-    function getraavnavn(ravid) {
+function insertprodkomps(callback) {
+    for (i = 0; i < Object.keys(prod).length; i++){
         $.ajax({
             url: "rest/afvejning/getrnavn",
-            data: ravid,
-            dataType : "text",
+            data: prod[i].rbId,
+            dataType: "text",
             method: 'POST',
             success: function (data) {
-                saver3(data);
+                $("#faerdig").append(formfilled(data, prod[0].pbId, prod[0].rbId, prod[0].tara, prod[0].netto, prod[0].labID))
             }
         });
     }
+    callback()
+}
+
 
 
 
