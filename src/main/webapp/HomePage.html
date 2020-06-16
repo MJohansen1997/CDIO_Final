@@ -4,12 +4,27 @@
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>Rødovre Pharmaceutics Hjem</title>
+    <script>
+        $(document).ready(function () {
+            $("#afvejning").click(function () {
+                $("#container").load("Afvejning.html #container");
+                $.getScript("Afvejning.js");
+            });
+            $("#admin").click(function () {
+                $("#container").load("AdminBruger.html #container");
+                $.getScript("AdminBrugerJS.js");
+                $.getScript("jquery.serializejson.js");
+            })
+        })
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <header id = homepage-header>
     <h6 id="userinfo">Userinformation</h6>
     <nav>
         <ul class="navigation">
             <li id="hjem">Hjem</li>
+            <li id="admin">Brugeradmin</li>
             <li id="afvejning">Afvejning</li>
             <li id="rvbatches">Råvarebatches</li>
             <li id="pdbatches">Produktionbatches</li>
@@ -18,16 +33,6 @@
             <li id="logud">Log ud</li>
         </ul>
     </nav>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#afvejning").click(function () {
-                $("#container").load("Afvejning.html #container")
-                $.getScript("Afvejning.js");
-            })
-        })
-
-    </script>
 </header>
 <body id = homepage-body>
 <div id = container>

@@ -111,7 +111,7 @@ public class AfvejningService {
             //ProduktBatchKompDTO pb = new ProduktBatchKompDTO(json.getString("pbId"),json.getString("rbId"),);
 
 
-        } catch (DALException | SQLException | ClassNotFoundException e) {
+        } catch (DALException e) {
             e.printStackTrace();
         }
     }
