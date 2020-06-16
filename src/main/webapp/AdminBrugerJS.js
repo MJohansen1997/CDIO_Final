@@ -8,8 +8,7 @@ $(document).ready(function() {
     $('#findForm').on('submit', function(e){
         e.preventDefault();
         getBruger($('#findForm').serializeJSON().brugerID)
-        $("#findFormBody").toggle();
-
+        $("#findForm-table").show();
     });
 
     $('#sletForm').on('submit', function(e){
@@ -44,6 +43,7 @@ function createBruger() {
         data: JSON.stringify(data),
         success: function (){
             loadBrugere();
+            alert("Oprettet bruger GZ homie")
             $("#opretForm").toggle();
         }
     })
@@ -82,6 +82,7 @@ function updateGetBruger(brugerID){
             return;
         }
 
+
         $form = $('#redigerInfoForm')
         $form.find('[name="brugerID"]').val(data.brugerID)
         $form.find('[name="brugerNavn"]').val(data.brugerNavn)
@@ -96,7 +97,6 @@ function getBruger(brugerID){
     $.get('rest/brugere/findBruger/'+brugerID, function (data, textStatus, req) {
         if(typeof data != "undefined"){
             $("#findFormBody").empty().append(generateHTMLTable(data));
-            $("#findForm-table").toggle();
         } else {
             alert("Der findes ikke nogen med det brugerID")
         }
@@ -144,6 +144,7 @@ function buttonSlet() {
 }
 function buttonFind(){
     $("#buttonFind").click(function () {
+        $("#findForm-table").toggle();
         $("#findForm").toggle();
     });
 }
