@@ -70,6 +70,11 @@ body.login-page {
 }
 
 /* Homepage */
+#homepage-title {
+    margin-left: 45px;
+}
+#homepage-body { background: #f7f7f7
+}
 li {
     float: left;
     display: block;
@@ -79,9 +84,11 @@ li {
     text-decoration: none;
 }
 li:hover {
-    background: #425f9c;
+    background: #658ee7;
+    color: #f7f7f7;
 }
 .navigation {
+    padding-left: 10px;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -89,19 +96,37 @@ li:hover {
     background: cornflowerblue;
 }
 .home {
-    border: 2px solid black;
+    height: 650px;
+    padding-top: 1px;
+    width: 95%;
+    margin: auto;
     position: relative;
 }
-#paragraph {
-    border: 2px solid black;
+.section-title {
+    margin: 25px 0 0 20px;
+    width: fit-content;
+
+}
+.paragraph {
+    margin: 25px 0 50px 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
     width: 35%;
+    margin-bottom: 20px;
+    font-size: 19px;
+    position: relative;
+    background: aliceblue;
 }
-#home-image-box {
-    
-}
-#drugimg{
+
+
+#drugimg {
     position: absolute;
-    border: 2px solid black;
-    float: right;
+    right: 0;
+    top: 0;
+    margin: 35px 45px 0 0;
+    border-radius: 10px;
+
 }
+
 
