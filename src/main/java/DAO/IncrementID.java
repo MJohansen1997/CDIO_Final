@@ -13,7 +13,7 @@ public class IncrementID {
     MySQLCon newCon;
 
 
-    public IncrementID() throws SQLException, ClassNotFoundException, DALException {
+    public IncrementID() throws DALException {
         try {
             newCon = MySQLCon.getInstance();
         } catch (SQLException | ClassNotFoundException e) {
@@ -22,7 +22,7 @@ public class IncrementID {
     }
 
 
-    public static void main(String[] args) throws SQLException, DALException, ClassNotFoundException {
+    public static void main(String[] args) throws DALException{
         IncrementID incre = new IncrementID();
         incre.returnID("Recepter", "recID");
     }

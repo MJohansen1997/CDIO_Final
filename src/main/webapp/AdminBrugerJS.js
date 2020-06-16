@@ -1,43 +1,66 @@
 $(document).ready(function() {
    loadBrugere();
-    $('#opretBrugerForm').on('submit', function(e){
-        console.log("Stan is gay")
+    $('#opretForm').on('submit', function(e){
         e.preventDefault();
         createBruger()
     });
 
-    $("button").click(function () {
-        $.ajax({
-            url: "rest/login/admin",
-            data: $('#loginform').serialize(),
-            contentType: "application/x-www-form-urlencoded",
-            method: 'POST',
-            success: function (data) {
-                alert(data);
-                if (data == 'true') {
-                    /*$('#maincontainer').load("HomePage.html");*/
-                    window.location.href = 'HomePage.html';
-                }
-            }
-        });
+    $('#findForm').on('submit', function(e){
+        e.preventDefault();
+        getBruger($('#findForm').serializeJSON().brugerID)
+        $("#findFormBody").toggle();
 
     });
+
+    $('#sletForm').on('submit', function(e){
+        e.preventDefault();
+        deleteBruger($('#sletForm').serializeJSON().brugerID)
+    });
+
+    $('#redigerForm').on('submit', function(e){
+        e.preventDefault();
+        updateGetBruger($('#redigerForm').serializeJSON().brugerID)
+        $("#redigerInfoForm").toggle();
+    });
+
+    $('#redigerInfoForm').on('submit', function(e){
+        e.preventDefault();
+        updateBruger($('#redigerInfoForm').serializeJSON().brugerID)
+    });
+
+    buttonOpret();
+    buttonFind();
+    buttonRediger();
+    buttonSlet();
 });
 
-jQuery(document).ready(function($){
-})
-
 function createBruger() {
-    var data = $('#opretBrugerForm').serializeJSON();
+    var data = $('#opretForm').serializeJSON();
     console.log(data)
     $.ajax({
         url:'rest/brugere/createUser',
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (data){
-            alert(JSON.stringify(data));
+        success: function (){
             loadBrugere();
+            $("#opretForm").toggle();
+        }
+    })
+}
+
+function updateBruger(){
+    var data = $('#redigerInfoForm').serializeJSON();
+    console.log(data)
+    $.ajax({
+        url:'rest/brugere/updateUser',
+        method: 'POST',
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (){
+            loadBrugere();
+            $("#redigerForm").toggle();
+            $("#redigerInfoForm").toggle();
         }
     })
 }
@@ -46,49 +69,87 @@ function loadBrugere() {
     $.get('rest/brugere/allUsers', function (data, textStatus, req) {
         $("#brugerBody").empty();
         $.each(data, function (i, brugerValue) {
-            $('#brugerBody').append(generateHTML(brugerValue));
+            $('#brugerBody').append(generateHTMLTable(brugerValue));
         });
     });
 }
 
-function generateHTML(bruger){
+function updateGetBruger(brugerID){
+    $.get('rest/brugere/findBruger/'+brugerID, function (data, textStatus, req) {
+        console.log("DATA", data)
+        if (!data){
+            alert("Der findes ikke nogen med det brugerID")
+            return;
+        }
+
+        $form = $('#redigerInfoForm')
+        $form.find('[name="brugerID"]').val(data.brugerID)
+        $form.find('[name="brugerNavn"]').val(data.brugerNavn)
+        $form.find('[name="rolle"]').val(data.rolle)
+        $form.find('[name="ini"]').val(data.ini)
+        $form.find('[name="cpr"]').val(data.cpr)
+        $form.find('[name="password"]').val(data.password)
+    });
+}
+
+function getBruger(brugerID){
+    $.get('rest/brugere/findBruger/'+brugerID, function (data, textStatus, req) {
+        if(typeof data != "undefined"){
+            $("#findFormBody").empty().append(generateHTMLTable(data));
+            $("#findForm-table").toggle();
+        } else {
+            alert("Der findes ikke nogen med det brugerID")
+        }
+    });
+}
+
+function deleteBruger(brugerID) {
+    var data = $('#sletForm').serializeJSON();
+    console.log(data)
+    $.ajax({
+        url:'rest/brugere/deleteBruger/'+ brugerID,
+        method: 'POST',
+        contentType:"application/json",
+        data: JSON.stringify(data),
+        success: function(){
+            loadBrugere();
+            $("#sletForm").toggle();
+        }
+    })
+}
+
+function generateHTMLTable(bruger){
         return '<tr><td>' + bruger.brugerID + '</td>' +
         '<td>' + bruger.brugerNavn + '</td>' +
         '<td>' + bruger.ini + '</td>' +
         '<td>' + bruger.cpr + '</td>' +
         '<td>' + bruger.rolle + '</td>' +
         '<td>' + bruger.password + '</td></tr>'
-    //@TODO Make a button which creates, updates and remove
 }
 
-
-jQuery(document).ready(function () {
+function buttonOpret(){
     $("#buttonOpret").click(function () {
         $("#opretForm").toggle();
     });
-});
-
-jQuery(document).ready(function () {
+}
+function buttonRediger(){
     $("#buttonRediger").click(function () {
         $("#redigerForm").toggle();
     });
-});
-
-jQuery(document).ready(function () {
+}
+function buttonSlet() {
     $("#buttonSlet").click(function () {
         $("#sletForm").toggle();
     });
-});
-
-jQuery(document).ready(function () {
+}
+function buttonFind(){
     $("#buttonFind").click(function () {
         $("#findForm").toggle();
     });
-});
-
-jQuery(document).ready(function () {
+}
+function submitUpdate(){
     $("#submit4").click(function () {
         $("#showForm").toggle();
     });
-})
+}
 
