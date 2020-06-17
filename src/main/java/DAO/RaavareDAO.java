@@ -22,7 +22,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     @Override
     public RaavareDTO getRaavare(String raavareId) throws DALException
     {
-            //Få daten fra databasen angåene råvarer
+        //Få daten fra databasen angåene råvarer
             try
             {
                 Statement stmt = newCon.createStatement();
@@ -65,17 +65,17 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     @Override
     public void createRaavare(RaavareDTO raavare) throws DALException
     {
-        try
-        {
-            Statement stmt = newCon.createStatement();
-            stmt.executeQuery("INSERT INTO raavarer VALUES "
-                    + raavare.getRaavID()
-                    + raavare.getRaavNavn()
-                    + raavare.getLeverandor());
-        }
-        catch (SQLException throwables)
-        {
-            throw new DALException("String messsage");
+        try {
+            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO raavarer " +
+                    "(raavID, raavNavn, leverandør) VALUES (?, ?, ?);");
+
+            preparedStatement.setString(1,raavare.getRaavID());
+            preparedStatement.setString(2, raavare.getRaavNavn());
+            preparedStatement.setString(3, raavare.getLeverandor());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DALException("Encountered an error when executing given sql statement. : " + e.getMessage());
         }
     }
 

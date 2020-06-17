@@ -142,7 +142,7 @@ function insertForm() {
         });
     }
     rec.forEach((r_item) => {
-        prod.forEach((p_item) =>{
+        prod.forEach((p_item) => {
             $.ajax({
                 url: "rest/afvejning/IdBatch?rid=" + r_item.raavareID + "&rbid=" + p_item.rbId,
                 method: 'POST',
