@@ -15,6 +15,7 @@
             $("#afvejning").click(function () {
                 $("#container").load("Afvejning.html #container");
                 $.getScript("Afvejning.js");
+                $.getScript("jquery.serializejson.js");
             });
             $("#admin").click(function () {
                 $("#container").load("AdminBruger.html #container");
