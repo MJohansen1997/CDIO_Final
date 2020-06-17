@@ -67,7 +67,7 @@ public class AfvejningService {
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
             RaavareDAO rdao = new RaavareDAO();
             if(!rid.equals(rbdao.getRaavareBatch(rbid).getRaavareId()))
-                return rdao.getRaavare(rid).getRaavareNavn();
+                return rdao.getRaavare(rid).getRaavNavn();
             else return "";
         }catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -81,7 +81,7 @@ public class AfvejningService {
         try{
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
             RaavareDAO rdao = new RaavareDAO();
-            return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavareNavn();
+            return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavNavn();
         } catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             return "????";
@@ -93,7 +93,7 @@ public class AfvejningService {
         try{
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
             RaavareDAO rdao = new RaavareDAO();
-            return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavareID();
+            return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavID();
         } catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             return "????";

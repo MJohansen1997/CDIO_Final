@@ -1,25 +1,94 @@
 package API;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import DAO.BrugerDAO;
+import DAO.DALException;
+import DAO.IncrementID;
+import DAO.RaavareDAO;
+import DTO.BrugerDTO;
 
-@Path("/HomePage")
-public class APIRaavare
-{
-    @POST
-    @Path("form")
-    public String ADD(@FormParam("IDName") String IDName, @FormParam("rName") String rName, @FormParam("lName") String lName)
+import DTO.RaavareDTO;
+import org.json.JSONObject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.sql.SQLException;
+import java.util.*;
+
+@Path("/raavarer")
+public class APIRaavare {
+    RaavareDAO dbAccess = new RaavareDAO();
+
+    public APIRaavare() throws SQLException, DALException, ClassNotFoundException
     {
-        //RaavareDAO RaaDAO = new RaavareDAO();
-
-
-        //return System.out.println(IDName, rName,lName);
-        return ADD(IDName,rName,lName);
-
-        //return null;
     }
 
 
+    @GET
+    @Path("/allRaavarer")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<RaavareDTO> getAllRaavarer() throws SQLException, DALException, ClassNotFoundException
+    {
+        return dbAccess.getRaavareList();
+    }
 
+    @POST
+    @Path("/createRaavarer")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createRaavarer(String jsonBody) throws SQLException, DALException, ClassNotFoundException
+    {
+        IncrementID incre = new IncrementID();
+        JSONObject json = new JSONObject(jsonBody);
+
+        try {
+            RaavareDTO raavarer = new RaavareDTO(
+                    incre.returnID("raavarer", "raavID"),
+                    json.getString("raavNavn"),
+                    json.getString("leverandør"));
+
+            dbAccess.createRaavare(raavarer);
+
+        }
+        catch (DALException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @POST
+    @Path("/updateRaavere")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateRaavare(String jsonBody)
+    {
+        JSONObject json = new JSONObject(jsonBody);
+
+        System.out.println(json.get("raavNavn"));
+
+        try
+        {
+            RaavareDTO raavare = new RaavareDTO(
+                    json.getString("raavID"),
+                    json.getString("raavNavn"),
+                    json.getString("levenradør"));
+
+
+            dbAccess.updateRaavare(raavare);
+        } catch (DALException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @GET
+    @Path("/findRaavarer/{raavID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public RaavareDTO getBruger(@PathParam("raavID") String raavID) throws ClassNotFoundException, DALException, SQLException
+    {
+        RaavareDTO findRaavare = dbAccess.getRaavare(raavID);
+        return findRaavare;
+    }
+
+    @POST
+    @Path("/deleteRaavarer/{raavID}")
+    public void deleteRaavarer(@PathParam("raavID") String raavID) throws ClassNotFoundException, DALException, SQLException
+    {
+        dbAccess.deleteRaavarer(raavID);
+    }
 }

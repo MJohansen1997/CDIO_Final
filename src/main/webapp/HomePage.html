@@ -20,7 +20,13 @@
                 $("#container").load("AdminBruger.html #container");
                 $.getScript("AdminBrugerJS.js");
                 $.getScript("jquery.serializejson.js");
-            })
+            });
+            $("#raavarer").click(function () {
+                $("#container").load("Raavare.html #container");
+                $.getScript("Raavare.js");
+                $.getScript("jquery.serializejson.js");
+            });
+
         })
     </script>
 </head>
@@ -34,7 +40,7 @@
             <li id="rvbatches">Råvarebatches</li>
             <li id="pdbatches">Produktionbatches</li>
             <li id="recept">Recept</li>
-            <li id="råvarer">Råvarer</li>
+            <li id="raavarer">Råvarer</li>
             <li id="logud">Log ud</li>
         </ul>
     </nav>

@@ -1,6 +1,5 @@
 package DAO;
 
-import DTO.BrugerDTO;
 import DTO.RaavareDTO;
 import java.sql.*;
 
@@ -70,9 +69,9 @@ public class RaavareDAO implements IDAO.IRaavareDAO
         {
             Statement stmt = newCon.createStatement();
             stmt.executeQuery("INSERT INTO raavarer VALUES "
-                    + raavare.getRaavareID()
-                    + raavare.getRaavareNavn()
-                    + raavare.getLeverandoer());
+                    + raavare.getRaavID()
+                    + raavare.getRaavNavn()
+                    + raavare.getLeverandor());
         }
         catch (SQLException throwables)
         {
@@ -90,21 +89,32 @@ public class RaavareDAO implements IDAO.IRaavareDAO
             PreparedStatement pSNavn = newCon.createStatement
                     ("UPDATE raavarer SET raavNavn = ? WHERE userID = ?");
 
-             pSNavn.setString(1, raavare.getRaavareNavn());
-             pSNavn.setString(2, raavare.getRaavareID());
+             pSNavn.setString(1, raavare.getRaavID());
+             pSNavn.setString(2, raavare.getRaavID());
 
             //laver en variable sql statment for Leverandør
            PreparedStatement pSLev = newCon.createStatement
                    ("UPDATE raavarer SET levenrandør = ? WHERE userID = ?");
 
-            pSLev.setString(1, raavare.getLeverandoer());
-            pSLev.setString(2, raavare.getRaavareID());
+            pSLev.setString(1, raavare.getLeverandor());
+            pSLev.setString(2, raavare.getRaavID());
         }
         catch (SQLException throwables)
         {
             throw new DALException("String messsage");
         }
     }
+    public void deleteRaavarer(String raavID) throws DALException {
+
+        try {
+            PreparedStatement preparedStatement = newCon.createStatement("DELETE FROM raavarer WHERE raavID = ?;");
+            preparedStatement.setString(1, raavID);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DALException("Encountered an error when executing given sql statement.");
+        }
+    }
+
 
     private RaavareDTO extractUserFromResultSet(ResultSet rs) throws SQLException
     {

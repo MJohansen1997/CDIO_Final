@@ -1,109 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Råvarer liste</title>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 15px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.serializejson.js"></script>
+    <script src="Raavare.js"></script>
+
+
 </head>
 
 <body>
-<h2>R&aring;vare liste</h2>
-<p>Indtast ny r&aring;varer</p>
+<div id="container">
+    <link rel="stylesheet" href="AdminBrugerStyle.css"/>
+    <h1>Velkommen tilbage "username"</h1>
+    <!--leftside-->
 
-<form method = "POST" action = "">
-    <label for="IDName">ID:</label>
-    <input type="text" id="IDName" name="IDName">
+    <nav>
+        <ul>
+            <button type="button" id="buttonOpret">Opret</button>
+            <button type="button" id="buttonRediger">Rediger</button>
+            <button type="button" id="buttonSlet">Slet</button>
+            <button type="button" id="buttonFind">Find</button>
+        </ul>
+    </nav>
+    <br>
 
-    <label for="rName">R&aring;varer:</label>
-    <input type="text" id="rName" name="rName">
-
-    <label for="lName">Leverand&oslash;r: </label>
-    <input type="text" id="lName" name="lName"><br><br>
-
-    <button  type = "button" id = "Add" class = "btn btn-success"> Tilf&oslash;j</button>
-    <button type = "button" id = "Opdatere" class = "btn btn-success">Opdater</button>
-
-        <br><br>
-</form>
+    <form id="opretForm">
+        <h1>Opret R&aring;varer</h1>
+        <p>Vælg ID : <input type="text" name = "raavID" required/></p>
+        <p> Indtast R&aring;varer : <input type="text" name="raavName" required/></p>
+        <p>Indtast Leverand&oslash;r : <input type="text" name = "leverandor" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
 
 
-<table class = "table table-bordered table-hover" id = "raavarer" style="width:100%">
-    <tr>
-        <th>ID</th>
-        <th>R&aring;varer</th>
-        <th>Levarand&oslash;r</th>
-    </tr>
+    <form id="redigerForm">
+        <h1>Rediger R&aring;varer</h1>
+        <p>Vælg r&aring;varerID : <input type="text" name="ravvID" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
 
-    <script type = "text/javascript">
-        var db = window.openDatabase("cdiofinaldb", "1.0", "cdiofinaldb", 65535);
-        $(function () {
+    <form id="redigerInfoForm">
+        <h1>Rediger r&aring;varer</h1>
+        <input type="hidden" name="raavID" />
+        <p>Vælg R&aring;varer Navn : <input type="text" name="raavNavn" required/></p>
+        <p>Vælg Leverand&oslash;r : <input type="text" name="leverandor" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
 
-        });
 
-        //Add
-        $("#Add").click(function ()
-        {
-            var raavID = $("#IDName").value();
-            var raavNavn = $("#rName").value();
-            var leverandor = $("#lName").value();
-            db.transaction(function (transaction)
-            {
-                var sql = "INSERT INTO raavarer(raavID, raavNavn, leverandør) VALUES(?,?,?)";
-                transaction.executeSql(sql, [raavID, raavNavn, leverandor],
-                    function ()
-                    {
-                        alert("Ny varer indsat uden fejl");
-                    },
-                    function (transaction, err)
-                    {
-                        alert(err.message);
-                    })
-            })
-        })
+    <form id="sletForm">
+        <h1>Slet R&aring;varer</h1>
+        <p>Vælg R&aring;varer ID : <input type="text" name="raavID" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
 
-        //Henter tabel
-        $("#Opdatere").click()(function ()
-        {
-            $("#raavarer").children().remove();
-            db.transaction(function (transaction)
-            {
-                var sql = "SELECT * FROM raavarer ORDER BY id DESC";
-                transaction.executeSql(sql,undefined,
-                function (transaction, result) {
-                if(result.rows.length)
-                {
-                    for(var i = 0; i < result.row.length; i++)
-                    {
-                        var row = result.rows.item(i);
-                        var item = row.IDName();
-                        var id = row.id;
-                        //var leverandor = row.leverandor;
-                        $("#raavarer").append('<tr><td>'
-                            + id
-                            + '</td><td>'
-                            + item
-                            + '</td><td>'
-                            +  /*leverandor*/ );
-                    }
-                }
-                else
-                {
-                    $("#raavarer").append('<tr><td colspan = "3" align = "center"> Ingen raavare fundet"</td></tr>');
-                }
+    <form id="findForm">
+        <h1>Find R&aring;varer</h1>
+        <p>Vælg R&aring;varer ID : <input type="text" name="raavID" required/></p>
+        <button type="submit">Find</button>
 
-                }, function (transaction, err) {
-                        alert(err.message);
-                    })
-            })
-        })
-    </script>
-</table>
+        <table id="findForm-table" class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Navn</th>
+                <th>Leverand&oslash;r</th>
+            </tr>
+            </thead>
+            <tbody id="findFormBody">
+            </tbody>
+        </table>
+    </form>
+
+    <table id="userInfo-table" class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Navn</th>
+            <th>Leverand&oslash;r</th>
+        </tr>
+        </thead>
+        <tbody id="ravvBody">
+        </tbody>
+    </table>
+</div>
 </body>
-</html>
