@@ -27,7 +27,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
             /* SQL Query */
             String query = "SELECT * FROM prodbestilling WHERE pbID = \'" + pbId + "\'";
             /* Statement to SQL */
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             /* Resultset from the query */
             ResultSet rs = stmt.executeQuery(query);
 
@@ -49,7 +49,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
             /* SQL Query */
             String query = "SELECT * FROM prodbestilling";
             /* Statement to SQL */
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             /* Resultset from the query */
             ResultSet rs = stmt.executeQuery(query);
             /* Arraylist needed to extract a full list of produktbatches */
@@ -72,7 +72,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
         try {
 
             /* Statement to SQL */
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             /* SQL Query to insert values */
             String query = "INSERT INTO prodbestilling VALUES (" +
                     "'" + produktbatch.getPbID() + "'" + ", " +
@@ -92,7 +92,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
         try {
 
             /* SQL Statement & Query to update values */
-            PreparedStatement statusQuery = newCon.connection.prepareStatement
+            PreparedStatement statusQuery = newCon.createStatement
                     ("UPDATE prodbestilling SET status = ? WHERE pbID = ?");
 
             statusQuery.setString(1, produktbatch.getStatus());

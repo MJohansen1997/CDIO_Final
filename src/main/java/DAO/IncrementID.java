@@ -50,7 +50,7 @@ public class IncrementID {
     public ArrayList<String> autoIncrementIDs(String tableName, String columnIDName) throws DALException {
         try {
             ResultSet rs;
-            PreparedStatement st = newCon.connection.prepareStatement("SELECT * FROM " + tableName + " ORDER BY " + columnIDName + " DESC LIMIT 1");
+            PreparedStatement st = newCon.createStatement("SELECT * FROM " + tableName + " ORDER BY " + columnIDName + " DESC LIMIT 1");
             rs = st.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
             int columnsNumber = rsmd.getColumnCount();

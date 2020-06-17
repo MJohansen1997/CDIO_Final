@@ -26,7 +26,7 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     @Override
     public ReceptKompDTO getReceptKomp(String receptId, String raavareId) throws DALException {
         try{
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM reckomp WHERE recID = " + receptId
             + " AND raavID = " + raavareId
             );
@@ -43,7 +43,7 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     @Override
     public List<ReceptKompDTO> getReceptKompList(String receptId) throws DALException {
         try{
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM reckomp WHERE recID = '" + receptId+"'");
             List<ReceptKompDTO> liste = new ArrayList<>();
             while (rs.next()) {
@@ -58,7 +58,7 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     @Override
     public List<ReceptKompDTO> getReceptKompList() throws DALException {
         try{
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM reckomp");
             List<ReceptKompDTO> liste = new ArrayList<>();
             while (rs.next()) {
@@ -73,7 +73,7 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     @Override
     public void createReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("Insert Into reckomp Values (" +
                     receptkomponent.getReceptID() + ", " +
                     receptkomponent.getRaavareID() + ", " +
@@ -88,7 +88,7 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     @Override
     public void updateReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("UPDATE Recepter Set " +
                     "nonNetto" + receptkomponent.getNonNetto() + ", " +
                     "tolerance" + receptkomponent.getTolerance() + ", " +

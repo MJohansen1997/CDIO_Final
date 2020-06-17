@@ -34,7 +34,7 @@ public class BrugerDAO implements IDAO {
     @Override
     public BrugerDTO getBruger(String brugerID) throws DALException, SQLException, ClassNotFoundException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM brugerer WHERE brugerID = \'" + brugerID + "\'");
             if (rs.next()) {
                 return extractUserFromResultSet(rs);
@@ -48,7 +48,7 @@ public class BrugerDAO implements IDAO {
     @Override
     public List<BrugerDTO> getBrugerList() throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM brugerer");
             ArrayList<BrugerDTO> users = new ArrayList<>();
             while (rs.next()) {
@@ -66,7 +66,7 @@ public class BrugerDAO implements IDAO {
     @Override
     public void createBruger(BrugerDTO opr) throws DALException {
         try {
-            PreparedStatement preparedStatement = newCon.connection.prepareStatement("INSERT INTO brugerer " +
+            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO brugerer " +
                     "(brugerID, brugerNavn, ini, cpr, rolle, password) VALUES (?, ?, ?, ?, ?, ?);");
 
             preparedStatement.setString(1,opr.getBrugerID());
@@ -77,7 +77,6 @@ public class BrugerDAO implements IDAO {
             preparedStatement.setString(6, opr.getPassword());
             preparedStatement.executeUpdate();
 
-
         } catch (SQLException e) {
             throw new DALException("Encountered an error when executing given sql statement. : " + e.getMessage());
         }
@@ -86,7 +85,7 @@ public class BrugerDAO implements IDAO {
     @Override
     public void updateBruger(BrugerDTO opr) throws DALException {
         try {
-            PreparedStatement preparedStatement = newCon.connection.prepareStatement("UPDATE brugerer SET " +
+            PreparedStatement preparedStatement = newCon.createStatement("UPDATE brugerer SET " +
                     "brugerID = ?, brugerNavn = ?, ini = ?, cpr = ?, rolle = ?, password = ? WHERE brugerID = ?");
             preparedStatement.setString(1, opr.getBrugerID());
             preparedStatement.setString(2, opr.getBrugerNavn());
@@ -104,7 +103,7 @@ public class BrugerDAO implements IDAO {
     public void deleteUser(String brugerID) throws DALException {
 
         try {
-            PreparedStatement preparedStatement = newCon.connection.prepareStatement("DELETE FROM brugerer WHERE brugerID = ?;");
+            PreparedStatement preparedStatement = newCon.createStatement("DELETE FROM brugerer WHERE brugerID = ?;");
             preparedStatement.setString(1, brugerID);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -114,7 +113,7 @@ public class BrugerDAO implements IDAO {
 
     public boolean verifyUser(String username, String password) throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT brugerNavn, password FROM brugerer " +
                     "WHERE brugerNavn = \'" + username + "\'");
             if (rs.next()) {

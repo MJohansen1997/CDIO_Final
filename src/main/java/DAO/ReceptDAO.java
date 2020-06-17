@@ -23,7 +23,7 @@ public class ReceptDAO implements IDAO.IReceptDAO {
     @Override
     public ReceptDTO getRecept(String receptId) throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Recepter WHERE recID = '" + receptId + "'");
             if (rs.next()) {
                 return udtagReceptFraResultat(rs);
@@ -39,7 +39,7 @@ public class ReceptDAO implements IDAO.IReceptDAO {
     @Override
     public List<ReceptDTO> getReceptList() throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Recepter");
             List<ReceptDTO> liste = new ArrayList<>();
 
@@ -57,7 +57,7 @@ public class ReceptDAO implements IDAO.IReceptDAO {
     @Override
     public void createRecept(ReceptDTO recept) throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("insert into recepter values(\" "+
                     recept.getReceptID() +
                     "\", \"" + recept.getReceptNavn() +"\");"
@@ -73,7 +73,7 @@ public class ReceptDAO implements IDAO.IReceptDAO {
     @Override
     public void updateRecept(ReceptDTO recept) throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("UPDATE Recepter Set " +
                     "recNavn = \"" + recept.getReceptNavn() + "\", \"" +
                     "WHERE recID = " + recept.getReceptID() + "\""

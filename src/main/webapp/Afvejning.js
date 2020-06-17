@@ -134,9 +134,15 @@ function getraavID(ravid) {
 }
 
 function insertForm() {
-    rec.forEach(function (r_item) {
-        console.log(r_item.receptID);
-        prod.forEach(function (p_item) {
+    console.log(rec);
+    if (typeof data == "undefined"){
+        console.log("backtothefuture");
+        findreckomps(function () {
+            insertForm()
+        });
+    }
+    rec.forEach((r_item) => {
+        prod.forEach((p_item) =>{
             $.ajax({
                 url: "rest/afvejning/IdBatch?rid=" + r_item.raavareID + "&rbid=" + p_item.rbId,
                 method: 'POST',
@@ -164,7 +170,6 @@ function insertprodkomps(callback) {
             dataType: "text",
             method: 'POST',
             success: function (data) {
-                console.log(JSON.stringify(item));
                 $("#faerdig").append(formfilled(data, item.pbId, item.rbId, item.tara,
                     item.netto, item.labID))
             }

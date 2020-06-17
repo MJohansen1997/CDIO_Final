@@ -4,8 +4,14 @@
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>Rødovre Pharmaceutics Hjem</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
+            var home = $("#container").html();
+            $("#hjem").click(function () {
+                console.log(home);
+                $("#container").empty().append(home);
+            });
             $("#afvejning").click(function () {
                 $("#container").load("Afvejning.html #container");
                 $.getScript("Afvejning.js");
@@ -17,7 +23,6 @@
             })
         })
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <header id = homepage-header>
     <h6 id="userinfo">Userinformation</h6>

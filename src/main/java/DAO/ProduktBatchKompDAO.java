@@ -23,7 +23,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     @Override
     public ProduktBatchKompDTO getProduktBatchKomp(String pbId, String rbId) throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE id = \'" + pbId + "\' AND \'" + rbId+"\'");
         } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
@@ -35,7 +35,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     public List<ProduktBatchKompDTO> getProduktBatchKompList(String pbId) throws DALException {
 
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE pbid = '" + pbId + "'");
 
             List<ProduktBatchKompDTO> alleprodukter = new ArrayList<ProduktBatchKompDTO>();
@@ -54,7 +54,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     @Override
     public List<ProduktBatchKompDTO> getProduktBatchKompList() throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches");
 
             List<ProduktBatchKompDTO> alleprodukter = new ArrayList<ProduktBatchKompDTO>();
@@ -72,7 +72,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     @Override
     public void createProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery
                     ("insert into produktbatches values ("
                             + pbk.getPbId() + ","
@@ -90,7 +90,7 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
 
     public void updateProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             stmt.executeQuery("update produktbatches set " +
                     "pbID = " + pbk.getPbId() +
                     ", rbID = " + pbk.getRbId() +

@@ -26,7 +26,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
             //Få daten fra databasen angåene råvarer
             try
             {
-                Statement stmt = newCon.connection.createStatement();
+                Statement stmt = newCon.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM raavarer WHERE raavID = '" + raavareId + "'");
 
                 if (rs.next())
@@ -46,7 +46,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     {
         try
         {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM userinformations");
             ArrayList<RaavareDTO> users = new ArrayList<>();
             while (rs.next())
@@ -68,7 +68,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     {
         try
         {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             stmt.executeQuery("INSERT INTO raavarer VALUES "
                     + raavare.getRaavareID()
                     + raavare.getRaavareNavn()
@@ -87,14 +87,14 @@ public class RaavareDAO implements IDAO.IRaavareDAO
         {
 
             //Forbinder og laver en variable sql statment for Råvare Navn
-            PreparedStatement pSNavn = newCon.connection.prepareStatement
+            PreparedStatement pSNavn = newCon.createStatement
                     ("UPDATE raavarer SET raavNavn = ? WHERE userID = ?");
 
              pSNavn.setString(1, raavare.getRaavareNavn());
              pSNavn.setString(2, raavare.getRaavareID());
 
             //laver en variable sql statment for Leverandør
-           PreparedStatement pSLev = newCon.connection.prepareStatement
+           PreparedStatement pSLev = newCon.createStatement
                    ("UPDATE raavarer SET levenrandør = ? WHERE userID = ?");
 
             pSLev.setString(1, raavare.getLeverandoer());

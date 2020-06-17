@@ -23,7 +23,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     @Override
     public RaavareBatchDTO getRaavareBatch(String rbId) throws DALException, SQLException, ClassNotFoundException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM raavarebatches WHERE rbID='" + rbId+"'");
             if (rs.next()) {
                 return extractRaavareBacth(rs);
@@ -37,7 +37,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     @Override
     public List<RaavareBatchDTO> getRaavareBatchList() throws SQLException, ClassNotFoundException, DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Ravaarebatches");
             ArrayList<RaavareBatchDTO>  list = new ArrayList<>();
             while (rs.next()) {
@@ -53,7 +53,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     @Override
     public List<RaavareBatchDTO> getRaavareBatchList(String raavareId) throws SQLException, ClassNotFoundException, DALException {
         try {
-            Statement stmt = newCon.connection.createStatement();
+            Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Ravaarebatches WHERE raavareId=" + raavareId);
             ArrayList<RaavareBatchDTO>  list = new ArrayList<>();
             while (rs.next()) {

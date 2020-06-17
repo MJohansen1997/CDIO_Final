@@ -9,11 +9,45 @@ public class MySQLCon {
     private String database = "cdiofinaldb";
     private String user = "myadmin@universitydtudb";
     private String password = "2GpZ#P/h{&";
-    public Connection connection = null;
+    private Connection connection = null;
     private static MySQLCon instance;
 
     private MySQLCon() throws SQLException, ClassNotFoundException {
         setupCon();
+    }
+
+    public Statement createStatement() throws DALException {
+        try {
+            connection.createStatement().executeQuery("SELECT * FROM brugerer");
+        } catch (SQLException e) {
+            try {
+                setupCon();
+            } catch (SQLException | ClassNotFoundException ignored) {
+                throw new DALException("fejl ved forbindelse til server");
+            }
+        }
+        try {
+            return connection.createStatement();
+        } catch (SQLException e) {
+            throw new DALException("fejl ved forbindelse til server");
+        }
+    }
+
+    public PreparedStatement createStatement(String statement) throws DALException {
+        try {
+            connection.prepareStatement("SELECT * FROM brugerer");
+        } catch (SQLException e) {
+            try {
+                setupCon();
+            } catch (SQLException | ClassNotFoundException ignored) {
+                throw new DALException("fejl ved forbindelse til server");
+            }
+        }
+        try {
+            return connection.prepareStatement(statement);
+        } catch (SQLException e) {
+            throw new DALException("fejl ved forbindelse til server");
+        }
     }
 
     public static MySQLCon getInstance() throws SQLException, ClassNotFoundException {
