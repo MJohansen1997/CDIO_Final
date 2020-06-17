@@ -153,7 +153,7 @@ function insertForm() {
                         $(document).find("#but" + data + "").on("click",function () {
                             console.log("lol")
                             /*$.ajax()
-                            $(document).find("#" + data + "form")*/
+                            $(document).find("#" + data + "form")k*/
                         });
                     }
                 }
