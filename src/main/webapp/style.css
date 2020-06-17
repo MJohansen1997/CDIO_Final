@@ -2,7 +2,7 @@
 body {font-family: Georgia, serif;}
 
 /* Login forsiden*/
-body.login-page {
+body.login-page  {
     height: 100%;
     margin: 0;
     overflow: hidden;
@@ -11,7 +11,8 @@ body.login-page {
     position: relative;
     display: flex;
     background: #425f9c;
-    width: 73%;
+    width: available;
+
     height: 50%;
     left: 0;
     top: 0;
@@ -24,7 +25,10 @@ body.login-page {
 }
 #whole-panel {
     float: right;
+    height: available;
+    flex-wrap: wrap;
     position: relative;
+    padding-left: 10px;
 }
 #maincontainer {
     text-align: left;
@@ -70,9 +74,13 @@ body.login-page {
 }
 
 /* Homepage */
+body#homepage-body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
 #homepage-title {
     margin-left: 45px;
-    font-weight: lighter;
 }
 #homepage-body { background: #f7f7f7
 }
@@ -89,8 +97,6 @@ li:hover {
     color: #f7f7f7;
 }
 .navigation {
-    font-family: Verdana;
-
     padding-left: 10px;
     list-style-type: none;
     margin: 0;
@@ -108,7 +114,6 @@ li:hover {
 .section-title {
     margin: 25px 0 0 20px;
     width: fit-content;
-    font-weight: lighter;
 
 }
 .paragraph {
