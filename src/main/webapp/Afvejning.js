@@ -74,11 +74,11 @@ function formunfilled(raavnavn, tolerance, lab, raavid, prodid) {
     var form =
         "<form class='form' method='POST' id='" +raavnavn+ "form'>" +
         "<h3>" +raavnavn+ "</h3>"+
-        "<label class='batch'> Råvare Batch : <input class='input' id='" + raavnavn + "rb' name='rbId' type='text' /></label>" +
-        "<label class='batch'> Tara Vægt : <input class='input' id='" + raavnavn + "tara' name='tara' type='number' step='0.01' /></label>" +
+        "<label class='batch'> Råvare Batch : <input class='input' id='" + raavnavn + "rb' name='rbId' type='text' required /></label>" +
+        "<label class='batch'> Tara Vægt : <input class='input' id='" + raavnavn + "tara' name='tara' type='number' step='0.01' required /></label>" +
         "<label class='batch'> Tolerance (%) : <input class='input' id='" + raavnavn + "tol' type='text' value='" + tolerance + "' readonly /></label>" +
-        "<label class='batch'> Råvare Mængde : <input class='input' id='" + raavnavn + "maengde' name='netto' type='number' step='0.01' /></label>" +
-        "<label class='batch'> Laborant : <input class='input' id='" + raavnavn + "lab' name='labID' type='text' value='" + lab + "' readonly /></label>" +
+        "<label class='batch'> Råvare Mængde : <input class='input' id='" + raavnavn + "maengde' name='netto' type='number' step='0.01' required /></label>" +
+        "<input class='input' id='" + raavnavn + "lab' name='labID' type='text' value='" + lab + "' readonly />" +
         "<input class='input' id='" + raavnavn + "id' type='text' value='" + raavid + " ' readonly/>" +
         "<input class='input' id='" + raavnavn + "prod' name='pbId' type='text' value='" + prodid + "' readonly/>" +
         "</form>" +
@@ -148,7 +148,10 @@ function insertForm() {
                                 contentType: "application/json",
                                 data: JSON.stringify(tada),
                                 success: function (){
-                                    alert("Oprettet bruger GZ homie")
+                                    alert("Oprettet bruger GZ homie");
+                                    $("#mangler").empty();
+                                    $("#faerdig").empty();
+                                    findreckomps();
                                 }
                             })
                         });
