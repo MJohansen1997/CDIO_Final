@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.serializejson.js"></script>
+
+    <script src="RaavareBatchJS.js"></script>
 
 </head>
 <body>
+<div id="container">
+    <link rel="stylesheet" href="RaavareBatch.css"/>
+    <h1>Velkommen til RåvareBatch</h1>
+    <!--leftside-->
+</div>
 
+
+
+<h1>RaavareBatch</h1>
+<div id="proleder">
+    <form class="form" method="POST" id='prolederidform'>
+        <label class='inlab' id='prolederid'> Projektleder ID : <input class="input" type="text" id="userid" name="userid" required /></label>
+        <label class='inproleder' id='raavareBachID'> RaavareBatch ID : <input class="input" type="text" id="rbid" name="rbid" required /></label>
+        <label class='inproleder' name='raaID id='raaID'> Raavare ID : <input type="text" id="raavareid" name="raavareid" required /></label>
+        <label class='inproleder' name='maen' id="recid"> Mængde : <input type="text" id="maengde" name="maengde" readonly /> </label>
+    </form>
+    <button id="verificer">Verificer ID</button>
+    <button id="verificerRBid">Verificer ID</button>
+
+    <button id="oprRaavare">Opret RaavareBatch</button>
+    <button id="visRaavare">Vis RaavareBatch</button>
+</div>
+
+<form id = "resultOpret">
+    <div id="OprRaavareBatchen">
+        <label class='inproleder' id='raavareBachID'> RaavareBatch ID : <input class="input" type="text" id="rbid" name="rbid" required /></label>
+        <label class='inproleder' id='raaID'> Raavare ID : <input type="text" id="raavareid" name="raavareid" required /></label>
+        <label class='inproleder' name='maen' id="recid"> Mængde : <input type="text" id="maengde" name="maengde" readonly /> </label>
+    </div>
+</form>
+
+<div id = "resultVis">
+    <div id="VisRaavareBatch">
+
+    </div>
+</div>
 </body>
 </html>
