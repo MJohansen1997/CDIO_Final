@@ -21,13 +21,6 @@ public class IncrementID {
         }
     }
 
-
-    public static void main(String[] args) throws DALException{
-        IncrementID incre = new IncrementID();
-        incre.returnID("Recepter", "recID");
-    }
-
-
     public String returnID(String tableName, String columnIDName) throws DALException {
         ArrayList<String> IDS = autoIncrementIDs(tableName, columnIDName);
         String IDNumbers = null;
