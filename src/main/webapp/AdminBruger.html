@@ -7,9 +7,9 @@
     <script type="text/javascript" src="jquery.serializejson.js"></script>
     <script src="AdminBrugerJS.js"></script>
     <link rel = "stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="AdminBrugerStyle.css"/>
 </head>
 <header id=homepage-header>
-
     <nav>
         <ul class="navigation">
             <li id="userinfo">Userinformation</li>
@@ -24,10 +24,13 @@
         </ul>
     </nav>
 </header>
-<body>
-<div id="container-admin">
-    <link rel="stylesheet" href="AdminBrugerStyle.css"/>
+<body class = "homepages-body">
+<div id = "adminpage-title-container">
     <h1>Velkommen tilbage "username"</h1>
+</div>
+<div id="container-admin">
+
+
     <!--leftside-->
 
     <nav>
@@ -39,7 +42,7 @@
     </ul>
 </nav>
 <br>
-
+<div id = "admin-forms">
 <form id="opretForm">
     <h1>Opret Bruger</h1>
     <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>
@@ -107,7 +110,7 @@
         </tbody>
     </table>
 </form>
-
+</div>
 <table id="userInfo-table" class="table">
     <thead>
     <tr>

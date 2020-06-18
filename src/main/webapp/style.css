@@ -1,14 +1,17 @@
 /* Alle body elementer*/
 body {
     font-family: Georgia;
-    margin: 0 ;
+    margin: 0;
 }
 nav {
     font-family: Arial;
     font-weight: bold;
 }
 #userinfo {
-
+    font-size: 9px;
+}
+.homepages-body {
+    background-image: url("bluebackground.jpg");
 }
 
 /* Login forsiden*/
@@ -86,15 +89,12 @@ body#homepage-body {
     height: 100%;
     margin: 0;
     overflow: hidden;
+    background-image: url("bluebackground.jpg");
 }
 #homepage-title {
-    margin-left: 25px;
-    width: max-content;
-    border-bottom: 2px solid darkblue;
+}
+#homepage-title-container {
     border: 1px solid black;
-    border-bottom-length: 30cm;
-
-    height: fit-content;
 }
 #homepage-body {
     background: #f7f7f7;
@@ -135,15 +135,12 @@ li:hover {
 }
 article {
     position: absolute;
-
 }
 article, .section-title {
-
     flex-direction: column;
-
     width: fit-content;
     height: min-content;
-    bottom: 0 ;
+    top: 0 ;
 }
 .paragraph {
     flex-direction: column;
@@ -158,8 +155,10 @@ article, .section-title {
     background: aliceblue;
 }
 #homepage-image-box {
-    position: relative;
-    margin: 110px 45px 0 0;
+    position: absolute;
+    right: 0;
+    display: flex;
+    margin: 80px 45px 0 0;
 }
 #drugimg {
     border-radius: 10px;
@@ -171,10 +170,15 @@ article, .section-title {
     border: 1px solid black;
     position: relative;
     display: flex;
+    height: 600px;
+
 }
 #userInfo-table {
-    border: 2px solid black;
-
+    position: absolute;
+    margin: 40px 80px 0 0;
+    padding: 6px;
+    border: 1px solid black;
+    right: 0;
 }
 .admin-button {
     margin: 4px;
@@ -182,7 +186,28 @@ article, .section-title {
     border: 1px solid black;
 }
 #admin-buttons {
-
+    position: absolute;
+    left: 0;
+    width: auto;
+    margin: 200px 0 0 0;
+    padding-left: 50px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
 }
 
+#adminpage-title-container {
+    margin-left: 20px;
+}
+
+#admin-forms {
+    width: 400px;
+    height: 300px;
+    border: 1px solid black;
+    margin: 125px 0 0 400px;
+    padding: 0 0 0 20px;
+}
+#brugerBody {
+    border: 1px solid black;
+}
 
