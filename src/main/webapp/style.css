@@ -1,4 +1,4 @@
-/* Alle body elementer*/
+/* Elementer der tilhører flere dele af forkskellige filer*/
 body {
     font-family: Georgia;
     margin: 0;
@@ -12,6 +12,49 @@ nav {
 }
 .homepages-body {
     background-image: url("bluebackground.jpg");
+}
+.headpanel-container {
+    border-bottom: 2px solid white;
+}
+.headpanel-title {
+    -webkit-text-stroke: thin black;
+    color: white;
+    font-size: 50px;
+    margin: 10px 0 15px 35px;
+}
+
+.pages-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%
+}
+.footer-list {
+    padding-left: 10px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: 11px;
+    background: gray;
+}
+.footer-list li {
+    float: left;
+    text-align: center;
+    padding: 0 5px 0 5px;
+}
+#meme {float: right; padding-right: 10px}
+
+.table-container {
+    margin: 50px 0 0 125px;
+    font-size: 19px;
+    background: white;
+    height: 500px;
+    width: fit-content;
+    border: 1px solid black;
+    overflow: auto;
+}
+td {
+    padding: 0.25rem;
 }
 
 /* Login forsiden*/
@@ -87,32 +130,10 @@ body.login-page {
 /* ----------Homepage--------------- */
 body#homepage-body {
     height: 100%;
-    margin: 0;
     overflow: hidden;
-    background-image: url("bluebackground.jpg");
 }
-#homepage-title {
-}
-#homepage-title-container {
-    border: 1px solid black;
-}
-#homepage-body {
-    background: #f7f7f7;
-    border-left: 1px solid black;
-}
-li {
-    float: left;
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-li:hover {
-    background: #658ee7;
-    color: #f7f7f7;
-}
-.navigation {
+
+.navigation-list {
     padding-left: 10px;
     list-style-type: none;
     margin: 0;
@@ -121,6 +142,16 @@ li:hover {
     background: cornflowerblue;
     border-bottom: 2px solid darkblue;
     border-top: 2px solid darkblue;
+}
+.navigation-list li {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+}
+.navigation-list li:hover {
+    background: #658ee7;
+    color: #f7f7f7;
 }
 .home {
     height: 650px;
@@ -132,11 +163,15 @@ li:hover {
 }
 .section-title {
     margin: 25px 0 0 20px;
+    font-weight: bolder;
+    color: white;
+    -webkit-text-stroke: thin black;
 }
 article {
     position: absolute;
 }
 article, .section-title {
+
     flex-direction: column;
     width: fit-content;
     height: min-content;
@@ -167,37 +202,36 @@ article, .section-title {
 
 /* -------------Adminpage------------*/
 #container-admin {
-    border: 1px solid black;
     position: relative;
     display: flex;
-    height: 600px;
+    height: 700px;
 
 }
-#userInfo-table {
+#admin-buttons-container {
+    background: white;
     position: absolute;
-    margin: 40px 80px 0 0;
-    padding: 6px;
-    border: 1px solid black;
-    right: 0;
-}
-.admin-button {
-    margin: 4px;
-    padding: 5px;
+    left: 0;
+    margin: 200px 0 0 40px;
     border: 1px solid black;
 }
 #admin-buttons {
-    position: absolute;
-    left: 0;
-    width: auto;
-    margin: 200px 0 0 0;
-    padding-left: 50px;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    padding: 0 30px;
 }
 
-#adminpage-title-container {
-    margin-left: 20px;
+.admin-button {
+    font-size: 20px;
+    min-width: 100px;
+    position: relative;
+    margin: 20px 0 0 0;
+}
+
+.admin-table-header {
+    top: 0;
+    position: sticky;
+    background: white;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    padding: 5px 4px ;
 }
 
 #admin-forms {
@@ -206,8 +240,13 @@ article, .section-title {
     border: 1px solid black;
     margin: 125px 0 0 400px;
     padding: 0 0 0 20px;
+    background: white;
 }
-#brugerBody {
-    border: 1px solid black;
+#userInfo-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+#admin-table-body td {
+    padding: 10px 10px;
 }
 
