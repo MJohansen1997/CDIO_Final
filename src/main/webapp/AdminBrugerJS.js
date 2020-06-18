@@ -148,9 +148,5 @@ function buttonFind(){
         $("#findForm").toggle();
     });
 }
-function submitUpdate(){
-    $("#submit4").click(function () {
-        $("#showForm").toggle();
-    });
-}
+
 

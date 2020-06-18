@@ -3,8 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.serializejson.js"></script>
+    <script src="ReceptJS.js"></script>
 </head>
 <body>
+<div id="container">
+    <link rel="stylesheet" href="AdminBrugerStyle.css"/>
+    <h1>Velkommen tilbage "username"</h1>
+    <!--leftside-->
 
+    <nav>
+        <ul>
+            <button type="button" id="buttonOpret">Opret</button>
+            <button type="button" id="buttonRediger">Rediger</button>
+            <button type="button" id="buttonSlet">Slet</button>
+            <button type="button" id="buttonFind">Find</button>
+        </ul>
+    </nav>
+    <br>
+
+    <form id="opretForm">
+        <h1>Opret Recept</h1>
+        <p>Vælg Recept Navn : <input type="text" name="receptNavn" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+    <form id="redigerForm">
+        <h1>Rediger Recept</h1>
+        <p>Vælg ID : <input type="text" name="receptID" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+    <form id="redigerInfoForm">
+        <h1>Rediger Recept</h1>
+        <input type="hidden" name="receptID" />
+        <p>Vælg Recept Navn : <input type="text" name="receptNavn" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+    <form id="sletForm">
+        <h1>Slet Recept</h1>
+        <p>Vælg ID : <input type="text" name="receptID" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+    <form id="findForm">
+        <h1>Find Recept</h1>
+        <p>Vælg ID : <input type="text" name="receptID" required/></p>
+        <button type="submit">Find</button>
+
+        <table id="findForm-table" class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Recept Navn</th>
+            </tr>
+            </thead>
+            <tbody id="findFormBody">
+            </tbody>
+        </table>
+    </form>
+
+    <table id="userInfo-table" class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Recept Navn</th>
+        </tr>
+        </thead>
+        <tbody id="receptBody">
+        </tbody>
+    </table>
+
+</div>
 </body>
 </html>

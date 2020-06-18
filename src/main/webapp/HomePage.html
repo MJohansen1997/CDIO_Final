@@ -27,6 +27,11 @@
                 $.getScript("Raavare.js");
                 $.getScript("jquery.serializejson.js");
             });
+            $("#recept").click(function () {
+                $("#container").load("Recept.html #container");
+                $.getScript("ReceptJS.js");
+                $.getScript("jquery.serializejson.js");
+            });
 
         })
     </script>
