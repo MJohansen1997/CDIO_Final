@@ -41,8 +41,8 @@ public class APIRaavare {
         try {
             RaavareDTO raavarer = new RaavareDTO(
                     incre.returnID("raavarer", "raavID"),
-                    json.getString("raavNavn"),
-                    json.getString("leverandør"));
+                    json.getString("raavName"),
+                    json.getString("leverandor"));
 
             dbAccess.createRaavare(raavarer);
 
@@ -60,14 +60,13 @@ public class APIRaavare {
     {
         JSONObject json = new JSONObject(jsonBody);
 
-        System.out.println(json.get("raavNavn"));
 
         try
         {
             RaavareDTO raavare = new RaavareDTO(
                     json.getString("raavID"),
-                    json.getString("raavNavn"),
-                    json.getString("levenradør"));
+                    json.getString("raavName"),
+                    json.getString("levenrador"));
 
 
             dbAccess.updateRaavare(raavare);
@@ -79,7 +78,7 @@ public class APIRaavare {
     @GET
     @Path("/findRaavarer/{raavID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public RaavareDTO getBruger(@PathParam("raavID") String raavID) throws ClassNotFoundException, DALException, SQLException
+    public RaavareDTO getRaavarer(@PathParam("raavID") String raavID) throws ClassNotFoundException, DALException, SQLException
     {
         RaavareDTO findRaavare = dbAccess.getRaavare(raavID);
         return findRaavare;
