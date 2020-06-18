@@ -134,6 +134,7 @@ public class APIRaavareBatch {
     @Produces(MediaType.APPLICATION_JSON)
     public List<RaavareBatchDTO> getAllRaavareBatches() throws SQLException, DALException, ClassNotFoundException {
         return dbAccess.getRaavareBatchList();
+
     }
 }
 

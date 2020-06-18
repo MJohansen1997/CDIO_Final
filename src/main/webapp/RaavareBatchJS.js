@@ -116,16 +116,15 @@ function visRaavareBatch(rbid) {
 
 function generateHTMLTable(raavarebatch){
     return '<tr>' +
-        //generes ligesom brugerid
-        '<td>' + raavarebatch.raavarebatchid + '</td>' +
-
-        '<td>' + raavarebatch.raavareid + '</td>' +
+        '<td>' + raavarebatch.rbID + '</td>' +
+        '<td>' + raavarebatch.raavareId + '</td>' +
         '<td>' + raavarebatch.maengde + '</td>' +
         '</tr>'
 }
 
 function loadRaavareBatch() {
     $.get('rest/RaavareBatch/allRaavareBatches', function (data, textStatus, req) {
+        console.log(data);
         $("#raavareBatchBody").empty();
         $.each(data, function (i, raavareBatchValue) {
             $('#raavareBatchBody').append(generateHTMLTable(raavareBatchValue));
