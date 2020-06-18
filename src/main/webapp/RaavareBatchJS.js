@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    $(".inproleder").hide();
+    $("#prolederid").show();
+    $("button").hide();
+});
+
+$(document).ready(function () {
     $("#verificer").show().click(function () {
         $.ajax({
             url: "rest/RaavareBatch/verifyProjektleder",
@@ -9,12 +15,16 @@ $(document).ready(function () {
                 if (data == 'true') {
                     $("#verificer").remove();
                     $("#userid").prop("readonly", true);
-                    $("#verificerRBid").show();
+
+                    $("#oprRaavare").show();
+                    $("#visRaavare").show();
                 } else return alert("ingen laborant fundet med dette ID");
             }
         });
     });
-    $("#verificerRBid").click(function () {
+
+    //ikke done
+    $("#visRaavareBatch").click(function () {
         $.ajax({
             url: "rest/RaavareBatch/verifyRB",
             data: $('#prolederidform').serialize(),
@@ -23,27 +33,61 @@ $(document).ready(function () {
             method: 'POST',
             success: function (data) {
                 if (data != null) {
-                    $("#verificerRBid").remove();
-                    $("#oprRaavare").show();
-                    $("#visRaavare").show();
+                    $("#visRaavareBatch").remove();
+                    $("#verificerRBid").show();
+
 
                     $("#rbid").prop("readonly", true);
                     $("[name='raaID']").show();
                     $("#raavareid").val(data.raavareid);
 
-                    opretRaavare();
-                    visRaavare();
-                } else return alert("ingen Produktion matcher dette id");
+                    visRaavareBatch();
+                } else return alert("ingen RaavareBatch matcher dette id");
             }
         });
     });
+
+    $("#oprRaavareBatch").click(function () {
+        $.ajax({
+            url: "rest/RaavareBatch/verifyRB",
+            data: $('#prolederidform').serialize(),
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "JSON",
+            method: 'POST',
+            success: function (data) {
+                if (data != null) {
+                    $("#oprRaavareBatch").remove();
+                    $("#verificerRBid").show();
+
+
+                    $("#rbid").prop("readonly", true);
+                    $("[name='raaID']").show();
+                    $("#raavareid").val(data.raavareid);
+
+                    opretRaavareBatch();
+                } else return alert("nået er tastet forkert");
+            }
+        });
+    });
+
 });
 
+var raaBatch;
+function saver(o) {
+    console.log(o);
+    raaBatch = o;
+}
 
-function opretRaavare() {
+var showraaBatch;
+function saver2(o) {
+    raa = o;
+}
+
+
+function opretRaavareBatch() {
     $.ajax({
-        url: "rest/RaavareBatch/loadreckomps",
-        data: $('#labidform').serialize(),
+        url: "rest/RaavareBatch/createRB",
+        data: $('#prolederidform').serialize(),
         contentType: "application/x-www-form-urlencoded",
         dataType: "JSON",
         method: 'POST',
@@ -51,50 +95,22 @@ function opretRaavare() {
             if (data != null) {
                 saver(data);
             }
-            else alert("recfailed")
+            else alert("RB failed")
         }
     });
 }
-function visRaavare() {
+function visRaavareBatch() {
     $.ajax({
-        url: "rest/RaavareBatch/loadprodkomps",
-        data: $('#labidform').serialize(),
+        url: "rest/RaavareBatch/loadRaavareBatch",
+        data: $('#prolederidform').serialize(),
         contentType: "application/x-www-form-urlencoded",
         dataType: "JSON",
         method: 'POST',
         success: function (data) {
             if (data != null) {
                 saver2(data);
-                insertKomps();
             }
-            else alert("prodfailed")
+            else alert("RB failed")
         }
-    });
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function buttonOprRaavare(){
-    $("#oprRaavare").click(function () {
-        $("#resultOpret").toggle();
-    });
-}
-function buttonVisRaavare(){
-    $("#visRaavare").click(function () {
-        $("#resultVis").toggle();
     });
 }

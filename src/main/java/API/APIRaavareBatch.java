@@ -64,11 +64,13 @@ public class APIRaavareBatch {
 
     @GET
     @Path("/getmaengde")
-    public double getMaengde{
+    public double getMaengde(){
         try{
-
+            RaavareBatchDTO rbdto = new RaavareBatchDTO();
+            return rbdto.getMaengde();
         } catch (DALException | SQLException | ClassNotFoundException e) {
-
+            e.printStackTrace();
+            return "????";
         }
     }
 
@@ -103,33 +105,20 @@ public class APIRaavareBatch {
     }
 
 
-
-
-
-
-    @POST
-    @Path("/loadprodkomps")
+    @GET
+    @Path("/loadRaavareBatch")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProduktBatchKompDTO> loadprodKomps(@FormParam("produktionsid") String prodid){
+    public List<RaavareBatchDTO> loadRB(@FormParam("rbid") String rdid){
         try {
-            ProduktBatchKompDAO dao = new ProduktBatchKompDAO();
-            return dao.getProduktBatchKompList(prodid);
+            RaavareBatchDAO dao = new RaavareBatchDAO();
+            RaavareBatchDTO dto = new RaavareBatchDTO();
+
+            return (List<RaavareBatchDTO>) dao.getRaavareBatch(rdid);
         } catch (DALException e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    @POST
-    @Path("/loadreckomps")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<ReceptKompDTO> loadKomps(@FormParam("receptid") String recid){
-        try {
-            ReceptKompDAO dao = new ReceptKompDAO();
-            return dao.getReceptKompList(recid);
-        } catch (DALException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            return null;
         }
     }
 }
