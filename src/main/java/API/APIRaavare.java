@@ -65,8 +65,8 @@ public class APIRaavare {
         {
             RaavareDTO raavare = new RaavareDTO(
                     json.getString("raavID"),
-                    json.getString("raavName"),
-                    json.getString("levenrador"));
+                    json.getString("raavNavn"),
+                    json.getString("leverandor"));
 
 
             dbAccess.updateRaavare(raavare);
