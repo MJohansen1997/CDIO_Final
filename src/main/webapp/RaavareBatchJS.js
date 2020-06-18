@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    loadRaavareBatch();
     $(".inproleder").hide();
     $("#prolederid").show();
     $("button").hide();
@@ -16,30 +17,31 @@ $(document).ready(function () {
                     $("#verificer").remove();
                     $("#userid").prop("readonly", true);
 
-                    $("#oprRaavare").show();
-                    $("#visRaavare").show();
+                    $("#oprRBbutton").show();
+                    $("#visRBbutton").show();
                 } else return alert("ingen laborant fundet med dette ID");
             }
         });
     });
 
     //ikke done
-    $("#visRaavareBatch").click(function () {
+    $("#visRBbutton").click(function () {
         $.ajax({
             url: "rest/RaavareBatch/verifyRB",
             data: $('#prolederidform').serialize(),
             contentType: "application/x-www-form-urlencoded",
             dataType: "JSON",
-            method: 'POST',
+            method: 'GET',
             success: function (data) {
                 if (data != null) {
-                    $("#visRaavareBatch").remove();
+                    $("#visRBbutton").remove();
                     $("#verificerRBid").show();
 
-
                     $("#rbid").prop("readonly", true);
-                    $("[name='raaID']").show();
-                    $("#raavareid").val(data.raavareid);
+                    $("[name='vis']").show();
+                    $("#raaID").val(data.raavareid);
+                    $("#maen").val(data.maengde);
+
 
                     visRaavareBatch();
                 } else return alert("ingen RaavareBatch matcher dette id");
@@ -47,22 +49,21 @@ $(document).ready(function () {
         });
     });
 
-    $("#oprRaavareBatch").click(function () {
+    $("#oprRBbutton").click(function () {
         $.ajax({
-            url: "rest/RaavareBatch/verifyRB",
+            url: "rest/RaavareBatch/createRB",
             data: $('#prolederidform').serialize(),
             contentType: "application/x-www-form-urlencoded",
             dataType: "JSON",
             method: 'POST',
             success: function (data) {
                 if (data != null) {
-                    $("#oprRaavareBatch").remove();
-                    $("#verificerRBid").show();
-
+                    $("#oprRBbutton").remove();
 
                     $("#rbid").prop("readonly", true);
-                    $("[name='raaID']").show();
-                    $("#raavareid").val(data.raavareid);
+                    $("[name='opret']").show();
+                    $("#raaID").val(data.raavareid);
+                    $("#maen").val(data.maengde);
 
                     opretRaavareBatch();
                 } else return alert("nået er tastet forkert");
@@ -72,18 +73,14 @@ $(document).ready(function () {
 
 });
 
+//hvad gør dette?
 var raaBatch;
 function saver(o) {
     console.log(o);
     raaBatch = o;
 }
 
-var showraaBatch;
-function saver2(o) {
-    raa = o;
-}
-
-
+//ufærdig
 function opretRaavareBatch() {
     $.ajax({
         url: "rest/RaavareBatch/createRB",
@@ -99,18 +96,39 @@ function opretRaavareBatch() {
         }
     });
 }
-function visRaavareBatch() {
-    $.ajax({
-        url: "rest/RaavareBatch/loadRaavareBatch",
-        data: $('#prolederidform').serialize(),
-        contentType: "application/x-www-form-urlencoded",
-        dataType: "JSON",
-        method: 'POST',
-        success: function (data) {
-            if (data != null) {
-                saver2(data);
-            }
-            else alert("RB failed")
+
+
+
+
+function visRaavareBatch(rbid) {
+    $.get('rest/RaavareBatch/findRaavareBatch'+rbid, function (data, textStatus, req) {
+        if(typeof data != "undefined"){
+            $("#raavareBatchBody").empty().append(generateHTMLTable(data));
+        } else {
+            alert("Der findes ikke nogen med det raavarebatch ID")
         }
+    });
+}
+
+
+
+
+
+function generateHTMLTable(raavarebatch){
+    return '<tr>' +
+        //generes ligesom brugerid
+        '<td>' + raavarebatch.raavarebatchid + '</td>' +
+
+        '<td>' + raavarebatch.raavareid + '</td>' +
+        '<td>' + raavarebatch.maengde + '</td>' +
+        '</tr>'
+}
+
+function loadRaavareBatch() {
+    $.get('rest/RaavareBatch/allRaavareBatches', function (data, textStatus, req) {
+        $("#raavareBatchBody").empty();
+        $.each(data, function (i, raavareBatchValue) {
+            $('#raavareBatchBody').append(generateHTMLTable(raavareBatchValue));
+        });
     });
 }

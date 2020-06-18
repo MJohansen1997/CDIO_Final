@@ -1,10 +1,7 @@
 package API;
 
 import DAO.*;
-import DTO.ProduktBatchKompDTO;
-import DTO.RaavareBatchDTO;
-import DTO.RaavareDTO;
-import DTO.ReceptKompDTO;
+import DTO.*;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;
@@ -14,8 +11,7 @@ import java.util.List;
 
 @Path("/RaavareBatch")
 public class APIRaavareBatch {
-    RaavareBatchDAO RBDAO = new RaavareBatchDAO();
-    RaavareDAO RDAO = new RaavareDAO();
+    RaavareBatchDAO dbAccess = new RaavareBatchDAO();
 
     public APIRaavareBatch() throws SQLException, DALException, ClassNotFoundException {
     }
@@ -27,7 +23,6 @@ public class APIRaavareBatch {
 
         return true;
     }
-
 
     @POST
     @Path("/verifyRB")
@@ -47,21 +42,18 @@ public class APIRaavareBatch {
         return null;
     }
 
-
     @GET
     @Path("/getrid")
     public String getRaaID(String rid){
         try{
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
-            RaavareDAO rdao = new RaavareDAO();
-            return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavareID();
+            return rbdao.getRaavareBatch(rid).getRaavareId();
         } catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             return "????";
         }
     }
-
-
+/*
     @GET
     @Path("/getmaengde")
     public double getMaengde(){
@@ -70,7 +62,7 @@ public class APIRaavareBatch {
             return rbdto.getMaengde();
         } catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            return "????";
+            return null;
         }
     }
 
@@ -88,30 +80,35 @@ public class APIRaavareBatch {
             return "";
         }
     }
-
+*/
 
     @POST
     @Path("/createRB")
-    public void createRaavareBatch(String jsonBody){
-
+    public void createRaavareBatch(String jsonBody) throws DALException {
+        IncrementID incre = new IncrementID();
+        JSONObject json = new JSONObject(jsonBody);
         try {
-            IncrementID incre = new IncrementID();
-            JSONObject json = new JSONObject(jsonBody);
-            RaavareBatchDAO raavareBatchDAOdao = new RaavareBatchDAO();
 
-        } catch (DALException e) {
+            RaavareBatchDTO raavareBatchDAOdao = new RaavareBatchDTO(
+                    incre.returnID("RaavarebatchID","rbID"),
+                    json.getString("raavID"),
+                    json.getDouble("maengde"));
+
+
+            dbAccess.createRaavareBatch(raavareBatchDAOdao);
+
+        } catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
 
     @GET
-    @Path("/loadRaavareBatch")
+    @Path("/showRaavareBatch")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<RaavareBatchDTO> loadRB(@FormParam("rbid") String rdid){
+    public List<RaavareBatchDTO> loadRB(@FormParam("rbid") String rdid) {
         try {
             RaavareBatchDAO dao = new RaavareBatchDAO();
-            RaavareBatchDTO dto = new RaavareBatchDTO();
 
             return (List<RaavareBatchDTO>) dao.getRaavareBatch(rdid);
         } catch (DALException e) {
@@ -120,6 +117,23 @@ public class APIRaavareBatch {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @GET
+    @Path("/findRaavareBatch/{raavareID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public RaavareBatchDTO getRaavareBAtch(@PathParam("raavareID") String raavareID) throws ClassNotFoundException, DALException, SQLException {
+        RaavareBatchDTO raavareBatch = dbAccess.getRaavareBatch(raavareID);
+        return raavareBatch;
+    }
+
+
+    @GET
+    @Path("/allRaavareBatches")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<RaavareBatchDTO> getAllRaavareBatches() throws SQLException, DALException, ClassNotFoundException {
+        return dbAccess.getRaavareBatchList();
     }
 }
 
