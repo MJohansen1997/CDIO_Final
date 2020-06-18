@@ -1,46 +1,48 @@
 package DTO;
 
+/** @author s195485, Nikolai Kristensen (john.doe@example.com)*/
+
 public class RaavareDTO
 {
-    public RaavareDTO(String rID, String rN, String lev) {
-        raavareID = rID;
-        raavareNavn = rN;
-        leverandoer = lev;
+    String raavID;
+    String raavNavn;
+    String leverandor;
+
+    public RaavareDTO(String raavID, String raavNavn, String leverandor)
+    {
+        this.raavID = raavID;
+        this.raavNavn = raavNavn;
+        this.leverandor = leverandor;
     }
 
-    public RaavareDTO(){}
-
-    //raavare id i området 1-99999999 vælges af brugerne
-    String raavareID;
-
-    // min. 2 max. 20 karakterer
-    String raavareNavn;
-
-    // min. 2 max. 20 karakterer
-    String leverandoer;
-
-    public String getRaavareID() {
-        return raavareID;
+    public String getRaavID()
+    {
+        return raavID;
     }
 
-    public void setRaavareID(String raavareID) {
-        this.raavareID = raavareID;
+    public void setRaavID(String raavID)
+    {
+        this.raavID = raavID;
     }
 
-    public String getRaavareNavn() {
-        return raavareNavn;
+    public String getRaavNavn()
+    {
+        return raavNavn;
     }
 
-    public void setRaavareNavn(String raavareNavn) {
-        this.raavareNavn = raavareNavn;
+    public void setRaavNavn(String raavNavn)
+    {
+        this.raavNavn = raavNavn;
     }
 
-    public String getLeverandoer() {
-        return leverandoer;
+    public String getLeverandor()
+    {
+        return leverandor;
     }
 
-    public void setLeverandoer(String leverandoer) {
-        this.leverandoer = leverandoer;
+    public void setLeverandor(String leverandor)
+    {
+        this.leverandor = leverandor;
     }
 }
 

@@ -1,6 +1,5 @@
 package DAO;
 
-import DTO.BrugerDTO;
 import DTO.RaavareDTO;
 import java.sql.*;
 
@@ -23,7 +22,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     @Override
     public RaavareDTO getRaavare(String raavareId) throws DALException
     {
-            //Få daten fra databasen angåene råvarer
+        //Få daten fra databasen angåene råvarer
             try
             {
                 Statement stmt = newCon.createStatement();
@@ -47,7 +46,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
         try
         {
             Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM userinformations");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM raavarer");
             ArrayList<RaavareDTO> users = new ArrayList<>();
             while (rs.next())
             {
@@ -66,17 +65,17 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     @Override
     public void createRaavare(RaavareDTO raavare) throws DALException
     {
-        try
-        {
-            Statement stmt = newCon.createStatement();
-            stmt.executeQuery("INSERT INTO raavarer VALUES "
-                    + raavare.getRaavareID()
-                    + raavare.getRaavareNavn()
-                    + raavare.getLeverandoer());
-        }
-        catch (SQLException throwables)
-        {
-            throw new DALException("String messsage");
+        try {
+            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO raavarer " +
+                    "(raavID, raavNavn, leverandør) VALUES (?, ?, ?);");
+
+            preparedStatement.setString(1,raavare.getRaavID());
+            preparedStatement.setString(2, raavare.getRaavNavn());
+            preparedStatement.setString(3, raavare.getLeverandor());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DALException("Encountered an error when executing given sql statement. : " + e.getMessage());
         }
     }
 
@@ -85,26 +84,30 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     {
         try
         {
-
-            //Forbinder og laver en variable sql statment for Råvare Navn
-            PreparedStatement pSNavn = newCon.createStatement
-                    ("UPDATE raavarer SET raavNavn = ? WHERE userID = ?");
-
-             pSNavn.setString(1, raavare.getRaavareNavn());
-             pSNavn.setString(2, raavare.getRaavareID());
-
-            //laver en variable sql statment for Leverandør
-           PreparedStatement pSLev = newCon.createStatement
-                   ("UPDATE raavarer SET levenrandør = ? WHERE userID = ?");
-
-            pSLev.setString(1, raavare.getLeverandoer());
-            pSLev.setString(2, raavare.getRaavareID());
+            PreparedStatement preparedStatement = newCon.createStatement("UPDATE brugerer SET " +
+                    "raavID = ?, raavNavn = ?, leverandør = ? WHERE raavID = ?");
+            preparedStatement.setString(1, raavare.getRaavID());
+            preparedStatement.setString(2, raavare.getRaavNavn());
+            preparedStatement.setString(3, raavare.getLeverandor());
+            preparedStatement.setString(4, raavare.getRaavID());
+            preparedStatement.executeUpdate();
         }
-        catch (SQLException throwables)
+        catch (SQLException e)
         {
-            throw new DALException("String messsage");
+            throw new DALException("Encountered an error when executing given sql statement." + e.getMessage());
         }
     }
+    public void deleteRaavarer(String raavID) throws DALException {
+
+        try {
+            PreparedStatement preparedStatement = newCon.createStatement("DELETE FROM raavarer WHERE raavID = ?;");
+            preparedStatement.setString(1, raavID);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DALException("Encountered an error when executing given sql statement.");
+        }
+    }
+
 
     private RaavareDTO extractUserFromResultSet(ResultSet rs) throws SQLException
     {
