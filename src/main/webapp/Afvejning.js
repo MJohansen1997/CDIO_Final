@@ -28,7 +28,7 @@ $(document).ready(function () {
             contentType: "application/x-www-form-urlencoded",
             dataType: "JSON",
             method: 'POST',
-            success: function (data) {
+            success: async function (data) {
                 if (data != null) {
                     $("#subprod").remove();
                     $("#subkomp").show();
@@ -37,7 +37,11 @@ $(document).ready(function () {
                     $("#receptid").val(data.receptID);
                     $("#receptnavn").val(data.receptNavn);
                     $(".resulttitle").show();
-                    findreckomps();
+                    await findreckomps();
+                    await findprodKomps();
+                    insertprodkomps();
+                    insertForm();
+
                 } else return alert("ingen Produktion matcher dette id");
             }
         });
@@ -45,17 +49,13 @@ $(document).ready(function () {
 });
 var rec;
 function saver(o) {
-    console.log(o);
     rec = o;
-
+    console.log("saver1 done");
 }
 var prod;
 function saver2(o) {
     prod = o;
-}
-var holder;
-function saver3(o) {
-    holder = o;
+    console.log("saver2 done");
 }
 
 function formfilled(temp, prodid, rbid, tara, vaegt, lab) {
@@ -86,45 +86,41 @@ function formunfilled(raavnavn, tolerance, lab, raavid, prodid) {
     return form;
 }
 
-function findreckomps() {
+async function findreckomps() {
+    console.log("findrec starts");
     $.ajax({
         url: "rest/afvejning/loadreckomps",
         data: $('#labidform').serialize(),
         contentType: "application/x-www-form-urlencoded",
         dataType: "JSON",
         method: 'POST',
-        success: function (data) {
+        success: async function (data) {
             if (data != null) {
-                console.log(data);
-                saver(data);
-                console.log(rec);
-                findprodKomps();
+                await saver(data);
+                console.log("rec : " + rec)
             }
             else alert("recfailed")
         }
     });
-
+    return "";
 }
-function findprodKomps() {
+async function findprodKomps() {
+    console.log("findprod starts");
     $.ajax({
         url: "rest/afvejning/loadprodkomps",
         data: $('#labidform').serialize(),
         contentType: "application/x-www-form-urlencoded",
         dataType: "JSON",
         method: 'POST',
-        success: function (data) {
+        success: async function (data) {
             if (data != null) {
-                saver2(data);
-                insertKomps();
+                await saver2(data);
+                console.log("prod : " + prod);
             }
             else alert("prodfailed")
         }
     });
-}
-/*[{"pbId":"PB00001","rbId":"RB00001","tara":12.0,"netto":1000.0,"labID":"B00001"}]*/
-/*[{"receptID":"REC00001","raavareID":"R00001","nonNetto":1000.0,"tolerance ":3.0},{"receptID":"REC00001","raavareID":"R00002","nonNetto":1000.0,"tolerance":3.0}]*/
-function insertKomps() {
-    insertprodkomps(insertForm);
+    return "";
 }
 
 function insertForm() {
@@ -162,7 +158,8 @@ function insertForm() {
     })
 }
 
-function insertprodkomps(callback) {
+function insertprodkomps() {
+    console.log(prod + " : insertprod");
     prod.forEach(function (item) {
         $.ajax({
             url: "rest/afvejning/getrnavn",
@@ -171,11 +168,10 @@ function insertprodkomps(callback) {
             method: 'POST',
             success: function (data) {
                 $("#faerdig").append(formfilled(data, item.pbId, item.rbId, item.tara,
-                    item.netto, item.labID))
+                    item.netto, item.labID));
             }
         });
     });
-    callback()
 }
 
 
