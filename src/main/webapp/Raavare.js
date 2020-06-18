@@ -77,6 +77,7 @@ function updateRaavarer()
             $("#redigerForm").toggle();
             $("#redigerInfoForm").toggle();
         }
+
     })
 }
 
