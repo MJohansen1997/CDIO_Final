@@ -28,37 +28,36 @@
 
     <form id="opretForm">
         <h1>Opret R&aring;varer</h1>
-        <p>Vælg ID : <input type="text" name = "raavID" required/></p>
-        <p> Indtast R&aring;varer : <input type="text" name="raavName" required/></p>
-        <p>Indtast Leverand&oslash;r : <input type="text" name = "leverandor" required/></p>
+         <p> Indtast Råvarer : <input type="text" name="raavName" required/></p>
+        <p>Indtast Leverandør : <input type="text" name = "leverandor" required/></p>
         <button type="submit">Gem ændringer</button>
     </form>
 
 
     <form id="redigerForm">
-        <h1>Rediger R&aring;varer</h1>
-        <p>Vælg r&aring;varerID : <input type="text" name="ravvID" required/></p>
+        <h1>Rediger Råvarer</h1>
+        <p>Vælg Råvarer ID : <input type="text" name="raavID" id="raavId" required/></p>
         <button type="submit">Gem ændringer</button>
     </form>
 
     <form id="redigerInfoForm">
-        <h1>Rediger r&aring;varer</h1>
+        <h1>Rediger råvarer</h1>
         <input type="hidden" name="raavID" />
-        <p>Vælg R&aring;varer Navn : <input type="text" name="raavNavn" required/></p>
-        <p>Vælg Leverand&oslash;r : <input type="text" name="leverandor" required/></p>
+        <p>Vælg Råvarer Navn : <input type="text" name="raavNavn" required/></p>
+        <p>Vælg Leverandør : <input type="text" name="leverandor" required/></p>
         <button type="submit">Gem ændringer</button>
     </form>
 
 
     <form id="sletForm">
-        <h1>Slet R&aring;varer</h1>
-        <p>Vælg R&aring;varer ID : <input type="text" name="raavID" required/></p>
+        <h1>Slet Råvarer</h1>
+        <p>Vælg Råvarer ID : <input type="text" name="raavID" required/></p>
         <button type="submit">Gem ændringer</button>
     </form>
 
     <form id="findForm">
-        <h1>Find R&aring;varer</h1>
-        <p>Vælg R&aring;varer ID : <input type="text" name="raavID" required/></p>
+        <h1>Find Råvarer</h1>
+        <p>Vælg Råvarer ID : <input type="text" name="raavID" required/></p>
         <button type="submit">Find</button>
 
         <table id="findForm-table" class="table">
@@ -66,7 +65,7 @@
             <tr>
                 <th>ID</th>
                 <th>Navn</th>
-                <th>Leverand&oslash;r</th>
+                <th>Leverandør</th>
             </tr>
             </thead>
             <tbody id="findFormBody">
@@ -79,10 +78,10 @@
         <tr>
             <th>ID</th>
             <th>Navn</th>
-            <th>Leverand&oslash;r</th>
+            <th>Leverandør</th>
         </tr>
         </thead>
-        <tbody id="ravvBody">
+        <tbody id="raavBody">
         </tbody>
     </table>
 </div>
