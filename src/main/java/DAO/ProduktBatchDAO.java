@@ -97,6 +97,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
 
             statusQuery.setString(1, produktbatch.getStatus());
             statusQuery.setString(2, produktbatch.getPbID());
+            statusQuery.executeUpdate();
 
         } catch (SQLException e) {
             throw new DALException("Error! Couldn't update desired values");

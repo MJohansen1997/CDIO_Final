@@ -2,6 +2,7 @@ package DAO;
 
 import DTO.ProduktBatchKompDTO;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -72,16 +73,15 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     @Override
     public void createProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException {
         try {
-            Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery
-                    ("insert into produktbatches values ("
-                            + pbk.getPbId() + ","
-                            + pbk.getRbId() + ","
-                            + pbk.getLabID() + ","
-                            + pbk.getTara() + ","
-                            + pbk.getNetto() + ");");
+            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO produktbatches " +
+                    "(pbID, rbID, laborant, tara, netto) VALUES (?, ?, ?, ?, ?);");
 
-
+            preparedStatement.setString(1, pbk.getPbId());
+            preparedStatement.setString(2, pbk.getRbId());
+            preparedStatement.setString(3, pbk.getLabID());
+            preparedStatement.setDouble(4, pbk.getTara());
+            preparedStatement.setDouble(5, pbk.getNetto());
+            preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
