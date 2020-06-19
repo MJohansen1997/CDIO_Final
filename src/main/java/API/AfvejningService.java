@@ -80,7 +80,7 @@ public class AfvejningService {
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
             RaavareDAO rdao = new RaavareDAO();
             r = rdao.getRaavare(rid).getRaavNavn();
-            s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavareId()));
+            s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavId()));
             return "{\"status\":\"" + s + "\",\"name\":\"" + r + "\"}";
         }catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
