@@ -41,7 +41,7 @@ public class APIRaavare {
         try {
             RaavareDTO raavarer = new RaavareDTO(
                     incre.returnID("raavarer", "raavID"),
-                    json.getString("raavName"),
+                    json.getString("raavNavn"),
                     json.getString("leverandor"));
 
             dbAccess.createRaavare(raavarer);

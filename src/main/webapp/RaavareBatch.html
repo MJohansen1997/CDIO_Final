@@ -13,43 +13,66 @@
     <link rel="stylesheet" href="RaavareBatch.css"/>
     <h1>Velkommen til RåvareBatch</h1>
     <!--leftside-->
-</div>
 
-<div id="proleder">
-    <form class="form" method="POST" id='prolederidform'>
-        <label class='inlab' id='prolederid'> Projektleder ID : <input class="input" type="text" id="userid" name="userid" required /></label>
+    <nav>
+        <ul>
+            <button type="button" id="buttonOpret">Opret</button>
+            <button type="button" id="buttonRediger">Rediger</button>
+            <button type="button" id="buttonFind">Find</button>
+        </ul>
+    </nav>
+    <br>
+
+    <form id="opretForm">
+        <h1>Opret R&aring;varerBatch</h1>
+        <p> Indtast RåvarerID : <input type="text" name="raavID" required/></p>
+        <p>Indtast mængde : <input type="text" name = "maengde" required/></p>
+        <button type="submit">Gem ændringer</button>
     </form>
 
-    <button id="verificer">Verificer brugerID</button>
-    <button id="oprRBbutton">Opret RaavareBatch</button>
-    <button id="visRBbutton">Vis RaavareBatch</button>
-    <button id="verificerRBid">Verificer RaavareBatchID</button>
-
-</div>
-
-<form id = "resultOpret">
-    <form id="OprRaavareBatchen">
-        <label class='inproleder' name ='vis' id='raaID'> Raavare ID : <input type="text" id="raavareid" name="raavareid" required /></label>
-        <label class='inproleder' name='vis' id="maen"> Mængde : <input type="text" id="maengde" name="maengde" readonly /> </label>
+    <form id = "redigerForm">
+        <h1>Rediger RåvarerBatch</h1>
+        <p>Vælg RåvarerBatch ID : <input type="text" name="raavBatchID" id="rbID" required/></p>
+        <button type="submit">Søg</button>
     </form>
-</form>
 
-<div id = "resultVis">
-    <form id="VisRaavareBatch">
-        <label class='inproleder' name="opret" id='labraavareBachID'> RaavareBatch ID : <input class="input" type="text" id="rbid" name="rbid" required /></label>
+    <form id="redigerInfoForm">
+        <h1>Rediger råvarerbatch</h1>
+        <input type="hidden" name="rbID" />
+        <p>Vælg RåvarerID : <input type="text" name="raavID" required/></p>
+        <p>Vælg Mængde : <input type="text" name="maengde" required/></p>
+        <button type="submit">Gem ændringer</button>
     </form>
+
+    <form id="findForm">
+        <h1>Find Råvarerbatch</h1>
+        <p>Vælg RåvarerBatch ID : <input type="text" name="rbID" required/></p>
+        <button type="submit">Find</button>
+
+        <table id="findForm-table" class="table">
+            <thead>
+            <tr>
+                <th>Råvarerbatch ID</th>
+                <th>Råvarer ID</th>
+                <th>Mængde</th>
+            </tr>
+            </thead>
+            <tbody id="findFormBody">
+            </tbody>
+        </table>
+    </form>
+
+    <table id="userInfo-table" class="table">
+        <thead>
+        <tr>
+            <th>Råvarerbatch ID</th>
+            <th>Råvarer ID</th>
+            <th>Mængde</th>
+        </tr>
+        </thead>
+        <tbody id="raavBatchBody">
+        </tbody>
+    </table>
 </div>
-
-
-<table id="raavareBatchInfo-table" class="table">
-    <thead>
-    <tr>
-        <th>RaavarebatchID</th>
-        <th>RaavareID</th>
-        <th>Mæaengde</th>
-    </tr>
-    </thead>
-<tbody id="raavareBatchBody">
-</tbody>
 </body>
 </html>
