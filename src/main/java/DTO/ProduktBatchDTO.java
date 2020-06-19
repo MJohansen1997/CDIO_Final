@@ -22,6 +22,10 @@ public class ProduktBatchDTO {
         return receptID;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     //Produktbatch id
     String pbID;
     // Status 0: Ikke påbegyndt, 1: Under produktion, 2: Afsluttet
