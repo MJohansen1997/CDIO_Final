@@ -17,14 +17,14 @@ import java.util.*;
 public class APIProduktBatch  {
     ProduktBatchDAO dbAccess = new ProduktBatchDAO();
 
-    public APIProduktBatch () throws SQLException,DALException,ClassNotFoundException {
+    public APIProduktBatch () throws DALException {
 
     }
 
     @POST
     @Path("/createPB")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createPB (String jsonbody) throws SQLException, DALException, ClassNotFoundException{
+    public void createPB (String jsonbody) throws DALException{
         IncrementID incID = new IncrementID();
         JSONObject json = new JSONObject(jsonbody);
 
@@ -44,14 +44,14 @@ public class APIProduktBatch  {
     @PUT
     @Path("/updatePB")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updatePB(String jsonbody) throws SQLException, DALException, ClassNotFoundException {
+    public void updatePB(String jsonbody) {
         JSONObject json = new JSONObject(jsonbody);
 
         try {
             ProduktBatchDTO pbatch = new ProduktBatchDTO(
                     json.getString("pbID"),
                     json.getString("status"),
-                    json.getString("recID"));
+                    null);
 
             dbAccess.updateProduktBatch(pbatch);
         } catch (DALException e ) {
@@ -64,7 +64,7 @@ public class APIProduktBatch  {
     @GET
     @Path("/findPB/{pbID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ProduktBatchDTO getPB (@PathParam("pbID") String pbID) throws SQLException, DALException, ClassNotFoundException {
+    public ProduktBatchDTO getPB (@PathParam("pbID") String pbID) throws DALException {
         ProduktBatchDTO pbatch = dbAccess.getProduktBatch(pbID);
         return pbatch;
     }
@@ -72,7 +72,7 @@ public class APIProduktBatch  {
     @POST
     @Path("/deletePB/{pbID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deletePB (@PathParam("pbID") String pbID) throws SQLException, DALException, ClassNotFoundException {
+    public void deletePB (@PathParam("pbID") String pbID) throws  DALException {
         dbAccess.deleteProduktBatch(pbID);
 
     }
@@ -80,7 +80,7 @@ public class APIProduktBatch  {
     @GET
     @Path("/allPB")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProduktBatchDTO> getAllProduktBatches() throws SQLException, DALException, ClassNotFoundException {
+    public List<ProduktBatchDTO> getAllProduktBatches() throws DALException {
         return dbAccess.getProduktBatchList();
     }
 }

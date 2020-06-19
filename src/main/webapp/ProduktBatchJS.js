@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     $('#findForm').on('submit', function (e) {
         e.preventDefault();
-        getPB($('#findForm').serializeJSON().brugerID);
+        getPB($('#findForm').serializeJSON().pbID);
         $("#findForm-table").show();
     });
 
@@ -59,7 +59,7 @@ function updatePB() {
     console.log(data);
     $.ajax({
         url: 'rest/PB/updatePB',
-        method: 'POST',
+        method: 'PUT',
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function () {
