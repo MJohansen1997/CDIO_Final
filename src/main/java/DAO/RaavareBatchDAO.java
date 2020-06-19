@@ -68,7 +68,8 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
             ResultSet rs = stmt.executeQuery("SELECT * FROM ravaarebatches WHERE raavareId=" + raavareId);
             ArrayList<RaavareBatchDTO>  list = new ArrayList<>();
             while (rs.next()) {
-                list.add(extractRaavareBacth(rs));
+                RaavareBatchDTO user = new RaavareBatchDTO(rs.getString("rbID"), rs.getString("raavID"), rs.getDouble("maengde"));
+                list.add(user);
             }
             return list;
         } catch (SQLException ex) {
@@ -79,7 +80,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     @Override
     public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws SQLException, ClassNotFoundException, DALException {
         try {
-            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO Raavarebatches (rbId, raavareID, maengde) VALUES (? ,? ,?)");
+            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO raavarebatches (rbID, raavID, maengde) VALUES (? ,? ,?)");
 
             preparedStatement.setString(1, raavarebatch.getRbID());
             preparedStatement.setString(2, raavarebatch.getRaavareId());
@@ -92,9 +93,24 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     }
 
     @Override
-    public void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
-
+    public void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException
+    {
+        try
+        {
+            PreparedStatement preparedStatement = newCon.createStatement("UPDATE raavarebatches SET " +
+                    "rbID = ?, raavID = ?, maengde = ? WHERE rbID = ?");
+            preparedStatement.setString(1, raavarebatch.getRbID());
+            preparedStatement.setString(2, raavarebatch.getRaavareId());
+            preparedStatement.setDouble(3, raavarebatch.getMaengde());
+            preparedStatement.setString(4, raavarebatch.getRbID());
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new DALException("Encountered an error when executing given sql statement." + e.getMessage());
+        }
     }
+
 
     public RaavareBatchDTO extractRaavareBacth(ResultSet rs) throws SQLException {
 
