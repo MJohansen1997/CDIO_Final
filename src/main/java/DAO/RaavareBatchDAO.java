@@ -77,7 +77,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     }
 
     @Override
-    public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws SQLException, ClassNotFoundException, DALException {
+    public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
         try {
             PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO Raavarebatches (rbId, raavareID, maengde) VALUES (? ,? ,?)");
 
@@ -94,6 +94,18 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     @Override
     public void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
 
+    }
+
+
+    public void deleteRB(String brugerID) throws DALException {
+
+        try {
+            PreparedStatement preparedStatement = newCon.createStatement("DELETE FROM raavarebatches WHERE rbID = ?;");
+            preparedStatement.setString(1, brugerID);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DALException("Encountered an error when executing given sql statement.");
+        }
     }
 
     public RaavareBatchDTO extractRaavareBacth(ResultSet rs) throws SQLException {

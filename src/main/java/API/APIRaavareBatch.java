@@ -99,7 +99,7 @@ public class APIRaavareBatch {
 
             dbAccess.createRaavareBatch(raavareBatchDAOdao);
 
-        } catch (DALException | SQLException | ClassNotFoundException e) {
+        } catch (DALException e) {
             e.printStackTrace();
         }
     }

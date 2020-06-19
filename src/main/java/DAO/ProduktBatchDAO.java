@@ -24,14 +24,10 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
         /* Creating a try catch
          * Within creating a statement and then getting a returned resultset with the specifed query. */
         try {
-            /* SQL Query */
             String query = "SELECT * FROM prodbestilling WHERE pbID = \'" + pbId + "\'";
-            /* Statement to SQL */
             Statement stmt = newCon.createStatement();
-            /* Resultset from the query */
             ResultSet rs = stmt.executeQuery(query);
 
-            //Using custom method to extract the information needed from the resultset.
             if (rs.next()) {
                 return extractPBLFromResultSet(rs);
             }
@@ -46,13 +42,9 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
     @Override
     public List<ProduktBatchDTO> getProduktBatchList() throws DALException {
         try {
-            /* SQL Query */
             String query = "SELECT * FROM prodbestilling";
-            /* Statement to SQL */
             Statement stmt = newCon.createStatement();
-            /* Resultset from the query */
             ResultSet rs = stmt.executeQuery(query);
-            /* Arraylist needed to extract a full list of produktbatches */
             ArrayList<ProduktBatchDTO> pblist = new ArrayList<>();
 
             //Using custom method to extract the information needed from the resultset.
