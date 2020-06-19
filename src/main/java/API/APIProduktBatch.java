@@ -69,19 +69,18 @@ public class APIProduktBatch  {
         return pbatch;
     }
 
-//    @POST
-//    @Path("/deletePB/{pbID}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public void deletePB (@PathParam("pbID") String pbID) throws SQLException, DALException, ClassNotFoundException {
-//
-//    }
+    @POST
+    @Path("/deletePB/{pbID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void deletePB (@PathParam("pbID") String pbID) throws SQLException, DALException, ClassNotFoundException {
+        dbAccess.deleteProduktBatch(pbID);
+
+    }
 
     @GET
     @Path("/allPB")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProduktBatchDTO> getAllBrugere() throws SQLException, DALException, ClassNotFoundException {
+    public List<ProduktBatchDTO> getAllProduktBatches() throws SQLException, DALException, ClassNotFoundException {
         return dbAccess.getProduktBatchList();
     }
-
-
 }

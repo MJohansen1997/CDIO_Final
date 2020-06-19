@@ -48,26 +48,22 @@
 <!-- Skal laves om -->
 
     <form id="redigerForm">
-        <h1>Rediger Produktionsbatch</h1>
-        <p>Angiv produktbatch ID til redigering: <input type="text" name="produktbatchID" required/></p>
-        <button type="submit">Gem ændringer</button>
+        <h1>Opdater status på produktionsbatches</h1>
+        <p>Angiv produktbatch ID til redigering: <input type="text" name="pbID" required/></p>
+        <button type="submit">Find ID til opdatering</button>
     </form>
 
-<!--    <form id="redigerInfoForm">-->
-<!--        <h1>Rediger bruger</h1>-->
-<!--        <input type="hidden" name="brugerID"/>-->
-<!--        <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>-->
-<!--        <select name="rolle" id="RolleRed">-->
-<!--            <option value="Brugeradminstrator">Brugeradminstrator</option>-->
-<!--            <option value="Farmaceut">Farmaceut</option>-->
-<!--            <option value="Produktionsleder">Produktionsleder</option>-->
-<!--            <option value="Laborant">Laborant</option>-->
-<!--        </select>-->
-<!--        <p>Vælg Bruger initialer : <input type="text" name="ini" required/></p>-->
-<!--        <p>Vælg Bruger CPR : <input type="text" name="cpr" required/></p>-->
-<!--        <p>Vælg Password : <input type="text" name="password" required/></p>-->
-<!--        <button type="submit">Gem ændringer</button>-->
-<!--    </form>-->
+    <form id="redigerInfoForm">
+        <h1>Rediger bruger</h1>
+        <input type="hidden" name="pbID"/>
+        <label for="toUpdateStatus"> Ny status : </label>
+        <select id="toUpdateStatus" name="status">
+            <option value="Afventer">Afventer</option>
+            <option value="Under produktion">Under produktion</option>
+            <option value="Afsluttet">Afsluttet</option>
+        </select>
+        <button type="submit">Gem ændringer</button>
+    </form>
 
 
     <form id="sletForm">
@@ -79,9 +75,7 @@
     <form id="findForm">
         <h1>Find Produktionsbatch</h1>
         <p>Angiv produktionsbatch ID : <input type="text" name="produktbatchID" required/></p>
-
         <button type="submit">Find</button>
-
         <table id="findForm-table" class="table">
             <thead>
             <tr>
@@ -94,20 +88,16 @@
             </tbody>
         </table>
     </form>
-
-<!--    <table id="userInfo-table" class="table">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>brugerID</th>-->
-<!--            <th>Bruger Navn</th>-->
-<!--            <th>Ini</th>-->
-<!--            <th>Cpr</th>-->
-<!--            <th>Rolle</th>-->
-<!--            <th>Password</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody id="brugerBody">-->
-<!--        </tbody>-->
-<!--    </table>-->
+    <table id="userInfo-table" class="table">
+        <thead>
+        <tr>
+            <th>pbID</th>
+            <th>status</th>
+            <th>receptID</th>
+        </tr>
+        </thead>
+        <tbody id="pbAllBody">
+        </tbody>
+    </table>
 </div>
 </body>

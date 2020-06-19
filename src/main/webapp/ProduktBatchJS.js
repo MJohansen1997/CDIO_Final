@@ -19,15 +19,15 @@ $(document).ready(function () {
     //     deleteBruger($('#sletForm').serializeJSON().brugerID)
     // });
 
-    // $('#redigerForm').on('submit', function (e) {
-    //     e.preventDefault();
-    //     updateGetBruger($('#redigerForm').serializeJSON().brugerID)
-    //     $("#redigerInfoForm").toggle();
-    // });
+    $('#redigerForm').on('submit', function (e) {
+        e.preventDefault();
+        updateGetBruger($('#redigerForm').serializeJSON().pbID);
+        $("#redigerInfoForm").toggle();
+    });
 
     $('#redigerInfoForm').on('submit', function (e) {
         e.preventDefault();
-        updatePB($('#redigerInfoForm').serializeJSON().brugerID)
+        updatePB($('#redigerInfoForm').serializeJSON())
     });
 
     buttonOpret();
@@ -70,31 +70,24 @@ function updatePB() {
     })
 }
 
+function updateGetBruger(pbID) {
+    $.get('rest/PB/findPB/' + pbID, function (data, textStatus, req) {
+        console.log("DATA", data)
+        if (!data) {
+            alert("Der findes ikke nogen med det brugerID")
+            return;
+        }
+        $form = $('#redigerInfoForm');
+        $form.find('[name="pbID"]').val(data.pbID);
+        $form.find('[name="status"]').val(data.status);
 
-
-// function updateGetBruger(brugerID) {
-//     $.get('rest/brugere/findBruger/' + brugerID, function (data, textStatus, req) {
-//         console.log("DATA", data)
-//         if (!data) {
-//             alert("Der findes ikke nogen med det brugerID")
-//             return;
-//         }
-//
-//
-//         $form = $('#redigerInfoForm')
-//         $form.find('[name="brugerID"]').val(data.brugerID)
-//         $form.find('[name="brugerNavn"]').val(data.brugerNavn)
-//         $form.find('[name="rolle"]').val(data.rolle)
-//         $form.find('[name="ini"]').val(data.ini)
-//         $form.find('[name="cpr"]').val(data.cpr)
-//         $form.find('[name="password"]').val(data.password)
-//     });
-// }
+        });
+    }
 
 function getPB(pbID) {
-    $.get('rest/PB/findPB' + pbID, function (data, textStatus, req) {
+    $.get('rest/PB/findPB/' + pbID, function (data, textStatus, req) {
         if (typeof data != "undefined") {
-            $("#findFormBody").empty().append(generateHTMLTable(data));
+            $("#pbBody").empty().append(generateHTMLTable(data));
         } else {
             alert("Der findes ikke nogen med det brugerID");
         }
@@ -117,14 +110,15 @@ function getPB(pbID) {
 // }
 function loadListPB() {
     $.get('rest/PB/allPB', function (data, textStatus, req) {
-        $("#pbBody").empty();
+        console.log(data);
+        $("#pbAllBody").empty();
         $.each(data, function (i, brugerValue) {
-            $('#pbBody').append(generateHTMLTable(brugerValue));
+            $('#pbAllBody').append(generateHTMLTable(brugerValue));
         });
     });
 }
 function generateHTMLTable(pbatch) {
-    return '<tr><td>' + pbatch.produktbatchID + '</td>' +
+    return '<tr><td>' + pbatch.pbID + '</td>' +
         '<td>' + pbatch.status + '</td>' +
         '<td>' + pbatch.receptID + '</td></tr>'
 }
@@ -140,12 +134,6 @@ function loadRecepter() {
         });
     });
 }
-
-// function generateReceptListe(pbatch) {
-//     let $dropdown = $("#chooseRecept")
-//     $dropdown.append($("<option />").text(pbatch.receptID));
-//     // return '<option>' + pbatch.receptID + '</option>'
-// }
 
 function buttonOpret() {
     $("#buttonOpret").click(function () {
