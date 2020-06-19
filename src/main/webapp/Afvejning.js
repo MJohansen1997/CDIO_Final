@@ -1,3 +1,6 @@
+var rec;
+var prod;
+
 $(document).ready(function () {
     $(".inlab").hide();
     $(".resulttitle").hide();
@@ -28,7 +31,7 @@ $(document).ready(function () {
             contentType: "application/x-www-form-urlencoded",
             dataType: "JSON",
             method: 'POST',
-            success: function (data) {
+            success: async function (data) {
                 if (data != null) {
                     $("#subprod").remove();
                     $("#subkomp").show();
@@ -37,27 +40,22 @@ $(document).ready(function () {
                     $("#receptid").val(data.receptID);
                     $("#receptnavn").val(data.receptNavn);
                     $(".resulttitle").show();
-                    findreckomps();
+                    await findreckomps();
+                    await findprodKomps();
+                    insertkomps();
+
                 } else return alert("ingen Produktion matcher dette id");
             }
         });
     });
 });
-var rec;
+
 function saver(o) {
-    console.log(o);
-    rec = o;
-
+    return rec = o;
 }
-var prod;
 function saver2(o) {
-    prod = o;
+    return prod = o;
 }
-var holder;
-function saver3(o) {
-    holder = o;
-}
-
 function formfilled(temp, prodid, rbid, tara, vaegt, lab) {
     var form =
         "<form class='form' action='rest/afvejning/verifylab' method='POST' id='labidform'>" +
@@ -70,64 +68,57 @@ function formfilled(temp, prodid, rbid, tara, vaegt, lab) {
         "</form>";
     return form;
 }
-function formunfilled(raavnavn, tolerance, lab, raavid, prodid) {
+function formunfilled(raavnavn, tolerance, lab, raavid, prodid, req) {
     var form =
         "<form class='form' method='POST' id='" +raavnavn+ "form'>" +
         "<h3>" +raavnavn+ "</h3>"+
-        "<label class='batch'> Råvare Batch : <input class='input' id='" + raavnavn + "rb' name='rbId' type='text' /></label>" +
-        "<label class='batch'> Tara Vægt : <input class='input' id='" + raavnavn + "tara' name='tara' type='number' step='0.01' /></label>" +
+        "<label class='batch'> Råvare Batch : <input class='input' id='" + raavnavn + "rb' name='rbId' type='text' required /></label>" +
+        "<label class='batch'> Tara Vægt : <input class='input' id='" + raavnavn + "tara' name='tara' type='number' step='0.01' required /></label>" +
+        "<label class='batch'> Påkrævet tilsat mængde : <input class='input' id='" + raavnavn + "req' type='text' value='" + req + "' readonly /></label>" +
         "<label class='batch'> Tolerance (%) : <input class='input' id='" + raavnavn + "tol' type='text' value='" + tolerance + "' readonly /></label>" +
-        "<label class='batch'> Råvare Mængde : <input class='input' id='" + raavnavn + "maengde' name='netto' type='number' step='0.01' /></label>" +
-        "<label class='batch'> Laborant : <input class='input' id='" + raavnavn + "lab' name='labID' type='text' value='" + lab + "' readonly /></label>" +
-        "<input class='input' id='" + raavnavn + "id' type='text' value='" + raavid + " ' readonly/>" +
-        "<input class='input' id='" + raavnavn + "prod' name='pbId' type='text' value='" + prodid + "' readonly/>" +
+        "<label class='batch'> Tilsat mængde : <input class='input' id='" + raavnavn + "maengde' name='netto' type='number' step='0.01' required /></label>" +
+        "<input class='input' id='" + raavnavn + "lab' name='labID' type='hidden' value='" + lab + "' readonly />" +
+        "<input class='input' id='" + raavnavn + "id' type='hidden' value='" + raavid + " ' readonly/>" +
+        "<input class='input' id='" + raavnavn + "prod' name='pbId' type='hidden' value='" + prodid + "' readonly/>" +
         "</form>" +
         "<button id='but" + raavnavn + "'> Click me</button>";
     return form;
 }
-
-function findreckomps() {
-    $.ajax({
+async function findreckomps() {
+    console.log("findrec starts");
+    return $.ajax({
         url: "rest/afvejning/loadreckomps",
         data: $('#labidform').serialize(),
         contentType: "application/x-www-form-urlencoded",
         dataType: "JSON",
         method: 'POST',
-        success: function (data) {
+        success: async function (data) {
             if (data != null) {
-                console.log(data);
-                saver(data);
-                console.log(rec);
-                findprodKomps();
+                await saver(data);
+                console.log("rec : " + JSON.stringify(rec))
             }
             else alert("recfailed")
         }
     });
-
 }
-function findprodKomps() {
-    $.ajax({
+async function findprodKomps() {
+    console.log("findprod starts");
+    return $.ajax({
         url: "rest/afvejning/loadprodkomps",
         data: $('#labidform').serialize(),
         contentType: "application/x-www-form-urlencoded",
         dataType: "JSON",
         method: 'POST',
-        success: function (data) {
+        success: async function (data) {
             if (data != null) {
-                saver2(data);
-                insertKomps();
+                await saver2(data);
+                console.log("prod : " + prod);
             }
             else alert("prodfailed")
         }
     });
 }
-/*[{"pbId":"PB00001","rbId":"RB00001","tara":12.0,"netto":1000.0,"labID":"B00001"}]*/
-/*[{"receptID":"REC00001","raavareID":"R00001","nonNetto":1000.0,"tolerance ":3.0},{"receptID":"REC00001","raavareID":"R00002","nonNetto":1000.0,"tolerance":3.0}]*/
-function insertKomps() {
-    insertprodkomps(insertForm);
-}
-
-function insertForm() {
+function insertkomps() {
     console.log(rec);
     rec.forEach((r_item) => {
         prod.forEach((p_item) => {
@@ -135,11 +126,13 @@ function insertForm() {
                 url: "rest/afvejning/IdBatch?rid=" + r_item.raavareID + "&rbid=" + p_item.rbId,
                 method: 'POST',
                 success: function (data) {
-                    if(data != ""){
-                        $("#mangler").append(formunfilled(data, parseFloat(r_item.tolerance), $("#userid").val(),
-                            r_item.raavareID, $("#produktionsid").val()));
-                        $(document).find("#but" + data + "").on("click",function () {
-                            var formname = "#" + data + "form";
+                    console.log(data);
+                    console.log(JSON.stringify(data));
+                    if(data.status == "false"){
+                        $("#mangler").append(formunfilled(data.name, parseFloat(r_item.tolerance), $("#userid").val(),
+                            r_item.raavareID, $("#produktionsid").val(), r_item.nonNetto));
+                        $(document).find("#but" + data.name + "").on("click",function () {
+                            var formname = "#" + data.name + "form";
                             var tada = $(document).find(formname).serializeJSON();
                             console.log(tada);
                             $.ajax({
@@ -148,31 +141,22 @@ function insertForm() {
                                 contentType: "application/json",
                                 data: JSON.stringify(tada),
                                 success: function (){
-                                    alert("Oprettet bruger GZ homie")
+                                    alert("Oprettet bruger GZ homie");
+                                    $("#mangler").empty();
+                                    $("#faerdig").empty();
+                                    insertkomps();
                                 }
                             })
                         });
+                    }
+                    if(data.status == "true"){
+                        $("#faerdig").append(formfilled(data.name, p_item.pbId, p_item.rbId, p_item.tara,
+                            p_item.netto, p_item.labID));
                     }
                 }
             });
         })
     })
-}
-
-function insertprodkomps(callback) {
-    prod.forEach(function (item) {
-        $.ajax({
-            url: "rest/afvejning/getrnavn",
-            data: item.rbId,
-            dataType: "text",
-            method: 'POST',
-            success: function (data) {
-                $("#faerdig").append(formfilled(data, item.pbId, item.rbId, item.tara,
-                    item.netto, item.labID))
-            }
-        });
-    });
-    callback()
 }
 
 

@@ -6,106 +6,136 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="jquery.serializejson.js"></script>
     <script src="AdminBrugerJS.js"></script>
-
-
-</head>
-<body>
-<div id="container">
+    <link rel="stylesheet" href="style.css"/>
     <link rel="stylesheet" href="AdminBrugerStyle.css"/>
-    <h1>Velkommen tilbage "username"</h1>
+</head>
+<header id=homepage-header>
+    <nav>
+        <ul class="navigation-list">
+            <li id="userinfo" >Userinformation</li>
+            <li id="hjem" class = "navigation-item">Hjem</li>
+            <li id="admin" class = "navigation-item">Brugeradmin</li>
+            <li id="afvejning" class = "navigation-item">Afvejning</li>
+            <li id="rvbatches" class = "navigation-item">Råvarebatches</li>
+            <li id="pdbatches" class = "navigation-item">Produktionbatches</li>
+            <li id="recept" class = "navigation-item">Recept</li>
+            <li id="raavarer" class = "navigation-item">Råvarer</li>
+            <li id="logud" class = "navigation-item">Log ud</li>
+        </ul>
+    </nav>
+</header>
+<body class="homepages-body">
+<div id="adminpage-title-container" class="headpanel-container">
+    <h1 class = "headpanel-title">Brugeradministration</h1>
+</div>
+<div id="container-admin">
+
+
     <!--leftside-->
 
-    <nav>
-        <ul>
-        <button type="button" id="buttonOpret">Opret</button>
-        <button type="button" id="buttonRediger">Rediger</button>
-        <button type="button" id="buttonSlet">Slet</button>
-        <button type="button" id="buttonFind">Find</button>
-    </ul>
-</nav>
-<br>
-
-<form id="opretForm">
-    <h1>Opret Bruger</h1>
-    <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>
-    <label for="rolle">Vælg Rolle:
-        <select name="rolle" id="rolle">
-            <option value="Brugeradminstrator">Brugeradminstrator</option>
-            <option value="Farmaceut">Farmaceut</option>
-            <option value="Produktionsleder">Produktionsleder</option>
-            <option value="Laborant">Laborant</option>
-        </select>
-    </label>
-    <p>Vælg Bruger initialer : <input type="text" name="ini" required/></p>
-    <p>Vælg Bruger CPR : <input type="text" name="cpr" required/></p>
-    <p>Vælg Password : <input type="text" name="password" required/></p>
-    <button type="submit">Gem ændringer</button>
-</form>
-
-
-<form id="redigerForm">
-    <h1>Rediger Bruger</h1>
-    <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
-    <button type="submit">Gem ændringer</button>
-</form>
-
-<form id="redigerInfoForm">
-    <h1>Rediger bruger</h1>
-    <input type="hidden" name="brugerID" />
-    <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>
-    <select name="rolle" id="RolleRed">
-        <option value="Brugeradminstrator">Brugeradminstrator</option>
-        <option value="Farmaceut">Farmaceut</option>
-        <option value="Produktionsleder">Produktionsleder</option>
-        <option value="Laborant">Laborant</option>
-    </select>
-    <p>Vælg Bruger initialer : <input type="text" name="ini" required/></p>
-    <p>Vælg Bruger CPR : <input type="text" name="cpr" required/></p>
-    <p>Vælg Password : <input type="text" name="password" required/></p>
-    <button type="submit">Gem ændringer</button>
-</form>
+    <nav id = admin-buttons-container>
+        <ul id="admin-buttons">
+            <button type="button" class="admin-button" id="buttonOpret">Opret</button>
+            <button type="button" class="admin-button" id="buttonRediger">Rediger</button>
+            <button type="button" class="admin-button" id="buttonSlet">Slet</button>
+            <button type="button" class="admin-button" id="buttonFind">Find</button>
+        </ul>
+    </nav>
+    <br>
+    <div id="admin-forms">
+        <form id="opretForm">
+            <h1>Opret Bruger</h1>
+            <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>
+            <label for="rolle">Vælg Rolle:
+                <select name="rolle" id="rolle">
+                    <option value="Brugeradminstrator">Brugeradminstrator</option>
+                    <option value="Farmaceut">Farmaceut</option>
+                    <option value="Produktionsleder">Produktionsleder</option>
+                    <option value="Laborant">Laborant</option>
+                </select>
+            </label>
+            <p>Vælg Bruger initialer : <input type="text" name="ini" required/></p>
+            <p>Vælg Bruger CPR : <input type="text" name="cpr" required/></p>
+            <p>Vælg Password : <input type="text" name="password" required/></p>
+            <button type="submit">Gem ændringer</button>
+        </form>
 
 
-<form id="sletForm">
-    <h1>Slet Bruger</h1>
-    <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
-    <button type="submit">Gem ændringer</button>
-</form>
+        <form id="redigerForm">
+            <h1>Rediger Bruger</h1>
+            <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
+            <button type="submit">Gem ændringer</button>
+        </form>
 
-<form id="findForm">
-    <h1>Find Bruger</h1>
-    <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
-    <button type="submit">Find</button>
+        <form id="redigerInfoForm">
+            <h1>Rediger bruger</h1>
+            <input type="hidden" name="brugerID"/>
+            <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>
+            <select name="rolle" id="RolleRed">
+                <option value="Brugeradminstrator">Brugeradminstrator</option>
+                <option value="Farmaceut">Farmaceut</option>
+                <option value="Produktionsleder">Produktionsleder</option>
+                <option value="Laborant">Laborant</option>
+            </select>
+            <p>Vælg Bruger initialer : <input type="text" name="ini" required/></p>
+            <p>Vælg Bruger CPR : <input type="text" name="cpr" required/></p>
+            <p>Vælg Password : <input type="text" name="password" required/></p>
+            <button type="submit">Gem ændringer</button>
+        </form>
 
-    <table id="findForm-table" class="table">
-        <thead>
-        <tr>
-            <th>brugerID</th>
-            <th>Bruger Navn</th>
-            <th>Ini</th>
-            <th>Cpr</th>
-            <th>Rolle</th>
-            <th>Password</th>
+
+        <form id="sletForm">
+            <h1>Slet Bruger</h1>
+            <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
+            <button type="submit">Gem ændringer</button>
+        </form>
+
+        <form id="findForm">
+            <h1>Find Bruger</h1>
+            <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
+            <button type="submit">Find</button>
+
+            <table id="findForm-table" class="table">
+                <thead>
+                <tr>
+                    <th>brugerID</th>
+                    <th>Bruger Navn</th>
+                    <th>Ini</th>
+                    <th>Cpr</th>
+                    <th>Rolle</th>
+                    <th>Password</th>
+                </tr>
+                </thead>
+                <tbody id="findFormBody">
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class = "table-container">
+    <table id="userInfo-table">
+        <thead id = "admin-thead">
+
+        <tr id = "admin-thead-row">
+            <th class = "admin-table-header">brugerID</th>
+            <th class = "admin-table-header">Bruger Navn</th>
+            <th class = "admin-table-header">Ini</th>
+            <th class = "admin-table-header">Cpr</th>
+            <th class = "admin-table-header">Rolle</th>
+            <th class = "admin-table-header">Password</th>
         </tr>
         </thead>
-        <tbody id="findFormBody">
+        <tbody id="brugerBody">
         </tbody>
     </table>
-</form>
-
-<table id="userInfo-table" class="table">
-    <thead>
-    <tr>
-        <th>brugerID</th>
-        <th>Bruger Navn</th>
-        <th>Ini</th>
-        <th>Cpr</th>
-        <th>Rolle</th>
-        <th>Password</th>
-    </tr>
-    </thead>
-    <tbody id="brugerBody">
-    </tbody>
-</table>
+    </div>
 </div>
 </body>
+<footer class = "pages-footer">
+    <ul class = "footer-list">
+        <li>Rødovrevej Pharmaceutics &copy 2020</li>
+        <li>Udviklet af Gruppe 24</li>
+        <li><a href="https://docs.google.com/document/d/143Kt3x7K9x_Bu3S6Uj2vfS-kMmljuvijk3yViVJrVyo/edit?usp=sharing" target = "_blank">Se vores rapport</a></li>
+        <li>Behandling af din data</li>
+        <li id = "meme"><a href="https://www.youtube.com/watch?v=d1YBv2mWll0" target = "_blank">Find ud af hvor Rødovrevej Pharmaceutics ligger</a></li>
+    </ul>
+</footer>

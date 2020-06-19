@@ -1,156 +1,203 @@
-$(document).ready(function() {
-    loadBrugere();
-    $('#opretForm').on('submit', function(e){
+$(document).ready(function()
+{
+    loadRaavarer();
+
+    $('#opretForm').on('submit', function(e)
+    {
         e.preventDefault();
         createRaavarer()
     });
 
-    $('#findForm').on('submit', function(e){
+    $('#findForm').on('submit', function(e)
+    {
         e.preventDefault();
-        getBruger($('#findForm').serializeJSON().brugerID)
+        getRaavarer($('#findForm').serializeJSON().raavID)
         $("#findForm-table").show();
     });
 
-    $('#sletForm').on('submit', function(e){
+    $('#sletForm').on('submit', function(e)
+    {
         e.preventDefault();
-        deleteBruger($('#sletForm').serializeJSON().brugerID)
+        deleteRaavarer($('#sletForm').serializeJSON().raavID)
     });
 
-    $('#redigerForm').on('submit', function(e){
+    $('#redigerForm').on('submit', function(e)
+    {
+
         e.preventDefault();
-        updateGetBruger($('#redigerForm').serializeJSON().brugerID)
+        updateGetRaavarer($("#raavId").val())
         $("#redigerInfoForm").toggle();
     });
 
-    $('#redigerInfoForm').on('submit', function(e){
+    $('#redigerInfoForm').on('submit', function(e)
+    {
         e.preventDefault();
-        updateBruger($('#redigerInfoForm').serializeJSON().brugerID)
+        updateRaavarer($('#redigerInfoForm').serializeJSON().raavID)
     });
 
     buttonOpret();
     buttonFind();
     buttonRediger();
     buttonSlet();
+    submitUpdate();
 });
 
-function createRaavarer() {
+function createRaavarer()
+{
     var data = $('#opretForm').serializeJSON();
     console.log(data)
-    $.ajax({
-        url:'rest/Raavarer/createRaavarer',
+    $.ajax
+    ({
+        url:'rest/raavarer/createRaavarer',
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (){
-            loadBrugere();
+        success: function ()
+        {
+            loadRaavarer();
             alert("Oprettet bruger GZ homie")
             $("#opretForm").toggle();
         }
     })
 }
 
-function updateBruger(){
+function updateRaavarer()
+{
     var data = $('#redigerInfoForm').serializeJSON();
     console.log(data)
-    $.ajax({
-        url:'rest/brugere/updateUser',
+    $.ajax
+    ({
+        url:'rest/raavarer/updateRaavere',
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (){
-            loadBrugere();
+        success: function ()
+        {
+            loadRaavarer();
             $("#redigerForm").toggle();
             $("#redigerInfoForm").toggle();
         }
+
     })
 }
 
-function loadBrugere() {
-    $.get('rest/brugere/allUsers', function (data, textStatus, req) {
-        $("#brugerBody").empty();
-        $.each(data, function (i, brugerValue) {
-            $('#brugerBody').append(generateHTMLTable(brugerValue));
+function loadRaavarer()
+{
+    $.get('rest/raavarer/allRaavarer', function (data, textStatus, req)
+    {
+        console.log("DATA", data);
+        $("#raavBody").empty();
+        $.each(data, function (i, raavValue)
+        {
+            console.log(raavValue);
+            $('#raavBody').append(generateHTMLTable(raavValue));
         });
     });
 }
 
-function updateGetBruger(brugerID){
-    $.get('rest/brugere/findBruger/'+brugerID, function (data, textStatus, req) {
+function updateGetRaavarer(raavID)
+{
+    console.log(raavID);
+    $.get('rest/raavarer/findRaavarer/' + raavID, function (data, textStatus, req)
+    {
         console.log("DATA", data)
-        if (!data){
-            alert("Der findes ikke nogen med det brugerID")
+        if (!data)
+        {
+            alert("Der findes ikke nogen med den Råvarer ID")
             return;
         }
 
-
         $form = $('#redigerInfoForm')
-        $form.find('[name="brugerID"]').val(data.brugerID)
-        $form.find('[name="brugerNavn"]').val(data.brugerNavn)
-        $form.find('[name="rolle"]').val(data.rolle)
-        $form.find('[name="ini"]').val(data.ini)
-        $form.find('[name="cpr"]').val(data.cpr)
-        $form.find('[name="password"]').val(data.password)
+        $form.find('[name="raavID"]').val(data.raavID)
+        $form.find('[name="raavNavn"]').val(data.raavNavn)
+        $form.find('[name="leverandor"]').val(data.leverandor)
     });
 }
 
-function getBruger(brugerID){
-    $.get('rest/brugere/findBruger/'+brugerID, function (data, textStatus, req) {
-        if(typeof data != "undefined"){
+function getRaavarer(raavID)
+{
+    console.log(raavID);
+    $.get('rest/raavarer/findRaavarer/' + raavID, function (data, textStatus, req)
+    {
+        if(typeof data != "undefined")
+        {
             $("#findFormBody").empty().append(generateHTMLTable(data));
-        } else {
-            alert("Der findes ikke nogen med det brugerID")
+        }
+        else
+        {
+            alert("Der findes ikke nogen med den Råvarer ID")
         }
     });
 }
 
-function deleteBruger(brugerID) {
+function deleteRaavarer(raavID)
+{
     var data = $('#sletForm').serializeJSON();
     console.log(data)
-    $.ajax({
-        url:'rest/brugere/deleteBruger/'+ brugerID,
+    $.ajax
+    ({
+        url:'rest/raavarer/deleteRaavarer/'+ raavID,
         method: 'POST',
         contentType:"application/json",
         data: JSON.stringify(data),
-        success: function(){
-            loadBrugere();
+        success: function()
+        {
+            loadRaavarer();
             $("#sletForm").toggle();
         }
     })
 }
 
-function generateHTMLTable(bruger){
-    return '<tr><td>' + bruger.brugerID + '</td>' +
-        '<td>' + bruger.brugerNavn + '</td>' +
-        '<td>' + bruger.ini + '</td>' +
-        '<td>' + bruger.cpr + '</td>' +
-        '<td>' + bruger.rolle + '</td>' +
-        '<td>' + bruger.password + '</td></tr>'
+function generateHTMLTable(raavarer)
+{
+    return '<tr><td>' + raavarer.raavID + '</td>' +
+        '<td>' + raavarer.raavNavn + '</td>' +
+        '<td>' + raavarer.leverandor + '</td></tr>'
+
 }
 
-function buttonOpret(){
+function buttonOpret()
+{
     $("#buttonOpret").click(function () {
+        hideAllForms()
+        console.log("Hvad sker der?")
         $("#opretForm").toggle();
     });
 }
-function buttonRediger(){
-    $("#buttonRediger").click(function () {
+function buttonRediger()
+{
+    $("#buttonRediger").click(function ()
+    {
+        hideAllForms()
         $("#redigerForm").toggle();
     });
 }
-function buttonSlet() {
-    $("#buttonSlet").click(function () {
+function buttonSlet()
+{
+    $("#buttonSlet").click(function ()
+    {
+        hideAllForms()
         $("#sletForm").toggle();
     });
 }
-function buttonFind(){
-    $("#buttonFind").click(function () {
+function buttonFind()
+{
+    $("#buttonFind").click(function ()
+    {
+        hideAllForms()
         $("#findForm-table").toggle();
         $("#findForm").toggle();
     });
 }
-function submitUpdate(){
-    $("#submit4").click(function () {
-        $("#showForm").toggle();
+
+function hideAllForms(){
+    $('form').each(function(){
+        if ( $(this).css('display') == 'block')
+        {
+            $(this).toggle();
+        }
     });
 }
+
+
 
