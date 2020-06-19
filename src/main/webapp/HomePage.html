@@ -27,6 +27,11 @@
                 $.getScript("Raavare.js");
                 $.getScript("jquery.serializejson.js");
             });
+            $("#pdbatches").click(function () {
+                $("#container").load("ProduktBatch.html #container");
+                $.getScript("ProduktBatchJS.js");
+                $.getScript("jquery.serializejson.js");
+            });
 
         })
     </script>
