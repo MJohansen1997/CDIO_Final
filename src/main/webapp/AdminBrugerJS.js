@@ -25,7 +25,7 @@ $(document).ready(function() {
 
     $('#redigerInfoForm').on('submit', function(e){
         e.preventDefault();
-        updateBruger($('#redigerInfoForm').serializeJSON().brugerID)
+        updateBruger()
     });
 
     buttonOpret();
@@ -150,7 +150,6 @@ function buttonSlet() {
 function buttonFind(){
     $("#buttonFind").click(function () {
         hideAllForms();
-        $("#findForm-table").toggle();
         $("#findForm").toggle();
     });
 }

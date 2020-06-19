@@ -2,26 +2,23 @@ package DTO;
 
 public class RaavareBatchDTO {
      // Raavare batch id
+
     String rbID;
-     // Raavare id
-    String raavareId;
-     // Mængde på lager
+    String raavID;
     double maengde;
 
-    public RaavareBatchDTO(String rbID, String raavareId, double maengde) {
+    public RaavareBatchDTO(String rbID, String raavID, double maengde) {
         this.rbID = rbID;
-        this.raavareId = raavareId;
+        this.raavID = raavID;
         this.maengde = maengde;
     }
-
-    public RaavareBatchDTO(){}
 
     public void setRbID(String rbID) {
         this.rbID = rbID;
     }
 
-    public void setRaavareId(String raavareId) {
-        this.raavareId = raavareId;
+    public void setRaavId(String raavID) {
+        this.raavID = raavID;
     }
 
     public void setMaengde(double maengde) {
@@ -32,8 +29,8 @@ public class RaavareBatchDTO {
         return rbID;
     }
 
-    public String getRaavareId() {
-        return raavareId;
+    public String getRaavId() {
+        return raavID;
     }
 
     public double getMaengde() {

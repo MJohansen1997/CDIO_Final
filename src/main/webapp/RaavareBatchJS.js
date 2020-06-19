@@ -1,31 +1,26 @@
 $(document).ready(function () {
     loadRaavarerBatch();
 
-    $('#opretForm').on('submit', function(e)
-    {
+    $('#opretForm').on('submit', function(e) {
         e.preventDefault();
         createRaavarerBatch()
     });
 
-    $('#findForm').on('submit', function(e)
-    {
+    $('#findForm').on('submit', function(e) {
         e.preventDefault();
-        getRaavarerBatch($('#findForm').serializeJSON().raavID)
+        getRaavarerBatch($('#findForm').serializeJSON().rbID)
         $("#findForm-table").show();
     });
 
-    $('#redigerForm').on('submit', function(e)
-    {
-
+    $('#redigerForm').on('submit', function(e) {
         e.preventDefault();
-        updateGetRaavarerBatch($("#raavBatchID").val())
+        updateGetRaavarerBatch($('#redigerForm').serializeJSON().rbID)
         $("#redigerInfoForm").toggle();
     });
 
-    $('#redigerInfoForm').on('submit', function(e)
-    {
+    $('#redigerInfoForm').on('submit', function(e) {
         e.preventDefault();
-        updateRaavarerBatch($('#redigerInfoForm').serializeJSON().raavID)
+        updateRaavarerBatch()
     });
 
     buttonOpret();
@@ -34,18 +29,15 @@ $(document).ready(function () {
     submitUpdate();
 });
 
-    function createRaavarerBatch()
-    {
+    function createRaavarerBatch() {
         var data = $('#opretForm').serializeJSON();
         console.log(data)
-        $.ajax
-        ({
+        $.ajax({
             url:'rest/raavarebatch/createRaavarerBatch',
             method: 'POST',
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function ()
-            {
+            success: function () {
                 loadRaavarerBatch();
                 alert("Oprettet bruger GZ homie")
                 $("#opretForm").toggle();
@@ -53,8 +45,7 @@ $(document).ready(function () {
         });
     }
 
-    function updateRaavarerBatch()
-    {
+function updateRaavarerBatch() {
         var data = $('#redigerInfoForm').serializeJSON();
         console.log(data)
         $.ajax
@@ -63,8 +54,7 @@ $(document).ready(function () {
             method: 'POST',
             contentType: "application/json",
             data: JSON.stringify(data),
-            success: function ()
-            {
+            success: function () {
                 loadRaavarerBatch();
                 $("#redigerForm").toggle();
                 $("#redigerInfoForm").toggle();
@@ -73,31 +63,26 @@ $(document).ready(function () {
         })
     }
 
-    function loadRaavarerBatch()
-    {
-        $.get('rest/raavarebatch/allRaavarerBatch', function (data, textStatus, req)
-        {
-            console.log("DATA", data);
-            $("#raavBatchBody").empty();
-            $.each(data, function (i, raavBatchValue)
-            {
-                console.log(raavBatchValue);
-                $('#raavBatchBody').append(generateHTMLTable(raavBatchValue));
-            });
+function loadRaavarerBatch() {
+    $.get('rest/raavarebatch/allRaavareBatches', function (data, textStatus, req) {
+        console.log(data)
+        $("#raavBatchBody").empty();
+        $.each(data, function (i, brugerValue) {
+            $('#raavBatchBody').append(generateHTMLTable(brugerValue));
         });
-    }
+    });
+}
 
-    function updateGetRaavarerBatch(rbID)
-    {
+
+    function updateGetRaavarerBatch(rbID) {
         console.log(rbID);
-        $.get('rest/raavarebatch/findRaavareBatch/' + rbID, function (data, textStatus, req)
-        {
+        $.get('rest/raavarebatch/getRaavareBatch/' + rbID, function (data, textStatus, req) {
             console.log("DATA", data)
-            if (!data)
-            {
+            if (!data) {
                 alert("Der findes ikke nogen med den Råvarer ID")
                 return;
             }
+
 
             $form = $('#redigerInfoForm');
             $form.find('[name="rbID"]').val(data.rbID);
@@ -106,17 +91,14 @@ $(document).ready(function () {
         });
     }
 
-    function getRaavarerBatch(rbID)
-    {
+
+    function getRaavarerBatch(rbID) {
         console.log(rbID);
-        $.get('rest/raavarebatch/findRaavareBatch/' + rbID, function (data, textStatus, req)
-        {
-            if(typeof data != "undefined")
-            {
+        $.get('rest/raavarebatch/getRaavareBatch/'+rbID, function (data, textStatus, req) {
+            if(typeof data != "undefined") {
                 $("#findFormBody").empty().append(generateHTMLTable(data));
             }
-            else
-            {
+            else {
                 alert("Der findes ikke nogen med den Råvarer ID");
             }
         });
@@ -126,36 +108,39 @@ $(document).ready(function () {
     function generateHTMLTable(raavarerBatch)
     {
         return '<tr><td>' + raavarerBatch.rbID + '</td>' +
-            '<td>' + raavarerBatch.raavID + '</td>' +
+            '<td>' + raavarerBatch.raavId + '</td>' +
             '<td>' + raavarerBatch.maengde + '</td></tr>'
 
     }
 
-    function buttonOpret()
-    {
+
+
+    function buttonOpret() {
         $("#buttonOpret").click(function () {
             hideAllForms()
             console.log("Click Opret Knap")
             $("#opretForm").toggle();
         });
     }
-    function buttonRediger()
-    {
-        $("#buttonRediger").click(function ()
-        {
+    function buttonRediger() {
+        $("#buttonRediger").click(function () {
             hideAllForms()
             $("#redigerForm").toggle();
         });
     }
 
-    function buttonFind()
-    {
-        $("#buttonFind").click(function ()
-        {
+    function buttonFind() {
+        $("#buttonFind").click(function () {
             hideAllForms()
             $("#findForm-table").toggle();
             $("#findForm").toggle();
         });
+    }
+    function buttonSlet(){
+        $("#sletForm").click(function(){
+            hideAllForms()
+            $("#sletForm").toggle();
+            })
     }
 
     function hideAllForms(){

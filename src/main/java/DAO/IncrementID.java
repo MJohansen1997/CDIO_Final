@@ -21,6 +21,12 @@ public class IncrementID {
         }
     }
 
+    public static void main(String[] args) throws DALException {
+        IncrementID incre = new IncrementID();
+
+        incre.returnID("raavarebatches", "rbID");
+    }
+
     public String returnID(String tableName, String columnIDName) throws DALException {
         ArrayList<String> IDS = autoIncrementIDs(tableName, columnIDName);
         String IDNumbers = null;
@@ -52,7 +58,7 @@ public class IncrementID {
                 for(int i = 1; i <= columnsNumber; i++){
                     String columnName = rsmd.getColumnName(i);
                     String columnValue = rs.getString(i);
-                    if(columnName.contains("ID")){
+                    if(columnName.contains(columnIDName)){
                         IDS.add(columnValue);
                     }
                 }
