@@ -70,7 +70,7 @@ public class AfvejningService {
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
             RaavareDAO rdao = new RaavareDAO();
             r = rdao.getRaavare(rid).getRaavNavn();
-            s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavareId()));
+            s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavId()));
             return "{\"status\":\"" + s + "\",\"name\":\"" + r + "\"}";
         }catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -116,7 +116,7 @@ public class AfvejningService {
     public String getBruger(@PathParam("rbid") String rbid) throws ClassNotFoundException, DALException, SQLException {
         try {
             RaavareBatchDAO dao = new RaavareBatchDAO();
-            return dao.getRaavareBatch(rbid).getRaavareId();
+            return dao.getRaavareBatch(rbid).getRaavId();
         } catch (SQLException | ClassNotFoundException | DALException e) {
             e.printStackTrace();
             return "";

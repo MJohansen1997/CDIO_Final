@@ -73,24 +73,21 @@ $(document).ready(function () {
         })
     }
 
-    function loadRaavarerBatch()
-    {
-        $.get('rest/raavarebatch/allRaavarerBatch', function (data, textStatus, req)
-        {
-            console.log("DATA", data);
-            $("#raavBatchBody").empty();
-            $.each(data, function (i, raavBatchValue)
-            {
-                console.log(raavBatchValue);
-                $('#raavBatchBody').append(generateHTMLTable(raavBatchValue));
-            });
+function loadRaavarerBatch() {
+    $.get('rest/raavarebatch/allRaavareBatches', function (data, textStatus, req) {
+        console.log(data)
+        $("#raavBatchBody").empty();
+        $.each(data, function (i, brugerValue) {
+            $('#raavBatchBody').append(generateHTMLTable(brugerValue));
         });
-    }
+    });
+}
+
 
     function updateGetRaavarerBatch(rbID)
     {
         console.log(rbID);
-        $.get('rest/raavarebatch/findRaavareBatch/' + rbID, function (data, textStatus, req)
+        $.get('rest/raavarebatch/getRaavareBatch/' + rbID, function (data, textStatus, req)
         {
             console.log("DATA", data)
             if (!data)
@@ -147,6 +144,13 @@ $(document).ready(function () {
             $("#redigerForm").toggle();
         });
     }
+
+function submitUpdate() {
+    $("#submit4").click(function () {
+        $("#showForm").toggle();
+    });
+}
+
 
     function buttonFind()
     {

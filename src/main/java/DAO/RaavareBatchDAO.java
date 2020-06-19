@@ -25,7 +25,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     public RaavareBatchDTO getRaavareBatch(String rbId) throws DALException, SQLException, ClassNotFoundException {
         try {
             Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM raavarebatches WHERE rbID='" + rbId+"'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM raavarebatches WHERE rbID = '" + rbId + "'");
             if (rs.next()) {
                 return extractRaavareBacth(rs);
             }
@@ -41,12 +41,12 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
         List<RaavareBatchDTO> raav = dbAc.getRaavareBatchList();
 
         for (int i = 0; i < raav.size(); i++) {
-            System.out.println(raav.get(i).getRaavareId());
+            System.out.println(raav.get(i).getRaavId());
             System.out.println(raav.get(i).getRbID());
         }
     }
 
-    @Override
+    /*@Override
     public List<RaavareBatchDTO> getRaavareBatchList() throws SQLException, ClassNotFoundException, DALException {
         try {
             Statement stmt = newCon.createStatement();
@@ -59,16 +59,16 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
         } catch (SQLException ex) {
             throw new DALException("Kunne ikke oprette forbindelse til ");
         }
-    }
+    }*/
 
     @Override
-    public List<RaavareBatchDTO> getRaavareBatchList(String raavareId) throws DALException {
+    public List<RaavareBatchDTO> getRaavareBatchList() throws DALException {
         try {
             Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM ravaarebatches WHERE raavareId=" + raavareId);
-            ArrayList<RaavareBatchDTO>  list = new ArrayList<>();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ravaarebatches");
+            List<RaavareBatchDTO>  list = new ArrayList<>();
             while (rs.next()) {
-                RaavareBatchDTO user = new RaavareBatchDTO(rs.getString("rbID"), rs.getString("raavID"), rs.getDouble("maengde"));
+                RaavareBatchDTO user = extractRaavareBacth(rs);
                 list.add(user);
             }
             return list;
@@ -78,12 +78,32 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     }
 
     @Override
+    public List<RaavareBatchDTO> getRaavareBatchListID(String rbID) throws DALException, SQLException, ClassNotFoundException {
+        try {
+            Statement stmt = newCon.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ravaarebatches WHERE rbID = '" + rbID + "'");
+            ArrayList<RaavareBatchDTO>  listID = new ArrayList<>();
+            while (rs.next()) {
+                RaavareBatchDTO user = new RaavareBatchDTO(
+                        rs.getString("rbID"),
+                        rs.getString("raavID"),
+                        rs.getDouble("maengde"));
+                listID.add(user);
+            }
+            return listID;
+        } catch (SQLException ex) {
+            throw new DALException("Kunne ikke oprette forbindelse til ");
+        }
+
+    }
+
+    @Override
     public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws SQLException, ClassNotFoundException, DALException {
         try {
             PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO raavarebatches (rbID, raavID, maengde) VALUES (? ,? ,?)");
 
             preparedStatement.setString(1, raavarebatch.getRbID());
-            preparedStatement.setString(2, raavarebatch.getRaavareId());
+            preparedStatement.setString(2, raavarebatch.getRaavId());
             preparedStatement.setDouble(3, raavarebatch.getMaengde());
 
             preparedStatement.executeUpdate();
@@ -100,7 +120,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
             PreparedStatement preparedStatement = newCon.createStatement("UPDATE raavarebatches SET " +
                     "rbID = ?, raavID = ?, maengde = ? WHERE rbID = ?");
             preparedStatement.setString(1, raavarebatch.getRbID());
-            preparedStatement.setString(2, raavarebatch.getRaavareId());
+            preparedStatement.setString(2, raavarebatch.getRaavId());
             preparedStatement.setDouble(3, raavarebatch.getMaengde());
             preparedStatement.setString(4, raavarebatch.getRbID());
             preparedStatement.executeUpdate();
@@ -112,9 +132,11 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     }
 
 
-    public RaavareBatchDTO extractRaavareBacth(ResultSet rs) throws SQLException {
+    private RaavareBatchDTO extractRaavareBacth(ResultSet rs) throws SQLException {
 
-        RaavareBatchDTO raavareBacth = new RaavareBatchDTO(rs.getString("rbID"), rs.getString("raavID"),
+        RaavareBatchDTO raavareBacth = new RaavareBatchDTO(
+                rs.getString("rbID"),
+                rs.getString("raavID"),
                 rs.getDouble("maengde"));
 
         return raavareBacth;

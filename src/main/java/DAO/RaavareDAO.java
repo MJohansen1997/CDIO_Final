@@ -50,7 +50,10 @@ public class RaavareDAO implements IDAO.IRaavareDAO
             ArrayList<RaavareDTO> users = new ArrayList<>();
             while (rs.next())
             {
-                RaavareDTO user = new RaavareDTO(rs.getString("raavID"), rs.getString("raavNavn"), rs.getString("leverandør"));
+                RaavareDTO user = new RaavareDTO(
+                        rs.getString("raavID"),
+                        rs.getString("raavNavn"),
+                        rs.getString("leverandør"));
                 users.add(user);
             }
             return users;
