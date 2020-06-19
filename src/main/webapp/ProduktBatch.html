@@ -3,8 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.serializejson.js"></script>
+    <script src="ProduktBatchJS.js"></script>
+
+
 </head>
 <body>
+<div id="container">
+    <link rel="stylesheet" href="AdminBrugerStyle.css"/>
+    <h1>Produktion af ProduktBatches</h1>
+    <!--leftside-->
 
+    <nav>
+        <ul>
+            <button type="button" id="buttonOpret">Opret et nyt produktbatch</button>
+            <button type="button" id="buttonRediger">Redigering af produktbatches</button>
+            <button type="button" id="buttonSlet">Slet</button>
+            <button type="button" id="buttonFind">Find</button>
+        </ul>
+    </nav>
+    <br>
+
+    <form id="opretForm">
+        <h1>Opret nyt produktbatch</h1>
+        <label for="chooseStatus">Status på produktbatch : </label>
+        <input type="hidden" name="chosenStatus" id="chosenStatus">
+            <select id="chooseStatus">
+                <option value="Afventer">Afventer</option>
+                <option value="Under produktion">Under produktion</option>
+                <option value="Afsluttet">Afsluttet</option>
+            </select>
+        <label for="chooseRecept">Angiv hvilket recept som skal tilknyttes : </label>
+        <input type="hidden" name="chosenRecept" id="chosenRecept">
+            <select id="chooseRecept">
+            </select>>
+
+<!--        <p>Angiv Tara-belasting: <input type="text" name="taraBelast" required/></p>-->
+<!--        <p>Angiv valgte råvares Råvarebatch ID:<input type="text" name="råvarebatchID" required/></p>-->
+
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+<!-- Skal laves om -->
+
+    <form id="redigerForm">
+        <h1>Rediger Produktionsbatch</h1>
+        <p>Angiv produktbatch ID til redigering: <input type="text" name="produktbatchID" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+<!--    <form id="redigerInfoForm">-->
+<!--        <h1>Rediger bruger</h1>-->
+<!--        <input type="hidden" name="brugerID"/>-->
+<!--        <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>-->
+<!--        <select name="rolle" id="RolleRed">-->
+<!--            <option value="Brugeradminstrator">Brugeradminstrator</option>-->
+<!--            <option value="Farmaceut">Farmaceut</option>-->
+<!--            <option value="Produktionsleder">Produktionsleder</option>-->
+<!--            <option value="Laborant">Laborant</option>-->
+<!--        </select>-->
+<!--        <p>Vælg Bruger initialer : <input type="text" name="ini" required/></p>-->
+<!--        <p>Vælg Bruger CPR : <input type="text" name="cpr" required/></p>-->
+<!--        <p>Vælg Password : <input type="text" name="password" required/></p>-->
+<!--        <button type="submit">Gem ændringer</button>-->
+<!--    </form>-->
+
+
+    <form id="sletForm">
+        <h1>Slet Produktionsbatch</h1>
+        <p>Angiv produktionsbatch ID : <input type="text" name="produktbatchID" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+    <form id="findForm">
+        <h1>Find Produktionsbatch</h1>
+        <p>Angiv produktionsbatch ID : <input type="text" name="produktbatchID" required/></p>
+
+        <button type="submit">Find</button>
+
+        <table id="findForm-table" class="table">
+            <thead>
+            <tr>
+                <th>pbID</th>
+                <th>status</th>
+                <th>receptID</th>
+            </tr>
+            </thead>
+            <tbody id="pbBody">
+            </tbody>
+        </table>
+    </form>
+
+<!--    <table id="userInfo-table" class="table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>brugerID</th>-->
+<!--            <th>Bruger Navn</th>-->
+<!--            <th>Ini</th>-->
+<!--            <th>Cpr</th>-->
+<!--            <th>Rolle</th>-->
+<!--            <th>Password</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody id="brugerBody">-->
+<!--        </tbody>-->
+<!--    </table>-->
+</div>
 </body>
-</html>

@@ -32,6 +32,11 @@
                 $.getScript("ReceptJS.js");
                 $.getScript("jquery.serializejson.js");
             });
+            $("#pdbatches").click(function () {
+                $("#container").load("ProduktBatch.html #container");
+                $.getScript("ProduktBatchJS.js");
+                $.getScript("jquery.serializejson.js");
+            });
 
         })
     </script>
@@ -52,6 +57,7 @@
     </nav>
 </header>
 <body class = "homepages-body">
+    <div id="container">
     <div id = "homepage-title-container" class = "headpanel-container">
     <h1 id="homepage-title" class = "headpanel-title">Velkommen tilbage til Rødovrevej Pharmaceutics</h1>
     </div>
@@ -80,7 +86,8 @@
         <div id="homepage-image-box">
             <img src="drug.jpg" alt="Stoffer brormand" id="drugimg" height="450">
         </div>
-</div>
+        </div>
+    </div>
 </body>
 <footer class = "pages-footer">
     <ul class = "footer-list">
