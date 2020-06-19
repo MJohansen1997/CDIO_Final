@@ -62,13 +62,16 @@ public class AfvejningService {
 
     @POST
     @Path("/IdBatch")
+    @Produces(MediaType.APPLICATION_JSON)
     public String verifyIdBatch(@QueryParam("rid") String rid, @QueryParam("rbid") String rbid){
+        String r;
+        String s;
         try {
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
             RaavareDAO rdao = new RaavareDAO();
-            if(!rid.equals(rbdao.getRaavareBatch(rbid).getRaavareId()))
-                return rdao.getRaavare(rid).getRaavNavn();
-            else return "";
+            r = rdao.getRaavare(rid).getRaavNavn();
+            s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavareId()));
+            return "{\"status\":\"" + s + "\",\"name\":\"" + r + "\"}";
         }catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             return "";
@@ -82,6 +85,7 @@ public class AfvejningService {
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
             RaavareDAO rdao = new RaavareDAO();
             return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavNavn();
+
         } catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             return "????";
