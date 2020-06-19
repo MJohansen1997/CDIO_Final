@@ -19,6 +19,7 @@ $(document).ready(function() {
     $('#redigerForm').on('submit', function(e){
         e.preventDefault();
         updateGetBruger($('#redigerForm').serializeJSON().brugerID)
+        hideAllForms()
         $("#redigerInfoForm").toggle();
     });
 
@@ -67,6 +68,7 @@ function updateBruger(){
 
 function loadBrugere() {
     $.get('rest/brugere/allUsers', function (data, textStatus, req) {
+        console.log(data)
         $("#brugerBody").empty();
         $.each(data, function (i, brugerValue) {
             $('#brugerBody').append(generateHTMLTable(brugerValue));
@@ -129,24 +131,38 @@ function generateHTMLTable(bruger){
 
 function buttonOpret(){
     $("#buttonOpret").click(function () {
+        hideAllForms();
         $("#opretForm").toggle();
     });
 }
 function buttonRediger(){
     $("#buttonRediger").click(function () {
+        hideAllForms();
         $("#redigerForm").toggle();
     });
 }
 function buttonSlet() {
     $("#buttonSlet").click(function () {
+        hideAllForms();
         $("#sletForm").toggle();
     });
 }
 function buttonFind(){
     $("#buttonFind").click(function () {
+        hideAllForms();
         $("#findForm-table").toggle();
         $("#findForm").toggle();
     });
 }
+
+function hideAllForms(){
+    $('form').each(function(){
+        if ( $(this).css('display') == 'block')
+        {
+            $(this).toggle();
+        }
+    });
+}
+
 
 

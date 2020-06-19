@@ -159,6 +159,8 @@ function generateHTMLTable(raavarer)
 function buttonOpret()
 {
     $("#buttonOpret").click(function () {
+        hideAllForms()
+        console.log("Hvad sker der?")
         $("#opretForm").toggle();
     });
 }
@@ -166,6 +168,7 @@ function buttonRediger()
 {
     $("#buttonRediger").click(function ()
     {
+        hideAllForms()
         $("#redigerForm").toggle();
     });
 }
@@ -173,6 +176,7 @@ function buttonSlet()
 {
     $("#buttonSlet").click(function ()
     {
+        hideAllForms()
         $("#sletForm").toggle();
     });
 }
@@ -180,14 +184,20 @@ function buttonFind()
 {
     $("#buttonFind").click(function ()
     {
+        hideAllForms()
         $("#findForm-table").toggle();
         $("#findForm").toggle();
     });
 }
-function submitUpdate()
-{
-    $("#submit4").click(function () {
-        $("#showForm").toggle();
+
+function hideAllForms(){
+    $('form').each(function(){
+        if ( $(this).css('display') == 'block')
+        {
+            $(this).toggle();
+        }
     });
 }
+
+
 

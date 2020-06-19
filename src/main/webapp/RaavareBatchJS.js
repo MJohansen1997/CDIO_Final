@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    loadRaavareBatch();
+    loadBrugere();
+
     $(".inproleder").hide();
     $("#prolederid").show();
     $("button").hide();
@@ -115,15 +116,24 @@ function visRaavareBatch(rbid) {
 
 
 function generateHTMLTable(raavarebatch){
-    return '<tr>' +
-        '<td>' + raavarebatch.rbID + '</td>' +
+    return'<tr><td>' + raavarebatch.rbID + '</td>' +
         '<td>' + raavarebatch.raavareId + '</td>' +
-        '<td>' + raavarebatch.maengde + '</td>' +
-        '</tr>'
+        '<td>' + raavarebatch.maengde + '</td></tr>'
+}
+
+function loadBrugere() {
+    $.get('rest/brugere/allUsers', function (data, textStatus, req) {
+        console.log(data)
+        $("#brugerBody").empty();
+        $.each(data, function (i, brugerValue) {
+            $('#brugerBody').append(generateHTMLTable(brugerValue));
+        });
+    });
 }
 
 function loadRaavareBatch() {
-    $.get('rest/RaavareBatch/allRaavareBatches', function (data, textStatus, req) {
+    console.log("Abe")
+    $.get('rest/raavarebatch/allRaavareBatches', function (data, textStatus, req) {
         console.log(data);
         $("#raavareBatchBody").empty();
         $.each(data, function (i, raavareBatchValue) {

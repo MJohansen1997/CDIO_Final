@@ -1,6 +1,7 @@
 package DAO;
 
 import DTO.RaavareBatchDTO;
+import DTO.RaavareDTO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +35,17 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
         return null;
     }
 
+    public static void main(String[] args) throws DALException, SQLException, ClassNotFoundException {
+        RaavareBatchDAO dbAc = new RaavareBatchDAO();
+
+        List<RaavareBatchDTO> raav = dbAc.getRaavareBatchList();
+
+        for (int i = 0; i < raav.size(); i++) {
+            System.out.println(raav.get(i).getRaavareId());
+            System.out.println(raav.get(i).getRbID());
+        }
+    }
+
     @Override
     public List<RaavareBatchDTO> getRaavareBatchList() throws SQLException, ClassNotFoundException, DALException {
         try {
@@ -44,26 +56,24 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
                list.add(extractRaavareBacth(rs));
             }
             return list;
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            throw new DALException("Kunne ikke oprette forbindelse til ");
         }
-        return null;
     }
 
     @Override
-    public List<RaavareBatchDTO> getRaavareBatchList(String raavareId) throws SQLException, ClassNotFoundException, DALException {
+    public List<RaavareBatchDTO> getRaavareBatchList(String raavareId) throws DALException {
         try {
             Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Ravaarebatches WHERE raavareId=" + raavareId);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ravaarebatches WHERE raavareId=" + raavareId);
             ArrayList<RaavareBatchDTO>  list = new ArrayList<>();
             while (rs.next()) {
                 list.add(extractRaavareBacth(rs));
             }
             return list;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw new DALException("Kunne ikke oprette forbindelse til ");
         }
-        return null;
     }
 
     @Override
