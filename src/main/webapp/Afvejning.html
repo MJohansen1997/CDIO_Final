@@ -7,11 +7,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="jquery.serializejson.js"></script>
     <script src="Afvejning.js"></script>
+    <link rel="stylesheet" href="style.css">
 
 </head>
-<body>
-<div class = "container" id="container">
-    <H1>Afvejning</H1>
+<header id=homepage-header>
+    <nav>
+        <ul class="navigation-list">
+            <li id="userinfo" >Userinformation</li>
+            <li id="hjem" class = "navigation-item">Hjem</li>
+            <li id="admin" class = "navigation-item">Brugeradmin</li>
+            <li id="afvejning" class = "navigation-item">Afvejning</li>
+            <li id="rvbatches" class = "navigation-item">Råvarebatches</li>
+            <li id="pdbatches" class = "navigation-item">Produktionbatches</li>
+            <li id="recept" class = "navigation-item">Recept</li>
+            <li id="raavarer" class = "navigation-item">Råvarer</li>
+            <li id="logud" class = "navigation-item">Log ud</li>
+        </ul>
+    </nav>
+</header>
+<body class="homepages-body">
+<div class = "container" id="afvejning-container">
+    <script src="Afvejning.js"></script>
+    <div id = "homepage-title-container" class = "headpanel-container">
+    <H1 class="headpanel-title">Afvejning</H1>
+    </div>
     <div id="lab">
         <form class="form" method="POST" id='labidform'>
             <label class='inlab' id='lablab'> Laborarnt ID : <input class="input" type="text" id="userid" name="userid" required /></label>
