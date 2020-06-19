@@ -27,50 +27,68 @@
                 $.getScript("Raavare.js");
                 $.getScript("jquery.serializejson.js");
             });
+            $("#recept").click(function () {
+                $("#container").load("Recept.html #container");
+                $.getScript("ReceptJS.js");
+                $.getScript("jquery.serializejson.js");
+            });
 
         })
     </script>
 </head>
-<header id = homepage-header>
-    <h6 id="userinfo">Userinformation</h6>
+<header id=homepage-header>
     <nav>
-        <ul class="navigation">
-            <li id="hjem">Hjem</li>
-            <li id="admin">Brugeradmin</li>
-            <li id="afvejning">Afvejning</li>
-            <li id="rvbatches">Råvarebatches</li>
-            <li id="pdbatches">Produktionbatches</li>
-            <li id="recept">Recept</li>
-            <li id="raavarer">Råvarer</li>
-            <li id="logud">Log ud</li>
+        <ul class="navigation-list">
+            <li id="userinfo" >Userinformation</li>
+            <li id="hjem" class = "navigation-item">Hjem</li>
+            <li id="admin" class = "navigation-item">Brugeradmin</li>
+            <li id="afvejning" class = "navigation-item">Afvejning</li>
+            <li id="rvbatches" class = "navigation-item">Råvarebatches</li>
+            <li id="pdbatches" class = "navigation-item">Produktionbatches</li>
+            <li id="recept" class = "navigation-item">Recept</li>
+            <li id="raavarer" class = "navigation-item">Råvarer</li>
+            <li id="logud" class = "navigation-item">Log ud</li>
         </ul>
     </nav>
 </header>
-<body id = homepage-body>
-<div id = container>
-<h1 id = "homepage-title">Velkommen tilbage til Rødovrevej Pharmaceutics</h1>
-<div class="home">
-    <h2 class=section-title>Hvad står vi for?</h2>
-        <p class="paragraph" id=" p1">
-            Hos Rødovre Pharmaceutics går vi op i kvalitet, både hos vores eget arbejde, men også hvordan vores
-            patienter bliver behandler.
-            Vi striver efter bedre service og hvordan vi kan forbedre vores recepter, så de hjælper dig endnu mere i din
-            hverdag.
-            Herunder modtager vores råvarer hver uge, for at sørge at vores produktioner er friske og altid er i god
-            kvalitet.
-            Vores hold arbejder på hver dag, at udvikle nye produkter til at forbedre den medicinske verden.
-        </p>
-    <h2 class = "section-title">Om os:</h2>
-        <p class = "paragraph" id = "p2">
-            Vi er nyt team som startede med 10 ambisiøse mennekser i 2018. Vi er nu en firma på over 100 ansatte og mere
-            end 10 partnere! Udviklingen gik ekstremt hurtigt hvilket gave os mulighed for at brede ud og tilkoble flere
-            forksere og udviklere.
-        </p>
-        <img src="drug.jpg" alt="Stoffer brormand" id="drugimg" height="450">
-</div>
+<body class = "homepages-body">
+    <div id = "homepage-title-container" class = "headpanel-container">
+    <h1 id="homepage-title" class = "headpanel-title">Velkommen tilbage til Rødovrevej Pharmaceutics</h1>
+    </div>
+    <div class=home>
+        <article>
+            <h2 class=section-title>Hvad står vi for?</h2>
+            <p class="paragraph" id=" p1">
+                Hos Rødovre Pharmaceutics går vi op i kvalitet, både hos vores eget arbejde, men også hvordan vores
+                patienter bliver behandler.
+                Vi striver efter bedre service og hvordan vi kan forbedre vores recepter, så de hjælper dig endnu mere i
+                din
+                hverdag.
+                Herunder modtager vores råvarer hver uge, for at sørge at vores produktioner er friske og altid er i god
+                kvalitet.
+                Vores hold arbejder på hver dag, at udvikle nye produkter til at forbedre den medicinske verden.
+            </p>
+            <h2 class="section-title">Om os:</h2>
+            <p class="paragraph" id="p2">
+                Vi er nyt team som startede med 10 ambisiøse mennekser i 2018. Vi er nu en firma på over 100 ansatte og
+                mere
+                end 10 partnere! Udviklingen gik ekstremt hurtigt hvilket gave os mulighed for at brede ud og tilkoble
+                flere
+                forksere og udviklere.
+            </p>
+        </article>
+        <div id="homepage-image-box">
+            <img src="drug.jpg" alt="Stoffer brormand" id="drugimg" height="450">
+        </div>
 </div>
 </body>
-<footer>
-
+<footer class = "pages-footer">
+    <ul class = "footer-list">
+        <li>Rødovrevej Pharmaceutics &copy 2020</li>
+        <li>Udviklet af Gruppe 24</li>
+        <li><a href="https://docs.google.com/document/d/143Kt3x7K9x_Bu3S6Uj2vfS-kMmljuvijk3yViVJrVyo/edit?usp=sharing" target = "_blank">Se vores rapport</a></li>
+        <li>Behandling af din data</li>
+        <li id = "meme"><a href="https://www.youtube.com/watch?v=d1YBv2mWll0" target = "_blank">Find ud af hvor Rødovrevej Pharmaceutics ligger</a></li>
+    </ul>
 </footer>
 </html>

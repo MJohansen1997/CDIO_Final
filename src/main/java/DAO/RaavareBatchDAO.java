@@ -2,8 +2,8 @@ package DAO;
 
 import DTO.RaavareBatchDTO;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.*;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
     public List<RaavareBatchDTO> getRaavareBatchList() throws SQLException, ClassNotFoundException, DALException {
         try {
             Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Ravaarebatches");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM raavarebatches");
             ArrayList<RaavareBatchDTO>  list = new ArrayList<>();
             while (rs.next()) {
                list.add(extractRaavareBacth(rs));
@@ -68,19 +68,17 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
 
     @Override
     public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws SQLException, ClassNotFoundException, DALException {
-        /*try {
-            PreparedStatement preparedStatement = newCon.connection.prepareStatement("INSERT INTO Raavarebatches (rbId, raavareID, maengde) VALUES (? ,? ,?)");
-
-            ArrayList<String> ar1 = IDCreate.autoIncrementIDs("Raavarebatches" ,"rbId");
-            ArrayList<String> ar2 = IDCreate.autoIncrementIDs("Raavarebatches" ,"rbId");
+        try {
+            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO Raavarebatches (rbId, raavareID, maengde) VALUES (? ,? ,?)");
 
             preparedStatement.setString(1, raavarebatch.getRbID());
             preparedStatement.setString(2, raavarebatch.getRaavareId());
             preparedStatement.setDouble(3, raavarebatch.getMaengde());
 
-        } catch (SQLException | ClassNotFoundException ex) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
             ex.printStackTrace();
-        }*/
+        }
     }
 
     @Override

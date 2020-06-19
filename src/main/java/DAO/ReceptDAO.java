@@ -2,6 +2,7 @@ package DAO;
 
 import DTO.ReceptDTO;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -57,15 +58,15 @@ public class ReceptDAO implements IDAO.IReceptDAO {
     @Override
     public void createRecept(ReceptDTO recept) throws DALException {
         try {
-            Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("insert into recepter values(\" "+
-                    recept.getReceptID() +
-                    "\", \"" + recept.getReceptNavn() +"\");"
-            );
+            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO recepter " +
+                    "(recID, recNavn) VALUES (?, ?);");
+
+            preparedStatement.setString(1,recept.getReceptID());
+            preparedStatement.setString(2, recept.getReceptNavn());
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DALException("Fejl ved indsættelse af element");
+            throw new DALException("Encountered an error when executing given sql statement. : " + e.getMessage());
         }
 
     }
@@ -73,14 +74,33 @@ public class ReceptDAO implements IDAO.IReceptDAO {
     @Override
     public void updateRecept(ReceptDTO recept) throws DALException {
         try {
-            Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("UPDATE Recepter Set " +
-                    "recNavn = \"" + recept.getReceptNavn() + "\", \"" +
-                    "WHERE recID = " + recept.getReceptID() + "\""
-            );
-
+            PreparedStatement preparedStatement = newCon.createStatement("UPDATE recepter SET " +
+                    "recID = ?, recNavn = ? WHERE recID = ?");
+            preparedStatement.setString(1, recept.getReceptID());
+            preparedStatement.setString(2, recept.getReceptNavn());
+            preparedStatement.setString(3, recept.getReceptID());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DALException("Fejl søgning");
+            throw new DALException("Encountered an error when executing given sql statement." + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) throws DALException {
+        ReceptDTO upda = new ReceptDTO("REC00002","Vand Salt");
+
+        ReceptDAO dbAc = new ReceptDAO();
+
+        dbAc.updateRecept(upda);
+    }
+
+    public void deleteRecept(String receptID) throws DALException {
+
+        try {
+            PreparedStatement preparedStatement = newCon.createStatement("DELETE FROM recepter WHERE recID = ?;");
+            preparedStatement.setString(1, receptID);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DALException("Encountered an error when executing given sql statement.");
         }
     }
 
