@@ -32,8 +32,8 @@ public class APIProduktBatch  {
             //Laver en produktbatch til indsættelse i DB
             ProduktBatchDTO pbatch = new ProduktBatchDTO(
                     incID.returnID("prodbestilling","pbID"),
-                    json.getString("status"),
-                    json.getString("recID"));
+                    json.getString("chosenStatus"),
+                    json.getString("chosenRecept"));
             //Indsætter i databasen med DAOen
             dbAccess.createProduktBatch(pbatch);
         } catch (DALException e) {

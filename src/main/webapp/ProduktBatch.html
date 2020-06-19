@@ -27,16 +27,20 @@
 
     <form id="opretForm">
         <h1>Opret nyt produktbatch</h1>
-        <p>Angiv nyt produktbatch ID: <input type="text" name="produktbatchID" required/></p>
-        <label for="chooseRecept">Vælg et aktuelt recept</label>
-        <!-- LAV DROPDOWN BOX MED AKTUELLE RECEPTS -->
-        <!-- LAV DROPDOWN BOX MED AKTUELLE RECEPTS -->
-            <select name="chooseRecept" id="chooseRecept">
-                <option value=""> </option>
+        <label for="chooseStatus">Status på produktbatch : </label>
+        <input type="hidden" name="chosenStatus" id="chosenStatus">
+            <select id="chooseStatus">
+                <option value="Afventer">Afventer</option>
+                <option value="Under produktion">Under produktion</option>
+                <option value="Afsluttet">Afsluttet</option>
             </select>
-<!--        <p>Angiv aktuelt recept ID til tilknytning: <input type="text" name="PBtoRecept" required/></p>-->
-        <p>Angiv Tara-belasting: <input type="text" name="taraBelast" required/></p>
-        <p>Angiv valgte råvares Råvarebatch ID:<input type="text" name="råvarebatchID" required/></p>
+        <label for="chooseRecept">Angiv hvilket recept som skal tilknyttes : </label>
+        <input type="hidden" name="chosenRecept" id="chosenRecept">
+            <select id="chooseRecept">
+            </select>>
+
+<!--        <p>Angiv Tara-belasting: <input type="text" name="taraBelast" required/></p>-->
+<!--        <p>Angiv valgte råvares Råvarebatch ID:<input type="text" name="råvarebatchID" required/></p>-->
 
         <button type="submit">Gem ændringer</button>
     </form>
@@ -75,20 +79,18 @@
     <form id="findForm">
         <h1>Find Produktionsbatch</h1>
         <p>Angiv produktionsbatch ID : <input type="text" name="produktbatchID" required/></p>
+
         <button type="submit">Find</button>
 
         <table id="findForm-table" class="table">
             <thead>
             <tr>
-                <th>brugerID</th>
-                <th>Bruger Navn</th>
-                <th>Ini</th>
-                <th>Cpr</th>
-                <th>Rolle</th>
-                <th>Password</th>
+                <th>pbID</th>
+                <th>status</th>
+                <th>receptID</th>
             </tr>
             </thead>
-            <tbody id="findFormBody">
+            <tbody id="pbBody">
             </tbody>
         </table>
     </form>

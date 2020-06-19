@@ -1,14 +1,16 @@
 $(document).ready(function () {
     loadListPB();
+    loadRecepter();
 
     $('#opretForm').on('submit', function (e) {
         e.preventDefault();
         createPB()
+
     });
 
     $('#findForm').on('submit', function (e) {
         e.preventDefault();
-        getPB($('#findForm').serializeJSON().brugerID)
+        getPB($('#findForm').serializeJSON().brugerID);
         $("#findForm-table").show();
     });
 
@@ -35,16 +37,18 @@ $(document).ready(function () {
 });
 
 function createPB() {
+    $("#chosenStatus").val($("#chooseStatus").val());
+    $("#chosenRecept").val($("#chooseRecept").val());
     var data = $('#opretForm').serializeJSON();
-    console.log(data)
+    console.log(data);
     $.ajax({
         url: 'rest/PB/createPB',
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function () {
-            loadBrugere();
-            alert("Oprettet bruger GZ homie")
+            loadListPB();
+            alert("Oprettet produktbatch gz homie");
             $("#opretForm").toggle();
         }
     })
@@ -52,28 +56,21 @@ function createPB() {
 
 function updatePB() {
     var data = $('#redigerInfoForm').serializeJSON();
-    console.log(data)
+    console.log(data);
     $.ajax({
         url: 'rest/PB/updatePB',
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function () {
-            loadBrugere();
+            loadListPB();
             $("#redigerForm").toggle();
             $("#redigerInfoForm").toggle();
         }
     })
 }
 
-function loadListPB() {
-    $.get('rest/PB/allPB', function (data, textStatus, req) {
-        $("#brugerBody").empty();
-        $.each(data, function (i, brugerValue) {
-            $('#brugerBody').append(generateHTMLTable(brugerValue));
-        });
-    });
-}
+
 
 // function updateGetBruger(brugerID) {
 //     $.get('rest/brugere/findBruger/' + brugerID, function (data, textStatus, req) {
@@ -99,7 +96,7 @@ function getPB(pbID) {
         if (typeof data != "undefined") {
             $("#findFormBody").empty().append(generateHTMLTable(data));
         } else {
-            alert("Der findes ikke nogen med det brugerID")
+            alert("Der findes ikke nogen med det brugerID");
         }
     });
 }
@@ -118,26 +115,43 @@ function getPB(pbID) {
 //         }
 //     })
 // }
-
-function generateHTMLTable(bruger) {
-    return '<tr><td>' + bruger.brugerID + '</td>' +
-        '<td>' + bruger.brugerNavn + '</td>' +
-        '<td>' + bruger.ini + '</td>' +
-        '<td>' + bruger.cpr + '</td>' +
-        '<td>' + bruger.rolle + '</td>' +
-        '<td>' + bruger.password + '</td></tr>'
+function loadListPB() {
+    $.get('rest/PB/allPB', function (data, textStatus, req) {
+        $("#pbBody").empty();
+        $.each(data, function (i, brugerValue) {
+            $('#pbBody').append(generateHTMLTable(brugerValue));
+        });
+    });
 }
+function generateHTMLTable(pbatch) {
+    return '<tr><td>' + pbatch.produktbatchID + '</td>' +
+        '<td>' + pbatch.status + '</td>' +
+        '<td>' + pbatch.receptID + '</td></tr>'
+}
+
+
+
+function loadRecepter() {
+    let cr  = $("#chooseRecept");
+    $.get('rest/recept/allRecepts', function (data, textStatus, req) {
+        console.log(data);
+        $.each(data, function (i, receptValues) {
+            cr.append(new Option(receptValues.receptNavn + " : " + receptValues.receptID, receptValues.receptID));
+        });
+    });
+}
+
+// function generateReceptListe(pbatch) {
+//     let $dropdown = $("#chooseRecept")
+//     $dropdown.append($("<option />").text(pbatch.receptID));
+//     // return '<option>' + pbatch.receptID + '</option>'
+// }
 
 function buttonOpret() {
     $("#buttonOpret").click(function () {
         $("#opretForm").toggle();
     });
 }
-
-function dropdownreceptInsertion () {
-
-}
-
 
 function buttonRediger() {
     $("#buttonRediger").click(function () {
