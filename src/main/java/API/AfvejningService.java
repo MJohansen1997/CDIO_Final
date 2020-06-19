@@ -15,8 +15,18 @@ public class AfvejningService {
     @POST
     @Path("/verifylab")
     public boolean verifyLaborant(@FormParam("userid") String labid){
+        try {
+            BrugerDAO dao = new BrugerDAO();
+            BrugerDTO dto = dao.getBruger(labid);
+            String fuck = dto.getRolle();
+            if (dto == null)
+                return false;
+            return !(fuck.equals("Brugeradminstrator"));
+        } catch (DALException | SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
 
-        return true;
     }
 
     @POST
@@ -112,13 +122,32 @@ public class AfvejningService {
 
     @GET
     @Path("/findraavid/{rbid}")
-    public String getBruger(@PathParam("rbid") String rbid) throws ClassNotFoundException, DALException, SQLException {
+    @Produces(MediaType.APPLICATION_JSON)
+    public RaavareBatchDTO getBruger(@PathParam("rbid") String rbid) {
         try {
             RaavareBatchDAO dao = new RaavareBatchDAO();
-            return dao.getRaavareBatch(rbid).getRaavareId();
+            return dao.getRaavareBatch(rbid);
         } catch (SQLException | ClassNotFoundException | DALException e) {
             e.printStackTrace();
-            return "";
+            return null;
+        }
+    }
+
+    @PUT
+    @Path("/updateraavbatch")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateRB(String jsonBody){
+        try {
+            JSONObject json = new JSONObject(jsonBody);
+            RaavareBatchDAO dao = new RaavareBatchDAO();
+            RaavareBatchDTO rb = new RaavareBatchDTO(
+                    json.getString("rbID"),
+                    json.getString("raavareId"),
+                    json.getDouble("maengde"));
+
+            dao.updateRaavareBatch(rb);
+        } catch (DALException | SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
