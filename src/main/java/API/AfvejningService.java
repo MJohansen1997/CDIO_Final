@@ -112,7 +112,6 @@ public class AfvejningService {
 
     @GET
     @Path("/findraavid/{rbid}")
-    @Produces(MediaType.APPLICATION_JSON)
     public String getBruger(@PathParam("rbid") String rbid) throws ClassNotFoundException, DALException, SQLException {
         try {
             RaavareBatchDAO dao = new RaavareBatchDAO();
