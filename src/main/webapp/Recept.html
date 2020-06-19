@@ -6,23 +6,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="jquery.serializejson.js"></script>
     <script src="ReceptJS.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<div id="container">
-    <link rel="stylesheet" href="AdminBrugerStyle.css"/>
-    <h1>Velkommen tilbage "username"</h1>
-    <!--leftside-->
-
+<header id=homepage-header>
     <nav>
-        <ul>
-            <button type="button" id="buttonOpret">Opret</button>
-            <button type="button" id="buttonRediger">Rediger</button>
-            <button type="button" id="buttonSlet">Slet</button>
-            <button type="button" id="buttonFind">Find</button>
+        <ul class="navigation-list">
+            <li id="userinfo" >Userinformation</li>
+            <li id="hjem" class = "navigation-item">Hjem</li>
+            <li id="admin" class = "navigation-item">Brugeradmin</li>
+            <li id="afvejning" class = "navigation-item">Afvejning</li>
+            <li id="rvbatches" class = "navigation-item">Råvarebatches</li>
+            <li id="pdbatches" class = "navigation-item">Produktionbatches</li>
+            <li id="recept" class = "navigation-item">Recept</li>
+            <li id="raavarer" class = "navigation-item">Råvarer</li>
+            <li id="logud" class = "navigation-item">Log ud</li>
+        </ul>
+    </nav>
+</header>
+<body class = "homepages-body">
+<div id="container" class = "headpanel-container">
+    <link rel="stylesheet" href="AdminBrugerStyle.css"/>
+    <h1 class = "headpanel-title">Velkommen tilbage "username"</h1>
+</div>
+    <!--leftside-->
+<div>
+    <nav id = admin-buttons-container>
+        <ul id="admin-buttons">
+            <button type="button" class="admin-button" id="buttonOpret">Opret</button>
+            <button type="button" class="admin-button" id="buttonRediger">Rediger</button>
+            <button type="button" class="admin-button" id="buttonSlet">Slet</button>
+            <button type="button" class="admin-button" id="buttonFind">Find</button>
         </ul>
     </nav>
     <br>
-
+    <div class = "forms">
     <form id="opretForm">
         <h1>Opret Recept</h1>
         <p>Vælg Recept Navn : <input type="text" name="receptNavn" required/></p>
@@ -64,7 +81,8 @@
             </tbody>
         </table>
     </form>
-
+    </div>
+    <div class = "table-container">
     <table id="userInfo-table" class="table">
         <thead>
         <tr>
@@ -75,7 +93,7 @@
         <tbody id="receptBody">
         </tbody>
     </table>
-
+    </div>
 </div>
 </body>
 </html>

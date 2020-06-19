@@ -1,9 +1,10 @@
 var rec;
 var prod;
+var exists;
 
 $(document).ready(function () {
     $(".inlab").hide();
-    $(".resulttitle").hide();
+    $("#result").hide();
     $("#lablab").show();
     $("button").hide();
 });
@@ -33,17 +34,20 @@ $(document).ready(function () {
             method: 'POST',
             success: async function (data) {
                 if (data != null) {
+                    $("#receptid").val(data.receptID);
+                    $("#receptnavn").val(data.receptNavn);
+                    await findreckomps();
+                    await findprodKomps();
+                    await insertkomps();
                     $("#subprod").remove();
                     $("#subkomp").show();
                     $("#produktionsid").prop("readonly", true);
                     $("[name='reclab']").show();
-                    $("#receptid").val(data.receptID);
-                    $("#receptnavn").val(data.receptNavn);
-                    $(".resulttitle").show();
-                    await findreckomps();
-                    await findprodKomps();
-                    insertkomps();
-
+                    $("#result").show();
+                    if (Object.keys(rec).length == Object.keys(prod).length){
+                        changeStatus("Afsluttet");
+                        alert("Denne Produktion er Fuldført og Afsluttet")
+                    }
                 } else return alert("ingen Produktion matcher dette id");
             }
         });
@@ -55,6 +59,9 @@ function saver(o) {
 }
 function saver2(o) {
     return prod = o;
+}
+function saver3(o) {
+    return exists = o;
 }
 function formfilled(temp, prodid, rbid, tara, vaegt, lab) {
     var form =
@@ -81,11 +88,10 @@ function formunfilled(raavnavn, tolerance, lab, raavid, prodid, req) {
         "<input class='input' id='" + raavnavn + "id' type='hidden' value='" + raavid + " ' readonly/>" +
         "<input class='input' id='" + raavnavn + "prod' name='pbId' type='hidden' value='" + prodid + "' readonly/>" +
         "</form>" +
-        "<button id='but" + raavnavn + "'> Click me</button>";
+        "<button id='but" + raavnavn + "'> TIlføj til Produktionen</button>";
     return form;
 }
 async function findreckomps() {
-    console.log("findrec starts");
     return $.ajax({
         url: "rest/afvejning/loadreckomps",
         data: $('#labidform').serialize(),
@@ -112,51 +118,66 @@ async function findprodKomps() {
         success: async function (data) {
             if (data != null) {
                 await saver2(data);
-                console.log("prod : " + prod);
             }
-            else alert("prodfailed")
+            else alert("Server fejl:")
         }
     });
 }
-function insertkomps() {
-    console.log(rec);
-    rec.forEach((r_item) => {
-        prod.forEach((p_item) => {
-            $.ajax({
-                url: "rest/afvejning/IdBatch?rid=" + r_item.raavareID + "&rbid=" + p_item.rbId,
-                method: 'POST',
-                success: function (data) {
-                    console.log(data);
-                    console.log(JSON.stringify(data));
-                    if(data.status == "false"){
-                        $("#mangler").append(formunfilled(data.name, parseFloat(r_item.tolerance), $("#userid").val(),
-                            r_item.raavareID, $("#produktionsid").val(), r_item.nonNetto));
-                        $(document).find("#but" + data.name + "").on("click",function () {
-                            var formname = "#" + data.name + "form";
-                            var tada = $(document).find(formname).serializeJSON();
-                            console.log(tada);
-                            $.ajax({
-                                url:'rest/afvejning/createpbk',
-                                method: 'POST',
-                                contentType: "application/json",
-                                data: JSON.stringify(tada),
-                                success: function (){
-                                    alert("Oprettet bruger GZ homie");
-                                    $("#mangler").empty();
-                                    $("#faerdig").empty();
-                                    insertkomps();
-                                }
-                            })
-                        });
+async function insertkomps() {
+    outer:
+    for (let i = 0; i < Object.keys(rec).length; i++) {
+        inner:
+        for (let j = 0; j < Object.keys(prod).length; j++) {
+            await getStatus(rec[i].raavareID,prod[j].rbId);
+            if(exists.status == "false" && j == Object.keys(prod).length-1) {
+                $("#mangler").append(formunfilled(exists.name, parseFloat(rec[i].tolerance), $("#userid").val(),
+                    rec[i].raavareID, $("#produktionsid").val(), rec[i].nonNetto));
+                $(document).find("#but" + exists.name + "").on("click", function () {
+                    var formname = "#" + exists.name + "form";
+                    var tada = $(document).find(formname).serializeJSON();
+                    console.log(tada);
+                    if ($("#produktionsid").val() == $.get("rest/afvejning/findraavid/" +
+                        $(document).find("#" + exists.name + "rb"))){
+                        $.ajax({
+                            url: 'rest/afvejning/createpbk',
+                            method: 'POST',
+                            contentType: "application/json",
+                            data: JSON.stringify(tada),
+                            success: function () {
+                                alert("Batchen er nu tilsat produktet");
+                                $("#mangler").empty();
+                                $("#faerdig").empty();
+                                insertkomps();
+                                changeStatus("Under produktion")
+                            }
+                        })
                     }
-                    if(data.status == "true"){
-                        $("#faerdig").append(formfilled(data.name, p_item.pbId, p_item.rbId, p_item.tara,
-                            p_item.netto, p_item.labID));
-                    }
-                }
-            });
-        })
-    })
+                    else alert("Råvarebatchen matcher ikke til den påkrævede råvare")
+
+                });
+            }
+            if(exists.status == "true"){
+                $("#faerdig").append(formfilled(exists.name, prod[j].pbId, prod[j].rbId, prod[j].tara,
+                    prod[j].netto, prod[j].labID));
+                continue outer;
+            }
+        }
+    }
+}
+function getStatus(raavid, raavbatchid) {
+    return $.ajax({
+        url: "rest/afvejning/IdBatch?rid=" + raavid + "&rbid=" + raavbatchid,
+        method: 'POST',
+        success: async function (data) {
+            await saver3(data);
+        }
+    });
+}
+function changeStatus(change) {
+    $.ajax({
+        url: "rest/afvejning/updatestatus?prodid=" + $("#produktionsid").val() + "&status=" + change,
+        method: 'PUT',
+    });
 }
 
 

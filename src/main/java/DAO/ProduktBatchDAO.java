@@ -1,5 +1,6 @@
 package DAO;
 
+import DTO.BrugerDTO;
 import DTO.ProduktBatchDTO;
 
 import java.sql.*;
@@ -18,47 +19,36 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
     }
 
 
-
     @Override
-    public ProduktBatchDTO getProduktBatch(String pbId) throws DALException {
-        /* Creating a try catch
-         * Within creating a statement and then getting a returned resultset with the specifed query. */
+    public ProduktBatchDTO getProduktBatch(String pbID) throws DALException {
         try {
-            String query = "SELECT * FROM prodbestilling WHERE pbID = \'" + pbId + "\'";
             Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-
+            ResultSet rs = stmt.executeQuery("SELECT * FROM prodbestilling WHERE pbID = \'" + pbID + "\'");
             if (rs.next()) {
                 return extractPBLFromResultSet(rs);
             }
-            throw new DALException("No results");
-
-            /* Catching exception and throwing a new custom one */
-        } catch (Exception e){
-            throw new DALException("Failed to get the ProduktBatch" + e);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
+        return null;
     }
 
-    @Override
     public List<ProduktBatchDTO> getProduktBatchList() throws DALException {
         try {
-            String query = "SELECT * FROM prodbestilling";
             Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM prodbestilling");
             ArrayList<ProduktBatchDTO> pblist = new ArrayList<>();
-
-            //Using custom method to extract the information needed from the resultset.
-            if (rs.next()) {
-                pblist.add(extractPBLFromResultSet(rs));
-                return pblist;
+            while (rs.next()) {
+                ProduktBatchDTO user = extractPBLFromResultSet(rs);
+                pblist.add(user);
             }
-            throw new DALException("No results");
-            /* Catching exception and throwing a new custom one */
-        } catch (Exception e) {
-            throw new DALException("Failed to get a ProduktBatch list " + e);
-        }
-    }
+            return pblist;
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
     @Override
     public void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
         try {
@@ -89,12 +79,24 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
 
             statusQuery.setString(1, produktbatch.getStatus());
             statusQuery.setString(2, produktbatch.getPbID());
+            statusQuery.executeUpdate();
 
         } catch (SQLException e) {
             throw new DALException("Error! Couldn't update desired values");
         }
     }
 
+
+    public void deleteProduktBatch(String pbID) throws DALException {
+
+        try {
+            PreparedStatement preparedStatement = newCon.createStatement("DELETE FROM prodbestilling WHERE pbID = ?;");
+            preparedStatement.setString(1, pbID);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DALException("Encountered an error when executing given sql delete statement.");
+        }
+    }
 
     private ProduktBatchDTO extractPBLFromResultSet(ResultSet rs) throws SQLException {
         ProduktBatchDTO PBL = new ProduktBatchDTO(

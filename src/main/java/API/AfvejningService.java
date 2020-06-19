@@ -70,7 +70,7 @@ public class AfvejningService {
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
             RaavareDAO rdao = new RaavareDAO();
             r = rdao.getRaavare(rid).getRaavNavn();
-            s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavareId()));
+            s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavId()));
             return "{\"status\":\"" + s + "\",\"name\":\"" + r + "\"}";
         }catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -78,29 +78,17 @@ public class AfvejningService {
         }
     }
 
-    @POST
-    @Path("/getrnavn")
-    public String getRaaNavn(String rid){
+    @PUT
+    @Path("/updatestatus")
+    public void changeStatus(@QueryParam("prodid") String prodid, @QueryParam("status") String status){
         try{
-            RaavareBatchDAO rbdao = new RaavareBatchDAO();
-            RaavareDAO rdao = new RaavareDAO();
-            return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavNavn();
+            ProduktBatchDAO dao = new ProduktBatchDAO();
+            ProduktBatchDTO dto = dao.getProduktBatch(prodid);
+            dto.setStatus(status);
+            dao.updateProduktBatch(dto);
 
-        } catch (DALException | SQLException | ClassNotFoundException e) {
+        } catch (DALException e) {
             e.printStackTrace();
-            return "????";
-        }
-    }
-    @POST
-    @Path("/getrid")
-    public String getRaaID(String rid){
-        try{
-            RaavareBatchDAO rbdao = new RaavareBatchDAO();
-            RaavareDAO rdao = new RaavareDAO();
-            return rdao.getRaavare(rbdao.getRaavareBatch(rid).getRaavareId()).getRaavID();
-        } catch (DALException | SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return "????";
         }
     }
 
@@ -119,8 +107,19 @@ public class AfvejningService {
                 json.getDouble("netto"),
                 json.getString("labID")
         );
+        dao.createProduktBatchKomp(user);
+    }
 
-        //dao.createProduktBatchKomp(user);
-
+    @GET
+    @Path("/findraavid/{rbid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getBruger(@PathParam("rbid") String rbid) throws ClassNotFoundException, DALException, SQLException {
+        try {
+            RaavareBatchDAO dao = new RaavareBatchDAO();
+            return dao.getRaavareBatch(rbid).getRaavId();
+        } catch (SQLException | ClassNotFoundException | DALException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

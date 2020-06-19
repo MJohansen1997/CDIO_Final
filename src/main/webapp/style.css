@@ -144,7 +144,7 @@ body#homepage-body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: cornflowerblue;
+    background: #339aed;
     border-bottom: 2px solid black;
 }
 .navigation-list .navigation-item {
@@ -155,7 +155,7 @@ body#homepage-body {
     padding: 14px 16px;
 }
 .navigation-list .navigation-item:hover {
-    background: #5972bf;
+    background: #338ee2;
     color: #f7f7f7;
 }
 #logud {
@@ -242,7 +242,7 @@ article, .section-title {
     padding: 5px 4px ;
 }
 
-#admin-forms {
+.forms {
     width: 400px;
     height: 300px;
     border: 1px solid black;

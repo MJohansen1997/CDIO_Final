@@ -58,7 +58,7 @@ function createRaavarer()
             alert("Oprettet bruger GZ homie")
             $("#opretForm").toggle();
         }
-    })
+    });
 }
 
 function updateRaavarer()

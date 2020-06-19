@@ -30,7 +30,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
 
                 if (rs.next())
                 {
-                    return extractUserFromResultSet(rs);
+                    return extractRavarerFromResultSet(rs);
                 }
             }
             catch (SQLException ex)
@@ -50,7 +50,10 @@ public class RaavareDAO implements IDAO.IRaavareDAO
             ArrayList<RaavareDTO> users = new ArrayList<>();
             while (rs.next())
             {
-                RaavareDTO user = new RaavareDTO(rs.getString("raavID"), rs.getString("raavNavn"), rs.getString("leverandør"));
+                RaavareDTO user = new RaavareDTO(
+                        rs.getString("raavID"),
+                        rs.getString("raavNavn"),
+                        rs.getString("leverandør"));
                 users.add(user);
             }
             return users;
@@ -84,7 +87,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     {
         try
         {
-            PreparedStatement preparedStatement = newCon.createStatement("UPDATE brugerer SET " +
+            PreparedStatement preparedStatement = newCon.createStatement("UPDATE raavarer SET " +
                     "raavID = ?, raavNavn = ?, leverandør = ? WHERE raavID = ?");
             preparedStatement.setString(1, raavare.getRaavID());
             preparedStatement.setString(2, raavare.getRaavNavn());
@@ -109,7 +112,7 @@ public class RaavareDAO implements IDAO.IRaavareDAO
     }
 
 
-    private RaavareDTO extractUserFromResultSet(ResultSet rs) throws SQLException
+    private RaavareDTO extractRavarerFromResultSet(ResultSet rs) throws SQLException
     {
         RaavareDTO user = new RaavareDTO(
                 rs.getString("raavID"),
