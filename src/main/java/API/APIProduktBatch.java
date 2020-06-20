@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -33,7 +35,8 @@ public class APIProduktBatch  {
             ProduktBatchDTO pbatch = new ProduktBatchDTO(
                     incID.returnID("prodbestilling","pbID"),
                     json.getString("chosenStatus"),
-                    json.getString("chosenRecept"));
+                    json.getString("chosenRecept"),
+                    new Timestamp(System.currentTimeMillis()));
             //Indsætter i databasen med DAOen
             dbAccess.createProduktBatch(pbatch);
         } catch (DALException e) {
@@ -51,6 +54,7 @@ public class APIProduktBatch  {
             ProduktBatchDTO pbatch = new ProduktBatchDTO(
                     json.getString("pbID"),
                     json.getString("status"),
+                    null,
                     null);
 
             dbAccess.updateProduktBatch(pbatch);
@@ -71,7 +75,6 @@ public class APIProduktBatch  {
 
     @POST
     @Path("/deletePB/{pbID}")
-    @Produces(MediaType.APPLICATION_JSON)
     public void deletePB (@PathParam("pbID") String pbID) throws  DALException {
         dbAccess.deleteProduktBatch(pbID);
 

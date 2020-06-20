@@ -14,10 +14,10 @@ $(document).ready(function () {
         $("#findForm-table").show();
     });
 
-    // $('#sletForm').on('submit', function (e) {
-    //     e.preventDefault();
-    //     deleteBruger($('#sletForm').serializeJSON().brugerID)
-    // });
+    $('#sletForm').on('submit', function (e) {
+        e.preventDefault();
+        deletePB($('#sletForm').serializeJSON().pbID)
+    });
 
     $('#redigerForm').on('submit', function (e) {
         e.preventDefault();
@@ -94,20 +94,20 @@ function getPB(pbID) {
     });
 }
 
-// function deleteBruger(brugerID) {
-//     var data = $('#sletForm').serializeJSON();
-//     console.log(data)
-//     $.ajax({
-//         url: 'rest/brugere/deleteBruger/' + brugerID,
-//         method: 'POST',
-//         contentType: "application/json",
-//         data: JSON.stringify(data),
-//         success: function () {
-//             loadBrugere();
-//             $("#sletForm").toggle();
-//         }
-//     })
-// }
+function deletePB(pbID) {
+    var data = $('#sletForm').serializeJSON();
+    console.log(data)
+    $.ajax({
+        url: 'rest/PB/deletePB/' + pbID,
+        method: 'POST',
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function () {
+            loadListPB();
+            $("#sletForm").toggle();
+        }
+    })
+}
 function loadListPB() {
     $.get('rest/PB/allPB', function (data, textStatus, req) {
         console.log(data);
@@ -117,10 +117,23 @@ function loadListPB() {
         });
     });
 }
+
 function generateHTMLTable(pbatch) {
-    return '<tr><td>' + pbatch.pbID + '</td>' +
-        '<td>' + pbatch.status + '</td>' +
-        '<td>' + pbatch.receptID + '</td></tr>'
+    if (pbatch.slutdato != null) {
+        return '<tr><td>' + pbatch.pbID + '</td>' +
+            '<td>' + pbatch.status + '</td>' +
+            '<td>' + pbatch.receptID + '</td>' +
+            '<td>' + (new Date(pbatch.startdato)).toLocaleString() + '</td>' +
+            '<td>' + (new Date(pbatch.slutdato)).toLocaleString()+ '</td></tr>'
+    } else {
+        return '<tr><td>' + pbatch.pbID + '</td>' +
+            '<td>' + pbatch.status + '</td>' +
+            '<td>' + pbatch.receptID + '</td>' +
+            '<td>' + (new Date(pbatch.startdato)).toLocaleString() + '</td>' +
+            '<td>' + '</td></tr>'
+    }
+
+
 }
 
 
