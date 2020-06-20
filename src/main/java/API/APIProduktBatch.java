@@ -65,7 +65,7 @@ public class APIProduktBatch  {
     }
 
 
-    @GET
+    @POST
     @Path("/findPB/{pbID}")
     @Produces(MediaType.APPLICATION_JSON)
     public ProduktBatchDTO getPB (@PathParam("pbID") String pbID) throws DALException {
