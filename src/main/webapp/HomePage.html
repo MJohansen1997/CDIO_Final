@@ -2,49 +2,12 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="AdminBrugerStyle.css">
     <meta charset="UTF-8">
     <title>Rødovre Pharmaceutics Hjem</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var home = $("#container").html();
-            $("#hjem").click(function () {
-                console.log(home);
-                $("#container").empty().append(home);
-            });
-            $("#afvejning").click(function () {
-                $("#container").load("Afvejning.html #container");
-                $.getScript("Afvejning.js");
-                $.getScript("jquery.serializejson.js");
-            });
-            $("#rvbatches").click(function () {
-                $("#container").load("RaavareBatch.html #container");
-                $.getScript("RaavareBatchJS.js");
-                $.getScript("jquery.serializejson.js");
-            });
-            $("#admin").click(function () {
-                $("#container").load("AdminBruger.html #container");
-                $.getScript("AdminBrugerJS.js");
-                $.getScript("jquery.serializejson.js");
-            });
-            $("#raavarer").click(function () {
-                $("#container").load("Raavare.html #container");
-                $.getScript("Raavare.js");
-                $.getScript("jquery.serializejson.js");
-            });
-            $("#recept").click(function () {
-                $("#container").load("Recept.html #container");
-                $.getScript("ReceptJS.js");
-                $.getScript("jquery.serializejson.js");
-            });
-            $("#pdbatches").click(function () {
-                $("#container").load("ProduktBatch.html #container");
-                $.getScript("ProduktBatchJS.js");
-                $.getScript("jquery.serializejson.js");
-            });
-
-        })
-    </script>
+    <script src="jquery.serializejson.js"></script>
+    <script src="homepage.js"></script>
 </head>
 <header id=homepage-header>
     <nav>
@@ -89,7 +52,7 @@
             </p>
         </article>
         <div id="homepage-image-box">
-            <img src="drug.jpg" alt="Stoffer brormand" id="drugimg" height="450">
+            <img src="Images/drug.jpg" alt="Stoffer brormand" id="drugimg" height="450">
         </div>
         </div>
     </div>

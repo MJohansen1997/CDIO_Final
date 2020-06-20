@@ -1,6 +1,6 @@
+//ASDF
 $(document).ready(function () {
     loadRaavarerBatch();
-
     $('#opretForm').on('submit', function(e) {
         e.preventDefault();
         createRaavarerBatch()

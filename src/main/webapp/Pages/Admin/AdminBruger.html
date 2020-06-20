@@ -1,0 +1,106 @@
+<script src="./Pages/Admin/AdminBrugerJS.js"></script>
+
+
+<div id="adminpage-title-container" class="headpanel-container">
+    <h1 class="headpanel-title">Brugeradministration</h1>
+</div>
+<div id="container-admin">
+
+
+<!--leftside-->
+
+<nav id = admin-buttons-container>
+    <ul id="admin-buttons">
+        <button type="button" class="admin-button" id="buttonOpret">Opret</button>
+        <button type="button" class="admin-button" id="buttonRediger">Rediger</button>
+        <button type="button" class="admin-button" id="buttonSlet">Slet</button>
+        <button type="button" class="admin-button" id="buttonFind">Find</button>
+    </ul>
+</nav>
+<br>
+<div id="admin-forms">
+    <form id="opretForm">
+        <h1>Opret Bruger</h1>
+        <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>
+        <label for="rolle">Vælg Rolle:
+            <select name="rolle" id="rolle">
+                <option value="Brugeradminstrator">Brugeradminstrator</option>
+                <option value="Farmaceut">Farmaceut</option>
+                <option value="Produktionsleder">Produktionsleder</option>
+                <option value="Laborant">Laborant</option>
+            </select>
+        </label>
+        <p>Vælg Bruger initialer : <input type="text" name="ini" required/></p>
+        <p>Vælg Bruger CPR : <input type="text" name="cpr" required/></p>
+        <p>Vælg Password : <input type="text" name="password" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+
+    <form id="redigerForm">
+        <h1>Rediger Bruger</h1>
+        <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
+        <button type="submit">Rediger</button>
+    </form>
+
+    <form id="redigerInfoForm">
+        <h1>Rediger bruger</h1>
+        <input type="hidden" name="brugerID"/>
+        <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>
+        <select name="rolle" id="RolleRed">
+            <option value="Brugeradminstrator">Brugeradminstrator</option>
+            <option value="Farmaceut">Farmaceut</option>
+            <option value="Produktionsleder">Produktionsleder</option>
+            <option value="Laborant">Laborant</option>
+        </select>
+        <p>Vælg Bruger initialer : <input type="text" name="ini" required/></p>
+        <p>Vælg Bruger CPR : <input type="text" name="cpr" required/></p>
+        <p>Vælg Password : <input type="text" name="password" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+
+    <form id="sletForm">
+        <h1>Slet Bruger</h1>
+        <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
+        <button type="submit">Slet</button>
+    </form>
+
+    <form id="findForm">
+        <h1>Find Bruger</h1>
+        <p>Vælg brugerID : <input type="text" name="brugerID" required/></p>
+        <button type="submit">Find</button>
+
+        <table id="findForm-table" class="table">
+            <thead>
+            <tr>
+                <th>brugerID</th>
+                <th>Bruger Navn</th>
+                <th>Ini</th>
+                <th>Cpr</th>
+                <th>Rolle</th>
+                <th>Password</th>
+            </tr>
+            </thead>
+            <tbody id="findFormBody">
+            </tbody>
+        </table>
+    </form>
+</div>
+<div class = "table-container">
+<table id="userInfo-table">
+    <thead id = "admin-thead">
+
+    <tr id = "admin-thead-row">
+        <th class = "admin-table-header">brugerID</th>
+        <th class = "admin-table-header">Bruger Navn</th>
+        <th class = "admin-table-header">Ini</th>
+        <th class = "admin-table-header">Cpr</th>
+        <th class = "admin-table-header">Rolle</th>
+        <th class = "admin-table-header">Password</th>
+    </tr>
+    </thead>
+    <tbody id="brugerBody">
+    </tbody>
+</table>
+</div>
