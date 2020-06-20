@@ -1,6 +1,5 @@
 package DAO;
 
-import DTO.BrugerDTO;
 import DTO.ProduktBatchDTO;
 
 import java.sql.*;
@@ -53,16 +52,15 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
     public void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
         try {
 
-            /* Statement to SQL */
-            Statement stmt = newCon.createStatement();
             /* SQL Query to insert values */
-            String query = "INSERT INTO prodbestilling VALUES (" +
-                    "'" + produktbatch.getPbID() + "'" + ", " +
-                    "'" + produktbatch.getReceptID() + "'" + ", " +
-                    "'" + produktbatch.getStatus() + "'";
+            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO prodbestilling " +
+                    "(pbID,status,recID,startdato) VALUES (?, ?, ?, ?);");
 
-            /* Resultset from the query */
-            ResultSet rs = stmt.executeQuery(query);
+            preparedStatement.setString(1, produktbatch.getPbID());
+            preparedStatement.setString(2, produktbatch.getStatus());
+            preparedStatement.setString(3, produktbatch.getReceptID());
+            preparedStatement.setDate(4, (Date) produktbatch.getStartdato());
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             throw new DALException("Error! Couldn't insert desired values");
@@ -102,7 +100,9 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
         ProduktBatchDTO PBL = new ProduktBatchDTO(
                 rs.getString("pbID"),
                 rs.getString("status"),
-                rs.getString("recID"));
+                rs.getString("recID"),
+                rs.getTimestamp("startdato"),
+                rs.getTimestamp("slutdato"));
 
         return PBL;
     }

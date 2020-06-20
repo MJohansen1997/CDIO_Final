@@ -117,10 +117,23 @@ function loadListPB() {
         });
     });
 }
+
 function generateHTMLTable(pbatch) {
-    return '<tr><td>' + pbatch.pbID + '</td>' +
-        '<td>' + pbatch.status + '</td>' +
-        '<td>' + pbatch.receptID + '</td></tr>'
+    if (pbatch.slutdato != null) {
+        return '<tr><td>' + pbatch.pbID + '</td>' +
+            '<td>' + pbatch.status + '</td>' +
+            '<td>' + pbatch.receptID + '</td>' +
+            '<td>' + new Date(pbatch.startdato) + '</td>' +
+            '<td>' + new Date(pbatch.slutdato) + '</td></tr>'
+    } else {
+        return '<tr><td>' + pbatch.pbID + '</td>' +
+            '<td>' + pbatch.status + '</td>' +
+            '<td>' + pbatch.receptID + '</td>' +
+            '<td>' + new Date(pbatch.startdato) + '</td>' +
+            '<td>' + '</td></tr>'
+    }
+
+
 }
 
 
