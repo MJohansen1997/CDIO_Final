@@ -6,11 +6,13 @@ var message;
 var tada;
 
 $(document).ready(function () {
+    console.log("fuck");
     $(".inlab").hide();
     $("#result").hide();
-    $("#lablab").show();
     $("button").hide();
+    $("#lablab").show();
 });
+
 $(document).ready(function () {
     $("#labbut").show().click(function () {
         $.ajax({
