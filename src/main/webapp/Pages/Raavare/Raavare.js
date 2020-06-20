@@ -46,7 +46,7 @@ function createRaavarer() {
         data: JSON.stringify(data),
         success: function () {
             loadRaavarer();
-            alert("Oprettet bruger GZ homie")
+            alert("Oprettet Råvarer")
             $("#opretForm").toggle();
         }
     });

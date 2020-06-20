@@ -26,10 +26,13 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
         try {
             Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE id = \'" + pbId + "\' AND \'" + rbId+"\'");
+
+        return extractProduktBatchKompListFromResultSet(rs);
+
         } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
-        return null;
+
     }
 
     @Override
@@ -64,10 +67,11 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
                 alleprodukter.add(extractProduktBatchKompListFromResultSet(rs));
             }
 
+            return alleprodukter;
         } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
-        return null;
+
     }
 
     @Override

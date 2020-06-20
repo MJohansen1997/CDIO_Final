@@ -26,7 +26,10 @@ public class APIRaavareBatch {
         JSONObject json = new JSONObject(jsonBody);
         try {
 
-            RaavareBatchDTO RBDTO = new RaavareBatchDTO(incre.returnID("raavarebatches", "rbID"), json.getString("raavID"), json.getDouble("maengde"));
+            RaavareBatchDTO RBDTO = new RaavareBatchDTO(
+                    incre.returnID("raavarebatches", "rbID"),
+                    json.getString("raavID"),
+                    json.getDouble("maengde"));
             dbAccess.createRaavareBatch(RBDTO);
 
         } catch (DALException | SQLException | ClassNotFoundException e) {
@@ -51,7 +54,10 @@ public class APIRaavareBatch {
         JSONObject json = new JSONObject(jsonBody);
         try
         {
-            RaavareBatchDTO raavareBatch = new RaavareBatchDTO(json.getString("rbID"), json.getString("raavID"), json.getDouble("maengde"));
+            RaavareBatchDTO raavareBatch = new RaavareBatchDTO(
+                    json.getString("rbID"),
+                    json.getString("raavID"),
+                    json.getDouble("maengde"));
             dbAccess.updateRaavareBatch(raavareBatch);
         } catch (DALException e) {
             e.printStackTrace();

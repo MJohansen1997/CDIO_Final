@@ -24,7 +24,9 @@ $(document).ready(function () {
     $("#pdbatches").click(function () {
         $("#container").load("Pages/ProduktBatches/ProduktBatch.html");
     });
-
+    $("#pbKomp").click(function () {
+        $("#container").load("Pages/ProduktBatchKomp/ProduktBatchKomp.html");
+    });
     userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
     console.log("LOADING USERINFO", userInfo)

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<script src="./Pages/ProduktBatchKomp/ProduktBatchKomp.js"></script>
+<link rel="stylesheet" href="AdminBrugerStyle.css">
+<div id="adminpage-title-container" class="headpanel-container">
+    <h1 class="headpanel-title">ProduktBatchKomp</h1>
+</div>
+<nav>
+    <ul>
+        <button type="button" id="buttonFind">Find Produkt batch</button>
+        <button type="button" id="buttonRediger">Find Produkt batch komponent</button>
+    </ul>
+</nav>
+<br>
+<form id="findBesForm">
+    <h1>Find produkt bestilling </h1>
+    <p> Indtast produkt batch ID : <input type="text" name="pbID" required/></p>
+    <button type="submit">Søg</button>
+    <table id="findForm-table1" class="table">
+        <thead>
+        <tr>
+            <th>pbID</th>
+            <th>rbID</th>
+            <th>laborant</th>
+            <th>tara</th>
+            <th>netto</th>
+        </tr>
+        </thead>
+        <tbody id="findFormBody1">
+        </tbody>
+    </table>
+
+</form>
+
+<form id="findPBRBForm">
+    <h1>Find Produkt Batch med Råvarer batch</h1>
+    <p> Indtast  Produkt batch ID : <input type="text" name="pbID" required/></p>
+    <p>Indtast Råvarer batch ID : <input type="text" name = "rbID" required/></p>
+    <button type="submit"> Søg </button>
+
+    <table id="findForm-table" class="table">
+        <thead>
+        <tr>
+            <th>pbID</th>
+            <th>rbID</th>
+            <th>laborant</th>
+            <th>tara</th>
+            <th>netto</th>
+        </tr>
+        </thead>
+        <tbody id="findFormBody">
+        </tbody>
+    </table>
+</form>
+
+    <table id="userInfo-table" class="table">
+        <thead>
+        <tr>
+            <th>pbID</th>
+            <th>rbID</th>
+            <th>laborant</th>
+            <th>tara</th>
+            <th>netto</th>
+        </tr>
+        </thead>
+        <tbody id="pbkdBody">
+        </tbody>
+    </table>

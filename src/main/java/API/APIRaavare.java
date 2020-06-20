@@ -14,10 +14,11 @@ import java.sql.SQLException;
 import java.util.*;
 
 @Path("/raavarer")
-public class APIRaavare {
+public class APIRaavare
+{
     RaavareDAO dbAccess = new RaavareDAO();
 
-    public APIRaavare() throws SQLException, DALException, ClassNotFoundException
+    public APIRaavare()
     {
     }
 
@@ -25,7 +26,7 @@ public class APIRaavare {
     @GET
     @Path("/allRaavarer")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<RaavareDTO> getAllRaavarer() throws SQLException, DALException, ClassNotFoundException
+    public List<RaavareDTO> getAllRaavarer() throws DALException
     {
         return dbAccess.getRaavareList();
     }
@@ -33,7 +34,7 @@ public class APIRaavare {
     @POST
     @Path("/createRaavarer")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createRaavarer(String jsonBody) throws SQLException, DALException, ClassNotFoundException
+    public void createRaavarer(String jsonBody) throws DALException
     {
         IncrementID incre = new IncrementID();
         JSONObject json = new JSONObject(jsonBody);
@@ -78,7 +79,7 @@ public class APIRaavare {
     @GET
     @Path("/findRaavarer/{raavID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public RaavareDTO getRaavarer(@PathParam("raavID") String raavID) throws ClassNotFoundException, DALException, SQLException
+    public RaavareDTO getRaavarer(@PathParam("raavID") String raavID) throws DALException
     {
         RaavareDTO findRaavare = dbAccess.getRaavare(raavID);
         return findRaavare;
@@ -86,7 +87,7 @@ public class APIRaavare {
 
     @POST
     @Path("/deleteRaavarer/{raavID}")
-    public void deleteRaavarer(@PathParam("raavID") String raavID) throws ClassNotFoundException, DALException, SQLException
+    public void deleteRaavarer(@PathParam("raavID") String raavID) throws  DALException
     {
         dbAccess.deleteRaavarer(raavID);
     }
