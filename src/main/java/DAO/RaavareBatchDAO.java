@@ -1,7 +1,6 @@
 package DAO;
 
 import DTO.RaavareBatchDTO;
-import DTO.RaavareDTO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -95,7 +94,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
         }
     }
 
-    public void deleteRB(String rbID) throws DALException {
+    public RaavareBatchDTO deleteRB(String rbID) throws DALException {
 
         try {
             PreparedStatement preparedStatement = newCon.createStatement("DELETE FROM raavarebatches WHERE rbID = ?;");
@@ -104,6 +103,7 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
         } catch (SQLException e) {
             throw new DALException("Encountered an error when executing given sql statement.");
         }
+        return null;
     }
 
 

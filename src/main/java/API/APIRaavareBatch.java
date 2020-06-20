@@ -1,14 +1,15 @@
 package API;
 
-import DAO.*;
-import DTO.*;
+import DAO.DALException;
+import DAO.IncrementID;
+import DAO.RaavareBatchDAO;
+import DTO.RaavareBatchDTO;
 import org.json.JSONObject;
 
-import org.json.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
 
 
 @Path("/raavarebatch")
@@ -31,6 +32,15 @@ public class APIRaavareBatch {
         } catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @POST
+    @Path("/deleteRB/{rbID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public RaavareBatchDTO deleteRB (@PathParam("rbID") String rbID) throws  DALException {
+        RaavareBatchDTO raavareBatch = dbAccess.deleteRB(rbID);
+        return raavareBatch;
     }
 
     @POST
