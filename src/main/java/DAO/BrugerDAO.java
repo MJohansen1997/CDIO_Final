@@ -126,6 +126,26 @@ public class BrugerDAO implements IDAO {
         return false;
     }
 
+    public BrugerDTO extractVerifiedUser(String username, String password) throws DALException {
+        try {
+            Statement stmt = newCon.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM brugerer " + "WHERE brugerNavn = \'" + username + "\'");
+             while(rs.next()) {
+                 int i = 0;
+                 ArrayList<BrugerDTO> users = new ArrayList<>();
+                 users.add(extractUserFromResultSet(rs));
+                if(users.get(i).getPassword().equals(password)) {
+                    return users.get(i);
+                 }
+                i++;
+            }
+        } catch (SQLException ex) {
+            throw new DALException("Forkert brugernavn eller adgangskode");
+        }
+        return null;
+    }
+
+
     private BrugerDTO extractUserFromResultSet(ResultSet rs) throws SQLException {
         BrugerDTO user = new BrugerDTO(rs.getString("brugerID"), rs.getString("brugerNavn"),
                 rs.getString("ini"), rs.getString("cpr"), rs.getString("rolle"), rs.getString("password"));

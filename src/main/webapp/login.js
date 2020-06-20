@@ -3,39 +3,27 @@ $("#login").ready(function(){
 });
 
 $(document).ready(function() {
-
-    var userInfo;
     verifyLogin()
-
 });
 
 function verifyLogin(){
     $("button").click(function () {
-        $.ajax({
-            url: "rest/login/verify",
-            data: $('#loginform').serialize(),
-            contentType: "application/x-www-form-urlencoded",
-            method: 'POST',
-            success: function (data) {
-                console.log(data)
-                if (data == 'true') {
-                    console.log(data);
-                    window.location.href = 'HomePage.html';
-                }
-            }
-        });
-
+        updateGetBruger($('#loginform').serializeJSON().Username,$('#loginform').serializeJSON().Password)
     });
 }
 
-
-
-/*function updateGetBruger(){
-    $.get('rest/login/getUser', function (data, textStatus, req) {
-        console.log("DATA", data)
+function updateGetBruger(Username, Password){
+    $.get("rest/login/getUser?Username=" + Username + "&Password=" + Password, function (data, textStatus, req) {
         if (!data){
             alert("Der findes ikke nogen med det brugerID")
             return;
         }
+        console.log("SETTING USERINFO")
+
+        localStorage.setItem('userInfo', JSON.stringify(data))
+
+        window.location.href = 'HomePage.html';
     });
-}*/
+}
+
+
