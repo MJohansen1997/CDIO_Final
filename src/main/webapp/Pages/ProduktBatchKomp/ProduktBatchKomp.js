@@ -58,9 +58,10 @@ $(document).ready(function() {
     function getProduktBactKompPBRB(pbID,rbID)
     {
         $.ajax({
-            url: 'rest/produktbatches/findProduktBatchKomp?pbID=' + pbID + '&rbID=' + rbID,
+            url: 'rest/produktbatches/BatchKompPost?pbID=' + pbID + '&rbID=' + rbID,
             method: 'POST',
             success: function (data) {
+                console.log(data);
                 if (typeof data != "undefined") {
                     $("#findFormBody").empty().append(generateHTMLTable(data));
                 } else {

@@ -7,7 +7,6 @@ $(document).ready(function () {
     $("#afvejning").click(function () {
         $("#container").load("Afvejning.html");
         $.getScript("Afvejning.js");
-        $.getScript("jquery.serializejson.js");
     });
     $("#rvbatches").click(function () {
         $("#container").load("Pages/RaavareBatches/RaavareBatch.html");
@@ -27,8 +26,11 @@ $(document).ready(function () {
     $("#pbKomp").click(function () {
         $("#container").load("Pages/ProduktBatchKomp/ProduktBatchKomp.html");
     });
-    userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    $("#logud").click(function () {
+        window.location.href = 'index.html';
+    });
 
+    userInfo = JSON.parse(localStorage.getItem('userInfo'))
     console.log("LOADING USERINFO", userInfo)
     //console.log("DOES THIS WORK" + window.userInfo.brugerNavn)
     $('#userinfo').html(userInfo.brugerNavn)

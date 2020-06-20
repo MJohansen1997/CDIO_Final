@@ -4,9 +4,8 @@ var exists;
 var raavbatch;
 var message;
 var tada;
-
 $(document).ready(function () {
-    console.log("fuck");
+    $.getScript("jquery.serializejson.js");
     $(".inlab").hide();
     $("#result").hide();
     $("button").hide();
@@ -134,10 +133,6 @@ async function findprodKomps() {
     });
 }
 async function insertkomps() {
-    if (Object.keys(rec).length == Object.keys(prod).length){
-        changeStatus("Afsluttet");
-        alert("Denne Produktion er Fuldført og Afsluttet")
-    }
     outer:
     for (let i = 0; i < Object.keys(rec).length; i++) {
         inner:
@@ -176,12 +171,10 @@ function changeStatus(change) {
 }
 async function addkomp(name) {
     var formname = "#" + name + "form";
-    tada = $(document).find(formname).serializeJSON();
-    console.log(tada);
+    var preda = $(document).find(formname);
+    tada = (preda).serializeJSON();
     await getraavid(tada.rbId);
     await verify(raavbatch, tada);
-    console.log(JSON.stringify(raavbatch));
-    console.log(message);
     if ($.trim(message) == $.trim("Done")){
         $.ajax({
             url: 'rest/afvejning/createpbk',
@@ -195,14 +188,18 @@ async function addkomp(name) {
                 alert("Batchen er nu tilsat produktet");
                 await findreckomps();
                 await findprodKomps();
-                changeStatus("Under produktion")
                 await insertkomps();
+                if (Object.keys(rec).length == Object.keys(prod).length){
+                    changeStatus("Afsluttet");
+                    alert("Denne Produktion er Fuldført og Afsluttet")
+                }
+                else
+                    changeStatus("Under produktion");
             }
         });
     }
     else alert(message)
 }
-
 async function getraavid(input) {
     console.log("getraavid" + input);
     return $.ajax({
@@ -228,9 +225,8 @@ function changebatch() {
     });
 }
 function verify(rb, input) {
-    console.log($.trim(rb.raavareId) + $.trim(input.raavid));
-    if ($.trim(rb.raavareId) == $.trim(input.raavid)){
-        console.log("into");
+    console.log($.trim(rb.raavId) + " : " +  $.trim(input.raavid));
+    if ($.trim(rb.raavId) == $.trim(input.raavid)){
         if (Number(input.netto) > Number(rb.maengde))
             saver5("Den tilføjede raavarebatch indeholder ikke nok til denne recept");
         else if (Number(input.netto) > Number(input.max)){
@@ -249,7 +245,6 @@ function verify(rb, input) {
     else {
         saver5("Den indsatte RaavareBatch matcher ikke med den påkrævede raavarer")
     }
-
 }
 
 
