@@ -71,7 +71,6 @@ public class APIProduktBatch  {
 
     @POST
     @Path("/deletePB/{pbID}")
-    @Produces(MediaType.APPLICATION_JSON)
     public void deletePB (@PathParam("pbID") String pbID) throws  DALException {
         dbAccess.deleteProduktBatch(pbID);
 
