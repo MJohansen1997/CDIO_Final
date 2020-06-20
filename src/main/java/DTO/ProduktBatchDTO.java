@@ -8,14 +8,14 @@ import java.util.Date;
 public class ProduktBatchDTO {
 
     /* Constructor */
-    public ProduktBatchDTO(String pbID, String status, String recID, Date startdato) {
+    public ProduktBatchDTO(String pbID, String status, String recID, Timestamp startdato) {
         this.pbID = pbID;
         this.status = status;
         this.recID = recID;
         this.startdato = startdato;
     }
 
-    public ProduktBatchDTO(String pbID, String status, String recID, Date startdato, Date slutdato) {
+    public ProduktBatchDTO(String pbID, String status, String recID, Timestamp startdato, Timestamp slutdato) {
         this.pbID = pbID;
         this.status = status;
         this.recID = recID;
@@ -39,15 +39,15 @@ public class ProduktBatchDTO {
         return recID;
     }
 
-    public Date getStartdato() {
+    public Timestamp getStartdato() {
         return startdato;
     }
 
-    public Date getSlutdato() {
+    public Timestamp getSlutdato() {
         return slutdato;
     }
 
-    public void setSlutdato(Date slutdato) {
+    public void setSlutdato(Timestamp slutdato) {
         this.slutdato = slutdato;
     }
 
@@ -60,7 +60,7 @@ public class ProduktBatchDTO {
     // Recept id
     String recID;
 
-    Date startdato;
-    Date slutdato;
+    Timestamp startdato;
+    Timestamp slutdato;
 
 }

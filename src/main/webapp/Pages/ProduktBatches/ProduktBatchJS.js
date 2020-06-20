@@ -123,13 +123,13 @@ function generateHTMLTable(pbatch) {
         return '<tr><td>' + pbatch.pbID + '</td>' +
             '<td>' + pbatch.status + '</td>' +
             '<td>' + pbatch.receptID + '</td>' +
-            '<td>' + new Date(pbatch.startdato) + '</td>' +
-            '<td>' + new Date(pbatch.slutdato) + '</td></tr>'
+            '<td>' + (new Date(pbatch.startdato)).toLocaleString() + '</td>' +
+            '<td>' + (new Date(pbatch.slutdato)).toLocaleString()+ '</td></tr>'
     } else {
         return '<tr><td>' + pbatch.pbID + '</td>' +
             '<td>' + pbatch.status + '</td>' +
             '<td>' + pbatch.receptID + '</td>' +
-            '<td>' + new Date(pbatch.startdato) + '</td>' +
+            '<td>' + (new Date(pbatch.startdato)).toLocaleString() + '</td>' +
             '<td>' + '</td></tr>'
     }
 

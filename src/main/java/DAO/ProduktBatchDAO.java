@@ -59,7 +59,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
             preparedStatement.setString(1, produktbatch.getPbID());
             preparedStatement.setString(2, produktbatch.getStatus());
             preparedStatement.setString(3, produktbatch.getReceptID());
-            preparedStatement.setDate(4, (Date) produktbatch.getStartdato());
+            preparedStatement.setTimestamp(4, produktbatch.getStartdato());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

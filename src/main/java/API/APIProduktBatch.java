@@ -36,7 +36,7 @@ public class APIProduktBatch  {
                     incID.returnID("prodbestilling","pbID"),
                     json.getString("chosenStatus"),
                     json.getString("chosenRecept"),
-                    new Date(System.currentTimeMillis()));
+                    new Timestamp(System.currentTimeMillis()));
             //Indsætter i databasen med DAOen
             dbAccess.createProduktBatch(pbatch);
         } catch (DALException e) {
