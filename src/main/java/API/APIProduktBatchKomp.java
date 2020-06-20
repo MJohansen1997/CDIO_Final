@@ -39,7 +39,7 @@ public class APIProduktBatchKomp
         return dbAccess.getProduktBatchKompList(pbID);
     }
 
-    @GET
+    @POST
     @Path("/allProduktBatchKomp")
     @Produces(MediaType.APPLICATION_JSON)
     public ProduktBatchKompDTO getProduktBatchKompPBRB(@QueryParam("pbID") String pbID, @QueryParam("rbID") String rbID) throws DALException
