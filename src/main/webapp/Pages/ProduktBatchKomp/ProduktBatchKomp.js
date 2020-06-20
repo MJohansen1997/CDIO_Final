@@ -4,13 +4,13 @@ $(document).ready(function() {
     $('#findBesForm').on('submit', function(e)
     {
         e.preventDefault();
-        getProduktBactKomp($('#findBesForm').serializeJSON().pbID)
+        getProduktBactKomp($('#findBesForm').serializeJSON().pbID);
         $("#findForm-table1").show();
     });
     $('#findPBRBForm').on('submit', function(e)
     {
         e.preventDefault();
-        getProduktBactKompPBRB($('#findPBRBForm').serializeJSON().pbID)
+        getProduktBactKompPBRB($('#findPBRBForm').serializeJSON().pbID, $('#findPBRBForm').serializeJSON().rbID);
         $("#findForm-table").show();
     });
 
@@ -57,17 +57,15 @@ $(document).ready(function() {
 
     function getProduktBactKompPBRB(pbID,rbID)
     {
-        console.log(pbID);
-        $.get('rest/produktbatches/findProduktBatchKomp?pbID=' + pbID + "&rbID=" + rbID, function (data, textStatus, req)
-        {
-            console.log(data);
-            if(typeof data != "undefined")
-            {
-                $("#findFormBody").empty().append(generateHTMLTable(data));
-            }
-            else
-            {
-                alert("Der findes ikke nogen Produkt Batch Komp ID")
+        $.ajax({
+            url: 'rest/produktbatches/findProduktBatchKomp?pbID=' + pbID + '&rbID=' + rbID,
+            method: 'POST',
+            success: function (data) {
+                if (typeof data != "undefined") {
+                    $("#findFormBody").empty().append(generateHTMLTable(data));
+                } else {
+                    alert("Der findes ikke nogen Produkt Batch Komp ID")
+                }
             }
         });
     }
