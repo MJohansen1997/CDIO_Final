@@ -8,27 +8,15 @@ $(document).ready(function () {
     $.getScript("jquery.serializejson.js");
     $(".inlab").hide();
     $("#result").hide();
-    $("button").hide();
+    $("#userid").val(userInfo.brugerID);
     $("#lablab").show();
+    $("#prodlab").show();
+    $("#subprod").show();
 });
 
+
+
 $(document).ready(function () {
-    $("#labbut").show().click(function () {
-        $.ajax({
-            url: "rest/afvejning/verifylab",
-            data: $('#labidform').serialize(),
-            contentType: "application/x-www-form-urlencoded",
-            method: 'POST',
-            success: function (data) {
-                if (data == 'true') {
-                    $("#labbut").remove();
-                    $("#userid").prop("readonly", true);
-                    $("#subprod").show();
-                    $("#prodlab").show();
-                } else return alert("ingen laborant fundet med dette ID eller brugerId'et har ikke adgang til dette indhold");
-            }
-        });
-    });
     $("#subprod").click(function () {
         $.ajax({
             url: "rest/afvejning/verifyprod",
