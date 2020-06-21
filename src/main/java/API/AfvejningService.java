@@ -38,6 +38,9 @@ public class AfvejningService {
             ProduktBatchDAO PDAO = new ProduktBatchDAO();
             ProduktBatchDTO PB = PDAO.getProduktBatch(prodID);
             ReceptDAO RDAO = new ReceptDAO();
+            if (PB == null)
+                return null;
+
             return RDAO.getRecept(PB.getReceptID());
         }
         catch (DALException e){
