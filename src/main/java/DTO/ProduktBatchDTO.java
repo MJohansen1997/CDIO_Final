@@ -6,7 +6,15 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ProduktBatchDTO {
+    //Produktbatch id
+    String pbID;
+    // Status 0: Ikke påbegyndt, 1: Under produktion, 2: Afsluttet
+    String status;
+    // Recept id
+    String recID;
 
+    Timestamp startdato;
+    Timestamp slutdato;
     /* Constructor */
     public ProduktBatchDTO(String pbID, String status, String recID, Timestamp startdato) {
         this.pbID = pbID;
@@ -53,14 +61,6 @@ public class ProduktBatchDTO {
 
 
 
-    //Produktbatch id
-    String pbID;
-    // Status 0: Ikke påbegyndt, 1: Under produktion, 2: Afsluttet
-    String status;
-    // Recept id
-    String recID;
 
-    Timestamp startdato;
-    Timestamp slutdato;
 
 }
