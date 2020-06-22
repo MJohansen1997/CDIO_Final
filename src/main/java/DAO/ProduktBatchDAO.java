@@ -67,6 +67,23 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
         }
     }
 
+    public void updateslut(ProduktBatchDTO produktBatch) throws DALException {
+        try {
+
+            /* SQL Statement & Query to update values */
+            PreparedStatement statusQuery = newCon.createStatement
+                    ("UPDATE prodbestilling SET status = ?, slutdato = ? WHERE pbID = ?");
+
+            statusQuery.setString(1, produktBatch.getStatus());
+            statusQuery.setTimestamp(2, produktBatch.getSlutdato());
+            statusQuery.setString(3, produktBatch.getPbID());
+            statusQuery.executeUpdate();
+
+        } catch (SQLException | DALException e) {
+            throw new DALException("Error! Couldn't update desired values");
+        }
+    }
+
     @Override
     public void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
         try {

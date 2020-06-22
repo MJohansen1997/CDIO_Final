@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Path("/afvejning")
@@ -37,6 +38,9 @@ public class AfvejningService {
             ProduktBatchDAO PDAO = new ProduktBatchDAO();
             ProduktBatchDTO PB = PDAO.getProduktBatch(prodID);
             ReceptDAO RDAO = new ReceptDAO();
+            if (PB == null)
+                return null;
+
             return RDAO.getRecept(PB.getReceptID());
         }
         catch (DALException e){
@@ -94,9 +98,15 @@ public class AfvejningService {
         try{
             ProduktBatchDAO dao = new ProduktBatchDAO();
             ProduktBatchDTO dto = dao.getProduktBatch(prodid);
-            dto.setStatus(status);
-            dao.updateProduktBatch(dto);
-
+            if (status.equals("Afsluttet") && dto.getSlutdato() == null){
+                dto.setStatus(status);
+                dto.setSlutdato(new Timestamp(System.currentTimeMillis()));
+                dao.updateslut(dto);
+            }
+            else {
+                dto.setStatus(status);
+                dao.updateProduktBatch(dto);
+            }
         } catch (DALException e) {
             e.printStackTrace();
         }
@@ -142,7 +152,7 @@ public class AfvejningService {
             RaavareBatchDAO dao = new RaavareBatchDAO();
             RaavareBatchDTO rb = new RaavareBatchDTO(
                     json.getString("rbID"),
-                    json.getString("raavareId"),
+                    json.getString("raavId"),
                     json.getDouble("maengde"));
 
             dao.updateRaavareBatch(rb);

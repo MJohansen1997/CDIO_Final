@@ -11,7 +11,7 @@ $(document).ready(function () {
     $('#findForm').on('submit', function (e) {
         e.preventDefault();
         getPB($('#findForm').serializeJSON().pbID);
-        $("#findForm-table").show();
+
     });
 
     $('#sletForm').on('submit', function (e) {
@@ -22,7 +22,7 @@ $(document).ready(function () {
     $('#redigerForm').on('submit', function (e) {
         e.preventDefault();
         updateGetBruger($('#redigerForm').serializeJSON().pbID);
-        $("#redigerInfoForm").toggle();
+
     });
 
     $('#redigerInfoForm').on('submit', function (e) {
@@ -47,9 +47,12 @@ function createPB() {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function () {
-            loadListPB();
-            alert("Oprettet produktbatch gz homie");
-            $("#opretForm").toggle();
+            if (data != null) {
+                loadListPB();
+                alert("Oprettet produktbatch gz homie");
+                $("#opretForm").toggle();
+            } else alert("Fejl! Kunne ikke oprette produktbatch")
+
         }
     })
 }
@@ -63,9 +66,12 @@ function updatePB() {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function () {
-            loadListPB();
-            $("#redigerForm").toggle();
-            $("#redigerInfoForm").toggle();
+            if (data != null) {
+                loadListPB();
+                $("#redigerForm").toggle();
+                $("#redigerInfoForm").toggle();
+            } else alert("Fejl! Kunne ikke opdatere produktbatch")
+
         }
     })
 }
@@ -74,13 +80,13 @@ function updateGetBruger(pbID) {
     $.get('rest/PB/findPB/' + pbID, function (data, textStatus, req) {
         console.log("DATA", data)
         if (!data) {
-            alert("Der findes ikke nogen med det brugerID")
+            alert("Fejl! kan ikke finde pbID");
             return;
         }
         $form = $('#redigerInfoForm');
         $form.find('[name="pbID"]').val(data.pbID);
         $form.find('[name="status"]').val(data.status);
-
+        $("#redigerInfoForm").toggle();
         });
     }
 
@@ -88,25 +94,27 @@ function getPB(pbID) {
     $.get('rest/PB/findPB/' + pbID, function (data, textStatus, req) {
         if (typeof data != "undefined") {
             $("#pbBody").empty().append(generateHTMLTable(data));
+            $("#findForm-table").toggle();
         } else {
-            alert("Der findes ikke nogen med det brugerID");
+            alert("Fejl! pbID findes ikke");
         }
     });
 }
 
 function deletePB(pbID) {
-    var data = $('#sletForm').serializeJSON();
-    console.log(data)
     $.ajax({
         url: 'rest/PB/deletePB/' + pbID,
         method: 'POST',
         contentType: "application/json",
-        data: JSON.stringify(data),
-        success: function () {
-            loadListPB();
-            $("#sletForm").toggle();
+        data: JSON.stringify(pbID),
+        success: function (data) {
+            if (data != null) {
+                loadListPB();
+                $("#sletForm").toggle();
+            } else alert("Det indtastede pbID kan ikke findes!")
+            }
         }
-    })
+    )
 }
 function loadListPB() {
     $.get('rest/PB/allPB', function (data, textStatus, req) {
@@ -120,8 +128,12 @@ function loadListPB() {
 
 function generateHTMLTable(pbatch) {
     if (pbatch.slutdato != null) {
+
+        localStorage.setItem("status", pbatch.status);
+        console.log(localStorage.getItem("status"));
+
         return '<tr><td>' + pbatch.pbID + '</td>' +
-            '<td>' + pbatch.status + '</td>' +
+            '<td>' +  pbatch.status + '</td>' +
             '<td>' + pbatch.receptID + '</td>' +
             '<td>' + (new Date(pbatch.startdato)).toLocaleString() + '</td>' +
             '<td>' + (new Date(pbatch.slutdato)).toLocaleString()+ '</td></tr>'
@@ -132,6 +144,7 @@ function generateHTMLTable(pbatch) {
             '<td>' + (new Date(pbatch.startdato)).toLocaleString() + '</td>' +
             '<td>' + '</td></tr>'
     }
+
 
 
 }
@@ -145,6 +158,7 @@ function loadRecepter() {
         $.each(data, function (i, receptValues) {
             cr.append(new Option(receptValues.receptNavn + " : " + receptValues.receptID, receptValues.receptID));
         });
+
     });
 }
 

@@ -27,7 +27,9 @@ $(document).ready(function () {
     $("#pbKomp").click(function () {
         $("#container").load("Pages/ProduktBatchKomp/ProduktBatchKomp.html");
     });
-
+    $("#logud").click(function () {
+        window.location.href = 'index.html';
+    });
 
     userInfo = JSON.parse(localStorage.getItem('userInfo'))
     console.log("LOADING USERINFO", userInfo)

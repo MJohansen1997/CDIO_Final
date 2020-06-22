@@ -1,5 +1,6 @@
 package DAO;
 
+import DTO.BrugerDTO;
 import DTO.ProduktBatchKompDTO;
 
 import java.sql.PreparedStatement;
@@ -24,15 +25,26 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     @Override
     public ProduktBatchKompDTO getProduktBatchKomp(String pbId, String rbId) throws DALException {
         try {
-            Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE id = \'" + pbId + "\' AND \'" + rbId+"\'");
+            PreparedStatement preparedStatement = newCon.createStatement("Select * From produktbatches " +
+                    " Where pbID = ?;");
 
-        return extractProduktBatchKompListFromResultSet(rs);
+            preparedStatement.setString(1, pbId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while(rs.next()) {
+                int i = 0;
+                ArrayList<ProduktBatchKompDTO> users = new ArrayList<>();
+                users.add(extractProduktBatchKompListFromResultSet(rs));
+                if(users.get(i).getRbId().equals(rbId)) {
+                    return users.get(i);
+                }
+                i++;
+            }
 
         } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
-
+        throw new DALException("fuck mig");
     }
 
     @Override

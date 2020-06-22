@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    loadRecepter()
+    loadRecepter();
 
     $('#opretForm').on('submit', function(e){
         e.preventDefault();
@@ -15,7 +15,7 @@ $(document).ready(function() {
     $('#redigerForm').on('submit', function(e){
         e.preventDefault();
         updateGetRecept($('#redigerForm').serializeJSON().receptID)
-        $("#redigerInfoForm").toggle();
+
     });
 
     $('#redigerInfoForm').on('submit', function(e){
@@ -36,23 +36,23 @@ $(document).ready(function() {
 
 function createRecept(receptNavn) {
     var data = $('#opretForm').serializeJSON();
-    console.log(data)
     $.ajax({
         url:'rest/recept/createRecept/'+receptNavn,
         method:'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (data){
-            console.log(data)
-            loadRecepter();
-            $("#opretForm").toggle();
+            if (data != null) {
+                loadRecepter();
+                $("#opretForm").toggle();
+            } else alert("Det indtastede pbID kan ikke findes!");
         }
     })
 }
 
 function loadRecepter() {
     $.get('rest/recept/allRecepts', function (data, textStatus, req) {
-        console.log(data)
+        console.log(data);
         $("#receptBody").empty();
         $.each(data, function (i, receptValues) {
             $('#receptBody').append(generateHTMLTable(receptValues));
@@ -68,44 +68,47 @@ function generateHTMLTable(bruger){
 
 function updateGetRecept(receptID){
     $.get('rest/recept/findRecept/'+receptID, function (data, textStatus, req) {
-        console.log("DATA", data)
+        console.log("DATA", data);
         if (!data){
-            alert("Der findes ikke nogen med det brugerID")
+            alert("Der findes ikke nogen med det brugerID");
             return;
         }
-        $form = $('#redigerInfoForm')
-        $form.find('[name="receptID"]').val(data.receptID)
-        $form.find('[name="receptNavn"]').val(data.receptNavn)
+        $form = $('#redigerInfoForm');
+        $form.find('[name="receptID"]').val(data.receptID);
+        $form.find('[name="receptNavn"]').val(data.receptNavn);
+        $("#redigerInfoForm").toggle();
     });
 }
 
 function updateRecept(){
     var data = $('#redigerInfoForm').serializeJSON();
-    console.log(data)
     $.ajax({
         url:'rest/recept/updateRecept',
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (){
-            loadRecepter();
-            $("#redigerForm").toggle();
-            $("#redigerInfoForm").toggle();
+        success: function (data){
+            if (data != null) {
+                loadRecepter();
+                $("#redigerForm").toggle();
+                $("#redigerInfoForm").toggle()
+            } else alert("Det indtastede pbID kan ikke findes!");
         }
     })
 }
 
 function deleteBruger(receptID) {
-    var data = $('#sletForm').serializeJSON();
-    console.log(data)
     $.ajax({
         url:'rest/recept/deleteRecept/'+ receptID,
         method: 'POST',
         contentType:"application/json",
-        data: JSON.stringify(data),
-        success: function(){
-            loadRecepter();
-            $("#sletForm").toggle();
+        data: JSON.stringify(receptID),
+        success: function(data){
+            if (data != null) {
+                loadRecepter();
+                $("#sletForm").toggle();
+            } else alert("Det indtastede pbID kan ikke findes!")
+
         }
     })
 }
