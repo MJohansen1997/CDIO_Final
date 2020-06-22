@@ -128,8 +128,12 @@ function loadListPB() {
 
 function generateHTMLTable(pbatch) {
     if (pbatch.slutdato != null) {
+
+        localStorage.setItem("status", pbatch.status);
+        console.log(localStorage.getItem("status"));
+
         return '<tr><td>' + pbatch.pbID + '</td>' +
-            '<td>' + pbatch.status + '</td>' +
+            '<td>' +  pbatch.status + '</td>' +
             '<td>' + pbatch.receptID + '</td>' +
             '<td>' + (new Date(pbatch.startdato)).toLocaleString() + '</td>' +
             '<td>' + (new Date(pbatch.slutdato)).toLocaleString()+ '</td></tr>'
@@ -140,6 +144,7 @@ function generateHTMLTable(pbatch) {
             '<td>' + (new Date(pbatch.startdato)).toLocaleString() + '</td>' +
             '<td>' + '</td></tr>'
     }
+
 
 
 }
