@@ -7,6 +7,7 @@ $(document).ready(function () {
     $("#afvejning").click(function () {
         $("#container").load("Afvejning.html");
         $.getScript("Afvejning.js");
+        $.getScript("jquery.serializejson.js");
     });
     $("#rvbatches").click(function () {
         $("#container").load("Pages/RaavareBatches/RaavareBatch.html");
@@ -43,9 +44,12 @@ $(document).ready(function () {
     $('#afvejning').hide();
     $('#rvbatches').hide();
     $('#pdbatches').hide();
+    $('#pbKomp').hide();
     $('#recept').hide();
     $('#raavarer').hide();
     $('#logud').hide();
+
+    pbKomp
 
     if (userInfo.rolle === 'Brugeradminstrator'){
         $('#hjem').show();
@@ -56,6 +60,7 @@ $(document).ready(function () {
         $('#afvejning').show();
         $('#rvbatches').show();
         $('#pdbatches').show();
+        $('#pbKomp').show();
         $('#recept').show();
         $('#raavarer').show();
         $('#logud').show();
@@ -64,6 +69,7 @@ $(document).ready(function () {
         $('#afvejning').show();
         $('#rvbatches').show();
         $('#pdbatches').show();
+        $('#pbKomp').show();
         $('#logud').show();
     } else if (userInfo.rolle === 'Laborant') {
         $('#hjem').show();

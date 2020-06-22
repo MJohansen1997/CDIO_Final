@@ -9,12 +9,13 @@
 <body>
 
 <div id="headerInfo">
-    <h1>Produktion (Tilstand: </h1> <h1 id="tilstand"></h1>
+    <h1>Produktion (Tilstand: </h1> <h1 id="tilstand">)</h1>
     <p>Produkt Batch </p> <p id="beskrivtilstand"></p>
     <!--firkant-->
     <p>Udskrevet: </p><p id="udskrevDato">   </p>
-
 </div>
+
+<div id="raavarebatches"></div>
 
 <div id="footerInfo">
     <p>Sum Tara: </p>
@@ -24,9 +25,7 @@
     <p>Produktion Start</p>
     <p>Produktion Slut</p>
 </div>
-
-<input type="button" onclick="printDiv('printableArea')" value="print a div!" />
-
+<button onclick="window.print()">Print this page</button>
 
 </body>
 </html>

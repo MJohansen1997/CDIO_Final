@@ -85,8 +85,4 @@ public interface IDAO {
         void updateProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException;
     }
 
-    public interface IPrintDAO{
-        PrintDTO getPrint(String pbID, String status, String recID) throws DALException, SQLException, ClassNotFoundException;
-
-    }
 }
