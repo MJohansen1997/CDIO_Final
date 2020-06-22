@@ -135,24 +135,37 @@ async function insertkomps() {
     outer:
     //forloop
     for (let i = 0; i < Object.keys(rec).length; i++) {
-        inner:
-        for (let j = 0; j < Object.keys(prod).length; j++) {
-            await getStatus(rec[i].raavareID,prod[j].rbId);
+
+        if (Object.keys(prod).length == 0){
+            await getStatus(rec[i].raavareID,null);
             //hvis recepten har en raavareid som den nuværende produktkomp liste ikke indeholder vil denne blive tilsat til mangler
-            if(exists.status == "false" && j == Object.keys(prod).length-1) {
-                $("#mangler").append(formunfilled(exists.name, parseFloat(rec[i].tolerance), $("#userid").val(),
-                    rec[i].raavareID, $("#produktionsid").val(), rec[i].nonNetto));
-                $(document).find("#but" + exists.name + "").on("click",function () {
-                    var komp = $(this).val();
-                    addkomp(komp);
-                });
-            }
-            //hvis den nuværende produktkomponent findes bliver den tilsat under færdig listen
-            if(exists.status == "true"){
-                $("#faerdig").append(formfilled(exists.name, prod[j].pbId, prod[j].rbId, prod[j].tara,
-                    prod[j].netto, prod[j].labID));
-                continue outer;
-            }
+            $("#mangler").append(formunfilled(exists.name, parseFloat(rec[i].tolerance), $("#userid").val(),
+                rec[i].raavareID, $("#produktionsid").val(), rec[i].nonNetto));
+            $(document).find("#but" + exists.name + "").on("click",function () {
+                var komp = $(this).val();
+                addkomp(komp);
+            });
+        }
+        else {
+            inner:
+                for (let j = 0; j < Object.keys(prod).length; j++) {
+                    await getStatus(rec[i].raavareID, prod[j].rbId);
+                    //hvis recepten har en raavareid som den nuværende produktkomp liste ikke indeholder vil denne blive tilsat til mangler
+                    if (exists.status == "false" && j == Object.keys(prod).length - 1) {
+                        $("#mangler").append(formunfilled(exists.name, parseFloat(rec[i].tolerance), $("#userid").val(),
+                            rec[i].raavareID, $("#produktionsid").val(), rec[i].nonNetto));
+                        $(document).find("#but" + exists.name + "").on("click", function () {
+                            var komp = $(this).val();
+                            addkomp(komp);
+                        });
+                    }
+                    //hvis den nuværende produktkomponent findes bliver den tilsat under færdig listen
+                    if (exists.status == "true") {
+                        $("#faerdig").append(formfilled(exists.name, prod[j].pbId, prod[j].rbId, prod[j].tara,
+                            prod[j].netto, prod[j].labID));
+                        continue outer;
+                    }
+                }
         }
     }
 }
