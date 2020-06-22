@@ -8,16 +8,16 @@
 <div id="container-admin">
 
     <!--leftside-->
-
-    <nav id = ReceptKomp-buttons-container>
+    <div class="page-container">
+    <nav id = ReceptKomp-buttons-container class="buttons-container">
         <ul id="ReceptKomp-buttons">
-            <button type="button" class="admin-button" id="buttonOpret">Opret</button>
-            <button type="button" class="admin-button" id="buttonSlet">Slet</button>
-            <button type="button" class="admin-button" id="buttonFind">Find</button>
+            <button type="button" class="edit-button" id="buttonOpret">Opret</button>
+            <button type="button" class="edit-button" id="buttonSlet">Slet</button>
+            <button type="button" class="edit-button" id="buttonFind">Find</button>
         </ul>
     </nav>
     <br>
-    <div id="ReceptKomp-forms">
+    <div id="ReceptKomp-forms" class="forms">
         <form id="opretForm">
             <h1>Opret Recept Komponent</h1>
             <p>Vælg ReceptID : <input type="text" name="ReceptID" required/></p>
@@ -54,17 +54,18 @@
         </form>
     </div>
     <div class = "table-container">
-        <table id="receptInfo-table">
+        <table id="receptInfo-table" class = "data-table">
             <thead id = "recept-thead">
 
             <tr id = "recept-thead-row">
-                <th class = "admin-table-header">Recept ID</th>
-                <th class = "admin-table-header">Raavare ID</th>
-                <th class = "admin-table-header">nonNetto</th>
-                <th class = "admin-table-header">Tolerance</th>
+                <th class = "table-header">Recept ID</th>
+                <th class = "table-header">Raavare ID</th>
+                <th class = "table-header">nonNetto</th>
+                <th class = "table-header">Tolerance</th>
             </tr>
             </thead>
             <tbody id="receptbody">
             </tbody>
         </table>
+    </div>
     </div>
