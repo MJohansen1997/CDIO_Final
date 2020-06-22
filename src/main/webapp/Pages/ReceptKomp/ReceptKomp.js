@@ -1,3 +1,4 @@
+//@Author Mikkel Johansen s175194
 $(document).ready(function() {
     loadBrugere();
     $('#opretForm').on('submit', function(e){

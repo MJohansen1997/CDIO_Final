@@ -1,6 +1,5 @@
 package DAO;
 
-import DTO.ReceptDTO;
 import DTO.ReceptKompDTO;
 
 import java.sql.PreparedStatement;
@@ -9,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-/** @author Johansen, Mikkel (john.doe@example.com)*/
+/** @author Johansen, Mikkel s175194*/
 
 public class ReceptKompDAO implements IDAO.IReceptKompDAO {
 
