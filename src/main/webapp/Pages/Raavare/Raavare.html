@@ -4,15 +4,17 @@
  <div id="adminpage-title-container" class="headpanel-container">
      <h1 class="headpanel-title">Råvare</h1>
  </div>
-    <nav>
+<div class="page-container">
+    <nav class = "buttons-container">
         <ul>
-            <button type="button" id="buttonOpret">Opret</button>
-            <button type="button" id="buttonRediger">Rediger</button>
-            <button type="button" id="buttonSlet">Slet</button>
-            <button type="button" id="buttonFind">Find</button>
+            <button type="button" class="edit-button" id="buttonOpret">Opret</button>
+            <button type="button" class="edit-button" id="buttonRediger">Rediger</button>
+            <button type="button" class="edit-button" id="buttonSlet">Slet</button>
+            <button type="button" class="edit-button" id="buttonFind">Find</button>
         </ul>
     </nav>
     <br>
+    <div class = "forms">
     <form id="opretForm">
         <h1>Opret R&aring;varer</h1>
          <p> Indtast Råvarer : <input type="text" name="raavNavn" required/></p>
@@ -59,15 +61,18 @@
             </tbody>
         </table>
     </form>
-
+    </div>
+    <div class = "table-container">
         <table id="userInfo-table" class="table">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Navn</th>
-            <th>Leverandør</th>
+            <th class = "table-header">ID</th>
+            <th class = "table-header">Navn</th>
+            <th class = "table-header">Leverandør</th>
         </tr>
         </thead>
         <tbody id="raavBody">
         </tbody>
     </table>
+    </div>
+</div>

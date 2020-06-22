@@ -1,0 +1,18 @@
+th {
+    text-align: left;
+    padding: 8px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+hr.line {
+    border-top: 1px dashed;
+}
+
+.heleprintet{
+    border: 1px dashed black;
+    width: 500px;
+    margin: auto;
+}

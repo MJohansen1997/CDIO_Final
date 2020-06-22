@@ -15,7 +15,7 @@ nav {
     float: left;
 }
 .homepages-body {
-    background: url("Images/bluebackground.jpg") no-repeat center center fixed;
+    background: url("images/bluebackground.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 .headpanel-container {
@@ -50,7 +50,7 @@ nav {
 #meme {float: right; padding-right: 10px}
 
 .table-container {
-    margin: 50px 0 0 125px;
+    margin: auto auto;
     font-size: 19px;
     background: white;
     height: 500px;
@@ -58,13 +58,28 @@ nav {
     border: 1px solid black;
     overflow: auto;
     float: right;
-    margin: 0 auto;
-    margin-right: 30%;
 }
 td {
     padding: 0.25rem;
 }
+.forms {
+    background-color: white;
+    width: fit-content;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 10px;
+    height: fit-content;
+    margin: auto auto;
+}
 
+.buttons-container {
+    background: white;
+    margin:  auto auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0 40px;
+    padding-inline-start: 0;
+}
 /* Login forsiden*/
 
 body.login-page {
@@ -213,31 +228,22 @@ article, .section-title {
 }
 
 /* -------------Adminpage------------*/
-#container-admin {
+.page-container {
     position: relative;
     display: flex;
     height: 700px;
 
 }
-#admin-buttons-container {
-    background: white;
-    position: absolute;
-    left: 0;
-    margin: 200px 0 0 40px;
-    border: 1px solid black;
-}
-#admin-buttons {
-    padding: 0 30px;
-}
 
-.admin-button {
+
+.edit-button {
     font-size: 20px;
     min-width: 100px;
     position: relative;
     margin: 20px 0 0 0;
 }
 
-.admin-table-header {
+.table-header {
     top: 0;
     position: sticky;
     background: white;
@@ -246,19 +252,31 @@ article, .section-title {
     padding: 5px 4px ;
 }
 
-.forms {
-    width: 400px;
-    height: 300px;
-    border: 1px solid black;
-    margin: 125px 0 0 400px;
-    padding: 0 0 0 20px;
-    background: white;
-}
-#userInfo-table {
+.data-table {
     border-collapse: separate;
     border-spacing: 0;
 }
-#admin-table-body td {
-    padding: 10px 10px;
+/*-----------Afvejning--------*/
+#lab {
+    background: white;
+    border: 1px solid black;
+    text-align: left;
+    width: fit-content;
+    margin: 40px auto 0;
+    padding: 6px;
 }
-
+#result {
+    background: white;
+    border: 1px solid black;
+    text-align: left;
+    margin: 10px auto 0;
+    width: fit-content;
+    padding: 6px;
+}
+#faerdig {
+    border-top: 1px solid black;
+}
+.filled {
+    color: gray;
+    background-color: lightgrey;
+}

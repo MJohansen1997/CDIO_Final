@@ -39,17 +39,28 @@ $(document).ready(function()
 function createRaavarer() {
     var data = $('#opretForm').serializeJSON();
     console.log(data)
+    if(hasNumber(data.raavNavn) && hasNumber(data.leverandor) || hasNumber(data.raavNavn)){
+        alert("We in the if statement fam")
+        return
+    }
     $.ajax({
         url:'rest/raavarer/createRaavarer',
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function () {
-            loadRaavarer();
-            alert("Oprettet Råvarer")
-            $("#opretForm").toggle();
+        success: function (data) {
+            console.log(data)
+            if (!data) {
+                loadRaavarer();
+                alert("Oprettet Råvarer")
+                $("#opretForm").toggle();
+            }
         }
     });
+}
+
+function hasNumber(myString) {
+    return /\d/.test(myString);
 }
 
 function updateRaavarer() {
@@ -60,13 +71,19 @@ function updateRaavarer() {
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function () {
-            loadRaavarer();
-            $("#redigerForm").toggle();
-            $("#redigerInfoForm").toggle();
+        success: function (data){
+            console.log(data)
+            if(data == "true") {
+                loadRaavarer();
+                $("#redigerForm").toggle();
+                $("#redigerInfoForm").toggle();
+                alert("Ændring Gemt");
+            }
+            else {
+                alert("Kunne ikke tage inputtet");
+            }
         }
-
-    })
+    });
 }
 
 function loadRaavarer() {
@@ -84,15 +101,15 @@ function updateGetRaavarer(raavID) {
     console.log(raavID);
     $.get('rest/raavarer/findRaavarer/' + raavID, function (data, textStatus, req) {
         console.log("DATA", data)
-        if (!data) {
-            alert("Der findes ikke nogen med den Råvarer ID")
-            return;
+        if (data) {
+            $form = $('#redigerInfoForm')
+            $form.find('[name="raavID"]').val(data.raavID)
+            $form.find('[name="raavNavn"]').val(data.raavNavn)
+            $form.find('[name="leverandor"]').val(data.leverandor)
         }
-
-        $form = $('#redigerInfoForm')
-        $form.find('[name="raavID"]').val(data.raavID)
-        $form.find('[name="raavNavn"]').val(data.raavNavn)
-        $form.find('[name="leverandor"]').val(data.leverandor)
+        else{
+        alert("Der findes ikke nogen med den Råvarer ID")
+        }
     });
 }
 
@@ -103,7 +120,7 @@ function getRaavarer(raavID) {
             $("#findFormBody").empty().append(generateHTMLTable(data));
         }
         else {
-            alert("Der findes ikke nogen med den Råvarer ID")
+            alert("Der findes ikke nogen med den Råvarer ID");
         }
     });
 }
