@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
-
+/** @author Johansen, Mikkel s175194*/
 @Path("/afvejning")
 public class AfvejningService {
 

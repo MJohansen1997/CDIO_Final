@@ -1,3 +1,4 @@
+//@Author Mikkel Johansen s175194
 var rec;
 var prod;
 var exists;
@@ -5,6 +6,7 @@ var raavbatch;
 var message;
 var tada;
 $(document).ready(function () {
+    //startop så kun de ting jeg vil have vist bliver vist
     $.getScript("jquery.serializejson.js");
     $(".inlab").hide();
     $("#result").hide();
@@ -17,8 +19,10 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
+    //når #subprod bliver klikket
     $("#subprod").click(function () {
         $.ajax({
+            //henter informationerne på recepten ud fra produkt id'et
             url: "rest/afvejning/verifyprod",
             data: $('#labidform').serialize(),
             contentType: "application/x-www-form-urlencoded",
@@ -28,6 +32,7 @@ $(document).ready(function () {
                 if (data != null) {
                     $("#receptid").val(data.receptID);
                     $("#receptnavn").val(data.receptNavn);
+                    //venter på findreckomps retunerer
                     await findreckomps();
                     await findprodKomps();
                     await insertkomps();
@@ -41,7 +46,7 @@ $(document).ready(function () {
         });
     });
 });
-
+//disse funktioner er brugt til at gemme data fra queries
 function saver(o) {
     return rec = o;
 }
@@ -57,6 +62,8 @@ function saver4(o) {
 function saver5(o) {
 return message = o;
 }
+
+//to skabeloner til at appende former ind på siden
 function formfilled(temp, prodid, rbid, tara, vaegt, lab) {
     var form =
         "<form class='form' action='rest/afvejning/verifylab' method='POST' id='labidform'>" +
@@ -90,6 +97,8 @@ function formunfilled(raavnavn, tolerance, lab, raavid, prodid, req) {
         "<button id='but" + raavnavn + "' value='" + raavnavn + "'> TIlføj til Produktionen</button>";
     return form;
 }
+
+//findreckomps og findprodkomps bruges til at hente informationer om produkt id'ets recept og produktionskomponenter
 async function findreckomps() {
     return $.ajax({
         url: "rest/afvejning/loadreckomps",
@@ -120,12 +129,16 @@ async function findprodKomps() {
         }
     });
 }
+
+//insertkomps tilføjer disse fundede tilføjede komponenter eller manglende komponenter fra receptlisten
 async function insertkomps() {
     outer:
+    //forloop
     for (let i = 0; i < Object.keys(rec).length; i++) {
         inner:
         for (let j = 0; j < Object.keys(prod).length; j++) {
             await getStatus(rec[i].raavareID,prod[j].rbId);
+            //hvis recepten har en raavareid som den nuværende produktkomp liste ikke indeholder vil denne blive tilsat til mangler
             if(exists.status == "false" && j == Object.keys(prod).length-1) {
                 $("#mangler").append(formunfilled(exists.name, parseFloat(rec[i].tolerance), $("#userid").val(),
                     rec[i].raavareID, $("#produktionsid").val(), rec[i].nonNetto));
@@ -134,6 +147,7 @@ async function insertkomps() {
                     addkomp(komp);
                 });
             }
+            //hvis den nuværende produktkomponent findes bliver den tilsat under færdig listen
             if(exists.status == "true"){
                 $("#faerdig").append(formfilled(exists.name, prod[j].pbId, prod[j].rbId, prod[j].tara,
                     prod[j].netto, prod[j].labID));
@@ -142,6 +156,9 @@ async function insertkomps() {
         }
     }
 }
+
+
+//denne metode tjekker om et raavareid matcher et raavarebatchs indeholder raavareid
 function getStatus(raavid, raavbatchid) {
     return $.ajax({
         url: "rest/afvejning/IdBatch?rid=" + raavid + "&rbid=" + raavbatchid,
@@ -151,12 +168,14 @@ function getStatus(raavid, raavbatchid) {
         }
     });
 }
+//denne metode ændrer status på et produktionsbatch
 function changeStatus(change) {
     $.ajax({
         url: "rest/afvejning/updatestatus?prodid=" + $("#produktionsid").val() + "&status=" + change,
         method: 'PUT',
     });
 }
+//denne metode bruges til at submite en produktionsbatch komponent og derefter reloade komponent listen
 async function addkomp(name) {
     var formname = "#" + name + "form";
     var preda = $(document).find(formname);
@@ -188,6 +207,7 @@ async function addkomp(name) {
     }
     else alert(message)
 }
+//denne metode bruges til at få fat i et raavare id
 async function getraavid(input) {
     console.log("getraavid" + input);
     return $.ajax({
@@ -202,6 +222,7 @@ async function getraavid(input) {
         }
     });
 }
+//denne metode reducerer mænden i et raavarebatch
 function changebatch() {
     raavbatch.maengde = Number(raavbatch.maengde) - Number(tada.netto);
     console.log(raavbatch);
@@ -212,6 +233,7 @@ function changebatch() {
         data: JSON.stringify(raavbatch),
     });
 }
+//denne metode bruges til at verificerer inputtet fra brugeren
 function verify(rb, input) {
     console.log($.trim(rb.raavId) + " : " +  $.trim(input.raavid));
     if ($.trim(rb.raavId) == $.trim(input.raavid)){

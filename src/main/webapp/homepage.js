@@ -21,6 +21,9 @@ $(document).ready(function () {
     $("#recept").click(function () {
         $("#container").load("Pages/Recept/Recept.html");
     });
+    $("#receptkomp").click(function () {
+        $("#container").load("Pages/ReceptKomp/ReceptKomp.html");
+    });
     $("#pdbatches").click(function () {
         $("#container").load("Pages/ProduktBatches/ProduktBatch.html");
     });
