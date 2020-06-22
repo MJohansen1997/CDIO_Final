@@ -63,7 +63,7 @@ $(document).ready(function () {
         $('#pdbatches').show();
         $('#pbKomp').show();
         $('#recept').show();
-        $("#receptkomp").hide();
+        $("#receptkomp").show();
         $('#raavarer').show();
         $('#logud').show();
     } else if (userInfo.rolle === 'Produktionsleder') {
