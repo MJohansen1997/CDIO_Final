@@ -11,7 +11,7 @@ $(document).ready(function () {
     $('#findForm').on('submit', function (e) {
         e.preventDefault();
         getPB($('#findForm').serializeJSON().pbID);
-        $("#findForm-table").show();
+
     });
 
     $('#sletForm').on('submit', function (e) {
@@ -94,6 +94,7 @@ function getPB(pbID) {
     $.get('rest/PB/findPB/' + pbID, function (data, textStatus, req) {
         if (typeof data != "undefined") {
             $("#pbBody").empty().append(generateHTMLTable(data));
+            $("#findForm-table").toggle();
         } else {
             alert("Fejl! pbID findes ikke");
         }
@@ -166,6 +167,7 @@ function loadRecepter() {
         $.each(data, function (i, receptValues) {
             cr.append(new Option(receptValues.receptNavn + " : " + receptValues.receptID, receptValues.receptID));
         });
+
     });
 }
 
