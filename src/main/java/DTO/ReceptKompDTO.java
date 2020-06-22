@@ -1,5 +1,5 @@
 package DTO;
-
+/** @author Johansen, Mikkel s175194*/
 public class ReceptKompDTO {
     public String getReceptID() {
         return receptID;

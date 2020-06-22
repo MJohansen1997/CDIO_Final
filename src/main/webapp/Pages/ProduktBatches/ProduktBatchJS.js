@@ -5,7 +5,6 @@ $(document).ready(function () {
     $('#opretForm').on('submit', function (e) {
         e.preventDefault();
         createPB()
-
     });
 
     $('#findForm').on('submit', function (e) {
@@ -128,22 +127,6 @@ function loadListPB() {
 
 function generateHTMLTable(pbatch) {
     if (pbatch.slutdato != null) {
-
-        localStorage.setItem("pbID", pbatch.pbID);
-        console.log(localStorage.getItem("pbID"))
-
-        localStorage.setItem("status", pbatch.status);
-        console.log(localStorage.getItem("status"));
-
-        localStorage.setItem("receptID", pbatch.receptID);
-        console.log(localStorage.getItem("receptID"));
-
-        localStorage.setItem("startdato", pbatch.startdato);
-        console.log(localStorage.getItem("startdato"));
-
-        localStorage.setItem("slutdato", pbatch.slutdato);
-        console.log(localStorage.getItem("slutdato"));
-
         return '<tr><td>' + pbatch.pbID + '</td>' +
             '<td>' +  pbatch.status + '</td>' +
             '<td>' + pbatch.receptID + '</td>' +

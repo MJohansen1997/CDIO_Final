@@ -1,5 +1,5 @@
 package DTO;
-
+/** @author Johansen, Mikkel s175194*/
 public class ReceptDTO {
     public ReceptDTO(String recID, String recNavn){
         receptID = recID;
