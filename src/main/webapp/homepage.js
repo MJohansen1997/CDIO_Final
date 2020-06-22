@@ -27,8 +27,9 @@ $(document).ready(function () {
     $("#pbKomp").click(function () {
         $("#container").load("Pages/ProduktBatchKomp/ProduktBatchKomp.html");
     });
-    userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
+
+    userInfo = JSON.parse(localStorage.getItem('userInfo'))
     console.log("LOADING USERINFO", userInfo)
     //console.log("DOES THIS WORK" + window.userInfo.brugerNavn)
     $('#userinfo').html(userInfo.brugerNavn)
@@ -38,9 +39,12 @@ $(document).ready(function () {
     $('#afvejning').hide();
     $('#rvbatches').hide();
     $('#pdbatches').hide();
+    $('#pbKomp').hide();
     $('#recept').hide();
     $('#raavarer').hide();
     $('#logud').hide();
+
+    pbKomp
 
     if (userInfo.rolle === 'Brugeradminstrator'){
         $('#hjem').show();
@@ -51,6 +55,7 @@ $(document).ready(function () {
         $('#afvejning').show();
         $('#rvbatches').show();
         $('#pdbatches').show();
+        $('#pbKomp').show();
         $('#recept').show();
         $('#raavarer').show();
         $('#logud').show();
@@ -59,6 +64,7 @@ $(document).ready(function () {
         $('#afvejning').show();
         $('#rvbatches').show();
         $('#pdbatches').show();
+        $('#pbKomp').show();
         $('#logud').show();
     } else if (userInfo.rolle === 'Laborant') {
         $('#hjem').show();

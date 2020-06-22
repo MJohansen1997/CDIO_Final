@@ -42,10 +42,13 @@ function createBruger() {
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (){
-            loadBrugere();
-            alert("Oprettet bruger GZ homie")
-            $("#opretForm").toggle();
+        success: function (data){
+            if(!data){
+                loadBrugere();
+                alert("Bruger er blevet oprettet")
+                $("#opretForm").toggle();
+            }
+            alert("Der opstod et problem under oprettelse")
         }
     })
 }
@@ -58,17 +61,19 @@ function updateBruger(){
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (){
-            loadBrugere();
-            $("#redigerForm").toggle();
-            $("#redigerInfoForm").toggle();
+        success: function (data){
+            if(!data){
+                loadBrugere();
+                $("#redigerForm").toggle();
+                $("#redigerInfoForm").toggle();
+            }
+            alert("Fejl under updatering af bruger")
         }
     })
 }
 
 function loadBrugere() {
     $.get('rest/brugere/allUsers', function (data, textStatus, req) {
-        console.log(data)
         $("#brugerBody").empty();
         $.each(data, function (i, brugerValue) {
             $('#brugerBody').append(generateHTMLTable(brugerValue));
