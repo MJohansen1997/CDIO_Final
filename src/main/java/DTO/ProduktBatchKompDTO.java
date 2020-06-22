@@ -4,19 +4,19 @@ public class ProduktBatchKompDTO {
     /**
      * raavare batch id i området 1-99999999. Vælges af brugerne
      */
-    private String rbId;
+    String rbId;
     /**
      * tara i kg
      */
-    private double tara;
+    double tara;
     /**
      * afvejet nettomængde i kg
      */
-    private double netto;
+    double netto;
     /**
      * Laborant-identifikationsnummer
      */
-    private String labID;
+    String labID;
 
     public ProduktBatchKompDTO(String pbId, String rbId, double tara, double netto, String labID) {
         this.pbId = pbId;

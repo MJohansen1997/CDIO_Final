@@ -4,12 +4,12 @@ package DTO;
 
 public class BrugerDTO {
 
-    private String brugerID;
-    private String brugerNavn;
-    private String ini;
-    private String cpr;
-    private String rolle;
-    private String password;
+    String brugerID;
+    String brugerNavn;
+    String ini;
+    String cpr;
+    String rolle;
+    String password;
 
     public BrugerDTO(String brugerID, String brugerNavn, String ini, String cpr, String rolle, String password) {
         this.brugerID = brugerID;
