@@ -1,28 +1,49 @@
 package API;
 
 import DAO.DALException;
-import DAO.PrintDAO;
-import DTO.PrintDTO;
+import DAO.ProduktBatchDAO;
+import DAO.ReceptKompDAO;
 
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import java.sql.SQLException;
 
-@Path("/print")
+@Path("/Print")
 public class APIPrint {
-    @GET
-    @Path("/printproduktbatch")
+
+    @POST
+    @Path("/pb")
     @Produces(MediaType.APPLICATION_JSON)
-    public PrintDTO getPrintProduktBatch(@PathParam("pbID") String pbID, @PathParam("status") String status, @PathParam("recID") String recID) {
+    public String getProduktbatch(@QueryParam("recID") String recID, @QueryParam("pbID") String pbID){
+        String r;
+        String p;
         try {
-            PrintDAO dao = new PrintDAO();
-            return dao.getPrint(pbID, status, recID);
-        } catch (SQLException | ClassNotFoundException | DALException e) {
+            ReceptKompDAO rdao = new ReceptKompDAO();
+            ProduktBatchDAO pdao = new ProduktBatchDAO();
+
+            r = rdao.getReceptKomp(recID, pbID).getReceptID();
+            p = pdao.getProduktBatch(pbID).getPbID();
+
+            return "{\"receptID\":\"" + r + "\",\"produktID\":\"" + p + "\"}";
+        }catch (DALException e) {
             e.printStackTrace();
-            return null;
+            return "";
         }
     }
+
+
+    //idk
+    /*@POST
+    @Path("/getReckompList")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void getreckomplist (@PathParam(recID)String recID) throws DALException {
+        ReceptKompDAO receptKompDAO = new ReceptKompDAO();
+        try {
+            receptKompDAO.getReceptKompList(recID);
+        } catch (DALException e) {
+            e.printStackTrace();
+        }
+    }*/
 }
