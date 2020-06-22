@@ -78,7 +78,6 @@ public class APIProduktBatch  {
     @Path("/deletePB/{pbID}")
     public void deletePB (@PathParam("pbID") String pbID) throws  DALException {
         dbAccess.deleteProduktBatch(pbID);
-
     }
 
     @GET
@@ -95,4 +94,23 @@ public class APIProduktBatch  {
         ProduktBatchDTO fuck = dbAccess.getProduktBatch2IDS(pbID, recID);
         return fuck;
     }
+
+    @POST
+    @Path("/IdBatch")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String verifyIdBatch(@QueryParam("rid") String rid, @QueryParam("rbid") String rbid){
+        String r;
+        String s;
+        try {
+            RaavareBatchDAO rbdao = new RaavareBatchDAO();
+            RaavareDAO rdao = new RaavareDAO();
+            r = rdao.getRaavare(rid).getRaavNavn();
+            s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavId()));
+            return "{\"status\":\"" + s + "\",\"name\":\"" + r + "\"}";
+        }catch (DALException | SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
 }

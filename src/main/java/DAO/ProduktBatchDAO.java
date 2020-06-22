@@ -31,7 +31,7 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
                 int i = 0;
                 ArrayList<ProduktBatchDTO> users = new ArrayList<>();
                 users.add(extractPBLFromResultSet(rs));
-                if(users.get(i).getReceptID().equals(recID)) {
+                if(users.get(i).getPbID().equals(recID)) {
                     return users.get(i);
                 }
                 i++;

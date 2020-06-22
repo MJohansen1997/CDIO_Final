@@ -49,7 +49,6 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
 
     @Override
     public List<ProduktBatchKompDTO> getProduktBatchKompList(String pbId) throws DALException {
-
         try {
             Statement stmt = newCon.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE pbid = '" + pbId + "'");

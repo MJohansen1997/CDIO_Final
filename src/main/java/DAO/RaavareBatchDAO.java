@@ -1,5 +1,6 @@
 package DAO;
 
+import DTO.ProduktBatchKompDTO;
 import DTO.RaavareBatchDTO;
 
 import java.sql.PreparedStatement;
@@ -32,17 +33,6 @@ public class RaavareBatchDAO implements IDAO.IRaavareBatchDAO {
             throw new DALException("Kunne ikke oprette forbindelse til ");
         }
         return null;
-    }
-
-    public static void main(String[] args) throws DALException, SQLException, ClassNotFoundException {
-        RaavareBatchDAO dbAc = new RaavareBatchDAO();
-
-        List<RaavareBatchDTO> raav = dbAc.getRaavareBatchList();
-
-        for (int i = 0; i < raav.size(); i++) {
-            System.out.println(raav.get(i).getRaavId());
-            System.out.println(raav.get(i).getRbID());
-        }
     }
 
     @Override

@@ -1,5 +1,5 @@
  <script src="./Pages/ProduktBatches/ProduktBatchJS.js"></script>
- <script src="./Pages/Print/PrintJS.js"></script>
+ <script src="./Pages/ProduktBatches/PrintJS.js"></script>
  <link rel="stylesheet" href="AdminBrugerStyle.css">
 
  <div id="adminpage-title-container" class="headpanel-container">
@@ -79,6 +79,35 @@
             </tbody>
         </table>
     </form>
+
+ <form id="printForm">
+     <h1>Print ønsket produkt batch</h1>
+     <p>Angiv produktbatch ID for print: <input type="text" name="pbID" required/></p>
+     <p>Angiv recept ID for print: <input type="text" name="recID" required/></p>
+     <button type="submit">Find ID til opdatering</button>
+ </form>
+
+ <div id="printBodyLayout">
+     <div id="headerInfo">
+         <h1>Produktion (Tilstand: </h1> <h1 id="tilstand">)</h1>
+         <p>Produkt Batch </p> <p id="beskrivtilstand"></p>
+         <!--firkant-->
+         <p>Udskrevet: </p><p id="udskrevDato">   </p>
+     </div>
+
+     <div id="raavarebatches"></div>
+
+     <div id="footerInfo">
+         <p>Sum Tara: </p>
+         <p>Sum Netto: </p>
+         <br>
+         <p>Produktion Status</p>
+         <p>Produktion Start</p>
+         <p>Produktion Slut</p>
+     </div>
+     <button onclick="window.print()">Print this page</button>
+ </div>
+
     <table id="userInfo-table" class="table">
         <thead>
         <tr>
@@ -93,31 +122,5 @@
         </tbody>
     </table>
 
-     <form id="printForm">
-         <h1>Print ønsket produkt batch</h1>
-         <p>Angiv produktbatch ID for print: <input type="text" name="pbID" required/></p>
-         <p>Angiv recept ID for print: <input type="text" name="recID" required/></p>
-         <button type="submit">Find ID til opdatering</button>
-     </form>
 
-<div id="printBodyLayout">
- <div id="headerInfo">
-     <h1>Produktion (Tilstand: </h1> <h1 id="tilstand">)</h1>
-     <p>Produkt Batch </p> <p id="beskrivtilstand"></p>
-     <!--firkant-->
-     <p>Udskrevet: </p><p id="udskrevDato">   </p>
- </div>
-
- <div id="raavarebatches"></div>
-
- <div id="footerInfo">
-     <p>Sum Tara: </p>
-     <p>Sum Netto: </p>
-     <br>
-     <p>Produktion Status</p>
-     <p>Produktion Start</p>
-     <p>Produktion Slut</p>
- </div>
- <button onclick="window.print()">Print this page</button>
-</div>
 
