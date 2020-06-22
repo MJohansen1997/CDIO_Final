@@ -4,21 +4,21 @@
 <div id="adminpage-title-container" class="headpanel-container">
     <h1 class="headpanel-title">Brugeradministration</h1>
 </div>
-<div id="container-admin">
+<div class = "page-container">
 
 
 <!--leftside-->
 
-<nav id = admin-buttons-container>
+<nav class = buttons-container>
     <ul id="admin-buttons">
-        <button type="button" class="admin-button" id="buttonOpret">Opret</button>
-        <button type="button" class="admin-button" id="buttonRediger">Rediger</button>
-        <button type="button" class="admin-button" id="buttonSlet">Slet</button>
-        <button type="button" class="admin-button" id="buttonFind">Find</button>
+        <button type="button" class="edit-button" id="buttonOpret">Opret</button>
+        <button type="button" class="edit-button" id="buttonRediger">Rediger</button>
+        <button type="button" class="edit-button" id="buttonSlet">Slet</button>
+        <button type="button" class="edit-button" id="buttonFind">Find</button>
     </ul>
 </nav>
 <br>
-<div id="admin-forms">
+<div class = "forms">
     <form id="opretForm">
         <h1>Opret Bruger</h1>
         <p>Vælg Bruger Navn : <input type="text" name="brugerNavn" required/></p>
@@ -88,19 +88,19 @@
     </form>
 </div>
 <div class = "table-container">
-<table id="userInfo-table">
-    <thead id = "admin-thead">
-
-    <tr id = "admin-thead-row">
-        <th class = "admin-table-header">brugerID</th>
-        <th class = "admin-table-header">Bruger Navn</th>
-        <th class = "admin-table-header">Ini</th>
-        <th class = "admin-table-header">Cpr</th>
-        <th class = "admin-table-header">Rolle</th>
-        <th class = "admin-table-header">Password</th>
+<table class="data-table">
+    <thead>
+    <tr>
+        <th class = "table-header">brugerID</th>
+        <th class = "table-header">Bruger Navn</th>
+        <th class = "table-header">Ini</th>
+        <th class = "table-header">Cpr</th>
+        <th class = "table-header">Rolle</th>
+        <th class = "table-header">Password</th>
     </tr>
     </thead>
     <tbody id="brugerBody">
     </tbody>
 </table>
+</div>
 </div>
