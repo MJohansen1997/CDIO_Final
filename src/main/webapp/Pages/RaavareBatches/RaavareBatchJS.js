@@ -130,6 +130,16 @@ function getRaavarerBatch(rbID) {
 
 
 function generateHTMLTable(raavarerBatch) {
+
+    localStorage.setItem("rbID", raavarerBatch.rbID );
+    console.log(localStorage.getItem("rbId"));
+
+    localStorage.setItem("raavId", raavarerBatch.raavId);
+    console.log(localStorage.getItem("raavId"));
+
+    localStorage.setItem("maengde", raavarerBatch.maengde );
+    console.log(localStorage.getItem("maengde"));
+
     return '<tr><td>' + raavarerBatch.rbID + '</td>' +
         '<td>' + raavarerBatch.raavId + '</td>' +
         '<td>' + raavarerBatch.maengde + '</td></tr>'

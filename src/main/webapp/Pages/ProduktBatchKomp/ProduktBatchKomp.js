@@ -73,6 +73,22 @@ $(document).ready(function() {
 
     function generateHTMLTable(ProduktBatchKomp)
     {
+
+        localStorage.setItem("pbId", ProduktBatchKomp.pbId);
+        console.log(localStorage.getItem("pbId"));
+
+        localStorage.setItem("rbId", ProduktBatchKomp.rbId);
+        console.log(localStorage.getItem("rbId"));
+
+        localStorage.setItem("labID", ProduktBatchKomp.labID);
+        console.log(localStorage.getItem("labID"));
+
+        localStorage.setItem("tara", ProduktBatchKomp.tara);
+        console.log(localStorage.getItem("tara"));
+
+        localStorage.setItem("netto", ProduktBatchKomp.netto);
+        console.log(localStorage.getItem("netto"));
+
         return '<tr><td>' + ProduktBatchKomp.pbId + '</td>' +
             '<td>' + ProduktBatchKomp.rbId + '</td>' +
             '<td>' + ProduktBatchKomp.labID + '</td>' +

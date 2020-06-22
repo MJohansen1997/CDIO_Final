@@ -36,3 +36,4 @@ function getproduktBatch(pbID){
 }
 
 $("#tilstand").show(localStorage.getItem("status"));
+
