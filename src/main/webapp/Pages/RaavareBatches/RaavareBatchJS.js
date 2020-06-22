@@ -44,9 +44,12 @@ function createRaavarerBatch() {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function () {
-            loadRaavarerBatch();
-            alert("Oprettet bruger GZ homie")
-            $("#opretForm").toggle();
+            if(data != null){
+                loadRaavarerBatch();
+                alert("Oprettet bruger GZ homie")
+                $("#opretForm").toggle();
+            } else alert("Kunne ikke oprette dette råvarebatch")
+
         }
     });
 }
@@ -61,9 +64,12 @@ function updateRaavarerBatch() {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function () {
-            loadRaavarerBatch();
-            $("#redigerForm").toggle();
-            $("#redigerInfoForm").toggle();
+            if(data != null){
+                loadRaavarerBatch();
+                $("#redigerForm").toggle();
+                $("#redigerInfoForm").toggle();
+            }else alert("Kunne ikke redigere denne råvarebatch")
+
         }
 
     })
@@ -108,10 +114,11 @@ function deleteRaavarerBatch(rbID){
         method: 'POST',
         contentType:"application/json",
         data: JSON.stringify(data),
-        success: function()
-        {
-            loadRaavarerBatch();
-            $("#sletForm").toggle();
+        success: function(){
+            if (data!=null){
+                loadRaavarerBatch();
+                $("#sletForm").toggle();
+            }else alert("Kunne ikke slette råvarebatchen")
         }
     })
 }
