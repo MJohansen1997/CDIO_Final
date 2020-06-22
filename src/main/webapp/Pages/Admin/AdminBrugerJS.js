@@ -19,8 +19,6 @@ $(document).ready(function() {
     $('#redigerForm').on('submit', function(e){
         e.preventDefault();
         updateGetBruger($('#redigerForm').serializeJSON().brugerID)
-        hideAllForms()
-        $("#redigerInfoForm").toggle();
     });
 
     $('#redigerInfoForm').on('submit', function(e){
@@ -43,12 +41,10 @@ function createBruger() {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (data){
-            if(!data){
+            console.log(data)
                 loadBrugere();
                 alert("Bruger er blevet oprettet")
                 $("#opretForm").toggle();
-            }
-            alert("Der opstod et problem under oprettelse")
         }
     })
 }
@@ -61,13 +57,14 @@ function updateBruger(){
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (data){
+        success: function (){
+            console.log(data)
             if(!data){
                 loadBrugere();
                 $("#redigerForm").toggle();
                 $("#redigerInfoForm").toggle();
-            }
-            alert("Fejl under updatering af bruger")
+            } alert("Noget gik galt under opdatering af brugeren")
+
         }
     })
 }
@@ -88,6 +85,8 @@ function updateGetBruger(brugerID){
             alert("Der findes ikke nogen med det brugerID")
             return;
         }
+        hideAllForms()
+        $("#redigerInfoForm").toggle();
 
 
         $form = $('#redigerInfoForm')
@@ -118,9 +117,11 @@ function deleteBruger(brugerID) {
         method: 'POST',
         contentType:"application/json",
         data: JSON.stringify(data),
-        success: function(){
+        success: function(data){
+            if(data != null){
             loadBrugere();
             $("#sletForm").toggle();
+            } else alert("Der findes ikke nogen med det brugerID")
         }
     })
 }
