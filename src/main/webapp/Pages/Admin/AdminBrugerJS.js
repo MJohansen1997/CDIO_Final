@@ -19,8 +19,6 @@ $(document).ready(function() {
     $('#redigerForm').on('submit', function(e){
         e.preventDefault();
         updateGetBruger($('#redigerForm').serializeJSON().brugerID)
-        hideAllForms()
-        $("#redigerInfoForm").toggle();
     });
 
     $('#redigerInfoForm').on('submit', function(e){
@@ -42,10 +40,11 @@ function createBruger() {
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (){
-            loadBrugere();
-            alert("Oprettet bruger GZ homie")
-            $("#opretForm").toggle();
+        success: function (data){
+            console.log(data)
+                loadBrugere();
+                alert("Bruger er blevet oprettet")
+                $("#opretForm").toggle();
         }
     })
 }
@@ -59,16 +58,19 @@ function updateBruger(){
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (){
-            loadBrugere();
-            $("#redigerForm").toggle();
-            $("#redigerInfoForm").toggle();
+            console.log(data)
+            if(!data){
+                loadBrugere();
+                $("#redigerForm").toggle();
+                $("#redigerInfoForm").toggle();
+            } alert("Noget gik galt under opdatering af brugeren")
+
         }
     })
 }
 
 function loadBrugere() {
     $.get('rest/brugere/allUsers', function (data, textStatus, req) {
-        console.log(data)
         $("#brugerBody").empty();
         $.each(data, function (i, brugerValue) {
             $('#brugerBody').append(generateHTMLTable(brugerValue));
@@ -83,6 +85,8 @@ function updateGetBruger(brugerID){
             alert("Der findes ikke nogen med det brugerID")
             return;
         }
+        hideAllForms()
+        $("#redigerInfoForm").toggle();
 
 
         $form = $('#redigerInfoForm')
@@ -113,9 +117,11 @@ function deleteBruger(brugerID) {
         method: 'POST',
         contentType:"application/json",
         data: JSON.stringify(data),
-        success: function(){
+        success: function(data){
+            if(data != null){
             loadBrugere();
             $("#sletForm").toggle();
+            } else alert("Der findes ikke nogen med det brugerID")
         }
     })
 }
