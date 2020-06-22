@@ -27,9 +27,9 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     public ReceptKompDTO getReceptKomp(String receptId, String raavareId) throws DALException {
         try{
             Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM reckomp WHERE recID = " + receptId
-            + " AND raavID = " + raavareId
+            ResultSet rs = stmt.executeQuery("select * from reckomp where recID = '" + receptId + "' and raavID = '" + raavareId + "';"
             );
+
             if (rs.next()) {
                 return udtagReceptFraResultat(rs);
             }

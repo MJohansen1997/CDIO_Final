@@ -1,11 +1,10 @@
 package API;
 
 import DAO.*;
-import DTO.BrugerDTO;
+import DTO.*;
 
-import DTO.ProduktBatchDTO;
-import DTO.ProduktBatchKompDTO;
-import DTO.RaavareDTO;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;
@@ -17,24 +16,24 @@ import java.util.*;
 
 
 @Path("/PB")
-public class APIProduktBatch  {
+public class APIProduktBatch {
     ProduktBatchDAO dbAccess = new ProduktBatchDAO();
 
-    public APIProduktBatch () throws DALException {
+    public APIProduktBatch() throws DALException {
 
     }
 
     @POST
     @Path("/createPB")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createPB (String jsonbody) throws DALException{
+    public void createPB(String jsonbody) throws DALException {
         IncrementID incID = new IncrementID();
         JSONObject json = new JSONObject(jsonbody);
 
         try {
             //Laver en produktbatch til indsættelse i DB
             ProduktBatchDTO pbatch = new ProduktBatchDTO(
-                    incID.returnID("prodbestilling","pbID"),
+                    incID.returnID("prodbestilling", "pbID"),
                     json.getString("chosenStatus"),
                     json.getString("chosenRecept"),
                     new Timestamp(System.currentTimeMillis()));
@@ -59,7 +58,7 @@ public class APIProduktBatch  {
                     null);
 
             dbAccess.updateProduktBatch(pbatch);
-        } catch (DALException e ) {
+        } catch (DALException e) {
             e.printStackTrace();
         }
 
@@ -69,14 +68,14 @@ public class APIProduktBatch  {
     @GET
     @Path("/findPB/{pbID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ProduktBatchDTO getPB (@PathParam("pbID") String pbID) throws DALException {
+    public ProduktBatchDTO getPB(@PathParam("pbID") String pbID) throws DALException {
         ProduktBatchDTO pbatch = dbAccess.getProduktBatch(pbID);
         return pbatch;
     }
 
     @POST
     @Path("/deletePB/{pbID}")
-    public void deletePB (@PathParam("pbID") String pbID) throws  DALException {
+    public void deletePB(@PathParam("pbID") String pbID) throws DALException {
         dbAccess.deleteProduktBatch(pbID);
     }
 
@@ -98,19 +97,59 @@ public class APIProduktBatch  {
     @POST
     @Path("/IdBatch")
     @Produces(MediaType.APPLICATION_JSON)
-    public String verifyIdBatch(@QueryParam("rid") String rid, @QueryParam("rbid") String rbid){
-        String r;
-        String s;
+    public String verifyIdBatch(@QueryParam("pbID") String prodID) {
         try {
-            RaavareBatchDAO rbdao = new RaavareBatchDAO();
-            RaavareDAO rdao = new RaavareDAO();
-            r = rdao.getRaavare(rid).getRaavNavn();
-            s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavId()));
-            return "{\"status\":\"" + s + "\",\"name\":\"" + r + "\"}";
-        }catch (DALException | SQLException | ClassNotFoundException e) {
+            BrugerDAO brugerDAO = new BrugerDAO();
+            ProduktBatchDAO produktBatchDAO = new ProduktBatchDAO();
+            ProduktBatchDTO produktBatch = produktBatchDAO.getProduktBatch(prodID);
+
+            ReceptKompDAO receptKompDAO = new ReceptKompDAO();
+            List<ReceptKompDTO> receptKompList = receptKompDAO.getReceptKompList(produktBatch.getReceptID());
+
+            RaavareBatchDAO raavareBatchDAO = new RaavareBatchDAO();
+            RaavareDAO RaavareDAO = new RaavareDAO();
+            List<RaavareDTO> raavareList = new ArrayList<>();
+            for (int i = 0; i < receptKompList.size(); i++) {
+                raavareList.add(RaavareDAO.getRaavare(receptKompList.get(i).getRaavareID()));
+            }
+
+            ProduktBatchKompDAO produktBatchKompDAO = new ProduktBatchKompDAO();
+            List<ProduktBatchKompDTO> produktBatchKompList = produktBatchKompDAO.getProduktBatchKompList(prodID);
+            JSONObject main = new JSONObject();
+
+            main.put("prodID", prodID);
+            main.put("recID", produktBatch.getReceptID());
+            main.put("status", produktBatch.getStatus());
+            main.put("start", produktBatch.getStartdato());
+            main.put("slut", produktBatch.getSlutdato());
+
+            JSONArray raavlist = new JSONArray();
+            for(int i = 0; i < raavareList.size(); i++) {
+                JSONObject raav = new JSONObject();
+                raav.put("ravID", raavareList.get(i).getRaavID());
+                raav.put("ravName", raavareList.get(i).getRaavNavn());
+                ReceptKompDTO unholy = receptKompDAO.getReceptKomp(produktBatch.getReceptID(), raavareList.get(i).getRaavID());
+                raav.put("maengde", unholy.getNonNetto());
+                raav.put("tolerance", unholy.getTolerance());
+
+                for (int j = 0; j < produktBatchKompList.size(); j++) {
+                    if (raavareList.get(i).getRaavID().equals(raavareBatchDAO.getRaavareBatch(
+                            produktBatchKompList.get(j).getRbId()).getRaavId())){
+                        raav.put("netto", produktBatchKompList.get(j).getNetto());
+                        raav.put("tara", produktBatchKompList.get(j).getTara());
+                        raav.put("init", brugerDAO.getBruger(produktBatchKompList.get(j).getLabID()).getIni());
+                        break;
+                    }
+                }
+                raavlist.put(raav);
+            }
+            main.put("raavlist", raavlist);
+            System.out.println(main.toString());
+
+            return main.toString();
+        } catch (DALException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            return "";
+            return null;
         }
     }
-
 }

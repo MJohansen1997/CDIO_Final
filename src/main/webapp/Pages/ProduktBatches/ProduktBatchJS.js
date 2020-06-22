@@ -29,10 +29,17 @@ $(document).ready(function () {
         updatePB($('#redigerInfoForm').serializeJSON())
     });
 
+    $('#printForm').on('submit', function(e) {
+        e.preventDefault();
+        secret = $("#onlyusefullthing").val();
+        $("html").load("Print.html");
+    });
+
     buttonOpret();
     buttonFind();
     buttonRediger();
     buttonSlet();
+    buttonVaelg();
 });
 
 function createPB() {
@@ -185,3 +192,10 @@ function submitUpdate() {
     });
 }
 
+function buttonVaelg() {
+    $("#buttonPrint").click(function () {
+        $("#printForm").toggle();
+    });
+}
+
+var secret;

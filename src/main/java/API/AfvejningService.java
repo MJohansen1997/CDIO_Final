@@ -87,9 +87,6 @@ public class AfvejningService {
             if (rbid.equals("null"))
                 return "{\"status\":\"LOL\",\"name\":\"" + rdao.getRaavare(rid).getRaavNavn() + "\"}";;
             r = rdao.getRaavare(rid).getRaavNavn();
-
-
-
             s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavId()));
             return "{\"status\":\"" + s + "\",\"name\":\"" + r + "\"}";
         }catch (DALException | SQLException | ClassNotFoundException e) {
