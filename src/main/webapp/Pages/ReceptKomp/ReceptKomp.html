@@ -1,0 +1,69 @@
+<script src="./Pages/ReceptKomp/ReceptKomp.js"></script>
+<link rel="stylesheet" href="AdminBrugerStyle.css">
+
+<div id="adminpage-title-container" class="headpanel-container">
+    <h1 class="headpanel-title">Recept Komponenter</h1>
+</div>
+<div id="container-admin">
+
+    <!--leftside-->
+
+    <nav id = ReceptKomp-buttons-container>
+        <ul id="ReceptKomp-buttons">
+            <button type="button" class="admin-button" id="buttonOpret">Opret</button>
+            <button type="button" class="admin-button" id="buttonSlet">Slet</button>
+            <button type="button" class="admin-button" id="buttonFind">Find</button>
+        </ul>
+    </nav>
+    <br>
+    <div id="ReceptKomp-forms">
+        <form id="opretForm">
+            <h1>Opret Recept Komponent</h1>
+            <p>Vælg ReceptID : <input type="text" name="ReceptID" required/></p>
+            <p>Vælg RaavareID : <input type="text" name="RaavareID" required/></p>
+            <p>Vælg nonNetto : <input type="text" name="nonNetto" required/></p>
+            <p>Vælg Tolerance : <input type="text" name="Tolerance" required/></p>
+            <button type="submit">Gem ændringer</button>
+        </form>
+
+        <form id="sletForm">
+            <h1>Slet ReceptKomponent</h1>
+            <p>Vælg ReceptID : <input type="text" name="receptID" required/></p>
+            <p>Vælg RaavareID : <input type="text" name="raavID" required/></p>
+            <button type="submit">Slet</button>
+        </form>
+
+        <form id="findForm">
+            <h1>Find Recept Komponenter</h1>
+            <p>Vælg ReceptID : <input type="text" name="receptID" required/></p>
+            <button type="submit">Find</button>
+
+            <table id="findForm-table" class="table">
+                <thead>
+                <tr>
+                    <th>Recept ID</th>
+                    <th>Raavare ID</th>
+                    <th>nonNetto</th>
+                    <th>Tolerance</th>
+                </tr>
+                </thead>
+                <tbody id="findFormBody">
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class = "table-container">
+        <table id="receptInfo-table">
+            <thead id = "recept-thead">
+
+            <tr id = "recept-thead-row">
+                <th class = "admin-table-header">Recept ID</th>
+                <th class = "admin-table-header">Raavare ID</th>
+                <th class = "admin-table-header">nonNetto</th>
+                <th class = "admin-table-header">Tolerance</th>
+            </tr>
+            </thead>
+            <tbody id="receptbody">
+            </tbody>
+        </table>
+    </div>
