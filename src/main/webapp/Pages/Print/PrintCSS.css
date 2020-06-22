@@ -1,6 +1,6 @@
 th {
     text-align: left;
-    padding: 8px;
+    padding: 7px;
 }
 
 .bold{
@@ -15,4 +15,9 @@ hr.line {
     border: 1px dashed black;
     width: 500px;
     margin: auto;
+}
+.blank_row
+{
+    height: 10px !important; /* overwrites any other rules */
+    background-color: #FFFFFF;
 }
