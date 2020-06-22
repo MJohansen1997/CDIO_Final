@@ -59,4 +59,8 @@ public class ProduktBatchDTO {
         this.slutdato = slutdato;
     }
 
+
+
+
+
 }

@@ -7,7 +7,6 @@ $(document).ready(function () {
     $("#afvejning").click(function () {
         $("#container").load("Afvejning.html");
         $.getScript("Afvejning.js");
-        $.getScript("jquery.serializejson.js");
     });
     $("#rvbatches").click(function () {
         $("#container").load("Pages/RaavareBatches/RaavareBatch.html");
@@ -20,9 +19,6 @@ $(document).ready(function () {
     });
     $("#recept").click(function () {
         $("#container").load("Pages/Recept/Recept.html");
-    });
-    $("#receptkomp").click(function () {
-        $("#container").load("Pages/ReceptKomp/ReceptKomp.html");
     });
     $("#pdbatches").click(function () {
         $("#container").load("Pages/ProduktBatches/ProduktBatch.html");
@@ -44,13 +40,9 @@ $(document).ready(function () {
     $('#afvejning').hide();
     $('#rvbatches').hide();
     $('#pdbatches').hide();
-    $('#pbKomp').hide();
     $('#recept').hide();
-    $("#receptkomp").hide();
     $('#raavarer').hide();
     $('#logud').hide();
-
-    pbKomp
 
     if (userInfo.rolle === 'Brugeradminstrator'){
         $('#hjem').show();
@@ -61,9 +53,7 @@ $(document).ready(function () {
         $('#afvejning').show();
         $('#rvbatches').show();
         $('#pdbatches').show();
-        $('#pbKomp').show();
         $('#recept').show();
-        $("#receptkomp").show();
         $('#raavarer').show();
         $('#logud').show();
     } else if (userInfo.rolle === 'Produktionsleder') {
@@ -71,7 +61,6 @@ $(document).ready(function () {
         $('#afvejning').show();
         $('#rvbatches').show();
         $('#pdbatches').show();
-        $('#pbKomp').show();
         $('#logud').show();
     } else if (userInfo.rolle === 'Laborant') {
         $('#hjem').show();

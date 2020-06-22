@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
-/** @author Johansen, Mikkel s175194*/
+
 @Path("/afvejning")
 public class AfvejningService {
 
@@ -81,15 +81,9 @@ public class AfvejningService {
         String r;
         String s;
         try {
-
             RaavareBatchDAO rbdao = new RaavareBatchDAO();
             RaavareDAO rdao = new RaavareDAO();
-            if (rbid.equals("null"))
-                return "{\"status\":\"LOL\",\"name\":\"" + rdao.getRaavare(rid).getRaavNavn() + "\"}";;
             r = rdao.getRaavare(rid).getRaavNavn();
-
-
-
             s = String.valueOf(rid.equals(rbdao.getRaavareBatch(rbid).getRaavId()));
             return "{\"status\":\"" + s + "\",\"name\":\"" + r + "\"}";
         }catch (DALException | SQLException | ClassNotFoundException e) {

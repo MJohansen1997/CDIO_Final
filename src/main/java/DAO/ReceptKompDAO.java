@@ -1,14 +1,14 @@
 package DAO;
 
+import DTO.ReceptDTO;
 import DTO.ReceptKompDTO;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-/** @author Johansen, Mikkel s175194*/
+/** @author Doe, John (john.doe@example.com)*/
 
 public class ReceptKompDAO implements IDAO.IReceptKompDAO {
 
@@ -73,13 +73,13 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     @Override
     public void createReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
         try {
-            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO reckomp VALUES (?, ?, ?, ?);");
-
-            preparedStatement.setString(1,receptkomponent.getReceptID());
-            preparedStatement.setString(2, receptkomponent.getRaavareID());
-            preparedStatement.setDouble(3, receptkomponent.getNonNetto());
-            preparedStatement.setDouble(4, receptkomponent.getTolerance());
-            preparedStatement.executeUpdate();
+            Statement stmt = newCon.createStatement();
+            ResultSet rs = stmt.executeQuery("Insert Into reckomp Values (" +
+                    receptkomponent.getReceptID() + ", " +
+                    receptkomponent.getRaavareID() + ", " +
+                    receptkomponent.getNonNetto() + ", " +
+                    receptkomponent.getTolerance()
+            );
         } catch (SQLException e) {
             throw new DALException("Fejl ved indsættelse af element");
         }
@@ -89,7 +89,7 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
     public void updateReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
         try {
             Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("UPDATE reckomp Set " +
+            ResultSet rs = stmt.executeQuery("UPDATE Recepter Set " +
                     "nonNetto" + receptkomponent.getNonNetto() + ", " +
                     "tolerance" + receptkomponent.getTolerance() + ", " +
                     "WHERE recID = " + receptkomponent.getReceptID() + " AND raavID = " +
@@ -98,16 +98,6 @@ public class ReceptKompDAO implements IDAO.IReceptKompDAO {
 
         } catch (SQLException e) {
             throw new DALException("Fejl søgning");
-        }
-    }
-
-    public void deleteReceptKomp(String recID, String raavID) throws DALException {
-        try {
-            Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("delete from reckomp where recID = '" + recID +"' and raavID = '" + raavID + "';"
-            );
-        } catch (SQLException | DALException e) {
-            throw new DALException("Encountered an error when executing given sql statement.");
         }
     }
 

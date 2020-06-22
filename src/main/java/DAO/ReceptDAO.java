@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-/** @author Johansen, Mikkel s175194*/
+/** @author Johansen, Mikkel (john.doe@example.com)*/
 public class ReceptDAO implements IDAO.IReceptDAO {
     MySQLCon newCon;
 

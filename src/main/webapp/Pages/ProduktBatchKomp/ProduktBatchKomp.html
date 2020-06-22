@@ -4,15 +4,13 @@
 <div id="adminpage-title-container" class="headpanel-container">
     <h1 class="headpanel-title">ProduktBatchKomp</h1>
 </div>
-<div class = "page-container">
-<nav class = "buttons-container">
-    <ul id = "produkt-batch-komp-buttons">
-        <button type="button" class=  "edit-button" id="buttonFind">Find Produkt batch</button>
-        <button type="button" class=  "edit-button" id="buttonRediger">Find Produkt batch komponent</button>
+<nav>
+    <ul>
+        <button type="button" id="buttonFind">Find Produkt batch</button>
+        <button type="button" id="buttonRediger">Find Produkt batch komponent</button>
     </ul>
 </nav>
 <br>
-<div class = "forms">
 <form id="findBesForm">
     <h1>Find produkt bestilling </h1>
     <p> Indtast produkt batch ID : <input type="text" name="pbID" required/></p>
@@ -53,20 +51,17 @@
         </tbody>
     </table>
 </form>
-</div>
-    <div class = "table-container">
-    <table class="data-table">
+
+    <table id="userInfo-table" class="table">
         <thead>
         <tr>
-            <th class = "table-header">pbID</th>
-            <th class = "table-header">rbID</th>
-            <th class = "table-header">laborant</th>
-            <th class = "table-header">tara</th>
-            <th class = "table-header">netto</th>
+            <th>pbID</th>
+            <th>rbID</th>
+            <th>laborant</th>
+            <th>tara</th>
+            <th>netto</th>
         </tr>
         </thead>
         <tbody id="pbkdBody">
         </tbody>
     </table>
-    </div>
-</div>

@@ -4,7 +4,6 @@ import DAO.*;
 import DTO.BrugerDTO;
 
 import DTO.ProduktBatchDTO;
-import DTO.ProduktBatchKompDTO;
 import DTO.RaavareDTO;
 import org.json.JSONObject;
 
@@ -86,13 +85,5 @@ public class APIProduktBatch  {
     @Produces(MediaType.APPLICATION_JSON)
     public List<ProduktBatchDTO> getAllProduktBatches() throws DALException {
         return dbAccess.getProduktBatchList();
-    }
-
-    @POST
-    @Path("/getPBRec")
-    @Produces(MediaType.APPLICATION_JSON)
-    public ProduktBatchDTO getProduktBatchPBRecB(@QueryParam("pbID") String pbID, @QueryParam("recID") String recID) throws DALException {
-        ProduktBatchDTO fuck = dbAccess.getProduktBatch2IDS(pbID, recID);
-        return fuck;
     }
 }

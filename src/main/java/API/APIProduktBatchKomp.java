@@ -12,7 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.List;
-/** @author Johansen, Mikkel s175194*/
+
 @Path("/produktbatches")
 public class APIProduktBatchKomp
 {
@@ -32,11 +32,11 @@ public class APIProduktBatchKomp
     }
 
     @GET
-    @Path("/findProduktBatchKomp/{pbkID}")
+    @Path("/findProduktBatchKomp/{pbID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProduktBatchKompDTO> getProduktBatchKomp(@PathParam("pbkID") String pbkID) throws DALException
+    public List<ProduktBatchKompDTO> getProduktBatchKomp(@PathParam("pbID") String pbID) throws DALException
     {
-        return dbAccess.getProduktBatchKompList(pbkID);
+        return dbAccess.getProduktBatchKompList(pbID);
     }
 
     @POST

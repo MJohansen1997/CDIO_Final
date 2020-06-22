@@ -6,18 +6,17 @@
      <h1 class="headpanel-title">ProduktBatches</h1>
  </div>
     <!--leftside-->
-<div class = "page-container">
-    <nav class = buttons-container>
+
+    <nav>
         <ul>
-            <button type="button" class = "edit-button" id="buttonOpret">Opret et nyt produktbatch</button>
-            <button type="button" class = "edit-button" id="buttonRediger">Redigering af produktbatches</button>
-            <button type="button" class = "edit-button" id="buttonSlet">Slet</button>
-            <button type="button" class = "edit-button" id="buttonFind">Find</button>
-            <button type="button" class = "edit-button" id="buttonPrint">Vælg og print</button>
+            <button type="button" id="buttonOpret">Opret et nyt produktbatch</button>
+            <button type="button" id="buttonRediger">Redigering af produktbatches</button>
+            <button type="button" id="buttonSlet">Slet</button>
+            <button type="button" id="buttonFind">Find</button>
         </ul>
     </nav>
     <br>
-    <div class = "forms">
+
     <form id="opretForm">
         <h1>Opret nyt produktbatch</h1>
         <label for="chooseStatus">Status på produktbatch : </label>
@@ -80,47 +79,17 @@
             </tbody>
         </table>
     </form>
-    </div>
-    <div class = "table-container">
     <table id="userInfo-table" class="table">
         <thead>
         <tr>
-            <th class = "table-header" >pbID</th>
-            <th class = "table-header" >status</th>
-            <th class = "table-header" >receptID</th>
-            <th class = "table-header" >Start dato</th>
-            <th class = "table-header" >Slut dato</th>
+            <th>pbID</th>
+            <th>status</th>
+            <th>receptID</th>
+            <th>Start dato</th>
+            <th>Slut dato</th>
         </tr>
         </thead>
         <tbody id="pbAllBody">
         </tbody>
     </table>
-
-     <form id="printForm">
-         <h1>Print ønsket produkt batch</h1>
-         <p>Angiv produktbatch ID for print: <input type="text" name="pbID" required/></p>
-         <p>Angiv recept ID for print: <input type="text" name="recID" required/></p>
-         <button type="submit">Find ID til opdatering</button>
-     </form>
-
-<div id="printBodyLayout">
- <div id="headerInfo">
-     <h1>Produktion (Tilstand: </h1> <h1 id="tilstand">)</h1>
-     <p>Produkt Batch </p> <p id="beskrivtilstand"></p>
-     <!--firkant-->
-     <p>Udskrevet: </p><p id="udskrevDato">   </p>
- </div>
-
- <div id="raavarebatches"></div>
-
- <div id="footerInfo">
-     <p>Sum Tara: </p>
-     <p>Sum Netto: </p>
-     <br>
-     <p>Produktion Status</p>
-     <p>Produktion Start</p>
-     <p>Produktion Slut</p>
- </div>
- <button onclick="window.print()">Print this page</button>
-</div>
 
