@@ -32,11 +32,11 @@ public class APIProduktBatchKomp
     }
 
     @GET
-    @Path("/findProduktBatchKomp/{pbID}")
+    @Path("/findProduktBatchKomp/{pbkID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProduktBatchKompDTO> getProduktBatchKomp(@PathParam("pbID") String pbID) throws DALException
+    public List<ProduktBatchKompDTO> getProduktBatchKomp(@PathParam("pbkID") String pbkID) throws DALException
     {
-        return dbAccess.getProduktBatchKompList(pbID);
+        return dbAccess.getProduktBatchKompList(pbkID);
     }
 
     @POST
