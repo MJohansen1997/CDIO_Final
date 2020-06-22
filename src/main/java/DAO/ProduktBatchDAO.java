@@ -1,6 +1,7 @@
 package DAO;
 
 import DTO.ProduktBatchDTO;
+import DTO.ProduktBatchKompDTO;
 
 import java.sql.*;
 
@@ -15,6 +16,31 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
         } catch (SQLException | ClassNotFoundException e) {
             throw new DALException("Cannot establish a connection to the server! " + e);
         }
+    }
+
+    @Override
+    public ProduktBatchDTO getProduktBatch2IDS(String pbId, String recID) throws DALException {
+        try {
+            PreparedStatement preparedStatement = newCon.createStatement("Select * From prodbestilling " +
+                    " Where pbID = ?;");
+
+            preparedStatement.setString(1, pbId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while(rs.next()) {
+                int i = 0;
+                ArrayList<ProduktBatchDTO> users = new ArrayList<>();
+                users.add(extractPBLFromResultSet(rs));
+                if(users.get(i).getReceptID().equals(recID)) {
+                    return users.get(i);
+                }
+                i++;
+            }
+
+        } catch (SQLException ex) {
+            throw new DALException("kunne ikke finde ønsket information");
+        }
+        throw new DALException("fuck mig");
     }
 
 
