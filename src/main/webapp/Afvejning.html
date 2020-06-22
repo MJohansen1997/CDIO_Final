@@ -4,29 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 
 </head>
-<body>
+<body class="homepages-body">
 <div class = "container" id="container">
-    <script src="Afvejning.js"></script>
-    <H1>Afvejning</H1>
+    <div id = "homepage-title-container" class = "headpanel-container">
+    <H1 class="headpanel-title">Afvejning</H1>
+    </div>
     <div id="lab">
         <form class="form" method="POST" id='labidform'>
-            <label class='inlab' id='lablab'> Laborarnt ID : <input class="input" type="text" id="userid" name="userid" required /></label>
+            <label class='inlab' id='lablab'> Velkommen Laborarnt : <input class="input" type="text" id="userid" name="userid" readonly /></label>
             <label class='inlab' id='prodlab'> Produktions ID : <input type="text" id="produktionsid" name="produktionsid" required /></label>
             <label class='inlab' name='reclab' id="recid"> Recept ID : <input type="text" id="receptid" name="receptid" readonly /> </label>
             <label class='inlab' name='reclab' id="recnavn"> Recept Navn : <input type="text" id="receptnavn" readonly /></label>
         </form>
-            <button id="labbut">Verificer ID</button>
             <button id="subprod">Find Recept</button>
     </div>
     <div id = "result">
-        <div id="mangler">
-            <h3>Mangler</h3>
+        <h3 class="resulttitle">Mangler</h3>
+        <div id="mangler" class="result">
+
         </div>
-        <div id="faerdig">
-            <h3>Færdig</h3>
+        <h3 class="resulttitle">Færdig</h3>
+        <div id="faerdig" class="result">
+
         </div>
     </div>
 </div>

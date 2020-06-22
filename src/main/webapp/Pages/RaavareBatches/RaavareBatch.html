@@ -1,0 +1,71 @@
+<script src="./Pages/RaavareBatches/RaavareBatchJS.js"></script>
+<link rel="stylesheet" href="AdminBrugerStyle.css">
+<h1 class="headpanel-title">Velkommen til RåvareBatch</h1>
+<!--leftside-->
+
+<nav>
+    <ul>
+        <button type="button" id="buttonOpret">Opret</button>
+        <button type="button" id="buttonRediger">Rediger</button>
+        <button type="button" id="buttonFind">Find</button>
+        <button type="button" id="buttonSlet">Slet</button>
+    </ul>
+</nav>
+<br>
+
+<form id="opretForm">
+    <h1>Opret R&aring;varerBatch</h1>
+    <p> Indtast RåvarerID : <input type="text" name="raavID" required/></p>
+    <p>Indtast mængde : <input type="text" name="maengde" required/></p>
+    <button type="submit">Gem ændringer</button>
+</form>
+
+<form id="redigerForm">
+    <h1>Rediger RåvarerBatch</h1>
+    <p>Vælg RåvarerBatch ID : <input type="text" name="rbID" required/></p>
+    <button type="submit">Søg</button>
+</form>
+
+<form id="redigerInfoForm">
+    <h1>Rediger råvarerbatch</h1>
+    <input type="hidden" name="rbID"/>
+    <p>Vælg RåvarerID : <input type="text" name="raavID" required/></p>
+    <p>Vælg Mængde : <input type="text" name="maengde" required/></p>
+    <button type="submit">Gem ændringer</button>
+</form>
+
+<form id="sletForm">
+    <h1>Slet RåvarerBatch</h1>
+    <p>Vælg RåvarerBatch ID : <input type="text" name="rbID" required/></p>
+    <button type="submit">Slet RåvareBatchen</button>
+</form>
+
+<form id="findForm">
+    <h1>Find Råvarerbatch</h1>
+    <p>Vælg RåvarerBatch ID : <input type="text" name="rbID" required/></p>
+    <button type="submit">Find</button>
+
+    <table id="findForm-table" class="table">
+        <thead>
+        <tr>
+            <th>Råvarerbatch ID</th>
+            <th>Råvarer ID</th>
+            <th>Mængde</th>
+        </tr>
+        </thead>
+        <tbody id="findFormBody">
+        </tbody>
+    </table>
+</form>
+
+<table id="userInfo-table" class="table">
+    <thead>
+    <tr>
+        <th>Råvarerbatch ID</th>
+        <th>Råvarer ID</th>
+        <th>Mængde</th>
+    </tr>
+    </thead>
+    <tbody id="raavBatchBody">
+    </tbody>
+</table>

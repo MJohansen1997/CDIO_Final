@@ -1,6 +1,22 @@
 package DTO;
 
 public class ProduktBatchKompDTO {
+    /**
+     * raavare batch id i området 1-99999999. Vælges af brugerne
+     */
+    String rbId;
+    /**
+     * tara i kg
+     */
+    double tara;
+    /**
+     * afvejet nettomængde i kg
+     */
+    double netto;
+    /**
+     * Laborant-identifikationsnummer
+     */
+    String labID;
 
     public ProduktBatchKompDTO(String pbId, String rbId, double tara, double netto, String labID) {
         this.pbId = pbId;
@@ -57,21 +73,5 @@ public class ProduktBatchKompDTO {
         this.labID = labID;
     }
 
-    /**
-     * raavare batch id i området 1-99999999. Vælges af brugerne
-     */
-    String rbId;
-    /**
-     * tara i kg
-     */
-    double tara;
-    /**
-     * afvejet nettomængde i kg
-     */
-    double netto;
-    /**
-     * Laborant-identifikationsnummer
-     */
-    String labID;
 
 }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<script src="./Pages/Raavare/Raavare.js"></script>
+ <link rel="stylesheet" href="AdminBrugerStyle.css">
+ <div id="adminpage-title-container" class="headpanel-container">
+     <h1 class="headpanel-title">Råvare</h1>
+ </div>
+    <nav>
+        <ul>
+            <button type="button" id="buttonOpret">Opret</button>
+            <button type="button" id="buttonRediger">Rediger</button>
+            <button type="button" id="buttonSlet">Slet</button>
+            <button type="button" id="buttonFind">Find</button>
+        </ul>
+    </nav>
+    <br>
+    <form id="opretForm">
+        <h1>Opret R&aring;varer</h1>
+         <p> Indtast Råvarer : <input type="text" name="raavNavn" required/></p>
+        <p>Indtast Leverandør : <input type="text" name = "leverandor" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+
+    <form id="redigerForm">
+        <h1>Rediger Råvarer</h1>
+        <p>Vælg Råvarer ID : <input type="text" name="raavID" id="raavId" required/></p>
+        <button type="submit">Søg</button>
+    </form>
+
+    <form id="redigerInfoForm">
+        <h1>Rediger råvarer</h1>
+        <input type="hidden" name="raavID" />
+        <p>Vælg Råvarer Navn : <input type="text" name="raavNavn" required/></p>
+        <p>Vælg Leverandør : <input type="text" name="leverandor" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+
+    <form id="sletForm">
+        <h1>Slet Råvarer</h1>
+        <p>Vælg Råvarer ID : <input type="text" name="raavID" required/></p>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+    <form id="findForm">
+        <h1>Find Råvarer</h1>
+        <p>Vælg Råvarer ID : <input type="text" name="raavID" required/></p>
+        <button type="submit">Find</button>
+
+        <table id="findForm-table" class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Navn</th>
+                <th>Leverandør</th>
+            </tr>
+            </thead>
+            <tbody id="findFormBody">
+            </tbody>
+        </table>
+    </form>
+
+        <table id="userInfo-table" class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Navn</th>
+            <th>Leverandør</th>
+        </tr>
+        </thead>
+        <tbody id="raavBody">
+        </tbody>
+    </table>

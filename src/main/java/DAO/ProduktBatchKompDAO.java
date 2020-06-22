@@ -1,7 +1,9 @@
 package DAO;
 
+import DTO.BrugerDTO;
 import DTO.ProduktBatchKompDTO;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,12 +25,26 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
     @Override
     public ProduktBatchKompDTO getProduktBatchKomp(String pbId, String rbId) throws DALException {
         try {
-            Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM produktbatches WHERE id = \'" + pbId + "\' AND \'" + rbId+"\'");
+            PreparedStatement preparedStatement = newCon.createStatement("Select * From produktbatches " +
+                    " Where pbID = ?;");
+
+            preparedStatement.setString(1, pbId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while(rs.next()) {
+                int i = 0;
+                ArrayList<ProduktBatchKompDTO> users = new ArrayList<>();
+                users.add(extractProduktBatchKompListFromResultSet(rs));
+                if(users.get(i).getRbId().equals(rbId)) {
+                    return users.get(i);
+                }
+                i++;
+            }
+
         } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
-        return null;
+        throw new DALException("fuck mig");
     }
 
     @Override
@@ -63,25 +79,25 @@ public class ProduktBatchKompDAO implements IDAO.IProduktBatchKompDAO {
                 alleprodukter.add(extractProduktBatchKompListFromResultSet(rs));
             }
 
+            return alleprodukter;
         } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }
-        return null;
+
     }
 
     @Override
     public void createProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException {
         try {
-            Statement stmt = newCon.createStatement();
-            ResultSet rs = stmt.executeQuery
-                    ("insert into produktbatches values ("
-                            + pbk.getPbId() + ","
-                            + pbk.getRbId() + ","
-                            + pbk.getLabID() + ","
-                            + pbk.getTara() + ","
-                            + pbk.getNetto() + ");");
+            PreparedStatement preparedStatement = newCon.createStatement("INSERT INTO produktbatches " +
+                    "(pbID, rbID, laborant, tara, netto) VALUES (?, ?, ?, ?, ?);");
 
-
+            preparedStatement.setString(1, pbk.getPbId());
+            preparedStatement.setString(2, pbk.getRbId());
+            preparedStatement.setString(3, pbk.getLabID());
+            preparedStatement.setDouble(4, pbk.getTara());
+            preparedStatement.setDouble(5, pbk.getNetto());
+            preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             throw new DALException("kunne ikke finde ønsket information");
         }

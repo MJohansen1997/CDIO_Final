@@ -1,0 +1,95 @@
+ <script src="./Pages/ProduktBatches/ProduktBatchJS.js"></script>
+
+ <link rel="stylesheet" href="AdminBrugerStyle.css">
+
+ <div id="adminpage-title-container" class="headpanel-container">
+     <h1 class="headpanel-title">ProduktBatches</h1>
+ </div>
+    <!--leftside-->
+
+    <nav>
+        <ul>
+            <button type="button" id="buttonOpret">Opret et nyt produktbatch</button>
+            <button type="button" id="buttonRediger">Redigering af produktbatches</button>
+            <button type="button" id="buttonSlet">Slet</button>
+            <button type="button" id="buttonFind">Find</button>
+        </ul>
+    </nav>
+    <br>
+
+    <form id="opretForm">
+        <h1>Opret nyt produktbatch</h1>
+        <label for="chooseStatus">Status på produktbatch : </label>
+        <input type="hidden" name="chosenStatus" id="chosenStatus">
+            <select id="chooseStatus">
+                <option value="Afventer">Afventer</option>
+                <option value="Under produktion">Under produktion</option>
+                <option value="Afsluttet">Afsluttet</option>
+            </select>
+        <label for="chooseRecept">Angiv hvilket recept som skal tilknyttes : </label>
+        <input type="hidden" name="chosenRecept" id="chosenRecept">
+            <select id="chooseRecept">
+            </select>>
+
+
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+    <form id="redigerForm">
+        <h1>Opdater status på produktionsbatches</h1>
+        <p>Angiv produktbatch ID til redigering: <input type="text" name="pbID" required/></p>
+        <button type="submit">Find ID til opdatering</button>
+    </form>
+
+    <form id="redigerInfoForm">
+        <h1>Rediger bruger</h1>
+        <input type="hidden" name="pbID"/>
+
+        <label for="toUpdateStatus"> Ny status : </label>
+        <select id="toUpdateStatus" name="status">
+            <option value="Afventer">Afventer</option>
+            <option value="Under produktion">Under produktion</option>
+            <option value="Afsluttet">Afsluttet</option>
+        </select>
+        <button type="submit">Gem ændringer</button>
+    </form>
+
+
+    <form id="sletForm">
+        <h1>Slet Produktionsbatch</h1>
+        <p>Angiv produktionsbatch ID : <input type="text" name="pbID" required/></p>
+        <button type="submit">Slet ProduktionsBatch</button>
+    </form>
+
+    <form id="findForm">
+        <h1>Find Produktionsbatch</h1>
+        <p>Angiv produktionsbatch ID : <input type="text" name="pbID" required/></p>
+        <button type="submit">Find</button>
+        <table id="findForm-table" class="table">
+            <thead>
+            <tr>
+                <th>pbID</th>
+                <th>status</th>
+                <th>receptID</th>
+                <th>Start dato for produktionsbatchen</th>
+                <th>Slut dato for produktionsbatchen</th>
+            </tr>
+            </thead>
+            <tbody id="pbBody">
+            </tbody>
+        </table>
+    </form>
+    <table id="userInfo-table" class="table">
+        <thead>
+        <tr>
+            <th>pbID</th>
+            <th>status</th>
+            <th>receptID</th>
+            <th>Start dato</th>
+            <th>Slut dato</th>
+        </tr>
+        </thead>
+        <tbody id="pbAllBody">
+        </tbody>
+    </table>
+

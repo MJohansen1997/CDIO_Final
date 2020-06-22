@@ -1,25 +1,22 @@
+var rec;
+var prod;
+var exists;
+var raavbatch;
+var message;
+var tada;
 $(document).ready(function () {
+    $.getScript("jquery.serializejson.js");
     $(".inlab").hide();
+    $("#result").hide();
+    $("#userid").val(userInfo.brugerID);
     $("#lablab").show();
-    $("button").hide();
+    $("#prodlab").show();
+    $("#subprod").show();
 });
+
+
+
 $(document).ready(function () {
-    $("#labbut").show().click(function () {
-        $.ajax({
-            url: "rest/afvejning/verifylab",
-            data: $('#labidform').serialize(),
-            contentType: "application/x-www-form-urlencoded",
-            method: 'POST',
-            success: function (data) {
-                if (data == 'true') {
-                    $("#labbut").remove();
-                    $("#userid").prop("readonly", true);
-                    $("#subprod").show();
-                    $("#prodlab").show();
-                } else return alert("ingen laborant fundet med dette ID");
-            }
-        });
-    });
     $("#subprod").click(function () {
         $.ajax({
             url: "rest/afvejning/verifyprod",
@@ -27,35 +24,39 @@ $(document).ready(function () {
             contentType: "application/x-www-form-urlencoded",
             dataType: "JSON",
             method: 'POST',
-            success: function (data) {
+            success: async function (data) {
                 if (data != null) {
+                    $("#receptid").val(data.receptID);
+                    $("#receptnavn").val(data.receptNavn);
+                    await findreckomps();
+                    await findprodKomps();
+                    await insertkomps();
                     $("#subprod").remove();
                     $("#subkomp").show();
                     $("#produktionsid").prop("readonly", true);
                     $("[name='reclab']").show();
-                    $("#receptid").val(data.receptID);
-                    $("#receptnavn").val(data.receptNavn);
-                    findreckomps();
-                    findprodKomps();
+                    $("#result").show();
                 } else return alert("ingen Produktion matcher dette id");
             }
         });
     });
 });
-var rec;
+
 function saver(o) {
-    rec = o;
-
+    return rec = o;
 }
-var prod;
 function saver2(o) {
-    prod = o;
+    return prod = o;
 }
-var holder;
 function saver3(o) {
-    holder = o;
+    return exists = o;
 }
-
+function saver4(o) {
+    return raavbatch = o;
+}
+function saver5(o) {
+return message = o;
+}
 function formfilled(temp, prodid, rbid, tara, vaegt, lab) {
     var form =
         "<form class='form' action='rest/afvejning/verifylab' method='POST' id='labidform'>" +
@@ -68,114 +69,170 @@ function formfilled(temp, prodid, rbid, tara, vaegt, lab) {
         "</form>";
     return form;
 }
-function formunfilled(raavnavn, tolerance, lab, raavid, prodid) {
+function formunfilled(raavnavn, tolerance, lab, raavid, prodid, req) {
+    var min = req-(req*(tolerance/100));
+    var max = req+(req*(tolerance/100));
     var form =
         "<form class='form' method='POST' id='" +raavnavn+ "form'>" +
         "<h3>" +raavnavn+ "</h3>"+
-        "<label class='batch'> Råvare Batch : <input class='input' id='" + raavnavn + "rb' type='text' /></label>" +
-        "<label class='batch'> Tara Vægt : <input class='input' id='" + raavnavn + "tara' type='number' step='0.01' /></label>" +
+        "<label class='batch'> Råvare Batch : <input class='input' id='" + raavnavn + "rb' name='rbId' type='text' required /></label>" +
+        "<label class='batch'> Tara Vægt : <input class='input' id='" + raavnavn + "tara' name='tara' type='number' step='0.01' required /></label>" +
+        "<label class='batch'> Påkrævet tilsat mængde : <input class='input' id='" + raavnavn + "req' type='text' value='" + req + "' readonly /></label>" +
         "<label class='batch'> Tolerance (%) : <input class='input' id='" + raavnavn + "tol' type='text' value='" + tolerance + "' readonly /></label>" +
-        "<label class='batch'> Råvare Mængde : <input class='input' id='" + raavnavn + "maengde' type='number' step='0.01' /></label>" +
-        "<label class='batch'> Laborant : <input class='input' id='" + raavnavn + "lab' type='text' value='" + lab + "' readonly /></label>" +
-        "<input class='input' id='" + raavnavn + "id' type='text' value='" + raavid + " ' readonly/>" +
-        "<input class='input' id='" + raavnavn + "prod' type='text' value='" + prodid + "' readonly/>" +
+        "<label class='batch'> Tilsat mængde : <input class='input' id='" + raavnavn + "maengde' name='netto' type='number' step='0.01' required /></label>" +
+        "<input class='input' id='" + raavnavn + "lab' name='labID' type='hidden' value='" + lab + "' readonly />" +
+        "<input class='input' id='" + raavnavn + "id' type='hidden' name='raavid' value='" + raavid + " ' readonly/>" +
+        "<input class='input' id='" + raavnavn + "prod' name='pbId' type='hidden' value='" + prodid + "' readonly/>" +
+        "<input class='input' id='" + raavnavn + "min' type='hidden' name='min' value='" + min + "' readonly/>" +
+        "<input class='input' id='" + raavnavn + "max' type='hidden' name='max' value='" + max + "' readonly/>" +
+
         "</form>" +
-        "<button id='but" + raavnavn + "'> Click me</button>";
+        "<button id='but" + raavnavn + "' value='" + raavnavn + "'> TIlføj til Produktionen</button>";
     return form;
 }
-
-function findreckomps() {
-    $.ajax({
+async function findreckomps() {
+    return $.ajax({
         url: "rest/afvejning/loadreckomps",
         data: $('#labidform').serialize(),
         contentType: "application/x-www-form-urlencoded",
         dataType: "JSON",
         method: 'POST',
-        success: function (data) {
+        success: async function (data) {
             if (data != null) {
-                saver(data);
+                await saver(data);
             }
             else alert("recfailed")
         }
     });
 }
-function findprodKomps() {
-    $.ajax({
+async function findprodKomps() {
+    return $.ajax({
         url: "rest/afvejning/loadprodkomps",
         data: $('#labidform').serialize(),
         contentType: "application/x-www-form-urlencoded",
         dataType: "JSON",
         method: 'POST',
-        success: function (data) {
+        success: async function (data) {
             if (data != null) {
-                saver2(data);
-                insertKomps();
+                await saver2(data);
             }
-            else alert("prodfailed")
+            else alert("Server fejl:")
         }
     });
 }
-    /*[{"pbId":"PB00001","rbId":"RB00001","tara":12.0,"netto":1000.0,"labID":"B00001"}]*/
-    /*[{"receptID":"REC00001","raavareID":"R00001","nonNetto":1000.0,"tolerance ":3.0},{"receptID":"REC00001","raavareID":"R00002","nonNetto":1000.0,"tolerance":3.0}]*/
-function insertKomps() {
-    insertprodkomps(insertForm);
+async function insertkomps() {
+    outer:
+    for (let i = 0; i < Object.keys(rec).length; i++) {
+        inner:
+        for (let j = 0; j < Object.keys(prod).length; j++) {
+            await getStatus(rec[i].raavareID,prod[j].rbId);
+            if(exists.status == "false" && j == Object.keys(prod).length-1) {
+                $("#mangler").append(formunfilled(exists.name, parseFloat(rec[i].tolerance), $("#userid").val(),
+                    rec[i].raavareID, $("#produktionsid").val(), rec[i].nonNetto));
+                $(document).find("#but" + exists.name + "").on("click",function () {
+                    var komp = $(this).val();
+                    addkomp(komp);
+                });
+            }
+            if(exists.status == "true"){
+                $("#faerdig").append(formfilled(exists.name, prod[j].pbId, prod[j].rbId, prod[j].tara,
+                    prod[j].netto, prod[j].labID));
+                continue outer;
+            }
+        }
+    }
 }
-function getraavID(ravid) {
-    $.ajax({
-        url: "rest/afvejning/getrid",
-        data: ravid,
-        dataType : "text",
+function getStatus(raavid, raavbatchid) {
+    return $.ajax({
+        url: "rest/afvejning/IdBatch?rid=" + raavid + "&rbid=" + raavbatchid,
         method: 'POST',
-        success: function (data) {
-            alert(data);
-            saver3(data);
+        success: async function (data) {
+            await saver3(data);
         }
     });
 }
-
-function insertForm() {
-    console.log(rec);
-    if (typeof data == "undefined"){
-        console.log("backtothefuture");
-        findreckomps(function () {
-            insertForm()
+function changeStatus(change) {
+    $.ajax({
+        url: "rest/afvejning/updatestatus?prodid=" + $("#produktionsid").val() + "&status=" + change,
+        method: 'PUT',
+    });
+}
+async function addkomp(name) {
+    var formname = "#" + name + "form";
+    var preda = $(document).find(formname);
+    tada = (preda).serializeJSON();
+    await getraavid(tada.rbId);
+    await verify(raavbatch, tada);
+    if ($.trim(message) == $.trim("Done")){
+        $.ajax({
+            url: 'rest/afvejning/createpbk',
+            method: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify(tada),
+            success: async function () {
+                $("#mangler").empty();
+                $("#faerdig").empty();
+                await changebatch();
+                alert("Batchen er nu tilsat produktet");
+                await findreckomps();
+                await findprodKomps();
+                await insertkomps();
+                if (Object.keys(rec).length == Object.keys(prod).length){
+                    changeStatus("Afsluttet");
+                    alert("Denne Produktion er Fuldført og Afsluttet")
+                }
+                else
+                    changeStatus("Under produktion");
+            }
         });
     }
-    rec.forEach((r_item) => {
-        prod.forEach((p_item) =>{
-            $.ajax({
-                url: "rest/afvejning/IdBatch?rid=" + r_item.raavareID + "&rbid=" + p_item.rbId,
-                method: 'POST',
-                success: function (data) {
-                    if(data != ""){
-                        $("#mangler").append(formunfilled(data, parseFloat(r_item.tolerance), $("#userid").val(),
-                            r_item.raavareID, $("#produktionsid").val()));
-                        $(document).find("#but" + data + "").on("click",function () {
-                            console.log("lol")
-                            /*$.ajax()
-                            $(document).find("#" + data + "form")k*/
-                        });
-                    }
-                }
-            });
-        })
-    })
+    else alert(message)
 }
-
-function insertprodkomps(callback) {
-    prod.forEach(function (item) {
-        $.ajax({
-            url: "rest/afvejning/getrnavn",
-            data: item.rbId,
-            dataType: "text",
-            method: 'POST',
-            success: function (data) {
-                $("#faerdig").append(formfilled(data, item.pbId, item.rbId, item.tara,
-                    item.netto, item.labID))
+async function getraavid(input) {
+    console.log("getraavid" + input);
+    return $.ajax({
+        url: "rest/afvejning/findraavid/" + input,
+        method: 'GET',
+        success: async function (data) {
+            console.log(data);
+            if (data != null) {
+                await saver4(data);
             }
-        });
+            else alert("server connection failed")
+        }
     });
-    callback()
+}
+function changebatch() {
+    raavbatch.maengde = Number(raavbatch.maengde) - Number(tada.netto);
+    console.log(raavbatch);
+    return $.ajax({
+        url:'rest/afvejning/updateraavbatch',
+        method: 'PUT',
+        contentType: "application/json",
+        data: JSON.stringify(raavbatch),
+    });
+}
+function verify(rb, input) {
+    console.log($.trim(rb.raavId) + " : " +  $.trim(input.raavid));
+    if ($.trim(rb.raavId) == $.trim(input.raavid)){
+        if (Number(input.netto) > Number(rb.maengde))
+            saver5("Den tilføjede raavarebatch indeholder ikke nok til denne recept");
+        else if (Number(input.netto) > Number(input.max)){
+            saver5("Den tilføjede mængde er højere end fejl tolerancen tillader");
+        }
+        else if (Number(input.tara) < 0 || Number(input.tara) > 9999){
+            saver5("Indtast en lovlig tara vægt på mellem 0-9999.99");
+        }
+        else if (Number(input.netto) < Number(input.min)){
+            saver5("Den tilføjede mængde er lavere end fejl tolerancen tillader");
+        }
+        else {
+            saver5("Done");
+        }
+    }
+    else {
+        saver5("Den indsatte RaavareBatch matcher ikke med den påkrævede raavarer")
+    }
 }
 
 

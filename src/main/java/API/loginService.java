@@ -3,9 +3,12 @@ package API;
 import DAO.BrugerDAO;
 import DAO.DALException;
 import DTO.BrugerDTO;
+import org.json.JSONObject;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
+import java.util.List;
 
 @Path("/login")
 public class loginService{
@@ -18,5 +21,14 @@ public class loginService{
         //BrugerDTO user = new BrugerDTO("B0001", "mikkel","MJ" ,"000000-0000",
         //        "Farmaceut", "0000" );
         return BDAO.verifyUser(name, password);
+    }
+
+    @GET
+    @Path("/getUser")
+    @Produces(MediaType.APPLICATION_JSON)
+    public BrugerDTO verificationBetweenAll(@QueryParam("Username") String name, @QueryParam("Password") String password) throws SQLException, DALException, ClassNotFoundException {
+        BrugerDAO BDAO = new BrugerDAO();
+
+        return BDAO.extractVerifiedUser(name,password);
     }
 }

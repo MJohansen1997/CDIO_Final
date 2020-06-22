@@ -55,7 +55,7 @@ public interface IDAO {
 
         List<RaavareBatchDTO> getRaavareBatchList() throws DALException, SQLException, ClassNotFoundException;
 
-        List<RaavareBatchDTO> getRaavareBatchList(String raavareId) throws DALException, SQLException, ClassNotFoundException;
+        //       List<RaavareBatchDTO> getRaavareBatchListID(String raavareId) throws DALException, SQLException, ClassNotFoundException;
 
         void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException, SQLException, ClassNotFoundException;
 
@@ -83,5 +83,10 @@ public interface IDAO {
         void createProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException;
 
         void updateProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException;
+    }
+
+    public interface IPrintDAO{
+        PrintDTO getPrint(String pbID, String status, String recID) throws DALException, SQLException, ClassNotFoundException;
+
     }
 }

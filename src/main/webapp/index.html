@@ -5,38 +5,20 @@
     <meta charset="UTF-8">
     <title>Rødovrevejs Pharmaceutics</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("button").click(function () {
-                $.ajax({
-                    url: "rest/login/verify",
-                    data: $('#loginform').serialize(),
-                    contentType: "application/x-www-form-urlencoded",
-                    method: 'POST',
-                    success: function (data) {
-                        alert(data);
-                        if (data == 'true') {
-                            /*$('#maincontainer').load("HomePage.html");*/
-                            window.location.href = 'HomePage.html';
-                        }
-                    }
-                });
-
-            });
-        });
-    </script>
+    <script src="jquery.serializejson.js"></script>
+    <script src="login.js"></script>
 </head>
 <body class = login-page>
 <div id="whole-panel">
     <div class="title">
         <header class=header-panel>
-            <img src="pill-512.png" height="64" width="64" alt="Logo" id = "logo"/>
+            <img src="Images/pill-512.png" height="64" width="64" alt="Logo" id = "logo"/>
             <h1 id = "title">Rødovrevej Pharmaceutics</h1>
         </header>
     </div>
     <div id="maincontainer" class=container>
         <h4 id = "login-title">Login med dit brugernavn og kodeord</h4>
-        <form action="rest/login/verify" method="POST" id='loginform'>
+        <form id="loginform" name='loginform'>
             <div class="text-input">
                 <input type="text" name="Username" class = "username-field" placeholder="Brugernavn" required/>
                 <br>
@@ -48,7 +30,7 @@
     </div>
 </div>
 <div id="imgbox">
-    <img src="1644639.jpg" alt="Et billede af rødovrevej" id="bygning" height="1000"/>
+    <img src="Images/1644639.jpg" alt="Et billede af rødovrevej" id="bygning"/>
 </div>
 </body>
 </html>
