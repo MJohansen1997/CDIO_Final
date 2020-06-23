@@ -112,7 +112,10 @@ public class APIProduktBatch {
             main.put("recID", produktBatch.getReceptID());
             main.put("status", produktBatch.getStatus());
             main.put("start", produktBatch.getStartdato());
-            main.put("slut", produktBatch.getSlutdato());
+            if(produktBatch.getSlutdato() == null)
+                main.put("slut", "");
+            else
+                main.put("slut", produktBatch.getSlutdato());
 
             JSONArray raavlist = new JSONArray();
             outerloop:
@@ -136,10 +139,10 @@ public class APIProduktBatch {
                         continue outerloop;
                     }
                 }
-               /* raav.put("rb", "");
+                raav.put("rb", "");
                 raav.put("netto", 0);
                 raav.put("tara", 0);
-                raav.put("ini", "");*/
+                raav.put("ini", "");
                 raavlist.put(raav);
 
             }

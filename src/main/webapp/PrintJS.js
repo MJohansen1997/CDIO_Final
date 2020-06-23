@@ -14,7 +14,7 @@ $(document).ready(function(){
             $("#ReceptID").text(data.recID);
             $("#ProdStatus").text(data.status);
             $("#ProdStart").text(data.start);
-            $("#ProdSlut").text(data.start);
+            $("#ProdSlut").text(data.slut);
             $.each(data.raavlist, function (i, list) {
                 $("#raavarebatches").append(htmllist(list));
                 sumnetto = Number(sumnetto) + Number(list.netto);
