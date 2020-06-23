@@ -13,7 +13,7 @@ $(document).ready(function () {
     $('#findForm').on('submit', function (e) {
         e.preventDefault();
         getPB($('#findForm').serializeJSON().pbID);
-
+        $("#findForm-table").show();
     });
 
     $('#sletForm').on('submit', function (e) {
@@ -167,38 +167,44 @@ function loadRecepter() {
 
 function buttonOpret() {
     $("#buttonOpret").click(function () {
+        hideAllForms()
         $("#opretForm").toggle();
     });
 }
 
 function buttonRediger() {
     $("#buttonRediger").click(function () {
+        hideAllForms()
         $("#redigerForm").toggle();
     });
 }
 
 function buttonSlet() {
     $("#buttonSlet").click(function () {
+        hideAllForms()
         $("#sletForm").toggle();
     });
 }
 
 function buttonFind() {
     $("#buttonFind").click(function () {
-        $("#findForm-table").toggle();
+        hideAllForms()
         $("#findForm").toggle();
-    });
-}
-
-function submitUpdate() {
-    $("#submit4").click(function () {
-        $("#showForm").toggle();
     });
 }
 
 function buttonVaelg() {
     $("#buttonPrint").click(function () {
+        hideAllForms()
         $("#printForm").toggle();
+    });
+}
+
+function hideAllForms(){
+    $('form').each(function(){
+        if ( $(this).css('display') == 'block') {
+            $(this).toggle();
+        }
     });
 }
 
