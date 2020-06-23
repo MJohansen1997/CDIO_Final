@@ -72,7 +72,6 @@ public interface IDAO {
 
         void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException;
 
-        ProduktBatchDTO getProduktBatch2IDS(String pbId, String recID) throws DALException;
     }
 
     public interface IProduktBatchKompDAO {
