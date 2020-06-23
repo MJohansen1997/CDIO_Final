@@ -1,3 +1,6 @@
+/**
+ * @author Hau, Shania (john.doe@example.com)
+ */
 package DTO;
 
 public class ProduktBatchKompDTO {
