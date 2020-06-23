@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $.getScript("jquery.serializejson.js");
     loadListPB();
     loadRecepter();
 
@@ -32,7 +33,7 @@ $(document).ready(function () {
     $('#printForm').on('submit', function(e) {
         e.preventDefault();
         secret = $("#onlyusefullthing").val();
-        $("html").load("Print.html");
+        window.open("Print.html?pbid=" + secret , "_blank");
     });
 
     buttonOpret();
@@ -122,6 +123,7 @@ function deletePB(pbID) {
         }
     )
 }
+
 function loadListPB() {
     $.get('rest/PB/allPB', function (data, textStatus, req) {
         console.log(data);
@@ -199,3 +201,4 @@ function buttonVaelg() {
 }
 
 var secret;
+var prev;

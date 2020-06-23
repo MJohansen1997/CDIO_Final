@@ -98,6 +98,7 @@ public class APIProduktBatch {
     @Path("/IdBatch")
     @Produces(MediaType.APPLICATION_JSON)
     public String verifyIdBatch(@QueryParam("pbID") String prodID) {
+        /** @Author Mikkel Johansen, s175194*/
         try {
             BrugerDAO brugerDAO = new BrugerDAO();
             ProduktBatchDAO produktBatchDAO = new ProduktBatchDAO();
@@ -124,7 +125,9 @@ public class APIProduktBatch {
             main.put("slut", produktBatch.getSlutdato());
 
             JSONArray raavlist = new JSONArray();
+            outerloop:
             for(int i = 0; i < raavareList.size(); i++) {
+                boolean found = true;
                 JSONObject raav = new JSONObject();
                 raav.put("ravID", raavareList.get(i).getRaavID());
                 raav.put("ravName", raavareList.get(i).getRaavNavn());
@@ -135,13 +138,20 @@ public class APIProduktBatch {
                 for (int j = 0; j < produktBatchKompList.size(); j++) {
                     if (raavareList.get(i).getRaavID().equals(raavareBatchDAO.getRaavareBatch(
                             produktBatchKompList.get(j).getRbId()).getRaavId())){
+                        raav.put("rb", produktBatchKompList.get(j).getRbId());
                         raav.put("netto", produktBatchKompList.get(j).getNetto());
                         raav.put("tara", produktBatchKompList.get(j).getTara());
-                        raav.put("init", brugerDAO.getBruger(produktBatchKompList.get(j).getLabID()).getIni());
-                        break;
+                        raav.put("ini", brugerDAO.getBruger(produktBatchKompList.get(j).getLabID()).getIni());
+                        raavlist.put(raav);
+                        continue outerloop;
                     }
                 }
+               /* raav.put("rb", "");
+                raav.put("netto", 0);
+                raav.put("tara", 0);
+                raav.put("ini", "");*/
                 raavlist.put(raav);
+
             }
             main.put("raavlist", raavlist);
             System.out.println(main.toString());
