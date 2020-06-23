@@ -1,4 +1,5 @@
-//ASDF
+//@author Hau, Shania s195477
+// ASDF
 $(document).ready(function () {
     loadRaavarerBatch();
     $('#opretForm').on('submit', function (e) {
@@ -69,9 +70,7 @@ function updateRaavarerBatch() {
                 $("#redigerForm").toggle();
                 $("#redigerInfoForm").toggle();
             }else alert("Kunne ikke redigere denne råvarebatch")
-
         }
-
     })
 }
 
