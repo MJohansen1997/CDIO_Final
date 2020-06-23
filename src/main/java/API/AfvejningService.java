@@ -119,24 +119,23 @@ public class AfvejningService {
     @Path("/createpbk")
     @Consumes(MediaType.APPLICATION_JSON)
     public void createprodkomp(String jsonBody) throws SQLException, DALException, ClassNotFoundException {
-        IncrementID incre = new IncrementID();
         ProduktBatchKompDAO dao = new ProduktBatchKompDAO();
         JSONObject json = new JSONObject(jsonBody);
 
-        ProduktBatchKompDTO user = new ProduktBatchKompDTO(
+        ProduktBatchKompDTO batchKompDTO = new ProduktBatchKompDTO(
                 json.getString("pbId"),
                 json.getString("rbId"),
                 json.getDouble("tara"),
                 json.getDouble("netto"),
                 json.getString("labID")
         );
-        dao.createProduktBatchKomp(user);
+        dao.createProduktBatchKomp(batchKompDTO);
     }
 
     @GET
     @Path("/findraavid/{rbid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public RaavareBatchDTO getBruger(@PathParam("rbid") String rbid) {
+    public RaavareBatchDTO getraavid(@PathParam("rbid") String rbid) {
         try {
             RaavareBatchDAO dao = new RaavareBatchDAO();
             return dao.getRaavareBatch(rbid);
