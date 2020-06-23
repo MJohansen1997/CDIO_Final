@@ -3,6 +3,8 @@ package DAO;
 import java.sql.*;
 import java.util.Properties;
 
+/** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
+
 public class MySQLCon {
     // Initialize connection variables.
     private String host = "universitydtudb.mysql.database.azure.com";

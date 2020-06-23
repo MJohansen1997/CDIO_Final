@@ -10,7 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.*;
-
+/** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
 @Path("/brugere")
 public class BrugerHaandtering {
     BrugerDAO dbAccess = new BrugerDAO();
