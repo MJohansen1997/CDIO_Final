@@ -11,7 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.List;
-
+/** @author Johansen, Mikkel s175194*/
 @Path("rk")
 public class APIReceptKomp {
     ReceptKompDAO dbAccess = new ReceptKompDAO();

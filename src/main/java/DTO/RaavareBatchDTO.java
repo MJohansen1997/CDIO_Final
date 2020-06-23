@@ -1,5 +1,5 @@
 package DTO;
-
+/** @Author Steffan Luxhøj*/
 public class RaavareBatchDTO {
      // Raavare batch id
 

@@ -1,3 +1,4 @@
+/** @Author Mikkel Johansen s175194*/
 let sumnetto = 0;
 let sumtara = 0;
 $(document).ready(function(){
