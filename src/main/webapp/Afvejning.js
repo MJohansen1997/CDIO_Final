@@ -1,4 +1,4 @@
-//@Author Mikkel Johansen s175194
+/**@Author Mikkel Johansen s175194*/
 var rec;
 var prod;
 var exists;
