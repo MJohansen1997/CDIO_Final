@@ -1,3 +1,5 @@
+/** @author Hansen, Mads Østerlund (s195456@student.dtu.dk) **/
+
 $(document).ready(function () {
     $.getScript("jquery.serializejson.js");
     loadListPB();
