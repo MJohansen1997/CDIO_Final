@@ -1,6 +1,7 @@
 let sumnetto = 0;
 let sumtara = 0;
 $(document).ready(function(){
+    $(".loader").show();
     var id = getUrlVars()["pbid"];
     $.ajax({
         url: "rest/PB/IdBatch?pbID=" + id,
@@ -20,6 +21,7 @@ $(document).ready(function(){
             });
             $("#SumTara").text(sumtara);
             $("#SumNetto").text(sumnetto);
+            $(".loader").hide();
             window.print();
         }
     });
