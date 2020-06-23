@@ -1,6 +1,6 @@
 package DTO;
 
-/** @author s195485, Nikolai Kristensen (john.doe@example.com)*/
+/** @author s195485, Nikolai Kristensen */
 
 public class RaavareDTO
 {
