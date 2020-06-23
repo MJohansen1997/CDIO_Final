@@ -1,11 +1,11 @@
 $(document).ready(function () {
+    $.getScript("jquery.serializejson.js");
     loadListPB();
     loadRecepter();
 
     $('#opretForm').on('submit', function (e) {
         e.preventDefault();
         createPB()
-
     });
 
     $('#findForm').on('submit', function (e) {
@@ -30,10 +30,17 @@ $(document).ready(function () {
         updatePB($('#redigerInfoForm').serializeJSON())
     });
 
+    $('#printForm').on('submit', function(e) {
+        e.preventDefault();
+        secret = $("#onlyusefullthing").val();
+        window.open("Print.html?pbid=" + secret , "_blank");
+    });
+
     buttonOpret();
     buttonFind();
     buttonRediger();
     buttonSlet();
+    buttonVaelg();
 });
 
 function createPB() {
@@ -116,6 +123,7 @@ function deletePB(pbID) {
         }
     )
 }
+
 function loadListPB() {
     $.get('rest/PB/allPB', function (data, textStatus, req) {
         console.log(data);
@@ -128,22 +136,6 @@ function loadListPB() {
 
 function generateHTMLTable(pbatch) {
     if (pbatch.slutdato != null) {
-
-        localStorage.setItem("pbID", pbatch.pbID);
-        console.log(localStorage.getItem("pbID"))
-
-        localStorage.setItem("status", pbatch.status);
-        console.log(localStorage.getItem("status"));
-
-        localStorage.setItem("receptID", pbatch.receptID);
-        console.log(localStorage.getItem("receptID"));
-
-        localStorage.setItem("startdato", pbatch.startdato);
-        console.log(localStorage.getItem("startdato"));
-
-        localStorage.setItem("slutdato", pbatch.slutdato);
-        console.log(localStorage.getItem("slutdato"));
-
         return '<tr><td>' + pbatch.pbID + '</td>' +
             '<td>' +  pbatch.status + '</td>' +
             '<td>' + pbatch.receptID + '</td>' +
@@ -202,3 +194,11 @@ function submitUpdate() {
     });
 }
 
+function buttonVaelg() {
+    $("#buttonPrint").click(function () {
+        $("#printForm").toggle();
+    });
+}
+
+var secret;
+var prev;

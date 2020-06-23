@@ -3,9 +3,9 @@ package DTO;
 public class RaavareBatchDTO {
      // Raavare batch id
 
-    String rbID;
-    String raavID;
-    double maengde;
+    private String rbID;
+    private String raavID;
+    private double maengde;
 
     public RaavareBatchDTO(String rbID, String raavID, double maengde) {
         this.rbID = rbID;

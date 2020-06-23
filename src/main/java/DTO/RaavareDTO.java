@@ -4,9 +4,9 @@ package DTO;
 
 public class RaavareDTO
 {
-    String raavID;
-    String raavNavn;
-    String leverandor;
+    private String raavID;
+    private String raavNavn;
+    private String leverandor;
 
     public RaavareDTO(String raavID, String raavNavn, String leverandor)
     {

@@ -71,6 +71,8 @@ public interface IDAO {
         void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException;
 
         void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException;
+
+        ProduktBatchDTO getProduktBatch2IDS(String pbId, String recID) throws DALException;
     }
 
     public interface IProduktBatchKompDAO {
@@ -85,8 +87,4 @@ public interface IDAO {
         void updateProduktBatchKomp(ProduktBatchKompDTO pbk) throws DALException;
     }
 
-    public interface IPrintDAO{
-        PrintDTO getPrint(String pbID, String status, String recID) throws DALException, SQLException, ClassNotFoundException;
-
-    }
 }

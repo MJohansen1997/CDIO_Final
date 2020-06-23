@@ -1,5 +1,4 @@
  <script src="./Pages/ProduktBatches/ProduktBatchJS.js"></script>
-
  <link rel="stylesheet" href="AdminBrugerStyle.css">
 
  <div id="adminpage-title-container" class="headpanel-container">
@@ -13,6 +12,7 @@
             <button type="button" id="buttonRediger">Redigering af produktbatches</button>
             <button type="button" id="buttonSlet">Slet</button>
             <button type="button" id="buttonFind">Find</button>
+            <button type="button" id="buttonPrint">Vælg og print</button>
         </ul>
     </nav>
     <br>
@@ -54,7 +54,6 @@
         <button type="submit">Gem ændringer</button>
     </form>
 
-
     <form id="sletForm">
         <h1>Slet Produktionsbatch</h1>
         <p>Angiv produktionsbatch ID : <input type="text" name="pbID" required/></p>
@@ -79,6 +78,12 @@
             </tbody>
         </table>
     </form>
+
+ <form id="printForm">
+     <h1>Print ønsket produkt batch</h1>
+     <p>Angiv produktbatch ID for print: <input type="text" id="onlyusefullthing" name="pbID" required/></p>
+     <button type="submit">Udprint Produktbatch</button>
+ </form>
     <table id="userInfo-table" class="table">
         <thead>
         <tr>
@@ -92,4 +97,6 @@
         <tbody id="pbAllBody">
         </tbody>
     </table>
+
+
 
