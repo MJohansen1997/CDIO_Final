@@ -1,4 +1,4 @@
-//@Author Jacob Kjærby Christensen S174130
+/** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
 $(document).ready(function() {
    loadBrugere();
     $('#opretForm').on('submit', function(e){

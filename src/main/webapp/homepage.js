@@ -1,3 +1,4 @@
+/** @Author Steffan Luxhøj*/
 $(document).ready(function () {
     var home = $("#container").html();
     $("#hjem").click(function () {

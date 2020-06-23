@@ -1,19 +1,14 @@
 package API;
 
-import DAO.BrugerDAO;
 import DAO.DALException;
 import DAO.IncrementID;
 import DAO.RaavareDAO;
-import DTO.BrugerDTO;
-
 import DTO.RaavareDTO;
 import org.json.JSONObject;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.sql.SQLException;
 import java.util.*;
-
+/** @author s195485, Nikolai Kristensen */
 @Path("/raavarer")
 public class APIRaavare {
     RaavareDAO dbAccess = new RaavareDAO();

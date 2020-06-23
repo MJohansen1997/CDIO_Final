@@ -1,4 +1,8 @@
-//@Author Jacob Kjærby Christensen S174130
+/** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
+$("#login").ready(function(){
+
+});
+
 $(document).ready(function() {
     verifyLogin()
 });

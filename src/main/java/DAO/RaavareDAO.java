@@ -5,7 +5,7 @@ import java.sql.*;
 
 import java.util.ArrayList;
 import java.util.List;
-/** @author Kristensen, Nikolai (S195485)*/
+/** @author s195485, Nikolai Kristensen */
 public class RaavareDAO implements IDAO.IRaavareDAO
 {
     //Forbinder til databasen
