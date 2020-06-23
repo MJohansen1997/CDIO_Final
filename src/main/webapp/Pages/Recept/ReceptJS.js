@@ -1,3 +1,4 @@
+//@Author Jacob Kjærby Christensen S174130
 $(document).ready(function() {
     loadRecepter();
 
@@ -126,22 +127,33 @@ function getRecept(receptID){
 
 function buttonOpret(){
     $("#buttonOpret").click(function () {
+        hideAllForms()
         $("#opretForm").toggle();
     });
 }
 function buttonRediger(){
     $("#buttonRediger").click(function () {
+        hideAllForms()
         $("#redigerForm").toggle();
     });
 }
 function buttonSlet() {
     $("#buttonSlet").click(function () {
+        hideAllForms()
         $("#sletForm").toggle();
     });
 }
 function buttonFind(){
     $("#buttonFind").click(function () {
-        $("#findForm-table").toggle();
+        hideAllForms()
         $("#findForm").toggle();
+    });
+}
+
+function hideAllForms(){
+    $('form').each(function(){
+        if ( $(this).css('display') == 'block') {
+            $(this).toggle();
+        }
     });
 }

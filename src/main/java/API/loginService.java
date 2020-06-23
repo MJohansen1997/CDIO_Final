@@ -10,6 +10,8 @@ import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.List;
 
+/** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
+
 @Path("/login")
 public class loginService{
 

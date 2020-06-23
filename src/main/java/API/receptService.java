@@ -1,6 +1,5 @@
 package API;
 
-
 import DAO.DALException;
 import DAO.IncrementID;
 import DAO.ReceptDAO;
@@ -12,6 +11,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.*;
+
+/** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
 
 @Path("/recept")
 public class receptService {

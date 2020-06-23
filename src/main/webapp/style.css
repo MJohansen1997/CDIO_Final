@@ -15,7 +15,7 @@ nav {
     float: left;
 }
 .homepages-body {
-    background: url("images/bluebackground.jpg") no-repeat center center fixed;
+    background: url("Images/bluebackground.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 .headpanel-container {

@@ -1,22 +1,22 @@
  <script src="./Pages/ProduktBatches/ProduktBatchJS.js"></script>
  <link rel="stylesheet" href="AdminBrugerStyle.css">
-
  <div id="adminpage-title-container" class="headpanel-container">
      <h1 class="headpanel-title">ProduktBatches</h1>
  </div>
     <!--leftside-->
 
-    <nav>
+ <div class = "page-container">
+    <nav class ="buttons-container">
         <ul>
-            <button type="button" id="buttonOpret">Opret et nyt produktbatch</button>
-            <button type="button" id="buttonRediger">Redigering af produktbatches</button>
-            <button type="button" id="buttonSlet">Slet</button>
-            <button type="button" id="buttonFind">Find</button>
-            <button type="button" id="buttonPrint">Vælg og print</button>
+            <button type="button" class=  "edit-button" id="buttonOpret">Opret et nyt produktbatch</button>
+            <button type="button" class=  "edit-button" id="buttonRediger">Redigering af produktbatches</button>
+            <button type="button" class=  "edit-button" id="buttonSlet">Slet</button>
+            <button type="button" class=  "edit-button" id="buttonFind">Find</button>
+            <button type="button" class=  "edit-button" id="buttonPrint">Vælg og print</button>
         </ul>
     </nav>
     <br>
-
+<div class = "forms">
     <form id="opretForm">
         <h1>Opret nyt produktbatch</h1>
         <label for="chooseStatus">Status på produktbatch : </label>
@@ -84,19 +84,22 @@
      <p>Angiv produktbatch ID for print: <input type="text" id="onlyusefullthing" name="pbID" required/></p>
      <button type="submit">Udprint Produktbatch</button>
  </form>
-    <table id="userInfo-table" class="table">
+</div>
+     <div class = "table-container">
+    <table id="userInfo-table" class="data-table">
         <thead>
         <tr>
-            <th>pbID</th>
-            <th>status</th>
-            <th>receptID</th>
-            <th>Start dato</th>
-            <th>Slut dato</th>
+            <th class = "table-header">pbID</th>
+            <th class = "table-header">status</th>
+            <th class = "table-header">receptID</th>
+            <th class = "table-header">Start dato</th>
+            <th class = "table-header">Slut dato</th>
         </tr>
         </thead>
         <tbody id="pbAllBody">
         </tbody>
     </table>
-
+     </div>
+ </div>
 
 

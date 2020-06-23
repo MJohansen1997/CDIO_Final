@@ -34,6 +34,8 @@ $(document).ready(function () {
         window.location.href = 'index.html';
     });
 
+
+
     userInfo = JSON.parse(localStorage.getItem('userInfo'))
     console.log("LOADING USERINFO", userInfo)
     //console.log("DOES THIS WORK" + window.userInfo.brugerNavn)
