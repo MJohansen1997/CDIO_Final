@@ -118,7 +118,7 @@ public class AfvejningService {
     @POST
     @Path("/createpbk")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createBruger(String jsonBody) throws SQLException, DALException, ClassNotFoundException {
+    public void createprodkomp(String jsonBody) throws SQLException, DALException, ClassNotFoundException {
         IncrementID incre = new IncrementID();
         ProduktBatchKompDAO dao = new ProduktBatchKompDAO();
         JSONObject json = new JSONObject(jsonBody);
