@@ -65,14 +65,14 @@
         <h1>Find Produktionsbatch</h1>
         <p>Angiv produktionsbatch ID : <input type="text" name="pbID" required/></p>
         <button type="submit">Find</button>
-        <table id="findForm-table" class="table">
+        <table id="findForm-table" class="table" hidden>
             <thead>
             <tr>
-                <th>pbID</th>
-                <th>status</th>
-                <th>receptID</th>
-                <th>Start dato for produktionsbatchen</th>
-                <th>Slut dato for produktionsbatchen</th>
+                <th class="table-header">pbID</th>
+                <th class="table-header">status</th>
+                <th class="table-header">receptID</th>
+                <th class="table-header">Start dato</th>
+                <th class="table-header">Slut dato</th>
             </tr>
             </thead>
             <tbody id="pbBody">

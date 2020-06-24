@@ -103,7 +103,6 @@ function getPB(pbID) {
     $.get('rest/PB/findPB/' + pbID, function (data, textStatus, req) {
         if (typeof data != "undefined") {
             $("#pbBody").empty().append(generateHTMLTable(data));
-            $("#findForm-table").toggle();
         } else {
             alert("Fejl! pbID findes ikke");
         }
@@ -190,6 +189,8 @@ function buttonFind() {
     $("#buttonFind").click(function () {
         hideAllForms()
         $("#findForm").toggle();
+        $("#findForm-table").hide();
+
     });
 }
 
