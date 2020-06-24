@@ -116,13 +116,10 @@ function deletePB(pbID) {
         contentType: "application/json",
         data: JSON.stringify(pbID),
         success: function (data) {
-            if (data != null) {
-                loadListPB();
-                $("#sletForm").toggle();
-            } else alert("Det indtastede pbID kan ikke findes!")
-            }
+            loadListPB();
+            $("#sletForm").toggle();
         }
-    )
+    })
 }
 
 function loadListPB() {

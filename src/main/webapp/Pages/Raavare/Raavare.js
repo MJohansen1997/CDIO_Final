@@ -41,7 +41,7 @@ function createRaavarer() {
     var data = $('#opretForm').serializeJSON();
     console.log(data)
     if(hasNumber(data.raavNavn) && hasNumber(data.leverandor) || hasNumber(data.raavNavn)){
-        alert("We in the if statement fam")
+        alert("Der må ikke være nummere i Råvarer navnet eller leverndør")
         return
     }
     $.ajax({
