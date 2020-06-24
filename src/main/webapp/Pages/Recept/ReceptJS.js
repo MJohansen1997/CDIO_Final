@@ -43,10 +43,11 @@ function createRecept(receptNavn) {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (data){
-            if (data != null) {
+            if (data == 'true') {
                 loadRecepter();
                 $("#opretForm").toggle();
-            } else alert("Det indtastede pbID kan ikke findes!");
+            } else
+                alert("fejl under oprettelse!");
         }
     })
 }
@@ -71,7 +72,7 @@ function updateGetRecept(receptID){
     $.get('rest/recept/findRecept/'+receptID, function (data, textStatus, req) {
         console.log("DATA", data);
         if (!data){
-            alert("Der findes ikke nogen med det brugerID");
+            alert("Der findes ikke nogen med det receptID");
             return;
         }
         $form = $('#redigerInfoForm');
@@ -89,11 +90,9 @@ function updateRecept(){
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (data){
-            if (data != null) {
                 loadRecepter();
                 $("#redigerForm").toggle();
                 $("#redigerInfoForm").toggle()
-            } else alert("Det indtastede pbID kan ikke findes!");
         }
     })
 }
@@ -105,11 +104,8 @@ function deleteBruger(receptID) {
         contentType:"application/json",
         data: JSON.stringify(receptID),
         success: function(data){
-            if (data != null) {
-                loadRecepter();
-                $("#sletForm").toggle();
-            } else alert("Det indtastede pbID kan ikke findes!")
-
+            loadRecepter();
+            $("#sletForm").toggle();
         }
     })
 }
@@ -119,7 +115,7 @@ function getRecept(receptID){
         if(typeof data != "undefined"){
             $("#findFormBody").empty().append(generateHTMLTable(data));
         } else {
-            alert("Der findes ikke nogen med det brugerID")
+            alert("Der findes ikke nogen Recept med det brugerID")
         }
     });
 }

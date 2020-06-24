@@ -16,10 +16,10 @@ $(document).ready(function () {
         $("#findForm-table").show();
     });
 
-    $('#sletForm').on('submit', function (e) {
-        e.preventDefault();
-        deletePB($('#sletForm').serializeJSON().pbID)
-    });
+    // $('#sletForm').on('submit', function (e) {
+    //     e.preventDefault();
+    //     deletePB($('#sletForm').serializeJSON().pbID)
+    // });
 
     $('#redigerForm').on('submit', function (e) {
         e.preventDefault();
@@ -41,7 +41,7 @@ $(document).ready(function () {
     buttonOpret();
     buttonFind();
     buttonRediger();
-    buttonSlet();
+    // buttonSlet();
     buttonVaelg();
 });
 
@@ -103,7 +103,6 @@ function getPB(pbID) {
     $.get('rest/PB/findPB/' + pbID, function (data, textStatus, req) {
         if (typeof data != "undefined") {
             $("#pbBody").empty().append(generateHTMLTable(data));
-            $("#findForm-table").toggle();
         } else {
             alert("Fejl! pbID findes ikke");
         }
@@ -117,13 +116,10 @@ function deletePB(pbID) {
         contentType: "application/json",
         data: JSON.stringify(pbID),
         success: function (data) {
-            if (data != null) {
-                loadListPB();
-                $("#sletForm").toggle();
-            } else alert("Det indtastede pbID kan ikke findes!")
-            }
+            loadListPB();
+            $("#sletForm").toggle();
         }
-    )
+    })
 }
 
 function loadListPB() {
@@ -179,17 +175,19 @@ function buttonRediger() {
     });
 }
 
-function buttonSlet() {
-    $("#buttonSlet").click(function () {
-        hideAllForms()
-        $("#sletForm").toggle();
-    });
-}
+// function buttonSlet() {
+//     $("#buttonSlet").click(function () {
+//         hideAllForms()
+//         $("#sletForm").toggle();
+//     });
+// }
 
 function buttonFind() {
     $("#buttonFind").click(function () {
         hideAllForms()
         $("#findForm").toggle();
+        $("#findForm-table").hide();
+
     });
 }
 

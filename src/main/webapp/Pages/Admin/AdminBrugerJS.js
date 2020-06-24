@@ -44,7 +44,7 @@ function createBruger() {
         success: function (data){
             console.log(data)
                 loadBrugere();
-                alert("Bruger er blevet oprettet")
+                alert("Bruger er blevet oprettet");
                 $("#opretForm").toggle();
         }
     })
@@ -58,13 +58,16 @@ function updateBruger(){
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (){
-            console.log(data)
-            if(!data){
+        success: function (data){
+            console.log(data);
+            if(data == 'true'){
                 loadBrugere();
                 $("#redigerForm").toggle();
                 $("#redigerInfoForm").toggle();
-            } alert("Noget gik galt under opdatering af brugeren")
+            }
+            else{
+                alert("Noget gik galt under opdatering af brugeren")
+            }
 
         }
     })
@@ -81,22 +84,23 @@ function loadBrugere() {
 
 function updateGetBruger(brugerID){
     $.get('rest/brugere/findBruger/'+brugerID, function (data, textStatus, req) {
-        console.log("DATA", data)
-        if (!data){
-            alert("Der findes ikke nogen med det brugerID")
-            return;
+        console.log("DATA", data);
+        if (typeof data != "undefined"){
+            hideAllForms()
+            $("#redigerInfoForm").toggle();
+
+            $form = $('#redigerInfoForm')
+            $form.find('[name="brugerID"]').val(data.brugerID)
+            $form.find('[name="brugerNavn"]').val(data.brugerNavn)
+            $form.find('[name="rolle"]').val(data.rolle)
+            $form.find('[name="ini"]').val(data.ini)
+            $form.find('[name="cpr"]').val(data.cpr)
+            $form.find('[name="password"]').val(data.password)
         }
-        hideAllForms()
-        $("#redigerInfoForm").toggle();
+        else{
+            alert("Der findes ikke nogen med det brugerID")
+        }
 
-
-        $form = $('#redigerInfoForm')
-        $form.find('[name="brugerID"]').val(data.brugerID)
-        $form.find('[name="brugerNavn"]').val(data.brugerNavn)
-        $form.find('[name="rolle"]').val(data.rolle)
-        $form.find('[name="ini"]').val(data.ini)
-        $form.find('[name="cpr"]').val(data.cpr)
-        $form.find('[name="password"]').val(data.password)
     });
 }
 
@@ -118,11 +122,10 @@ function deleteBruger(brugerID) {
         method: 'POST',
         contentType:"application/json",
         data: JSON.stringify(data),
-        success: function(data){
-            if(data != null){
+        success: function(data) {
             loadBrugere();
             $("#sletForm").toggle();
-            } else alert("Der findes ikke nogen med det brugerID")
+
         }
     })
 }

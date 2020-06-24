@@ -29,7 +29,7 @@ public class BrugerHaandtering {
     @POST
     @Path("/createUser")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createBruger(String jsonBody) throws SQLException, DALException, ClassNotFoundException {
+    public boolean createBruger(String jsonBody) throws SQLException, DALException, ClassNotFoundException {
         IncrementID incre = new IncrementID();
         JSONObject json = new JSONObject(jsonBody);
 
@@ -43,16 +43,18 @@ public class BrugerHaandtering {
                     json.getString("password"));
 
             dbAccess.createBruger(user);
+            return true;
 
         } catch (DALException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     @POST
     @Path("/updateUser")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateBruger(String jsonBody){
+    public boolean updateBruger(String jsonBody){
         JSONObject json = new JSONObject(jsonBody);
 
         System.out.println(json.get("brugerNavn"));
@@ -67,8 +69,10 @@ public class BrugerHaandtering {
                     json.getString("password"));
 
             dbAccess.updateBruger(user);
+            return true;
         } catch (DALException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
