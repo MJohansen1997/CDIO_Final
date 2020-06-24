@@ -1,3 +1,4 @@
+/** @Author Steffan Luxhøj*/
 $(document).ready(function () {
     var home = $("#container").html();
     $("#hjem").click(function () {
@@ -33,6 +34,8 @@ $(document).ready(function () {
     $("#logud").click(function () {
         window.location.href = 'index.html';
     });
+
+
 
     userInfo = JSON.parse(localStorage.getItem('userInfo'))
     console.log("LOADING USERINFO", userInfo)

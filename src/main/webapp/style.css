@@ -1,4 +1,5 @@
 /* Elementer der tilhører flere dele af forkskellige filer*/
+/**@Author Steffan Luxhøj */
 body {
     font-family: Georgia;
     margin: 0;
@@ -15,7 +16,7 @@ nav {
     float: left;
 }
 .homepages-body {
-    background: url("images/bluebackground.jpg") no-repeat center center fixed;
+    background: url("Images/bluebackground.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 .headpanel-container {

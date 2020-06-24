@@ -106,8 +106,7 @@ function buttonFind(){
 
 function hideAllForms(){
     $('form').each(function(){
-        if ( $(this).css('display') == 'block')
-        {
+        if ( $(this).css('display') == 'block') {
             $(this).toggle();
         }
     });

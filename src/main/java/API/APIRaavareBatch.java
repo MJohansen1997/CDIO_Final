@@ -1,3 +1,6 @@
+/**
+ * @author Hau, Shania (john.doe@example.com)
+ */
 package API;
 
 import DAO.DALException;
@@ -11,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.List;
 
-
+/** Shania Hau*/
 @Path("/raavarebatch")
 public class APIRaavareBatch {
     RaavareBatchDAO dbAccess = new RaavareBatchDAO();

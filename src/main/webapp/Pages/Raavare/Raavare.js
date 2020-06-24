@@ -1,3 +1,4 @@
+/** @author s195485, Nikolai Kristensen */
 $(document).ready(function()
 {
     loadRaavarer();

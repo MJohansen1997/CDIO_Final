@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-
+/** @author Johansen, Mikkel s175194*/
 @Path("/Print")
 public class APIPrint {
 

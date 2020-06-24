@@ -2,18 +2,17 @@ package API;
 
 import DAO.*;
 import DTO.*;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * @author Hansen, Mads Østerlund (s195456@student.dtu.dk)
+ **/
 
 @Path("/PB")
 public class APIProduktBatch {
@@ -31,13 +30,11 @@ public class APIProduktBatch {
         JSONObject json = new JSONObject(jsonbody);
 
         try {
-            //Laver en produktbatch til indsættelse i DB
             ProduktBatchDTO pbatch = new ProduktBatchDTO(
                     incID.returnID("prodbestilling", "pbID"),
                     json.getString("chosenStatus"),
                     json.getString("chosenRecept"),
                     new Timestamp(System.currentTimeMillis()));
-            //Indsætter i databasen med DAOen
             dbAccess.createProduktBatch(pbatch);
         } catch (DALException e) {
             e.printStackTrace();
@@ -73,6 +70,7 @@ public class APIProduktBatch {
         return pbatch;
     }
 
+
     @POST
     @Path("/deletePB/{pbID}")
     public void deletePB(@PathParam("pbID") String pbID) throws DALException {
@@ -84,14 +82,6 @@ public class APIProduktBatch {
     @Produces(MediaType.APPLICATION_JSON)
     public List<ProduktBatchDTO> getAllProduktBatches() throws DALException {
         return dbAccess.getProduktBatchList();
-    }
-
-    @POST
-    @Path("/getPBRec")
-    @Produces(MediaType.APPLICATION_JSON)
-    public ProduktBatchDTO getProduktBatchPBRecB(@QueryParam("pbID") String pbID, @QueryParam("recID") String recID) throws DALException {
-        ProduktBatchDTO fuck = dbAccess.getProduktBatch2IDS(pbID, recID);
-        return fuck;
     }
 
     @POST
@@ -122,7 +112,10 @@ public class APIProduktBatch {
             main.put("recID", produktBatch.getReceptID());
             main.put("status", produktBatch.getStatus());
             main.put("start", produktBatch.getStartdato());
-            main.put("slut", produktBatch.getSlutdato());
+            if(produktBatch.getSlutdato() == null)
+                main.put("slut", "");
+            else
+                main.put("slut", produktBatch.getSlutdato());
 
             JSONArray raavlist = new JSONArray();
             outerloop:
@@ -146,10 +139,10 @@ public class APIProduktBatch {
                         continue outerloop;
                     }
                 }
-               /* raav.put("rb", "");
+                raav.put("rb", "");
                 raav.put("netto", 0);
                 raav.put("tara", 0);
-                raav.put("ini", "");*/
+                raav.put("ini", "");
                 raavlist.put(raav);
 
             }

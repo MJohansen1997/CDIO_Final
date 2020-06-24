@@ -1,3 +1,4 @@
+/** @author Chistensen, Jacob Kjærby (s174130@student.dtu.dk)*/
 $(document).ready(function() {
    loadBrugere();
     $('#opretForm').on('submit', function(e){
@@ -162,8 +163,7 @@ function buttonFind(){
 
 function hideAllForms(){
     $('form').each(function(){
-        if ( $(this).css('display') == 'block')
-        {
+        if ( $(this).css('display') == 'block') {
             $(this).toggle();
         }
     });
