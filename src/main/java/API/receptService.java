@@ -31,10 +31,16 @@ public class receptService {
 
     @POST
     @Path("/createRecept/{receptNavn}")
-    public void createRecept(@PathParam("receptNavn") String receptNavn) throws DALException {
+    public boolean createRecept(@PathParam("receptNavn") String receptNavn) throws DALException {
+        try {
         IncrementID incre = new IncrementID();
         ReceptDTO recept = new ReceptDTO(incre.returnID("recepter","recID"),receptNavn);
         dbAccess.createRecept(recept);
+        return true;
+        } catch (DALException e) {
+            return false;
+        }
+
     }
 
     @GET

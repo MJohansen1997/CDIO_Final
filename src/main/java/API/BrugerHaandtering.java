@@ -69,7 +69,6 @@ public class BrugerHaandtering {
                     json.getString("password"));
 
             dbAccess.updateBruger(user);
-
             return true;
         } catch (DALException e) {
             e.printStackTrace();

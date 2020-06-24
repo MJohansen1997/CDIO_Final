@@ -43,11 +43,11 @@ function createRecept(receptNavn) {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (data){
-            if (!data) {
+            if (data == 'true') {
                 loadRecepter();
                 $("#opretForm").toggle();
             } else
-                alert("Det indtastede Recept kan ikke findes!");
+                alert("fejl under oprettelse!");
         }
     })
 }
@@ -72,7 +72,7 @@ function updateGetRecept(receptID){
     $.get('rest/recept/findRecept/'+receptID, function (data, textStatus, req) {
         console.log("DATA", data);
         if (!data){
-            alert("Der findes ikke nogen med det brugerID");
+            alert("Der findes ikke nogen med det receptID");
             return;
         }
         $form = $('#redigerInfoForm');
@@ -90,11 +90,9 @@ function updateRecept(){
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (data){
-            if (!data ) {
                 loadRecepter();
                 $("#redigerForm").toggle();
                 $("#redigerInfoForm").toggle()
-            } else alert("Det indtastede Recept kan ikke findes!");
         }
     })
 }

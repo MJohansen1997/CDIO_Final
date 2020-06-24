@@ -44,7 +44,7 @@ function createBruger() {
         success: function (data){
             console.log(data)
                 loadBrugere();
-                alert("Bruger er blevet oprettet")
+                alert("Bruger er blevet oprettet");
                 $("#opretForm").toggle();
         }
     })
@@ -58,9 +58,9 @@ function updateBruger(){
         method: 'POST',
         contentType: "application/json",
         data: JSON.stringify(data),
-        success: function (){
-            console.log(data)
-            if(data == true){
+        success: function (data){
+            console.log(data);
+            if(data == 'true'){
                 loadBrugere();
                 $("#redigerForm").toggle();
                 $("#redigerInfoForm").toggle();
@@ -84,8 +84,8 @@ function loadBrugere() {
 
 function updateGetBruger(brugerID){
     $.get('rest/brugere/findBruger/'+brugerID, function (data, textStatus, req) {
-        console.log("DATA", data)
-        if (data != true){
+        console.log("DATA", data);
+        if (typeof data != "undefined"){
             hideAllForms()
             $("#redigerInfoForm").toggle();
 
