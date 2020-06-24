@@ -11,7 +11,7 @@
         <ul>
             <button type="button" class=  "edit-button" id="buttonOpret">Opret et nyt produktbatch</button>
             <button type="button" class=  "edit-button" id="buttonRediger">Redigering af produktbatches</button>
-            <button type="button" class=  "edit-button" id="buttonSlet">Slet</button>
+<!--            <button type="button" class=  "edit-button" id="buttonSlet">Slet</button>-->
             <button type="button" class=  "edit-button" id="buttonFind">Find</button>
             <button type="button" class=  "edit-button" id="buttonPrint">Vælg og print</button>
         </ul>
@@ -55,24 +55,24 @@
         <button type="submit">Gem ændringer</button>
     </form>
 
-    <form id="sletForm">
+    <!-- <form id="sletForm">
         <h1>Slet Produktionsbatch</h1>
         <p>Angiv produktionsbatch ID : <input type="text" name="pbID" required/></p>
         <button type="submit">Slet ProduktionsBatch</button>
-    </form>
+    </form> -->
 
     <form id="findForm">
         <h1>Find Produktionsbatch</h1>
         <p>Angiv produktionsbatch ID : <input type="text" name="pbID" required/></p>
         <button type="submit">Find</button>
-        <table id="findForm-table" class="table">
+        <table id="findForm-table" class="table" hidden>
             <thead>
             <tr>
-                <th>pbID</th>
-                <th>status</th>
-                <th>receptID</th>
-                <th>Start dato for produktionsbatchen</th>
-                <th>Slut dato for produktionsbatchen</th>
+                <th class="table-header">pbID</th>
+                <th class="table-header">status</th>
+                <th class="table-header">receptID</th>
+                <th class="table-header">Start dato</th>
+                <th class="table-header">Slut dato</th>
             </tr>
             </thead>
             <tbody id="pbBody">
