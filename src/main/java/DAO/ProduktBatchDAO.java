@@ -103,7 +103,6 @@ public class ProduktBatchDAO implements IDAO.IProduktBatchDAO {
 
 
     public void deleteProduktBatch(String pbID) throws DALException {
-
         try {
             PreparedStatement preparedStatement = newCon.createStatement("DELETE FROM prodbestilling WHERE pbID = ?;");
             preparedStatement.setString(1, pbID);

@@ -16,10 +16,10 @@ $(document).ready(function () {
         $("#findForm-table").show();
     });
 
-    $('#sletForm').on('submit', function (e) {
-        e.preventDefault();
-        deletePB($('#sletForm').serializeJSON().pbID)
-    });
+    // $('#sletForm').on('submit', function (e) {
+    //     e.preventDefault();
+    //     deletePB($('#sletForm').serializeJSON().pbID)
+    // });
 
     $('#redigerForm').on('submit', function (e) {
         e.preventDefault();
@@ -41,7 +41,7 @@ $(document).ready(function () {
     buttonOpret();
     buttonFind();
     buttonRediger();
-    buttonSlet();
+    // buttonSlet();
     buttonVaelg();
 });
 
@@ -175,12 +175,12 @@ function buttonRediger() {
     });
 }
 
-function buttonSlet() {
-    $("#buttonSlet").click(function () {
-        hideAllForms()
-        $("#sletForm").toggle();
-    });
-}
+// function buttonSlet() {
+//     $("#buttonSlet").click(function () {
+//         hideAllForms()
+//         $("#sletForm").toggle();
+//     });
+// }
 
 function buttonFind() {
     $("#buttonFind").click(function () {
